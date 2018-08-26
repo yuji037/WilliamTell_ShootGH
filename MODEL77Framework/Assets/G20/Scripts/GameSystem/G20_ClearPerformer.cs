@@ -14,6 +14,11 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     [SerializeField] float fallAppleDelay;
     [SerializeField] Text clearScoreText;
     [SerializeField] GameObject paramObjs;
+
+    
+    [SerializeField] GameObject[] onClearDeactivateFieldObjs;
+    [SerializeField] GameObject[] onClearActivateFieldObjs;
+
     [SerializeField] GameObject skyObject;
     [SerializeField] Light directionLight;
     [SerializeField] GameObject gesuraObj;
@@ -61,12 +66,16 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     //ホワイトアウトしている間にする処理
     void SetClearObjects()
     {
-        directionLight.intensity = 1.0f;
-        skyObject.SetActive(false);
         paramObjs.SetActive(false);
 
-        gesuraObj.SetActive(false);
-        directionLight2.gameObject.SetActive(true);
+        foreach ( var obj in onClearDeactivateFieldObjs )
+        {
+            obj.SetActive(false);
+        }
+        foreach ( var obj in onClearActivateFieldObjs )
+        {
+            obj.SetActive(true);
+        }
     }
     void SetUIsActive()
     {
