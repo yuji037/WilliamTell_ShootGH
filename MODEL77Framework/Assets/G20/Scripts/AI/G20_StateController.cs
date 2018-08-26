@@ -13,7 +13,11 @@ public class G20_StateController {
     }
     public void Start()
     {
-        owner.enemy.recvDamageActions += _ => Falter();
+        //0だったら怯まないように設定
+        if (owner.enemy.hirumiTime>0f)
+        {
+            owner.enemy.recvDamageActions += _ => Falter(owner.enemy.hirumiTime/owner.enemy.Speed);
+        }
         owner.enemy.deathActions += _ => Death();
         Run();
     }
@@ -37,17 +41,17 @@ public class G20_StateController {
     {
         ChangeState(new G20_AIAttackState(attack_time, owner, attack_action));
     }
-    public void Falter()
+    public void Falter(float hirumi_time)
     {
         //attack中は怯まない
         if (currentState is G20_AIAttackState) return;
         if (currentState is G20_AIFalterState)
         {
-            ChangeState(new G20_AIFalterState(1.0f, owner, ((G20_AIFalterState)currentState).preState));
+            ChangeState(new G20_AIFalterState(hirumi_time, owner, ((G20_AIFalterState)currentState).preState));
         }
         else
         {
-            ChangeState(new G20_AIFalterState(1.0f, owner, currentState));
+            ChangeState(new G20_AIFalterState(hirumi_time, owner, currentState));
         }
     }
     public void Death()

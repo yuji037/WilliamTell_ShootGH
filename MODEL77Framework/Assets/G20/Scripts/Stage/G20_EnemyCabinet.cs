@@ -60,12 +60,8 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet> {
 
         foreach(var enemy in enemys )
         {
-            // 一回分のスコアを与える
-            var hitActionScore = enemy.GetComponentInChildren<G20_HitScore>();
-            if ( hitActionScore ) hitActionScore.Execute(hitActionScore.transform.position);
-
             Debug.Log(enemy + "ダメ―ジ");
-            enemy.RecvDamage(damage);
+            enemy.RecvDamage(damage,G20_DamageType.HEAD);
         }
     }
 
@@ -77,7 +73,7 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet> {
         {
             if ( !enemy ) continue;
             Debug.Log(enemy + "キル");
-            enemy.RecvDamage(enemy.HP);
+            enemy.RecvDamage(enemy.HP,G20_DamageType.BODY);
         }
     }
 }

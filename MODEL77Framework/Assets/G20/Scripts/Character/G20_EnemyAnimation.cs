@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class G20_EnemyAnimation : MonoBehaviour {
     [SerializeField] Animator animator;
+    public float AnimSpeed{
+        set { animator.speed = value; }
+        get { return animator.speed; }
+    }
     public void Attack()
     {
         animator.CrossFadeInFixedTime("Attack", 0.4f);
@@ -23,13 +27,5 @@ public class G20_EnemyAnimation : MonoBehaviour {
     public void Suicide()
     {
         animator.CrossFadeInFixedTime("Suicide", 0.4f);
-    }
-    public int GetCurrentState()
-    {
-       return animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
-    }
-    public void SetState(int stateName)
-    {
-        animator.CrossFadeInFixedTime(stateName, 0.4f);
     }
 }
