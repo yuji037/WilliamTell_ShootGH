@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class G20_Enemy : G20_Unit {
     [SerializeField] int attack = 1;
+    public G20_EnemyAnimation anim;
     public int Attack { get { return attack; } }
     public float Speed = 1.0f;
     List<G20_EnemyBuff> buffList=new List<G20_EnemyBuff>();

@@ -4,18 +4,13 @@ using UnityEngine;
 using System;
 public abstract class G20_AI : MonoBehaviour
 {
-    [SerializeField]protected G20_EnemyAnimation eneAnim;
-    bool isPouse;
-    G20_Enemy ene;
-    Coroutine currentRoutine;
-    protected bool isAttacking;
-    int? currentState;
-
+    public bool isPouse;
+    public G20_Enemy enemy;
     protected GameObject target;
     protected Vector3 targetPos;
     protected Vector3 distanceVec = Vector3.zero;
     protected float distance = 9999;
-
+    protected G20_StateController stateController;
     //攻撃に移行する距離
     [SerializeField] protected float attackRange = 3.0f;
     //キャラクターを消す高さ
@@ -28,11 +23,20 @@ public abstract class G20_AI : MonoBehaviour
     [SerializeField] protected float changePhase = 5.0f;
 
 
-    private void  Awake()
+    private void Awake()
     {
-        ene = GetComponent<G20_Enemy>();
-        ene.recvDamageActions += PouseAI;
-        ene.deathActions += _=>DeathAI();
+        enemy = GetComponent<G20_Enemy>();
+        stateController = new G20_StateController(this);
+        stateController.Start();
+        StartCoroutine(StateRoutine());
+    }
+    IEnumerator StateRoutine()
+    {
+        while (true)
+        {
+            stateController.Update();
+            yield return null;
+        }
     }
     protected float AITime
     {
@@ -44,65 +48,14 @@ public abstract class G20_AI : MonoBehaviour
             }
             else
             {
-                return Time.deltaTime*ene.Speed;
+                return Time.deltaTime * enemy.Speed;
             }
         }
     }
-    //引数の秒数に合わせてplayerにダメージ
-    protected void Attack(float damage_delay_time)
-    {
-        eneAnim.Attack();
-        currentRoutine = StartCoroutine(AttackCoroutine(damage_delay_time));
-    }
-    IEnumerator AttackCoroutine(float damage_delay_time)
-    {
-        isAttacking = true;
-        yield return new WaitForSeconds(damage_delay_time);
-        //isAttackingが中断された時は、damage処理をしない
-        if (isAttacking)
-        {
-            G20_EnemyAttack.GetInstance().Attack(ene.Attack);
-        }
-        isAttacking = false;
-    }
-    void DeathAI()
-    {
-        if ( !this ) return;
-        if(currentRoutine!=null)StopCoroutine(currentRoutine);
-        currentRoutine = StartCoroutine( DeathCoroutine(1.0f));
-    }
-    IEnumerator DeathCoroutine(float _time)
-    {
-        eneAnim.Death();
-        isPouse = true;
-        isAttacking = false;
-        yield return new WaitForSeconds(_time);
-        Destroy(gameObject);
-    }
-    //ここに書くべきじゃないと感じるので後で他の場所に移す
-    int maxhirumi = 3;
-    int hirumi = 0;
-    //attackモーション中はAiをStopしない
-    void PouseAI(G20_Unit _unit)
-    {
-        if (maxhirumi<=hirumi||isAttacking||_unit.HP<=0) return;
-        hirumi++;
-        if (currentRoutine != null) StopCoroutine(currentRoutine);
-        currentRoutine = StartCoroutine(PouseRoutine(1.0f));
-    }
-    IEnumerator PouseRoutine(float _time)
-    {
-        if(currentState==null)currentState=eneAnim.GetCurrentState();
-        eneAnim.Falter();
-        isPouse = true;
-        yield return new WaitForSeconds(_time);
-        isPouse = false;
-        eneAnim.SetState((int)currentState);
-        currentState = null;
-    }
+
     public void AIStart()
     {
-        if (ene.HP <= 0) return;
+        if (enemy.HP <= 0) return;
         childAIStart();
     }
     protected abstract void childAIStart();

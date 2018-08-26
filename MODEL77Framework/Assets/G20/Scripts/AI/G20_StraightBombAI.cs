@@ -79,7 +79,7 @@ public class G20_StraightBombAI : G20_AI
 
         }
         Debug.Log("攻撃中");
-        Attack(attacktime);
+        stateController.Attack(attacktime, () => G20_EnemyAttack.GetInstance().Attack(enemy.Attack));
         yield return new WaitForSeconds(attacktime);
         
         //攻撃後の消えるまでの処理

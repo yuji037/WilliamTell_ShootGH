@@ -20,6 +20,10 @@ public class G20_EnemyAnimation : MonoBehaviour {
     {
         animator.CrossFadeInFixedTime("Falter", 0.4f);
     }
+    public void Suicide()
+    {
+        animator.CrossFadeInFixedTime("Suicide", 0.4f);
+    }
     public int GetCurrentState()
     {
        return animator.GetCurrentAnimatorStateInfo(0).fullPathHash;

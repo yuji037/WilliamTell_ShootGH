@@ -106,7 +106,7 @@ public class G20_BombAI : G20_AI
 
         }
         Debug.Log("攻撃中");
-        Attack(attacktime);
+        stateController.Attack(attacktime, () => G20_EnemyAttack.GetInstance().Attack(enemy.Attack));
         yield return new WaitForSeconds(attacktime);
 
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)

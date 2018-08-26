@@ -105,7 +105,7 @@ public class G20_NormalAI : G20_AI
 
         }
         Debug.Log("攻撃中");
-        Attack(attacktime);
+        stateController.Attack(attacktime, () => G20_EnemyAttack.GetInstance().Attack(enemy.Attack));
         yield return new WaitForSeconds(attacktime);
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
@@ -122,7 +122,7 @@ public class G20_NormalAI : G20_AI
 
     IEnumerator RunCoroutine()
     {
-        eneAnim.Run();
+        stateController.Run();
         runTime = (targetPos.x - transform.position.x) * runTimeRate;
         if (runTime < 0)
         {
@@ -158,7 +158,7 @@ public class G20_NormalAI : G20_AI
 
     IEnumerator TargetRun()
     {
-        eneAnim.Run();
+        stateController.Run();
         //向き変更
         Vector3 targetfront = distanceVec.normalized;
         targetfront.y = 0;
