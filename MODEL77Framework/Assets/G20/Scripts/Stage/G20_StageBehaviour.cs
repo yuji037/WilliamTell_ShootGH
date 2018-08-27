@@ -23,6 +23,8 @@ public class G20_StageBehaviour : MonoBehaviour {
         PATERN_C,
     }
 
+    [SerializeField] public float stageTotalTime = 90.0f;
+
     [System.Serializable]
     public class PopSequence {
         public SequencePopType sequencePopType;
@@ -33,6 +35,7 @@ public class G20_StageBehaviour : MonoBehaviour {
         public int limitEnemyCount;
         public NextSequenceConditionType conditionToNextSequence;
         public float conditionValue;
+        public float speedBuffValue;
     }
 
     [System.Serializable]
@@ -45,7 +48,6 @@ public class G20_StageBehaviour : MonoBehaviour {
     public class PopEnemyPatern {
         public PopEnemyCue[] cueList;
     }
-
 
     [SerializeField] PopSequence[] popSequenceList;
 
@@ -69,11 +71,13 @@ public class G20_StageBehaviour : MonoBehaviour {
     float popTimer = 0;
 
     G20_GameManager gameManager;
+    
 
 
     // Use this for initialization
     void Start()
     {
+        timer = stageTotalTime;
 
         enemyPopper = G20_ComponentUtility.FindComponentOnScene<G20_EnemyPopper>();
         enemyCabinet = G20_EnemyCabinet.GetInstance();
@@ -101,7 +105,7 @@ public class G20_StageBehaviour : MonoBehaviour {
             return;
         }
 
-        timer += Time.unscaledDeltaTime;
+        timer -= Time.unscaledDeltaTime;
         popTimer += Time.unscaledDeltaTime;
 
         SequenceUpdate();
@@ -211,8 +215,15 @@ public class G20_StageBehaviour : MonoBehaviour {
                 }
                 Vector3 _popPos = popPositions[positionNumber].transform.position;
                 samePositionNumberList.Add(positionNumber);
+
                 // 敵出現
-                enemyPopper.EnemyPop(cue.enemyType, _popPos);
+                var enemy = enemyPopper.EnemyPop(cue.enemyType, _popPos);
+
+                // スピードバフ
+                G20_SpeedBuff speedBuff = null;
+                if ( nowStatus.speedBuffValue != 0 ) speedBuff = new G20_SpeedBuff(enemy, 100.0f, nowStatus.speedBuffValue);
+
+                if ( speedBuff != null ) enemy.AddBuff(speedBuff);
             }
         }
     }
@@ -256,11 +267,11 @@ public class G20_StageBehaviour : MonoBehaviour {
 
             case NextSequenceConditionType.INGAME_TIME:
 
-                return timer >= nowStatus.conditionValue;
+                return timer <= nowStatus.conditionValue;
 
             case NextSequenceConditionType.WAIT_TIME:
 
-                return timer >= thisSequenceStartTime + nowStatus.conditionValue;
+                return timer <= thisSequenceStartTime - nowStatus.conditionValue;
 
             case NextSequenceConditionType.NO_CONDITION:
 

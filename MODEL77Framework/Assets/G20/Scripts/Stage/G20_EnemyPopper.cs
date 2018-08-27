@@ -18,7 +18,7 @@ public class G20_EnemyPopper : MonoBehaviour {
 
     public Transform PopCenter;
 
-    public void EnemyPop(G20_EnemyType enemyType, Vector3 position,G20_EnemyBuff enemy_buff=null)
+    public G20_Enemy EnemyPop(G20_EnemyType enemyType, Vector3 position)
     {
         // 敵のオブジェクト生成
         var ene = Instantiate(enemyPrefabs[(int)enemyType],enemysParent);
@@ -31,8 +31,10 @@ public class G20_EnemyPopper : MonoBehaviour {
         StartCoroutine(RiseUp(ene));
 
         var enemy = ene.GetComponent<G20_Enemy>();
-        
+
         //enemyのbuffを設定、本来はstageBehaviourで処理したいので後で移行
+        G20_EnemyBuff enemy_buff = null;
+        //if(plusEnemySpeed != 0)enemy_buff = new G20_SpeedBuff(enemy, 100.0f, )
         if (G20_Timer.GetInstance().CurrentTime<=30.0f)
         {
             enemy_buff = new G20_SpeedBuff(enemy,100.0f,1.2f);
@@ -46,6 +48,8 @@ public class G20_EnemyPopper : MonoBehaviour {
 
         //敵情報破棄を敵が死んだときに実行
         enemy.deathActions += G20_EnemyCabinet.GetInstance().UnregisterEnemy;
+
+        return enemy;
     }
 
     // 下から出てくる演出
