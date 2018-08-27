@@ -15,13 +15,11 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
     {
    
         Vector2? shotPoint = null;
-        if (isCheating)
+       
+        shotPoint= G20_InputPointGetter.GetInstance().GetInputPoint();
+        if (isCheating&&shotPoint==null)
         {
             shotPoint = G20_CheatShoot.GetInstance().GetEnemyHeadPoint();
-        }
-        else
-        {
-         shotPoint= G20_InputPointGetter.GetInstance().GetInputPoint();
         }
         if (CanShoot&&shotPoint != null)
         {
