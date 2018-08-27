@@ -5,7 +5,7 @@ using UnityEngine;
 public class G20_StageManager : G20_Singleton<G20_StageManager> {
 
     [SerializeField]
-    GameObject stageBehaviourPrefab;
+    public GameObject stageBehaviourPrefab;
     public void IngameStart()
     {
         var stage = Instantiate(stageBehaviourPrefab, transform);

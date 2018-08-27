@@ -15,6 +15,13 @@ public class G20_PlayDebugger : MonoBehaviour
     [SerializeField] G20_HitDebugToggle debugObjToggle;
     [SerializeField] GameObject[] ActiveObjects;
     [SerializeField] GameObject[] DeActiveObjects;
+
+    [SerializeField] G20_HitEmpty stageSelectObj;
+    [SerializeField] TextMesh stageNameTextMesh;
+    [SerializeField] GameObject[] stagePrefabs;
+    G20_StageManager stageManager;
+    int stageIndex = 0;
+
     private void Awake()
     {
         invinObj.toggleAction += ChangePlayerInvin;
@@ -32,6 +39,16 @@ public class G20_PlayDebugger : MonoBehaviour
             speedTextMesh.text = string.Format("{0:0.0}", popper.onPopSpeedBuffValue);
         };
         speedTextMesh.text = string.Format("{0:0.0}", popper.onPopSpeedBuffValue);
+
+        stageManager = G20_StageManager.GetInstance();
+        stageSelectObj.hitAction += () =>
+        {
+            stageIndex++;
+            if ( stageIndex >= stagePrefabs.Length ) stageIndex = 0;
+            stageManager.stageBehaviourPrefab = stagePrefabs[stageIndex];
+            UpdateStageNameTextMesh();
+        };
+        UpdateStageNameTextMesh();
     }
     void ChangeAllActive(bool _active)
     {
@@ -53,6 +70,14 @@ public class G20_PlayDebugger : MonoBehaviour
             Time.timeScale = 1.0f;
         }
     }
+
+    void UpdateStageNameTextMesh()
+    {
+        var name = stageManager.stageBehaviourPrefab.name;
+        name = name.Substring(9);
+        stageNameTextMesh.text = name;
+    }
+
     void ChangePlayerInvin(bool _active)
     {
         player.IsInvincible = _active;
