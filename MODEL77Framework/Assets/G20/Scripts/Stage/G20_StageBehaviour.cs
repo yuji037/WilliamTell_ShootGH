@@ -21,6 +21,11 @@ public class G20_StageBehaviour : MonoBehaviour {
         PATERN_A,
         PATERN_B,
         PATERN_C,
+        PATERN_D,
+        PATERN_E,
+        PATERN_F,
+        PATERN_G,
+        PATERN_H,
     }
 
     [SerializeField] public float stageTotalTime = 90.0f;
@@ -54,6 +59,11 @@ public class G20_StageBehaviour : MonoBehaviour {
     [SerializeField] PopEnemyPatern paternA;
     [SerializeField] PopEnemyPatern paternB;
     [SerializeField] PopEnemyPatern paternC;
+    [SerializeField] PopEnemyPatern paternD;
+    [SerializeField] PopEnemyPatern paternE;
+    [SerializeField] PopEnemyPatern paternF;
+    [SerializeField] PopEnemyPatern paternG;
+    [SerializeField] PopEnemyPatern paternH;
 
     List<PopEnemyCue> popCueList = new List<PopEnemyCue>();
     int limitEnemyCount = 0;
@@ -176,6 +186,26 @@ public class G20_StageBehaviour : MonoBehaviour {
                             case PopPaternType.PATERN_C:
                                 cue = paternC.cueList[paternCueCounter];
                                 paternCueCounter++; if ( paternCueCounter >= paternC.cueList.Length ) paternCueCounter = 0;
+                                break;
+                            case PopPaternType.PATERN_D:
+                                cue = paternD.cueList[paternCueCounter];
+                                paternCueCounter++; if ( paternCueCounter >= paternD.cueList.Length ) paternCueCounter = 0;
+                                break;
+                            case PopPaternType.PATERN_E:
+                                cue = paternE.cueList[paternCueCounter];
+                                paternCueCounter++; if ( paternCueCounter >= paternE.cueList.Length ) paternCueCounter = 0;
+                                break;
+                            case PopPaternType.PATERN_F:
+                                cue = paternF.cueList[paternCueCounter];
+                                paternCueCounter++; if ( paternCueCounter >= paternF.cueList.Length ) paternCueCounter = 0;
+                                break;
+                            case PopPaternType.PATERN_G:
+                                cue = paternG.cueList[paternCueCounter];
+                                paternCueCounter++; if ( paternCueCounter >= paternG.cueList.Length ) paternCueCounter = 0;
+                                break;
+                            case PopPaternType.PATERN_H:
+                                cue = paternH.cueList[paternCueCounter];
+                                paternCueCounter++; if ( paternCueCounter >= paternH.cueList.Length ) paternCueCounter = 0;
                                 break;
                             default:
                                 break;

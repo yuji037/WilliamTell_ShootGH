@@ -15,6 +15,8 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
     }
     public int enemyCount { get; private set; }
 
+    [SerializeField] float unregisterEnemyDelay = 1.0f;
+
     private void Start()
     {
         enemyCount = 0;
@@ -50,12 +52,20 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
         if (enemy is G20_Enemy)
         {
             enemyList.Remove((G20_Enemy)enemy);
-            enemyCount = enemyList.Count;
+            //enemyCount = enemyList.Count;
+            // 見た目上敵が減るのを遅らせる
+            StartCoroutine(DecrementEnemyCountCoroutine());
         }
         else
         {
             Debug.Log("エラー：敵以外の登録解除");
         }
+    }
+
+    IEnumerator DecrementEnemyCountCoroutine()
+    {
+        yield return new WaitForSeconds(unregisterEnemyDelay);
+        enemyCount--;
     }
 
     public void DamageAllEnemys(int damage)
