@@ -105,8 +105,8 @@ public class G20_StageBehaviour : MonoBehaviour {
             return;
         }
 
-        timer -= Time.unscaledDeltaTime;
-        popTimer += Time.unscaledDeltaTime;
+        timer -= Time.deltaTime;
+        popTimer += Time.deltaTime;
 
         SequenceUpdate();
 

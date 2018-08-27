@@ -21,7 +21,7 @@ public enum G20_EnemyType {
     GOLDEN_STRAIGHT,
     BOMB_STRAIGHT,
     SMALL_STRAIGHT,
-    EnemyTypeMax,
+    //EnemyTypeMax,
 }
 public enum G20_DamageType
 {
