@@ -7,6 +7,7 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
 {
     [SerializeField] LayerMask hitmask;
     [SerializeField] LayerMask panelmask;
+    //弾の射出を制限出来る
     public bool CanShoot=true;
     private void Update()
     {

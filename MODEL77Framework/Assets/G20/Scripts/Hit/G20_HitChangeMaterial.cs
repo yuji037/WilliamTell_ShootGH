@@ -5,10 +5,14 @@ using UnityEngine;
 public class G20_HitChangeMaterial : G20_HitAction
 {
     [SerializeField] MeshRenderer mesh;
-    [SerializeField] Material changeMaterial;
+    [SerializeField] Material[] changeMaterials;
+    int currentNum = 0;
     public override void Execute(Vector3 hit_point)
     {
-        mesh.material= changeMaterial;
-        Debug.Log("changeMat");
+        if (currentNum < changeMaterials.Length)
+        {
+            mesh.material = changeMaterials[currentNum];
+            currentNum++;
+        }
     }
 }

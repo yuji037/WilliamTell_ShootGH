@@ -8,26 +8,13 @@ public class G20_InputPointGetter : G20_Singleton<G20_InputPointGetter> {
     {
         CM = GameObject.Find("GameManager").GetComponent<CoordinateManager>();
     }
-    bool hitted;
-    private void Update()
-    {
-#if UNITY_EDITOR
-
-#endif
-        hitted = CM.isUpdate();
-    }
+    //1Fに1回呼ばれる
     public Vector2? GetInputPoint()
     {
-//#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            return Input.mousePosition;
-        }
-//#endif
-        if (hitted)
+        if (CM.isUpdate())
         {
             Hashtable ht = CM.Get();
-            new Vector2((float)ht["x"],(float)ht["y"]);
+            return new Vector2((float)ht["x"],(float)ht["y"]);
         }
 
         return null;
