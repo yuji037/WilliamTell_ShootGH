@@ -54,6 +54,9 @@ public class G20_SEManager : G20_Singleton<G20_SEManager> {
     [SerializeField]
     Dictionary<int, AudioClip> seClips = new Dictionary<int, AudioClip>();
 
+    [SerializeField, Range(0f, 1f)]
+    float[] seVolumes;
+
     protected override void Awake()
     {
         base.Awake();
@@ -78,6 +81,17 @@ public class G20_SEManager : G20_Singleton<G20_SEManager> {
             // 3D的なボリューム調節をしない
             audioSource.spatialBlend = 0.0f;
         }
+
+        if ( (int)seType < seVolumes.Length )
+        {
+            audioSource.volume = seVolumes[(int)seType];
+        }
+        else
+        {
+            Debug.Log("エラー：SE音量設定ミス");
+            audioSource.volume = 1f;
+        }
+
         audioSource.Play();
     }
 }
