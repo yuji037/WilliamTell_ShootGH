@@ -26,6 +26,7 @@ public class G20_Enemy : G20_Unit {
     private void Awake()
     {
         anim.AnimSpeed = Speed;
+        if (!head) head = transform;
     }
     public void AddBuff(G20_EnemyBuff enemy_buff)
     {
