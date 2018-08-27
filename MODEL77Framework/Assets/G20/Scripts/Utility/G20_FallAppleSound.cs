@@ -6,6 +6,9 @@ public class G20_FallAppleSound : MonoBehaviour {
 
     Rigidbody _rigidbody;
     
+    [SerializeField] int playSEMaxCount = 2;
+    int playSECount = 0;
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -13,9 +16,11 @@ public class G20_FallAppleSound : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(_rigidbody.velocity.sqrMagnitude > 1.0f )
+        if (    playSECount < playSEMaxCount 
+            && _rigidbody.velocity.sqrMagnitude > 1.0f )
         {
             G20_SEManager.GetInstance().Play(G20_SEType.APPLE_FALL, transform.position);
+            playSECount++;
         }
     }
 }

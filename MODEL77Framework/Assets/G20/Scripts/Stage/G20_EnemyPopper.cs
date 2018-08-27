@@ -16,6 +16,9 @@ public class G20_EnemyPopper : MonoBehaviour {
     [SerializeField]
     float riseUpSpeed = 3.0f;
 
+    // 一律全敵に付けるバフ
+    public float onPopSpeedBuffValue = 0f;
+
     public Transform PopCenter;
 
     public G20_Enemy EnemyPop(G20_EnemyType enemyType, Vector3 position)
@@ -35,11 +38,13 @@ public class G20_EnemyPopper : MonoBehaviour {
         //enemyのbuffを設定、本来はstageBehaviourで処理したいので後で移行
         G20_EnemyBuff enemy_buff = null;
         //if(plusEnemySpeed != 0)enemy_buff = new G20_SpeedBuff(enemy, 100.0f, )
-        if (G20_Timer.GetInstance().CurrentTime<=30.0f)
-        {
-            enemy_buff = new G20_SpeedBuff(enemy,100.0f,1.2f);
-        }
-        if (enemy_buff!=null)
+        //if (G20_Timer.GetInstance().CurrentTime<=30.0f)
+        //{
+        //    enemy_buff = new G20_SpeedBuff(enemy,100.0f,1.2f);
+        //}
+        if ( onPopSpeedBuffValue != 0 ) enemy_buff = new G20_SpeedBuff(enemy, 100.0f, onPopSpeedBuffValue);
+
+        if ( enemy_buff!=null)
         {
             enemy.AddBuff(enemy_buff);
         }
