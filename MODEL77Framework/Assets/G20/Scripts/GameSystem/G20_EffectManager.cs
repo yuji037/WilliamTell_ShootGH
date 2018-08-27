@@ -13,6 +13,7 @@ public enum G20_EffectType
     HIT_BOMB,
     HIT_PANEL2,
     PLUS_ONE_SCORE,
+    HIT_PROTECT,
 }
 public static class G20_EffectExt
 {
@@ -44,6 +45,9 @@ public static class G20_EffectExt
                 break;
             case G20_EffectType.PLUS_ONE_SCORE:
                 retStr = "PlusOneScore";
+                break;
+            case G20_EffectType.HIT_PROTECT:
+                retStr = "HitProtect";
                 break;
         }
         return retStr;
