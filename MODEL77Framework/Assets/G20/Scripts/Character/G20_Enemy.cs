@@ -8,6 +8,7 @@ public class G20_Enemy : G20_Unit {
     public float hirumiTime=1.0f;
     //頭にスコア出すためのTransform
     [SerializeField] Transform head;
+    public Transform Head { get { return head; } }
     //頭に当たった時のダメージ倍率
     [SerializeField] uint HeadRate=1;
     public G20_EnemyAnimation anim;

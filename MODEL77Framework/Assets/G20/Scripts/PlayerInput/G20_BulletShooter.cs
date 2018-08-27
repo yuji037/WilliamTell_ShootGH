@@ -9,9 +9,20 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
     [SerializeField] LayerMask panelmask;
     //弾の射出を制限出来る
     public bool CanShoot=true;
+    //チートモード
+    public bool isCheating;
     private void Update()
     {
-        Vector2? shotPoint = G20_InputPointGetter.GetInstance().GetInputPoint();
+   
+        Vector2? shotPoint = null;
+        if (isCheating)
+        {
+            shotPoint = G20_CheatShoot.GetInstance().GetEnemyHeadPoint();
+        }
+        else
+        {
+         shotPoint= G20_InputPointGetter.GetInstance().GetInputPoint();
+        }
         if (CanShoot&&shotPoint != null)
         {
             Vector3 hitPoint = Vector3.zero;
