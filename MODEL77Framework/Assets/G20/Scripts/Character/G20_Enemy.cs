@@ -13,7 +13,7 @@ public class G20_Enemy : G20_Unit {
     public G20_EnemyAnimation anim;
     public int Attack { get { return attack; } }
     //移動スピード
-    float speed=1.0f;
+    [SerializeField] float speed=1.0f;
     public float Speed
     {
         get { return speed; }
@@ -25,7 +25,9 @@ public class G20_Enemy : G20_Unit {
     List<G20_EnemyBuff> buffList=new List<G20_EnemyBuff>();
     private void Awake()
     {
+        Speed = speed;
         anim.AnimSpeed = Speed;
+        deathActions +=_=> KillCollider();
         if (!head) head = transform;
     }
     public void AddBuff(G20_EnemyBuff enemy_buff)
@@ -52,5 +54,14 @@ public class G20_Enemy : G20_Unit {
                 break;
         }
         hp -= damage_value;
+    }
+    //子オブジェクトのコライダーを非アクティブにする
+    void KillCollider()
+    {
+        var cols=GetComponentsInChildren<Collider>();
+        foreach (var c in cols)
+        {
+            c.enabled = false;
+        }
     }
 }
