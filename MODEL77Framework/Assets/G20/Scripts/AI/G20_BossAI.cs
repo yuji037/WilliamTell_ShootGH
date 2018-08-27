@@ -47,7 +47,7 @@ public class G20_BossAI : G20_AI
 
     IEnumerator Move_Coroutine()
     {
-        Vector3 moveVec = new Vector3(0, 0, (-1) * movespeed * AITime);
+        Vector3 moveVec = new Vector3(0, 0, (-1) * movespeed);
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
             if (distance < attackRange)
