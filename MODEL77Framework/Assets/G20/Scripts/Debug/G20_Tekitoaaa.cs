@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class G20_Tekito : MonoBehaviour {
+public class G20_Tekitoaaa : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
