@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class G20_BossAI : G20_AI
 {
-    
+    //ボス本体の変数
     [SerializeField] float movespeed = 1;
+    
+    //ふわふわリンゴの変数
+    [SerializeField] float rotspeed = 100;
+    [SerializeField] GameObject apple;
 
     void Start()
     {
@@ -19,15 +23,19 @@ public class G20_BossAI : G20_AI
     {
         distanceVec = target.transform.position - transform.position;
         distance = distanceVec.magnitude;
+        
+
     }
 
     protected override void childAIStart()
     {
         StartCoroutine(AICoroutine());
+        StartCoroutine(AppleCoroutine());
     }
 
     IEnumerator AICoroutine()
     {
+       
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
             if (distance < attackRange)
@@ -38,10 +46,7 @@ public class G20_BossAI : G20_AI
             {
                 yield return StartCoroutine(Move_Coroutine());
             }
-
-
             yield return null;
-
         }
     }
 
@@ -87,5 +92,18 @@ public class G20_BossAI : G20_AI
         }
         yield return null;
     }
-    // Use this for initialization
+
+    IEnumerator AppleCoroutine()
+    {
+        while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
+        {
+            apple.transform.Rotate(0, rotspeed * AITime, 0);
+            if (enemy.HP <= 0)
+            {
+                Destroy(apple);
+                yield break;
+            }
+            yield return null;
+        }
+    }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class G20_BossWeakpointmove : MonoBehaviour
 {
 
-    [SerializeField] float rotspeed = 100;
+    //[SerializeField] float rotspeed = 100;
 
     // Use this for initialization
     void Start()
@@ -16,6 +16,6 @@ public class G20_BossWeakpointmove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(0, rotspeed*Time.deltaTime, 0);
+        //transform.Rotate(0, rotspeed*Time.deltaTime, 0);
     }
 }
