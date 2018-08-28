@@ -19,8 +19,6 @@ public class G20_EnemyPopper : MonoBehaviour {
     // 一律全敵に付けるバフ
     public float onPopSpeedBuffValue = 0f;
 
-    public Transform PopCenter;
-
     public G20_Enemy EnemyPop(G20_EnemyType enemyType, Vector3 position)
     {
         // 敵のオブジェクト生成
