@@ -15,6 +15,7 @@ public class G20_Enemy : G20_Unit {
     public int Attack { get { return attack; } }
     //移動スピード
     [SerializeField] float speed=1.0f;
+    public GameObject motimono;
     public float Speed
     {
         get { return speed; }
