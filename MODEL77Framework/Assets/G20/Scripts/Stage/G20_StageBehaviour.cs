@@ -286,22 +286,22 @@ public class G20_StageBehaviour : MonoBehaviour {
 
     bool IsNextStateCondition()
     {
-        var nowStatus = popSequenceList[sequenceCounter];
+        var nowSequence = popSequenceList[sequenceCounter];
 
-        switch ( nowStatus.conditionToNextSequence )
+        switch ( nowSequence.conditionToNextSequence )
         {
 
             case NextSequenceConditionType.ENEMY_COUNT:
 
-                return enemyCabinet.enemyCount <= nowStatus.conditionValue;
+                return enemyCabinet.enemyCount <= nowSequence.conditionValue;
 
             case NextSequenceConditionType.INGAME_TIME:
 
-                return timer <= nowStatus.conditionValue;
+                return timer <= nowSequence.conditionValue;
 
             case NextSequenceConditionType.WAIT_TIME:
 
-                return timer <= thisSequenceStartTime - nowStatus.conditionValue;
+                return timer <= thisSequenceStartTime - nowSequence.conditionValue;
 
             case NextSequenceConditionType.NO_CONDITION:
 
