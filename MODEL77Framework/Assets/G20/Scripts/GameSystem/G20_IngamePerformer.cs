@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class G20_IngamePerformer : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    //[SerializeField] GameObject 
+    //[SerializeField] 
+    //[SerializeField] 
+    //[SerializeField] 
+    //[SerializeField] 
+    //[SerializeField]
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	

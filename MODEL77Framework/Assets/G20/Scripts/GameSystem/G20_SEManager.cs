@@ -12,6 +12,26 @@ public enum G20_SEType {
     BOMB,
     APPLE_FALL,
     TEST_VOICE,
+    VOICE1,
+    VOICE2,
+    VOICE3,
+    VOICE4,
+    VOICE5,
+    VOICE6,
+    VOICE7,
+    VOICE8,
+    VOICE9,
+    VOICE10,
+    VOICE11,
+    VOICE12,
+    VOICE13,
+    VOICE14,
+    VOICE15,
+    VOICE16,
+    VOICE17,
+    VOICE18,
+    VOICE19,
+    VOICE20,
 }
 
 public static class G20_SEExt {
@@ -51,7 +71,6 @@ public class G20_SEManager : G20_Singleton<G20_SEManager> {
     [SerializeField]
     GameObject sePlayPrefab;
 
-    [SerializeField]
     Dictionary<int, AudioClip> seClips = new Dictionary<int, AudioClip>();
 
     [SerializeField, Range(0f, 1f)]
@@ -69,7 +88,7 @@ public class G20_SEManager : G20_Singleton<G20_SEManager> {
         }
     }
 
-    public void Play(G20_SEType seType, Vector3 position, bool playIn3DVolume = true)
+    public AudioSource Play(G20_SEType seType, Vector3 position, bool playIn3DVolume = true)
     {
         var obj = Instantiate(sePlayPrefab, transform);
         obj.transform.position = position;
@@ -79,7 +98,7 @@ public class G20_SEManager : G20_Singleton<G20_SEManager> {
         if ( !playIn3DVolume )
         {
             // 3D的なボリューム調節をしない
-            audioSource.spatialBlend = 0.0f;
+            audioSource.spatialBlend = 0f;
         }
 
         if ( (int)seType < seVolumes.Length )
@@ -93,5 +112,7 @@ public class G20_SEManager : G20_Singleton<G20_SEManager> {
         }
 
         audioSource.Play();
+
+        return audioSource;
     }
 }

@@ -39,6 +39,14 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     [SerializeField]
     GameObject ingameCanvas;
 
+    [SerializeField]
+    Animator gameRoot;
+
+    [SerializeField]
+    Color startAmbient;
+    [SerializeField]
+    Color ingameAmbient;
+
     void Start()
     {
         _gameController = GameObject.Find("GameManager").GetComponent<GameController>();
@@ -66,10 +74,22 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         yield return new WaitForSeconds(1);
         playerObj.GetComponent<Animator>().SetBool("zoomout", true);
 
+        float changeLightTime = 1.0f;
+        for(float t = 0; t < changeLightTime; t += Time.deltaTime )
+        {
+            
+        }
+
         ingameCanvas.SetActive(true);
 
         // ボイス再生
         float voiceWait = 3.0f;
+        G20_VoicePerformer.GetInstance().Play(0);
+
+        gameRoot.CrossFade("ToIngame", 0f);
+
+        float toVoiceWait = 1.0f;
+        yield return new WaitForSeconds(toVoiceWait);
 
         G20_SEManager.GetInstance().Play(G20_SEType.TEST_VOICE, Vector3.zero, false);
         for (float t = 0; t < voiceWait; t+= Time.deltaTime )
