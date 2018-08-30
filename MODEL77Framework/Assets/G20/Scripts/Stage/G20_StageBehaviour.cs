@@ -41,6 +41,7 @@ public class G20_StageBehaviour : MonoBehaviour {
         public NextSequenceConditionType conditionToNextSequence;
         public float conditionValue;
         public float speedBuffValue;
+        public GameObject InGamePerformer;
     }
 
     [System.Serializable]
@@ -135,7 +136,15 @@ public class G20_StageBehaviour : MonoBehaviour {
         if ( IsNextStateCondition() )
         {
             sequenceCounter++;
-            if ( sequenceCounter >= popSequenceList.Length )
+            if (sequenceCounter < popSequenceList.Length)
+            {
+                //シーケンスに設定されたインゲームの演出開始
+                if (popSequenceList[sequenceCounter].InGamePerformer)
+                {
+                    popSequenceList[sequenceCounter].InGamePerformer.GetComponent<G20_IngamePerformer>().StartPerformance();
+                }
+            }
+            else
             {
                 // これ以上敵出現しない
                 // ここにクリア判定がくるはず
