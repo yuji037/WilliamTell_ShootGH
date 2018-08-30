@@ -37,7 +37,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     GameObject titleCanvas;
 
     [SerializeField]
-    GameObject ingameCanvas;
+    GameObject paramCanvas;
 
     [SerializeField]
     Animator gameRootAnim;
@@ -49,6 +49,8 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     [SerializeField]
     Animator gesslerAnim;
 
+    public bool isSkipPerformance = false;
+
     void Start()
     {
         _gameController = GameObject.Find("GameManager").GetComponent<GameController>();
@@ -57,7 +59,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         titleCanvas.SetActive(true);
         titleApple.SetActive(true);
         G20_BGMManager.GetInstance().Play(G20_BGMType.TITLE);
-        ingameCanvas.SetActive(false);
+        paramCanvas.SetActive(false);
 
         //Playerが死んだときにGameOverに移行させるためにアクションを追加
         playerObj.deathActions += (_) => GameFailed();
@@ -78,39 +80,19 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         titleCanvas.SetActive(false);
         titleApple.SetActive(false);
         G20_BGMManager.GetInstance().FadeOut();
-        yield return new WaitForSeconds(1);
-        playerObj.GetComponent<Animator>().SetBool("zoomout", true);
 
-        // 環境光は外部コルーチンで遷移
+        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 1f);
+        //playerObj.GetComponent<Animator>().SetBool("zoomout", true);
+
+        // 環境光は別のコルーチンで遷移
         StartCoroutine(LightSettingCoroutine());
 
-        ingameCanvas.SetActive(true);
+        paramCanvas.SetActive(true);
 
-        // ボイス再生
-        float voiceWait = 3.0f;
-        
-
+        // プレイヤー後ずさり等のアニメーション開始
         gameRootAnim.CrossFade("ToIngame", 0f);
 
-        float toVoiceWait = 1.0f;
-        yield return new WaitForSeconds(toVoiceWait);
-
-        // テスト用ボイス
-        //G20_SEManager.GetInstance().Play(G20_SEType.TEST_VOICE, Vector3.zero, false);
-
-        for (float t = 0; t < voiceWait; t+= Time.deltaTime )
-        {
-            // 待つ
-            // デバッグボタン押されたら省略
-            if ( G20_HitDebug.IsPressedButton )
-            {
-                break;
-            }
-            yield return null;
-        }
-
-        // デバッグボタンの押される猶予のため
-        yield return null;
+        yield return new WaitForSeconds(4f);
 
         gameRootAnim.enabled = false;
         // ゲスラーふわふわアニメーション開始
@@ -119,29 +101,24 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         G20_StageManager.GetInstance().IngameStart();
         G20_StageManager.GetInstance().nowStageBehaviour.SetEnableUpdateCall(1);
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 1.5f);
+
         // セリフ再生と字幕表示
         G20_VoicePerformer.GetInstance().Play(0);
-        yield return new WaitForSeconds(5);
+
+        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 4.5f);
 
         // 戦闘開始
         G20_BulletShooter.GetInstance().CanShoot = true;
         gameState = G20_GameState.INGAME;
         G20_EnemyCabinet.GetInstance().AllEnemyAIStart();
-
+        // 「SURVIVE!」表示
         uiTextSurvive.SetActive(true);
         // BGM
         G20_BGMManager.GetInstance().Play(G20_BGMType.INGAME_0);
 
-        for (float t = 0; t < 3.0f; t += Time.deltaTime )
-        {
-            // デバッグボタン押されたら省略
-            if ( G20_HitDebug.IsPressedButton )
-            {
-                break;
-            }
-            yield return null;
-        }
+        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 3f);
+
         uiTextSurvive.SetActive(false);
 
         yield return null;

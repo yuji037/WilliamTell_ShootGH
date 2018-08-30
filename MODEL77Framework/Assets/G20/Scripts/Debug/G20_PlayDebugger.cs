@@ -22,10 +22,13 @@ public class G20_PlayDebugger : MonoBehaviour
     G20_StageManager stageManager;
     int stageIndex = 0;
 
+    [SerializeField] G20_HitDebugToggle skipObj;
+
     private void Awake()
     {
         invinObj.toggleAction += ChangePlayerInvin;
         cheatShotObj.toggleAction += ChangeCheatShoot;
+        skipObj.toggleAction += ChangeIsSkipIngamePerformance;
         debugObjToggle.toggleAction += ChangeAllActive;
         replayObj.hitAction += () => { Time.timeScale = 1.0f; G20_ReloadScene.GetInstance().ReloadScene(); };
         minusSpeed.hitAction += () =>
@@ -69,6 +72,11 @@ public class G20_PlayDebugger : MonoBehaviour
         {
             Time.timeScale = 1.0f;
         }
+    }
+
+    void ChangeIsSkipIngamePerformance(bool _active)
+    {
+        G20_GameManager.GetInstance().isSkipPerformance = _active;
     }
 
     void UpdateStageNameTextMesh()
