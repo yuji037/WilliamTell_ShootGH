@@ -40,12 +40,14 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     GameObject ingameCanvas;
 
     [SerializeField]
-    Animator gameRoot;
+    Animator gameRootAnim;
 
     [SerializeField]
     Color startAmbient;
     [SerializeField]
     Color ingameAmbient;
+    [SerializeField]
+    Animator gesslerAnim;
 
     void Start()
     {
@@ -59,6 +61,8 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
 
         //Playerが死んだときにGameOverに移行させるためにアクションを追加
         playerObj.deathActions += (_) => GameFailed();
+
+        RenderSettings.ambientLight = startAmbient;
     }
 
     public void StartIngameCoroutine()
@@ -68,30 +72,32 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
 
     IEnumerator ToIngameCoroutine()
     {
+        // 演出中は弾の判定なし
+        G20_BulletShooter.GetInstance().CanShoot = false;
+
         titleCanvas.SetActive(false);
         titleApple.SetActive(false);
         G20_BGMManager.GetInstance().FadeOut();
         yield return new WaitForSeconds(1);
         playerObj.GetComponent<Animator>().SetBool("zoomout", true);
 
-        float changeLightTime = 1.0f;
-        for(float t = 0; t < changeLightTime; t += Time.deltaTime )
-        {
-            
-        }
+        // 環境光は外部コルーチンで遷移
+        StartCoroutine(LightSettingCoroutine());
 
         ingameCanvas.SetActive(true);
 
         // ボイス再生
         float voiceWait = 3.0f;
-        G20_VoicePerformer.GetInstance().Play(0);
+        
 
-        gameRoot.CrossFade("ToIngame", 0f);
+        gameRootAnim.CrossFade("ToIngame", 0f);
 
         float toVoiceWait = 1.0f;
         yield return new WaitForSeconds(toVoiceWait);
 
-        G20_SEManager.GetInstance().Play(G20_SEType.TEST_VOICE, Vector3.zero, false);
+        // テスト用ボイス
+        //G20_SEManager.GetInstance().Play(G20_SEType.TEST_VOICE, Vector3.zero, false);
+
         for (float t = 0; t < voiceWait; t+= Time.deltaTime )
         {
             // 待つ
@@ -106,12 +112,26 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         // デバッグボタンの押される猶予のため
         yield return null;
 
+        gameRootAnim.enabled = false;
+        // ゲスラーふわふわアニメーション開始
+        gesslerAnim.enabled = true;
+        // 最初のリンゴ召喚
+        G20_StageManager.GetInstance().IngameStart();
+        G20_StageManager.GetInstance().nowStageBehaviour.SetEnableUpdateCall(1);
+
+        yield return new WaitForSeconds(1);
+        // セリフ再生と字幕表示
+        G20_VoicePerformer.GetInstance().Play(0);
+        yield return new WaitForSeconds(5);
+
+        // 戦闘開始
+        G20_BulletShooter.GetInstance().CanShoot = true;
+        gameState = G20_GameState.INGAME;
+        G20_EnemyCabinet.GetInstance().AllEnemyAIStart();
+
         uiTextSurvive.SetActive(true);
         // BGM
         G20_BGMManager.GetInstance().Play(G20_BGMType.INGAME_0);
-        // インゲームスタート
-        G20_StageManager.GetInstance().IngameStart();
-        gameState = G20_GameState.INGAME;
 
         for (float t = 0; t < 3.0f; t += Time.deltaTime )
         {
@@ -125,6 +145,16 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         uiTextSurvive.SetActive(false);
 
         yield return null;
+    }
+
+    IEnumerator LightSettingCoroutine()
+    {
+        //float changeLightTime = 1.0f;
+        for ( float t = 0; t < 1f; t += Time.deltaTime )
+        {
+            RenderSettings.ambientLight = startAmbient * ( 1f - t ) + ingameAmbient * t;
+            yield return null;
+        }
     }
 
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 public abstract class G20_AI : MonoBehaviour
 {
+    bool isAIStarted = false;
     public bool isPouse;
     public G20_Enemy enemy;
     protected GameObject target;
@@ -55,6 +56,7 @@ public abstract class G20_AI : MonoBehaviour
 
     public void AIStart()
     {
+        if (isAIStarted) return;
         if (enemy.HP <= 0) return;
         childAIStart();
     }

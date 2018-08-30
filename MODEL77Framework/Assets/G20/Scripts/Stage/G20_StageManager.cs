@@ -6,11 +6,13 @@ public class G20_StageManager : G20_Singleton<G20_StageManager> {
 
     [SerializeField]
     public GameObject stageBehaviourPrefab;
+    public G20_StageBehaviour nowStageBehaviour { get; private set; }
     public void IngameStart()
     {
-        var stage = Instantiate(stageBehaviourPrefab, transform);
+        var stageObj = Instantiate(stageBehaviourPrefab, transform);
 
-        float stageTotalTime = stage.GetComponent<G20_StageBehaviour>().stageTotalTime;
+        nowStageBehaviour = stageObj.GetComponent<G20_StageBehaviour>();
+        float stageTotalTime = nowStageBehaviour.stageTotalTime;
         G20_Timer.GetInstance().StartTimer(stageTotalTime);
     }
 }

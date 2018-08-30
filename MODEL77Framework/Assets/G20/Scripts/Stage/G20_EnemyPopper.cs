@@ -58,12 +58,12 @@ public class G20_EnemyPopper : MonoBehaviour {
     // 下から出てくる演出
     IEnumerator RiseUp(GameObject ene)
     {
+        var enemy = ene.GetComponent<G20_Enemy>();
         //float[] rotPatern = { -45.0f, -22.5f, 22.5f, 45.0f };
         //ene.transform.Rotate(0, rotPatern[Random.Range(0, rotPatern.Length)], 0);
         //魔法陣が出来てから少し間を置く
         yield return new WaitForSeconds(0.3f);
 
-        var enemy = ene.GetComponent<G20_Enemy>();
 
         while ( ene && enemy.HP > 0 && ene.transform.position.y < 0 )
         {
@@ -76,6 +76,7 @@ public class G20_EnemyPopper : MonoBehaviour {
         ene.transform.position = new Vector3(pos.x, 0, pos.z);
 
         // 敵AI開始
-        ene.GetComponent<G20_AI>().AIStart();
+        if ( G20_GameManager.GetInstance().gameState == G20_GameState.INGAME )
+            ene.GetComponent<G20_AI>().AIStart();
     }
 }

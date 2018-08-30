@@ -100,14 +100,22 @@ public class G20_StageBehaviour : MonoBehaviour {
         SequenceEnter();
     }
 
+    int updateCall = 0;
+
+    public void SetEnableUpdateCall(int callCount)
+    {
+        updateCall = callCount;
+    }
+
     // Update is called once per frame
     void Update()
     {
 
-        if ( gameManager.gameState == G20_GameState.GAMEOVER )
+        if ( updateCall <= 0 && gameManager.gameState != G20_GameState.INGAME )
         {
             return;
         }
+        updateCall--;
 
         if ( sequenceCounter >= popSequenceList.Length )
         {
@@ -115,8 +123,11 @@ public class G20_StageBehaviour : MonoBehaviour {
             return;
         }
 
-        timer -= Time.deltaTime;
-        popTimer += Time.deltaTime;
+        if ( gameManager.gameState == G20_GameState.INGAME )
+        {
+            timer -= Time.deltaTime;
+            popTimer += Time.deltaTime;
+        }
 
         SequenceUpdate();
 

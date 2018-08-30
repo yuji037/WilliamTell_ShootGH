@@ -20,7 +20,8 @@ public class G20_Timer : G20_Singleton<G20_Timer> {
     {
         while (CurrentTime >= 0)
         {
-            CurrentTime -= Time.deltaTime;
+            if (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
+                CurrentTime -= Time.deltaTime;
             yield return null;
         }
         if (TimerZeroAction!=null)

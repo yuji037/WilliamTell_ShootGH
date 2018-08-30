@@ -68,6 +68,17 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
         enemyCount--;
     }
 
+    public void AllEnemyAIStart()
+    {
+        var enemys = enemyList.ToArray();
+
+        foreach ( var enemy in enemys )
+        {
+            Debug.Log("AIStart");
+            enemy.GetComponent<G20_AI>().AIStart();
+        }
+    }
+
     public void DamageAllEnemys(int damage)
     {
         // 敵が死ぬとリストの要素数が変わるためコピー配列で操作する
