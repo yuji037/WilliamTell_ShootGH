@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114285455563140000}
   - component: {fileID: 114655488625585100}
   - component: {fileID: 114267953484516784}
+  - component: {fileID: 114359612257833912}
   m_Layer: 0
   m_Name: ScoreApple
   m_TagString: Untagged
@@ -96,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 098abaca3503a394ba6fd6060364c658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seType: 4
+  seType: 0
 --- !u!114 &114285455563140000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -109,6 +110,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitTag: 1
+--- !u!114 &114359612257833912
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1307270715325788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7912ecb66d464bb479dae4abf0ec2168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreMax: 1
+  hitGroundHeight: 0.35
+  bounceRate: 0.2
 --- !u!114 &114655488625585100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dae63db1e5172b49948c8feaddf02b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectType: 5
+  effectType: 0
 --- !u!135 &135192233581151866
 SphereCollider:
   m_ObjectHideFlags: 1

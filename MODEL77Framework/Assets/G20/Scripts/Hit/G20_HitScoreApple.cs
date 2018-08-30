@@ -4,36 +4,94 @@ using UnityEngine;
 
 public class G20_HitScoreApple : G20_HitAction {
 
-    [SerializeField] int score = 1;
+    [SerializeField] int scoreMax = 1;
+    int score = 0;
 
     G20_HitAction[] hitActions;
 
     Renderer meshRenderer;
 
+    [SerializeField] float hitGroundHeight = 1f;
+    [SerializeField] float bounceRate = 0.2f;
+
+    ParticleSystem[] particleSystems;
+
     private void Start()
     {
         hitActions = GetComponentsInChildren<G20_HitAction>();
         meshRenderer = GetComponent<Renderer>();
+        particleSystems = GetComponentsInChildren<ParticleSystem>();
+        score = scoreMax;
     }
 
     public override void Execute(Vector3 hit_point)
     {
+        G20_EffectManager.GetInstance().Create(G20_EffectType.PLUS_ONE_SCORE, hit_point);
         G20_Score.GetInstance().AddScore(1);
-        
+        score--;
 
-        // 落ちて消える処理
-        if(score <= 0 )
+        foreach(var ps in particleSystems )
         {
 
+            var cMin = ps.main.startColor.colorMin;
+            var cMax = ps.main.startColor.colorMax;
+            if ( score >= 0 ) {
+                cMin = new Color(cMin.r, cMin.g, cMin.b, cMin.a * (float)score / (float)( score + 1f ));
+                cMax = new Color(cMax.r, cMax.g, cMax.b, cMax.a * (float)score / (float)( score + 1f ));
+            }
+            ParticleSystem.MinMaxGradient grad = new ParticleSystem.MinMaxGradient(cMin, cMax);
+
+            //ps.SetParticles(;
+        }
+
+        // 落ちて消える処理
+        if( score <= 0 )
+        {
+            StartCoroutine(FallCoroutine());
         }
     }
 
     IEnumerator FallCoroutine()
     {
+        // 落下
+        Vector3 velocity = Vector3.zero;
+        while(transform.position.y > hitGroundHeight )
+        {
+            velocity += Physics.gravity * Time.deltaTime;
+            transform.position += velocity * Time.deltaTime;
+            yield return null;
+        }
+
+        // 地面に当たる
+        velocity.y *= -1;
+        bool isRightSide = transform.position.x > 0;
+        velocity.x = 3f * (isRightSide ? -1 : 1);
+        Vector3 pos = transform.position;
+        pos.y = hitGroundHeight;
+        transform.position = pos;
+        transform.position += velocity * Time.deltaTime;
+        yield return null;
+
+        velocity.y *= bounceRate;
+
+        // もう一度放物線運動
+        while(transform.position.y > hitGroundHeight )
+        {
+            velocity += Physics.gravity * Time.deltaTime;
+            velocity.x -= 6f * Time.deltaTime * ( velocity.x > 0 ? 1 : -1 );
+            transform.position += velocity * Time.deltaTime;
+            transform.rotation = Quaternion.Euler(
+                0, 0, 180 * Time.deltaTime * ( isRightSide ? 1 : -1 ))
+                * transform.rotation;
+            yield return null;
+        }
+
+        // 消える
         Color c = meshRenderer.material.color;
         for(float t = 0; t < 1; t+=Time.deltaTime )
         {
             meshRenderer.material.color = new Color(c.r, c.b, c.g, 1f - t);
+            yield return null;
         }
 
         yield return null;
