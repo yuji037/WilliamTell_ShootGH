@@ -13,14 +13,9 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
     {
         get { return enemyList; }
     }
-    public int enemyCount { get; private set; }
+    public int enemyCount { get { return enemyList.Count; }}
 
     [SerializeField] float unregisterEnemyDelay = 1.0f;
-
-    private void Start()
-    {
-        enemyCount = 0;
-    }
 
     public void RegisterEnemy(G20_Unit enemy)
     {
@@ -33,7 +28,6 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
         if (enemy is G20_Enemy)
         {
             enemyList.Add((G20_Enemy)enemy);
-            enemyCount = enemyList.Count;
         }
         else
         {
@@ -65,7 +59,6 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
     IEnumerator DecrementEnemyCountCoroutine()
     {
         yield return new WaitForSeconds(unregisterEnemyDelay);
-        enemyCount--;
     }
 
     public void AllEnemyAIStart()

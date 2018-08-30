@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 public class G20_StageBehaviour : MonoBehaviour {
 
@@ -94,7 +94,7 @@ public class G20_StageBehaviour : MonoBehaviour {
 
         // ポップ位置情報の確保
         popPositions = enemyPopper.transform.GetComponentsInChildren<G20_EnemyPopPosition>();
-
+        Array.Sort(popPositions,(a,b)=>a.number-b.number);
         gameManager = G20_GameManager.GetInstance();
 
         SequenceEnter();
@@ -152,22 +152,21 @@ public class G20_StageBehaviour : MonoBehaviour {
     {
         // Enemyをポップするかの判定
         var nowStatus = popSequenceList[sequenceCounter];
-
-        if ( ( nowStatus.sequencePopType == SequencePopType.PATERN
-            || ( nowStatus.sequencePopType == SequencePopType.CUE && popCueList.Count > 0 ))
+        if ((nowStatus.sequencePopType == SequencePopType.PATERN
+            || (nowStatus.sequencePopType == SequencePopType.CUE && popCueList.Count > 0))
             && popTimer >= nowStatus.popIntervalTime
-            && enemyCabinet.enemyCount < nowStatus.limitEnemyCount )
+            && enemyCabinet.enemyCount < nowStatus.limitEnemyCount)
         {
             popTimer = 0.001f;
 
             int popCount = nowStatus.popEnemyCountByOneChance;
 
-            List<int> samePositionNumberList = new List<int>();
+            List<int> poppedNumberList = new List<int>();
 
-            while ( popCount > 0
-                && enemyCabinet.enemyCount < nowStatus.limitEnemyCount )
+            while (popCount > 0
+                && enemyCabinet.enemyCount < nowStatus.limitEnemyCount)
             {
-                if( nowStatus.sequencePopType == SequencePopType.CUE && popCueList.Count <= 0 )
+                if (nowStatus.sequencePopType == SequencePopType.CUE && popCueList.Count <= 0)
                 {
                     // キューが出尽くしている
                     break;
@@ -175,7 +174,7 @@ public class G20_StageBehaviour : MonoBehaviour {
 
                 PopEnemyCue cue = new PopEnemyCue();
 
-                switch ( nowStatus.sequencePopType )
+                switch (nowStatus.sequencePopType)
                 {
                     case SequencePopType.CUE:
                         // キューの先頭から抜き出す
@@ -184,39 +183,39 @@ public class G20_StageBehaviour : MonoBehaviour {
                         break;
 
                     case SequencePopType.PATERN:
-                        switch ( nowStatus.popPaternType )
+                        switch (nowStatus.popPaternType)
                         {
                             case PopPaternType.PATERN_A:
                                 cue = paternA.cueList[paternCueCounter];
-                                paternCueCounter++; if ( paternCueCounter >= paternA.cueList.Length ) paternCueCounter = 0;
+                                paternCueCounter++; if (paternCueCounter >= paternA.cueList.Length) paternCueCounter = 0;
                                 break;
                             case PopPaternType.PATERN_B:
                                 cue = paternB.cueList[paternCueCounter];
-                                paternCueCounter++; if ( paternCueCounter >= paternB.cueList.Length ) paternCueCounter = 0;
+                                paternCueCounter++; if (paternCueCounter >= paternB.cueList.Length) paternCueCounter = 0;
                                 break;
                             case PopPaternType.PATERN_C:
                                 cue = paternC.cueList[paternCueCounter];
-                                paternCueCounter++; if ( paternCueCounter >= paternC.cueList.Length ) paternCueCounter = 0;
+                                paternCueCounter++; if (paternCueCounter >= paternC.cueList.Length) paternCueCounter = 0;
                                 break;
                             case PopPaternType.PATERN_D:
                                 cue = paternD.cueList[paternCueCounter];
-                                paternCueCounter++; if ( paternCueCounter >= paternD.cueList.Length ) paternCueCounter = 0;
+                                paternCueCounter++; if (paternCueCounter >= paternD.cueList.Length) paternCueCounter = 0;
                                 break;
                             case PopPaternType.PATERN_E:
                                 cue = paternE.cueList[paternCueCounter];
-                                paternCueCounter++; if ( paternCueCounter >= paternE.cueList.Length ) paternCueCounter = 0;
+                                paternCueCounter++; if (paternCueCounter >= paternE.cueList.Length) paternCueCounter = 0;
                                 break;
                             case PopPaternType.PATERN_F:
                                 cue = paternF.cueList[paternCueCounter];
-                                paternCueCounter++; if ( paternCueCounter >= paternF.cueList.Length ) paternCueCounter = 0;
+                                paternCueCounter++; if (paternCueCounter >= paternF.cueList.Length) paternCueCounter = 0;
                                 break;
                             case PopPaternType.PATERN_G:
                                 cue = paternG.cueList[paternCueCounter];
-                                paternCueCounter++; if ( paternCueCounter >= paternG.cueList.Length ) paternCueCounter = 0;
+                                paternCueCounter++; if (paternCueCounter >= paternG.cueList.Length) paternCueCounter = 0;
                                 break;
                             case PopPaternType.PATERN_H:
                                 cue = paternH.cueList[paternCueCounter];
-                                paternCueCounter++; if ( paternCueCounter >= paternH.cueList.Length ) paternCueCounter = 0;
+                                paternCueCounter++; if (paternCueCounter >= paternH.cueList.Length) paternCueCounter = 0;
                                 break;
                             default:
                                 break;
@@ -227,48 +226,97 @@ public class G20_StageBehaviour : MonoBehaviour {
                 }
 
                 popCount--;
+                int positionNumber = 0;
 
-                int positionNumber = cue.positionNumber - 1;
-
-                // 位置ランダム選択の失敗回数。
-                // これがないとバグで止まるとは今のところ確認されてない（ほぼ要らない）
-                int tryCount = 0;
-
-                if ( cue.positionNumber == 0 )
+                //0以下だったらランダム処理
+                if (cue.positionNumber <= 0)
                 {
-                    bool isSameNumber = false;
-                    do
-                    {
-                        positionNumber = Random.Range(0, 15);
-                        //Debug.Log("位置選出");
-
-                        isSameNumber = false;
-                        foreach (var num in samePositionNumberList )
-                        {
-                            if ( positionNumber == num ) isSameNumber = true;
-                        }
-                        tryCount++;
-                    } while ( isSameNumber && samePositionNumberList.Count < 15 && tryCount < 30);
+                    int minNum = 0;
+                    int maxNum = 0;
+                    SetMinMAx(cue.positionNumber,out minNum,out maxNum);
+                    positionNumber = GetRandomPopNumber(poppedNumberList,minNum,maxNum);
                 }
-                if ( positionNumber < 0 || positionNumber > 14 )
+                else
+                {
+                    positionNumber = cue.positionNumber - 1;
+                }
+
+                if (positionNumber < 0 || popPositions.Length < positionNumber)
                 {
                     Debug.LogError("ポップ位置の選択が不正");
                 }
                 Vector3 _popPos = popPositions[positionNumber].transform.position;
-                samePositionNumberList.Add(positionNumber);
+                poppedNumberList.Add(positionNumber);
 
                 // 敵出現
                 var enemy = enemyPopper.EnemyPop(cue.enemyType, _popPos);
 
                 // スピードバフ
                 G20_SpeedBuff speedBuff = null;
-                if ( nowStatus.speedBuffValue != 0 ) speedBuff = new G20_SpeedBuff(enemy, 100.0f, nowStatus.speedBuffValue);
+                if (nowStatus.speedBuffValue != 0) speedBuff = new G20_SpeedBuff(enemy, 100.0f, nowStatus.speedBuffValue);
 
-                if ( speedBuff != null ) enemy.AddBuff(speedBuff);
+                if (speedBuff != null) enemy.AddBuff(speedBuff);
             }
         }
     }
+    void SetMinMAx(int position_number,out int _min,out int _max)
+    {
+        switch (position_number)
+        {
+            case -4:
+                _min = 15;
+                _max = 19;
+                break;
+            case -3:
+                _min = 10;
+                _max = 14;
+                break;
+            case -2:
+                _min = 5;
+                _max = 9;
+                break;
+            case -1:
+                _min = 0;
+                _max = 4;
+                break;
+            case 0:
+            default:
+                _min = 0;
+                _max = 19;
+                break;
+        }
+    }
 
+    //pop出来るpostionが一つでもあればtrueを返す
+    bool CanPop(List<int> popped_numberlist, int min_num, int max_num)
+    {
+        int maxCount = max_num - min_num;
+        int count = 0;
+        foreach (var i in popped_numberlist)
+        {
+            if (min_num <= i && i <= max_num)
+            {
+                count++;
+                break;
+            }
+        }
+        return maxCount > count;
+    }
+    //ポップできる有効なランダム値を取得できるまで再帰する。
+    int GetRandomPopNumber(List<int> popped_numberlist, int min_num, int max_num)
+    {
+        if (popped_numberlist.Count > (max_num - min_num)) return 0;
+        var randNum = UnityEngine.Random.Range(min_num, max_num+1);
+        foreach (var p in popped_numberlist)
+        {
+            if (p == randNum)
+            {
+                randNum = GetRandomPopNumber(popped_numberlist, min_num, max_num);
+                break;
+            }
+        }
+        return randNum;
+    }
     void SequenceEnter()
     {
         Debug.Log("EnemyPop Sequence " + sequenceCounter);

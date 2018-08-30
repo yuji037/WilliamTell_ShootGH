@@ -512,7 +512,7 @@ MonoBehaviour:
   rotspeed: 0.3
   runTimeRate: 1.5
   runTimeMin: 1.5
-  bomb: {fileID: 0}
+  bomb: {fileID: 114083109118971048}
 --- !u!114 &114453298237947702
 MonoBehaviour:
   m_ObjectHideFlags: 1
