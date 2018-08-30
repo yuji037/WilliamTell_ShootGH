@@ -5,29 +5,17 @@ using UnityEngine.EventSystems;
 public class G20_RayShooter
 {
     //HitObject用RayCast、Rayを飛ばしてカメラから一番近いHitTagのHitObjectインスタンスを返す
-    public static G20_HitObject GetHitObject(Vector2 screen_pos, ref Vector3 hit_point, G20_HitTag hit_tag)
+    public static G20_HitObject GetHitObject(Vector2 screen_pos, ref Vector3 hit_point, Camera ray_camera)
     {
-        Ray ray = Camera.main.ScreenPointToRay(screen_pos);
-        RaycastHit[] hits = Physics.RaycastAll(ray, 1000.0f);
-        float shortest = 100000000f;
-        G20_HitObject retObj = null;
-        foreach (var hit in hits)
-        {
+        Ray ray = ray_camera.ScreenPointToRay(screen_pos);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 1000.0f)){
             var hitObj = hit.transform.GetComponent<G20_HitObject>();
-            if (!hitObj) continue;
-            bool isMatchTag = (hitObj.hitTag & hit_tag)>0;
-            if (!(isMatchTag))
-            {
-                continue;
-            }
-            var sqrMag = Vector3.SqrMagnitude(hit.point - Camera.main.transform.position);
-            if (shortest > sqrMag)
-            {
-                shortest = sqrMag;
-                hit_point = hit.point;
-                retObj = hitObj;
-            }
+            if (!hitObj) return null;
+            hit_point = hit.point;
+            return hitObj;
+
         }
-        return retObj;
+        return null;
     }
 }

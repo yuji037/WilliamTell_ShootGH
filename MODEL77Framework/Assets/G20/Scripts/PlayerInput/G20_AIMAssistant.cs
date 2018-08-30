@@ -22,7 +22,7 @@ public class G20_AIMAssistant
     {
         Vector2 targetPoint = Camera.main.WorldToScreenPoint(target_postion);
         var diffVec = targetPoint - shot_point;
-        var dis = diffVec.sqrMagnitude;
+        var dis = diffVec.magnitude;
         //最短距離じゃなければnullを返す
         if (shortest_distance > dis) {
             shortest_distance = dis;
