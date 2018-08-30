@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 114581966352968940}
   - component: {fileID: 114638884653210922}
   - component: {fileID: 135199523597358524}
+  - component: {fileID: 114083109118971048}
   m_Layer: 0
   m_Name: appleBomb:appleBomb_mesh
   m_TagString: Untagged
@@ -449,6 +450,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seType: 2
+--- !u!114 &114083109118971048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1733674330855960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 139184ed68652454592677aa1ad8f10c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  gravity: 1.2
+  init_v: 1
 --- !u!114 &114105408760517040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -497,6 +512,7 @@ MonoBehaviour:
   rotspeed: 0.3
   runTimeRate: 1.5
   runTimeMin: 1.5
+  bomb: {fileID: 0}
 --- !u!114 &114453298237947702
 MonoBehaviour:
   m_ObjectHideFlags: 1
