@@ -502,6 +502,7 @@ MonoBehaviour:
   changePhase: 5
   rotationTime: 1
   bombrot_speed: 100
+  bomb: {fileID: 114909923966561630}
 --- !u!114 &114333093712681566
 MonoBehaviour:
   m_ObjectHideFlags: 1

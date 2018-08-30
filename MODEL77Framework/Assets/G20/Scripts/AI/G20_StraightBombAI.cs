@@ -9,6 +9,7 @@ public class G20_StraightBombAI : G20_AI
     //キャラクターの回転スピード
     [SerializeField] float bombrot_speed = 100;
 
+    [SerializeField] G20_BombController bomb;
     Vector3 moveVec = new Vector3(0, 0, -1);
 
     void Start()
@@ -41,19 +42,14 @@ public class G20_StraightBombAI : G20_AI
         {
             // 以下の処理（1フレーム間）で行動を決定する
 
-            // ターゲットが目の前にいたら攻撃する
-            if (distance < attackRange )
-            {
-                Debug.Log("攻撃開始");
-                // 攻撃選択
-                yield return StartCoroutine(AttackCoroutine());
-            }
-            else
+            
+            
             if (distance < changePhase)
             {
                 //ある程度近づいたらカメラに向かう
                 yield return StartCoroutine(TargetRun());
 
+                yield return StartCoroutine(AttackCoroutine());
             }
             else
             {
@@ -79,13 +75,17 @@ public class G20_StraightBombAI : G20_AI
 
         }
         Debug.Log("攻撃中");
-        stateController.Attack(attacktime, () => G20_EnemyAttack.GetInstance().Attack(enemy.Attack));
+        //stateController.Attack(attacktime, () => bomb.Bombthrow(distanceVec));
+        //なげるアニメーションの実行
         yield return new WaitForSeconds(attacktime);
-        
-        //攻撃後の消えるまでの処理
+        //アニメーション終了と同時に爆弾の親変更と爆弾の動く処理実行
+        bomb.Bombthrow(attackRange, enemy.Attack);
+        bomb.transform.parent = enemy.transform.parent;
+
+
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
-            transform.position += AITime*deathvec;
+            transform.position += AITime * deathvec;
             yield return null;
             if (transform.position.y < deathposition_y)
             {
@@ -140,18 +140,18 @@ public class G20_StraightBombAI : G20_AI
         }
         targetfront.y = 0;
         
-        //ターゲットに向かって走る
-        while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
-        {
+        ////ターゲットに向かって走る
+        //while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
+        //{
 
-            transform.position += targetfront * AITime;
-            if (distance < attackRange )
-            {
-                // 走ってる途中で近くなったので終了
-                yield break;
-            }
-            yield return null;
-        }
+        //    transform.position += targetfront * AITime;
+        //    if (distance < attackRange )
+        //    {
+        //        // 走ってる途中で近くなったので終了
+        //        yield break;
+        //    }
+        //    yield return null;
+        //}
         yield return null;
     }
 }
