@@ -64,27 +64,28 @@ MonoBehaviour:
     conditionToNextSequence: 0
     conditionValue: 0
     speedBuffValue: -0.5
+    InGamePerformer: {fileID: 0}
   paternA:
     cueList:
-    - enemyType: 6
+    - enemyType: 7
       positionNumber: -4
-    - enemyType: 6
+    - enemyType: 7
       positionNumber: -2
-    - enemyType: 6
+    - enemyType: 7
       positionNumber: -2
-    - enemyType: 6
+    - enemyType: 7
       positionNumber: -2
-    - enemyType: 2
+    - enemyType: 7
       positionNumber: -2
-    - enemyType: 2
+    - enemyType: 7
       positionNumber: -2
-    - enemyType: 2
+    - enemyType: 7
       positionNumber: -2
-    - enemyType: 2
+    - enemyType: 7
       positionNumber: -2
-    - enemyType: 2
+    - enemyType: 7
       positionNumber: -2
-    - enemyType: 2
+    - enemyType: 7
       positionNumber: -2
   paternB:
     cueList:

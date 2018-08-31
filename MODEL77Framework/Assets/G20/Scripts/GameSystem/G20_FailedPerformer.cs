@@ -7,19 +7,23 @@ using System;
 public class G20_FailedPerformer : G20_Singleton<G20_FailedPerformer>
 {
     [SerializeField] Text FailedText;
-    [SerializeField] GameObject paramObjects;
     [SerializeField] Image FailedPanel;
     [SerializeField] Text ScoreText;
-    [SerializeField] GameObject failedCanvas;
-    [SerializeField] GameObject scoreObj;
-    [SerializeField] GameObject lifeObj;
+    [SerializeField] GameObject[] ActiveObjs;
+    [SerializeField] GameObject[] DeActiveObjs;
     [SerializeField] float fadeAlpha = 0.5f;
     [SerializeField] float fadeTime = 3.0f;
     public void Excute(Action on_end_action)
     {
         fadeAlpha= Mathf.Clamp(fadeAlpha, 0, 1.0f); 
-        paramObjects.SetActive(false);
-        failedCanvas.SetActive(true);
+        foreach (var i in DeActiveObjs)
+        {
+            i.SetActive(false);
+        }
+        foreach (var i in ActiveObjs)
+        {
+            i.SetActive(true);
+        }
         StartCoroutine(FailedTextRoutine(on_end_action));
         StartCoroutine(FailedPanelRoutine());
         ScoreText.text = "SHOT APPLE:" + G20_Score.GetInstance().Score;
