@@ -209,6 +209,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
 
         // 敵（残ってれば）全滅
         G20_EnemyCabinet.GetInstance().KillAllEnemys();
+        G20_ScoreApplePopper.GetInstance().DeleteAllScoreApples();
         
         G20_BGMManager.GetInstance().Play(G20_BGMType.CLEAR);
 

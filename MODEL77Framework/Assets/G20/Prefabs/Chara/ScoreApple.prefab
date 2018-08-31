@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114655488625585100}
   - component: {fileID: 114267953484516784}
   - component: {fileID: 114359612257833912}
+  - component: {fileID: 54743005423509592}
   m_Layer: 0
   m_Name: ScoreApple
   m_TagString: Untagged
@@ -86,6 +87,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307270715325788}
   m_Mesh: {fileID: 4300002, guid: 878cdfddb76fcd44d92024241637a3d7, type: 3}
+--- !u!54 &54743005423509592
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1307270715325788}
+  serializedVersion: 2
+  m_Mass: 5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &114267953484516784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,7 +159,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307270715325788}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.21086365

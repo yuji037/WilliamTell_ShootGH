@@ -260,6 +260,9 @@ public class G20_StageBehaviour : MonoBehaviour {
                 // 敵出現
                 var enemy = enemyPopper.EnemyPop(cue.enemyType, _popPos);
 
+                // 同時に試しにステージ脇リンゴ生成
+                G20_ScoreApplePopper.GetInstance().PopSameAppleWithEnemy(cue.enemyType);
+
                 // スピードバフ
                 G20_SpeedBuff speedBuff = null;
                 if (nowStatus.speedBuffValue != 0) speedBuff = new G20_SpeedBuff(enemy, 100.0f, nowStatus.speedBuffValue);

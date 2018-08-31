@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageTotalTime: 90
   popSequenceList:
-  - sequencePopType: 0
+  - sequencePopType: 1
     addEnemyCueList:
     - enemyType: 0
       positionNumber: 0
@@ -116,23 +116,24 @@ MonoBehaviour:
     - enemyType: 0
       positionNumber: 0
     popPaternType: 0
-    popIntervalTime: 0.2
-    popEnemyCountByOneChance: 30
+    popIntervalTime: 0.5
+    popEnemyCountByOneChance: 1
     limitEnemyCount: 30
-    conditionToNextSequence: 0
-    conditionValue: 0
+    conditionToNextSequence: 2
+    conditionValue: 10
     speedBuffValue: 0
+    InGamePerformer: {fileID: 0}
   paternA:
     cueList:
     - enemyType: 0
       positionNumber: 1
     - enemyType: 0
       positionNumber: 3
-    - enemyType: 0
+    - enemyType: 1
       positionNumber: 5
     - enemyType: 0
       positionNumber: 1
-    - enemyType: 0
+    - enemyType: 5
       positionNumber: 3
     - enemyType: 0
       positionNumber: 5

@@ -1305,7 +1305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9679d28231cea134cac2392498c29764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageBehaviourPrefab: {fileID: 1980596754760056, guid: f4832d1cd4c5f6a48b407598fe8badea,
+  stageBehaviourPrefab: {fileID: 1980596754760056, guid: 95f3ea6747c18184a97674df4d605600,
     type: 2}
 --- !u!1 &176073080
 GameObject:
@@ -13067,7 +13067,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 1040187391
+    rgba: 637534207
 --- !u!23 &671732777
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -22905,6 +22905,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58fd1540fa906040b08d1e4cd9b98ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreApplePrefabs:
+  - {fileID: 1307270715325788, guid: 8de4e2004e49cd641bc84c460017e48c, type: 2}
+  - {fileID: 1317072536677658, guid: efedaf759cc0f2f478b4fb7e99101437, type: 2}
 --- !u!1 &1110934945
 GameObject:
   m_ObjectHideFlags: 0
