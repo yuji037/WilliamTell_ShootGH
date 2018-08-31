@@ -170,7 +170,6 @@ public class G20_SmallAI : G20_AI
                 yield break;
 
             }
-
             var newRotation = Quaternion.LookRotation(targetfront).eulerAngles;
             newRotation.x = 0; //ずれ防止のため
             newRotation.z = 0; //ずれ防止のため
@@ -180,7 +179,8 @@ public class G20_SmallAI : G20_AI
         }
 
         yield return null;
-
+        //ジャンプモーション開始
+        stateController.Attack(100.0f, null);
         //放物線
         float hight = 0;
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)

@@ -37,7 +37,7 @@ public class G20_StateController {
         if (currentState is G20_AIFalterState) return;
         ChangeState(new G20_AIRunState(1.0f, owner));
     }
-    //attack_time秒後に、attack_actionを実行
+    //attack_time秒後に、attack_actionを実行し死ぬ
     public void Attack(float attack_time,System.Action attack_action)
     {
         ChangeState(new G20_AIAttackState(attack_time, owner, attack_action));
