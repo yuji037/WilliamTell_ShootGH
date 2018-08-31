@@ -181,6 +181,7 @@ public class G20_SmallAI : G20_AI
         yield return null;
         //ジャンプモーション開始
         stateController.Attack(100.0f, null);
+        yield return new WaitForSeconds(1.0f/enemy.anim.AnimSpeed);
         //放物線
         float hight = 0;
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
