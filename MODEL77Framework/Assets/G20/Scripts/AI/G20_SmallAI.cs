@@ -188,9 +188,10 @@ public class G20_SmallAI : G20_AI
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
 
-            transform.position += transform.forward * AITime;
-            init_v -= gravity * AITime;
-            hight += init_v * AITime;
+            transform.position += (enemy.HP <= 0 ? -1 : 1) * transform.forward * Time.deltaTime * enemy.Speed;
+
+            init_v -= gravity * Time.deltaTime;
+            hight += init_v * Time.deltaTime;
             transform.position = new Vector3(transform.position.x, hight, transform.position.z);
 
             if (distance < attackRange )

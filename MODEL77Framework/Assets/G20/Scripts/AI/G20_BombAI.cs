@@ -92,8 +92,10 @@ public class G20_BombAI : G20_AI
             {
                 Debug.Log("インゲーム状態を抜けたのでAIを終了");
                 yield break;
-
             }
+
+            if (enemy.HP <= 0) yield break;
+
             yield return null;
         }
     }
@@ -108,10 +110,15 @@ public class G20_BombAI : G20_AI
 
         }
         Debug.Log("攻撃中");
-        //stateController.Attack(attacktime, () => bomb.Bombthrow(distanceVec));
+        stateController.Attack(attacktime, () => G20_EnemyAttack.GetInstance().Attack(enemy.Attack));
+
         //なげるアニメーションの実行
         yield return new WaitForSeconds(attacktime);
+        
         //アニメーション終了と同時に爆弾の親変更と爆弾の動く処理実行
+
+        if (enemy.HP <= 0) yield break;
+
         bomb.Bombthrow(attackRange,enemy.Attack);
         bomb.transform.parent = enemy.transform.parent;
         

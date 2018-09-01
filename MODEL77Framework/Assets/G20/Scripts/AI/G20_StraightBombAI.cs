@@ -62,6 +62,8 @@ public class G20_StraightBombAI : G20_AI
                 yield break;
 
             }
+            if (enemy.HP <= 0) yield break;
+
             yield return null;
         }
     }
@@ -79,6 +81,9 @@ public class G20_StraightBombAI : G20_AI
         //なげるアニメーションの実行
         yield return new WaitForSeconds(attacktime);
         //アニメーション終了と同時に爆弾の親変更と爆弾の動く処理実行
+
+        if (enemy.HP <= 0) yield break;
+
         bomb.Bombthrow(attackRange, enemy.Attack);
         bomb.transform.parent = enemy.transform.parent;
 

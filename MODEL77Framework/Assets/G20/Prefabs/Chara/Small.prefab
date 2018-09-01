@@ -1731,8 +1731,7 @@ MonoBehaviour:
   head: {fileID: 4504128812797458}
   HeadRate: 5
   anim: {fileID: 114645434565230548}
-  speed: 1
-  motimono: {fileID: 0}
+  speed: 1.5
 --- !u!114 &114107104752614352
 MonoBehaviour:
   m_ObjectHideFlags: 1
