@@ -107,10 +107,9 @@ public class G20_BombAI : G20_AI
         {
             Debug.Log("インゲーム状態を抜けたのでAIを終了");
             yield break;
-
         }
         Debug.Log("攻撃中");
-        stateController.Attack(attacktime, () => G20_EnemyAttack.GetInstance().Attack(enemy.Attack));
+        stateController.Attack(attacktime,null);
 
         //なげるアニメーションの実行
         yield return new WaitForSeconds(attacktime);
