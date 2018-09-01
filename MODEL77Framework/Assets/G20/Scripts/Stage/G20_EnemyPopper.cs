@@ -50,7 +50,7 @@ public class G20_EnemyPopper : MonoBehaviour {
         G20_EnemyCabinet.GetInstance().RegisterEnemy(enemy);
 
         //敵情報破棄を敵が死んだときに実行
-        enemy.deathActions += G20_EnemyCabinet.GetInstance().UnregisterEnemy;
+        enemy.OnDestroyAction += G20_EnemyCabinet.GetInstance().UnregisterEnemy;
 
         return enemy;
     }

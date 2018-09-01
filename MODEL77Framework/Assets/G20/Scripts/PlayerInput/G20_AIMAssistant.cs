@@ -8,11 +8,9 @@ public class G20_AIMAssistant
     {
         float shortestDistance = 3000000f;
         Vector2 nearestDiff = Vector2.zero;
-        foreach (var e in G20_EnemyCabinet.GetInstance().EnemyList)
+        foreach (var e in G20_HitObjectCabinet.GetInstance().AssitObjectList)
         {
-            ChangeNearest(ref nearestDiff,ref shortestDistance, shot_point, e.Head.transform.position);
-            if (!CheckEnemyMotimono(e)) continue;
-            ChangeNearest(ref nearestDiff,ref shortestDistance, shot_point, e.motimono.transform.position);
+            ChangeNearest(ref nearestDiff,ref shortestDistance, shot_point, e.transform.position);
         }
         //AIM補正のポイントがターゲットを通り過ぎないようにする
         if (assist_value > shortestDistance) assist_value = shortestDistance;
@@ -28,14 +26,5 @@ public class G20_AIMAssistant
             shortest_distance = dis;
             nearest_diff= diffVec;
         };
-    }
-    //motimonoのtagがassistの場合true
-    bool CheckEnemyMotimono(G20_Enemy _enemy)
-    {
-        if (!_enemy.motimono) return false;
-        var hitObj = _enemy.motimono.GetComponent<G20_HitObject>();
-        if (!hitObj) return false;
-        if (!(hitObj.hitTag == G20_HitTag.ASSIST)) return false;
-        return true;
     }
 }

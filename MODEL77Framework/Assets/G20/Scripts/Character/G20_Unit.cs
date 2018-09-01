@@ -10,6 +10,7 @@ public class G20_Unit : MonoBehaviour {
     }
     public bool IsInvincible=false;
     public event Action<G20_Unit> deathActions;
+    public event Action<G20_Unit> OnDestroyAction;
     public event Action<G20_Unit> recvDamageActions;
     bool isStartDeath = false;
     public void RecvDamage(int damage_value,G20_DamageType damage_type)
@@ -20,6 +21,13 @@ public class G20_Unit : MonoBehaviour {
         if (0>=hp)
         {
             ExecuteDeathAction();
+        }
+    }
+    private void OnDestroy()
+    {
+        if (OnDestroyAction != null)
+        {
+            OnDestroyAction(this);
         }
     }
     //子classによってダメージの値を変更できる、仮想関数

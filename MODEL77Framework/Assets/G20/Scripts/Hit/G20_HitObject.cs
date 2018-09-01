@@ -15,7 +15,12 @@ public class G20_HitObject : MonoBehaviour {
     public G20_HitTag hitTag=G20_HitTag.NORMAL;
     private void Awake()
     {
-        hitActions = GetComponents<G20_HitAction>();    
+        hitActions = GetComponents<G20_HitAction>();
+        G20_HitObjectCabinet.GetInstance().Add(this);
+    }
+    private void OnDestroy()
+    {
+        G20_HitObjectCabinet.GetInstance().Remove(this);
     }
     public void ExcuteActions(Vector3 hit_point)
     {
