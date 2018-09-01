@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class G20_StageBehaviour : MonoBehaviour {
+public class G20_StageBehaviour : MonoBehaviour
+{
 
-    public enum NextSequenceConditionType {
+    public enum NextSequenceConditionType
+    {
         ENEMY_COUNT,
         INGAME_TIME,
         WAIT_TIME,
         NO_CONDITION,
     }
 
-    public enum SequencePopType {
+    public enum SequencePopType
+    {
         CUE,
         PATERN,
     }
 
-    public enum PopPaternType {
+    public enum PopPaternType
+    {
         PATERN_A,
         PATERN_B,
         PATERN_C,
@@ -28,34 +32,43 @@ public class G20_StageBehaviour : MonoBehaviour {
         PATERN_H,
     }
 
-    [SerializeField] public float stageTotalTime = 90.0f;
+    [SerializeField, Range(0, 90)]
+    public float stageTotalTime = 90.0f;
 
     [System.Serializable]
-    public class PopSequence {
-        public SequencePopType sequencePopType;
-        public List<PopEnemyCue> addEnemyCueList = new List<PopEnemyCue>();
-        public PopPaternType popPaternType;
-        public float popIntervalTime;
-        public int popEnemyCountByOneChance;
-        public int limitEnemyCount;
-        public NextSequenceConditionType conditionToNextSequence;
-        public float conditionValue;
-        public float speedBuffValue;
-        public GameObject InGamePerformer;
+    public class PopSequence
+    {
+        [SerializeField, Header("シーケンスタイプ")] public SequencePopType sequencePopType;
+        [SerializeField, Header("シーケンスタイプがキューだった場合ここを編集")] public List<PopEnemyCue> addEnemyCueList = new List<PopEnemyCue>();
+        [SerializeField, Header("シーケンスタイプがパターンだった場合ここを編集")] public PopPaternType popPaternType;
+        [SerializeField, Header("エネミーが出るまでの間隔")] public float popIntervalTime;
+        [SerializeField, Header("一回のポップ処理で出るエネミーの数")] public int popEnemyCountByOneChance;
+        [SerializeField, Header("フィールド上に存在出来るエネミーの数")] public int limitEnemyCount;
+        [Tooltip("EnemyCount:フィールドのエネミー数がConditionValue以下の場合次シーケンスに移行\n"+
+        "IngameTime:\tタイマーがConditionValue秒数以下の場合移行\n"+
+        "WaitTime:ConditionValue秒経ったら移行\n"+
+        "NoCondition:条件無しで移行\n")]
+        [SerializeField] public NextSequenceConditionType conditionToNextSequence;
+        [SerializeField, Header("移る条件で使う値")] public float conditionValue;
+        [SerializeField, Header("エネミーに加算するスピード")] public float speedBuffValue;
+        [SerializeField, Header("演出が入る場合はここに、G20_IngamePerformerをアタッチしたprefabを挿入")] public GameObject InGamePerformer;
     }
 
     [System.Serializable]
-    public class PopEnemyCue {
+    public class PopEnemyCue
+    {
         public G20_EnemyType enemyType;
+        [SerializeField, Range(-4, 20)]
         public int positionNumber;
     }
 
     [System.Serializable]
-    public class PopEnemyPatern {
+    public class PopEnemyPatern
+    {
         public PopEnemyCue[] cueList;
     }
 
-    [SerializeField] PopSequence[] popSequenceList;
+    [SerializeField, Header("シーケンス")] PopSequence[] popSequenceList;
 
     [SerializeField] PopEnemyPatern paternA;
     [SerializeField] PopEnemyPatern paternB;
@@ -82,7 +95,7 @@ public class G20_StageBehaviour : MonoBehaviour {
     float popTimer = 0;
 
     G20_GameManager gameManager;
-    
+
 
 
     // Use this for initialization
@@ -95,7 +108,7 @@ public class G20_StageBehaviour : MonoBehaviour {
 
         // ポップ位置情報の確保
         popPositions = enemyPopper.transform.GetComponentsInChildren<G20_EnemyPopPosition>();
-        Array.Sort(popPositions,(a,b)=>a.number-b.number);
+        Array.Sort(popPositions, (a, b) => a.number - b.number);
         gameManager = G20_GameManager.GetInstance();
 
         SequenceEnter();
@@ -112,19 +125,19 @@ public class G20_StageBehaviour : MonoBehaviour {
     void Update()
     {
 
-        if ( updateCall <= 0 && gameManager.gameState != G20_GameState.INGAME )
+        if (updateCall <= 0 && gameManager.gameState != G20_GameState.INGAME)
         {
             return;
         }
         updateCall--;
 
-        if ( sequenceCounter >= popSequenceList.Length )
+        if (sequenceCounter >= popSequenceList.Length)
         {
             // これ以上敵出現しない
             return;
         }
 
-        if ( gameManager.gameState == G20_GameState.INGAME )
+        if (gameManager.gameState == G20_GameState.INGAME)
         {
             timer -= Time.deltaTime;
             popTimer += Time.deltaTime;
@@ -133,7 +146,7 @@ public class G20_StageBehaviour : MonoBehaviour {
         SequenceUpdate();
 
         // 状態遷移判定
-        if ( IsNextStateCondition() )
+        if (IsNextStateCondition())
         {
             sequenceCounter++;
             if (sequenceCounter < popSequenceList.Length)
@@ -242,8 +255,8 @@ public class G20_StageBehaviour : MonoBehaviour {
                 {
                     int minNum = 0;
                     int maxNum = 0;
-                    SetMinMAx(cue.positionNumber,out minNum,out maxNum);
-                    positionNumber = GetRandomPopNumber(poppedNumberList,minNum,maxNum);
+                    SetMinMAx(cue.positionNumber, out minNum, out maxNum);
+                    positionNumber = GetRandomPopNumber(poppedNumberList, minNum, maxNum);
                 }
                 else
                 {
@@ -271,7 +284,7 @@ public class G20_StageBehaviour : MonoBehaviour {
             }
         }
     }
-    void SetMinMAx(int position_number,out int _min,out int _max)
+    void SetMinMAx(int position_number, out int _min, out int _max)
     {
         switch (position_number)
         {
@@ -318,7 +331,7 @@ public class G20_StageBehaviour : MonoBehaviour {
     int GetRandomPopNumber(List<int> popped_numberlist, int min_num, int max_num)
     {
         if (popped_numberlist.Count > (max_num - min_num)) return 0;
-        var randNum = UnityEngine.Random.Range(min_num, max_num+1);
+        var randNum = UnityEngine.Random.Range(min_num, max_num + 1);
         foreach (var p in popped_numberlist)
         {
             if (p == randNum)
@@ -342,13 +355,13 @@ public class G20_StageBehaviour : MonoBehaviour {
         var nowSequence = popSequenceList[sequenceCounter];
 
         // このシーケンスタイプがPATERNなら今持ってるキューを全部捨てる
-        if ( nowSequence.sequencePopType == SequencePopType.PATERN )
+        if (nowSequence.sequencePopType == SequencePopType.PATERN)
         {
             popCueList.Clear();
         }
 
         // 順番待ちリストに新規追加
-        foreach ( var enemy in nowSequence.addEnemyCueList )
+        foreach (var enemy in nowSequence.addEnemyCueList)
         {
             popCueList.Add(enemy);
         }
@@ -359,7 +372,7 @@ public class G20_StageBehaviour : MonoBehaviour {
     {
         var nowSequence = popSequenceList[sequenceCounter];
 
-        switch ( nowSequence.conditionToNextSequence )
+        switch (nowSequence.conditionToNextSequence)
         {
 
             case NextSequenceConditionType.ENEMY_COUNT:
