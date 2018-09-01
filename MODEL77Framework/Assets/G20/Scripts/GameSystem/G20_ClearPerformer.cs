@@ -19,6 +19,9 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     [SerializeField] GameObject[] onClearDeactivateFieldObjs;
     [SerializeField] GameObject[] onClearActivateFieldObjs;
 
+    [SerializeField] MeshRenderer backGroundMesh;
+    [SerializeField] Material clearBackGroundMaterial;
+
     [SerializeField] GameObject skyObject;
     [SerializeField] Light directionLight;
     [SerializeField] GameObject gesuraObj;
@@ -67,6 +70,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     void SetClearObjects()
     {
         paramObjs.SetActive(false);
+        backGroundMesh.material = clearBackGroundMaterial;
 
         foreach ( var obj in onClearDeactivateFieldObjs )
         {
