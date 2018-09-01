@@ -59,6 +59,7 @@ public abstract class G20_AI : MonoBehaviour
         if (isAIStarted) return;
         if (enemy.HP <= 0) return;
         childAIStart();
+        isAIStarted = true;
     }
     protected abstract void childAIStart();
 
