@@ -100,6 +100,7 @@ public class G20_BombAI : G20_AI
 
     IEnumerator AttackCoroutine()
     {
+
         if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
         {
             Debug.Log("インゲーム状態を抜けたのでAIを終了");
@@ -130,7 +131,7 @@ public class G20_BombAI : G20_AI
 
     IEnumerator RunCoroutine()
     {
-
+        stateController.Run();
         runTime = (targetPos.x - transform.position.x) * runTimeRate;
         if (runTime < 0)
         {
@@ -169,6 +170,7 @@ public class G20_BombAI : G20_AI
 
     IEnumerator TargetRun()
     {
+        stateController.Run();
         //向き変更
         Vector3 targetfront = distanceVec.normalized;
         targetfront.y = 0;

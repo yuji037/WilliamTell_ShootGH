@@ -28,4 +28,8 @@ public class G20_EnemyAnimation : MonoBehaviour {
     {
         animator.CrossFadeInFixedTime("Suicide", 0.4f);
     }
+    public void Idle()
+    {
+        animator.CrossFadeInFixedTime("idle",0.4f);
+    }
 }

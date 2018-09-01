@@ -99,7 +99,7 @@ public class G20_StraightBombAI : G20_AI
     //とにかく前に走る
     IEnumerator RunCoroutine()
     {
-        //eneAnim.Run();
+        stateController.Run();
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
             transform.Rotate(0, bombrot_speed * AITime, 0);
@@ -118,8 +118,7 @@ public class G20_StraightBombAI : G20_AI
     //ターゲットに向いてから走る
     IEnumerator TargetRun()
     {
-        //eneAnim.Run();
-
+        stateController.Run();
         //ターゲットに向く
         Vector3 targetfront = distanceVec.normalized;
         for (float t = 0; t < rotationTime; t += AITime)

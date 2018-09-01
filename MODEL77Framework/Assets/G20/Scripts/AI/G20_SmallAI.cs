@@ -128,6 +128,7 @@ public class G20_SmallAI : G20_AI
 
     IEnumerator RunCoroutine()
     {
+        stateController.Run();
         //走る時間の計算
         runTime = (targetPos.x - transform.position.x) * runTimeRate;
         if (runTime < 0) runTime *= (-1);

@@ -19,7 +19,7 @@ public class G20_StateController {
             owner.enemy.recvDamageActions += _ => Falter(owner.enemy.hirumiTime/owner.enemy.Speed);
         }
         owner.enemy.deathActions += _ => Death();
-        Run();
+        currentState=new G20_AIIdleState(100.0f,owner);
     }
     public void Update()
     {
