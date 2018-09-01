@@ -7,11 +7,11 @@ public class G20_CheatShoot : G20_Singleton<G20_CheatShoot> {
    
 	public Vector2? GetEnemyHeadPoint()
     {
-        foreach(var i in G20_EnemyCabinet.GetInstance().EnemyList)
+        foreach(var i in G20_HitObjectCabinet.GetInstance().AssitObjectList)
         {
-            if (i.transform.position.y>=0)
+            if (i.GetComponent<Collider>().enabled&&i.transform.position.y>=0)
             {
-                return Camera.main.WorldToScreenPoint(i.Head.transform.position);
+                return Camera.main.WorldToScreenPoint(i.transform.position);
             }
         }
         return null;
