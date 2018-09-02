@@ -132,6 +132,11 @@ public class G20_HitScoreApple : G20_HitAction {
         Destroy(gameObject);
     }
 
+    //IEnumerator DestroyCoroutine()
+    //{
+
+    //}
+
     IEnumerator FadeOut()
     {
         Color c = meshRenderer.material.color;

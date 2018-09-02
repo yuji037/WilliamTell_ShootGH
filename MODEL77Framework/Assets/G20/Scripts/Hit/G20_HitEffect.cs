@@ -11,4 +11,8 @@ public class G20_HitEffect : G20_HitAction {
     {
         G20_EffectManager.GetInstance().Create(effectType, hit_point);
     }
+
+    // 当たるたびにエフェクト変える場合は
+    // これではなくG20_HitMultiEffectを使う
+    public void ChangeEffectType(G20_EffectType effType) { effectType = effType; }
 }

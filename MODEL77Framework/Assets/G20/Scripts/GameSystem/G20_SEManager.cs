@@ -12,6 +12,7 @@ public enum G20_SEType {
     BOMB,
     APPLE_FALL,
     TEST_VOICE,
+    VOICE0,
     VOICE1,
     VOICE2,
     VOICE3,
@@ -31,7 +32,6 @@ public enum G20_SEType {
     VOICE17,
     VOICE18,
     VOICE19,
-    VOICE20,
 }
 
 public static class G20_SEExt {
@@ -60,6 +60,9 @@ public static class G20_SEExt {
                 break;
             case G20_SEType.TEST_VOICE:
                 retStr = "test_voice";
+                break;
+            default:
+                retStr = "voice" + ((int)( _type - G20_SEType.VOICE0 )).ToString();
                 break;
         }
 

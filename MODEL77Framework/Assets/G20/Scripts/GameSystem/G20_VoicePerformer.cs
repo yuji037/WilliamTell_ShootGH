@@ -3,6 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum G20_VoiceType {
+    GAME_START1,
+    GAME_START2,
+    GAME_START3,
+    INGAME1,
+    INGAME2,
+    INGAME3,
+    INGAME4,
+    INGAME5,
+    INGAME6,
+    INGAME7,
+    GAME_CLEAR1,
+    GAME_CLEAR2,
+    GAME_CLEAR3,
+    GAME_CLEAR4,
+    GAME_CLEAR5,
+    GAME_OVER1,
+    GAME_OVER2,
+    GAME_OVER3,
+    GAME_OVER4,
+    GAME_OVER5,
+}
+
+
 public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
 
     [SerializeField]
@@ -28,6 +52,11 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
         StartCoroutine(PlayCoroutine(voiceNumber));
     }
 
+    public void Play(G20_VoiceType voiceType)
+    {
+        StartCoroutine(PlayCoroutine((int)voiceType));
+    }
+
     IEnumerator PlayCoroutine(int voiceNumber)
     {
         // 改行処理
@@ -42,7 +71,7 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
             serifuText.text += "\n";
         }
 
-        G20_SEType seType = G20_SEType.VOICE1 + voiceNumber;
+        G20_SEType seType = G20_SEType.VOICE0 + voiceNumber;
 
         var sePlayer = G20_SEManager.GetInstance().Play(seType, Vector3.zero, false);
 

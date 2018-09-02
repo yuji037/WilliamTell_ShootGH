@@ -11,4 +11,6 @@ public class G20_HitSE : G20_HitAction {
     {
         G20_SEManager.GetInstance().Play(seType, transform.position);
     }
+
+    public void ChangeSEType(G20_SEType _seType) { seType = _seType; }
 }

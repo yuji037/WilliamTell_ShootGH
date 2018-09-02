@@ -51,10 +51,13 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
 
     public bool isSkipPerformance = false;
 
+    G20_GesslerShootPerformer gesslerShootPerformer;
+
     void Start()
     {
         _gameController = GameObject.Find("GameManager").GetComponent<GameController>();
         _coordinateManager = GameObject.Find("GameManager").GetComponent<CoordinateManager>();
+        gesslerShootPerformer = G20_ComponentUtility.FindComponentOnScene<G20_GesslerShootPerformer>();
 
         titleCanvas.SetActive(true);
         titleApple.SetActive(true);
@@ -200,9 +203,17 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         gameState = G20_GameState.GAMEOVER;
         Time.timeScale = 0;
         G20_BGMManager.GetInstance().Play(G20_BGMType.GAMEOVER);
+        G20_VoicePerformer.GetInstance().Play(G20_VoiceType.GAME_OVER1);
         //ゲームオーバー演出の開始
         G20_FailedPerformer.GetInstance().Excute(GameEnd);
     }
+
+    public void StartGesslerBattle()
+    {
+        // ゲスラー撃った後、クリア
+        gesslerShootPerformer.ToGesslerBattle(GameClear);
+    }
+
     public void GameClear()
     {
         gameState = G20_GameState.CLEAR;

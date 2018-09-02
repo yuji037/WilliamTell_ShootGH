@@ -160,9 +160,9 @@ public class G20_StageBehaviour : MonoBehaviour
             else
             {
                 // これ以上敵出現しない
-                // ここにクリア判定がくるはず
-                G20_GameManager.GetInstance().GameClear();
-                Debug.Log("クリア");
+                // ゲスラー戦へ移行
+                G20_GameManager.GetInstance().StartGesslerBattle();
+                Debug.Log("ゲスラー戦");
                 return;
             }
 
