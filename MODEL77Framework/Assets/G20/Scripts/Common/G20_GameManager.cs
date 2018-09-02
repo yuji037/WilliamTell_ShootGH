@@ -117,7 +117,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         // BGM
         G20_BGMManager.GetInstance().Play(G20_BGMType.INGAME_0);
 
-        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 3f);
+        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 5f);
 
         uiTextSurvive.SetActive(false);
 
