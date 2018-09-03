@@ -24,13 +24,11 @@ public class G20_BombAI : G20_AI
     float angle = 0.0f;
     bool isRight = true;
     bool rotated = true;
-
-
+    
     Vector3 moveVec = new Vector3(0, 0, -1);
 
     void Start()
     {
-
         target = GameObject.FindGameObjectWithTag("MainCamera");
         targetPos = target.transform.position;
         targetPos.y = transform.position.y;
@@ -154,11 +152,9 @@ public class G20_BombAI : G20_AI
             {
                 Debug.Log("インゲーム状態を抜けたのでAIを終了");
                 yield break;
-
             }
             transform.position += moveVec * AITime;
-
-
+            
             transform.Rotate(0, bombrot_speed * AITime, 0);
 
 

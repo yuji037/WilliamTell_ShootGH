@@ -41,8 +41,7 @@ public class G20_BombController : MonoBehaviour {
 
         while (true)
         {
-
-
+            
             init_v -= gravity * Time.deltaTime;
             moveVec.y = init_v;
             transform.position += moveVec * Time.deltaTime;
@@ -54,7 +53,8 @@ public class G20_BombController : MonoBehaviour {
             distance = distanceVec.magnitude;
             if (distance < attackRange)
             {
-                G20_EnemyAttack.GetInstance().Attack(1);
+
+                G20_EnemyAttack.GetInstance().Attack(damage);
                 Destroy(this.gameObject);
 
             }
