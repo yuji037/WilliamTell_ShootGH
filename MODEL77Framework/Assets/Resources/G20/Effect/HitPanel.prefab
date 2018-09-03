@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4205852354457330}
   - component: {fileID: 198539988003278912}
   - component: {fileID: 199132553326419160}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HitPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4430550932646014}
   - component: {fileID: 198692060717454194}
   - component: {fileID: 199136221010939436}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HitPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
