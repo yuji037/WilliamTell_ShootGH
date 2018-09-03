@@ -65,10 +65,10 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
         var _strs = serifuList[voiceNumber].Split(c);
 
         serifuText.text = "";
-        foreach ( var s in _strs )
+        for(int i = 0; i < _strs.Length; ++i )
         {
-            serifuText.text += s;
-            serifuText.text += "\n";
+            serifuText.text += _strs[i];
+            if ( i < _strs.Length - 1 ) serifuText.text += "\n";
         }
 
         G20_SEType seType = G20_SEType.VOICE0 + voiceNumber;

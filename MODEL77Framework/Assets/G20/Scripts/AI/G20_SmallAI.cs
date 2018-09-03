@@ -180,18 +180,22 @@ public class G20_SmallAI : G20_AI
         }
 
         yield return null;
+        if ( enemy.HP <= 0 ) yield break;
         //ジャンプモーション開始
         stateController.Attack(100.0f, null);
         yield return new WaitForSeconds(1.0f/enemy.anim.AnimSpeed);
         //放物線
         float hight = 0;
-        while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
+        while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME && transform.position.y >= -0.1f)
         {
 
             transform.position += (enemy.HP <= 0 ? -1 : 1) * transform.forward * Time.deltaTime * enemy.Speed;
 
-            init_v -= gravity * Time.deltaTime;
+            if ( enemy.HP <= 0 && init_v > 0 ) init_v = 0;
+            init_v -= gravity * Time.deltaTime * ( enemy.HP <= 0 ? 4 : 1 );
             hight += init_v * Time.deltaTime;
+
+
             transform.position = new Vector3(transform.position.x, hight, transform.position.z);
 
             if (distance < attackRange )
