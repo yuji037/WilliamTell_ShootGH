@@ -77,8 +77,8 @@ public class G20_StraightBombAI : G20_AI
 
         }
         Debug.Log("攻撃中");
+        stateController.Attack(attacktime,null);
         //なげるアニメーションの実行
-        stateController.Attack(attacktime, null);
 
         yield return new WaitForSeconds(attacktime);
         //アニメーション終了と同時に爆弾の親変更と爆弾の動く処理実行
@@ -87,8 +87,7 @@ public class G20_StraightBombAI : G20_AI
 
         bomb.Bombthrow(attackRange, enemy.Attack);
         bomb.transform.parent = enemy.transform.parent;
-
-
+        
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
             transform.position += AITime * deathvec;
