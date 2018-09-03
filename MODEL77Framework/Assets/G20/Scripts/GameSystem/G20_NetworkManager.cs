@@ -7,14 +7,17 @@ public class G20_NetworkManager : MonoBehaviour {
     [SerializeField] string ip = "127.0.0.1:10080";
     [SerializeField] string dir = "/gp17op17/WT/";
 
-    [SerializeField] string file = "ScoreSend.php";
 
-    string scoresendadress;
+
+    string scoreSendAdress;
+    string scoreReceiveAdress;
 
     [SerializeField] bool networkflag = false;
     // Use this for initialization
     void Start () {
-        scoresendadress = adress + ip + dir + file;
+        scoreReceiveAdress = adress + ip + dir + "ScoreSend.php";
+        scoreSendAdress = adress + ip + dir + "ScoreReceive.php";
+
         if (networkflag) StartCoroutine(Scorereceive());
         
 	}
@@ -26,10 +29,18 @@ public class G20_NetworkManager : MonoBehaviour {
 
     IEnumerator Scorereceive()
     {
-        WWW www = new WWW(adress + ip + dir + file);
+        WWW www = new WWW(scoreReceiveAdress);
         yield return www;
 
         Debug.Log(www.text);
+
+        yield return null;
+    }
+
+    IEnumerator scoreSend()
+    {
+        WWW www = new WWW(scoreReceiveAdress);
+        yield return www;
 
         yield return null;
     }
