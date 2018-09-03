@@ -76,7 +76,8 @@ MonoBehaviour:
     conditionToNextSequence: 1
     conditionValue: 30
     speedBuffValue: -0.5
-    InGamePerformer: {fileID: 0}
+    InGamePerformer: {fileID: 1771258280347622, guid: afb59b635b9663d439a16954a0ae1c4e,
+      type: 2}
   paternA:
     cueList:
     - enemyType: 6
