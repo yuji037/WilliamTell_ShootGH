@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e6f8efd94a00764d94a8b66bd6f1f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageTotalTime: 90
+  stageTotalTime: 60
   popSequenceList:
   - sequencePopType: 0
     addEnemyCueList:
@@ -59,11 +59,12 @@ MonoBehaviour:
       positionNumber: 3
     popPaternType: 0
     popIntervalTime: 0
-    popEnemyCountByOneChance: 2
+    popEnemyCountByOneChance: 10
     limitEnemyCount: 5
     conditionToNextSequence: 0
     conditionValue: 0
-    speedBuffValue: -0.3
+    speedBuffValue: -0.45
+    InGamePerformer: {fileID: 0}
   - sequencePopType: 0
     addEnemyCueList:
     - enemyType: 4
@@ -71,12 +72,25 @@ MonoBehaviour:
     - enemyType: 4
       positionNumber: 4
     popPaternType: 0
-    popIntervalTime: 0
+    popIntervalTime: 0.8
     popEnemyCountByOneChance: 2
+    limitEnemyCount: 5
+    conditionToNextSequence: 2
+    conditionValue: 0.8
+    speedBuffValue: -0.45
+    InGamePerformer: {fileID: 0}
+  - sequencePopType: 0
+    addEnemyCueList:
+    - enemyType: 5
+      positionNumber: 3
+    popPaternType: 0
+    popIntervalTime: 1
+    popEnemyCountByOneChance: 1
     limitEnemyCount: 5
     conditionToNextSequence: 0
     conditionValue: 0
-    speedBuffValue: -0.3
+    speedBuffValue: -0.45
+    InGamePerformer: {fileID: 0}
   - sequencePopType: 0
     addEnemyCueList:
     - enemyType: 6
@@ -86,8 +100,9 @@ MonoBehaviour:
     popEnemyCountByOneChance: 1
     limitEnemyCount: 99
     conditionToNextSequence: 2
-    conditionValue: 0.2
+    conditionValue: 0.3
     speedBuffValue: -0.3
+    InGamePerformer: {fileID: 0}
   - sequencePopType: 0
     addEnemyCueList:
     - enemyType: 6
@@ -99,171 +114,149 @@ MonoBehaviour:
     - enemyType: 6
       positionNumber: 5
     popPaternType: 0
-    popIntervalTime: 0.2
+    popIntervalTime: 0.3
     popEnemyCountByOneChance: 2
     limitEnemyCount: 99
     conditionToNextSequence: 0
     conditionValue: 0
-    speedBuffValue: -0.3
+    speedBuffValue: -0.45
+    InGamePerformer: {fileID: 0}
   - sequencePopType: 1
     addEnemyCueList: []
-    popPaternType: 2
-    popIntervalTime: 0.6
+    popPaternType: 0
+    popIntervalTime: 1
     popEnemyCountByOneChance: 1
-    limitEnemyCount: 3
+    limitEnemyCount: 99
     conditionToNextSequence: 1
-    conditionValue: 70
-    speedBuffValue: -0.3
+    conditionValue: 30
+    speedBuffValue: -0.45
+    InGamePerformer: {fileID: 0}
+  - sequencePopType: 0
+    addEnemyCueList:
+    - enemyType: 5
+      positionNumber: 11
+    - enemyType: 5
+      positionNumber: 20
+    popPaternType: 0
+    popIntervalTime: 0
+    popEnemyCountByOneChance: 2
+    limitEnemyCount: 99
+    conditionToNextSequence: 2
+    conditionValue: 3
+    speedBuffValue: -0.7
+    InGamePerformer: {fileID: 0}
+  - sequencePopType: 1
+    addEnemyCueList: []
+    popPaternType: 1
+    popIntervalTime: 1
+    popEnemyCountByOneChance: 1
+    limitEnemyCount: 99
+    conditionToNextSequence: 1
+    conditionValue: 10
+    speedBuffValue: -0.45
+    InGamePerformer: {fileID: 0}
   - sequencePopType: 0
     addEnemyCueList:
     - enemyType: 5
       positionNumber: 1
     - enemyType: 5
       positionNumber: 5
-    popPaternType: 2
-    popIntervalTime: 0
+    - enemyType: 5
+      positionNumber: 2
+    - enemyType: 5
+      positionNumber: 4
+    popPaternType: 3
+    popIntervalTime: 0.3
     popEnemyCountByOneChance: 2
     limitEnemyCount: 99
     conditionToNextSequence: 2
-    conditionValue: 0.3
-    speedBuffValue: -0.6
-  - sequencePopType: 1
-    addEnemyCueList: []
-    popPaternType: 2
-    popIntervalTime: 0.5
-    popEnemyCountByOneChance: 1
-    limitEnemyCount: 4
-    conditionToNextSequence: 1
-    conditionValue: 60
-    speedBuffValue: -0.3
+    conditionValue: 1
+    speedBuffValue: 0
+    InGamePerformer: {fileID: 0}
   - sequencePopType: 0
     addEnemyCueList:
     - enemyType: 5
       positionNumber: 6
     - enemyType: 5
       positionNumber: 10
-    popPaternType: 2
-    popIntervalTime: 0
-    popEnemyCountByOneChance: 2
-    limitEnemyCount: 99
-    conditionToNextSequence: 2
-    conditionValue: 0.3
-    speedBuffValue: -0.6
-  - sequencePopType: 1
-    addEnemyCueList: []
-    popPaternType: 0
+    - enemyType: 5
+      positionNumber: 7
+    - enemyType: 5
+      positionNumber: 9
+    - enemyType: 5
+      positionNumber: 6
+    - enemyType: 5
+      positionNumber: 10
+    popPaternType: 3
     popIntervalTime: 0.3
     popEnemyCountByOneChance: 1
     limitEnemyCount: 4
     conditionToNextSequence: 1
-    conditionValue: 45
-    speedBuffValue: -0.3
-  - sequencePopType: 0
-    addEnemyCueList:
-    - enemyType: 5
-      positionNumber: 15
-    - enemyType: 5
-      positionNumber: 11
-    popPaternType: 0
-    popIntervalTime: 0
-    popEnemyCountByOneChance: 2
-    limitEnemyCount: 99
-    conditionToNextSequence: 2
-    conditionValue: 0.3
-    speedBuffValue: -0.6
-  - sequencePopType: 1
-    addEnemyCueList: []
-    popPaternType: 0
-    popIntervalTime: 0.2
-    popEnemyCountByOneChance: 1
-    limitEnemyCount: 5
-    conditionToNextSequence: 1
-    conditionValue: 30
-    speedBuffValue: -0.3
-  - sequencePopType: 1
-    addEnemyCueList: []
-    popPaternType: 1
-    popIntervalTime: 0.1
-    popEnemyCountByOneChance: 1
-    limitEnemyCount: 5
-    conditionToNextSequence: 1
     conditionValue: 0
-    speedBuffValue: -0.3
-  - sequencePopType: 0
-    addEnemyCueList:
-    - enemyType: 5
-      positionNumber: 3
-    - enemyType: 5
-      positionNumber: 2
-    - enemyType: 5
-      positionNumber: 4
-    - enemyType: 5
-      positionNumber: 1
-    - enemyType: 5
-      positionNumber: 5
-    popPaternType: 1
-    popIntervalTime: 0
-    popEnemyCountByOneChance: 1
-    limitEnemyCount: 99
-    conditionToNextSequence: 0
-    conditionValue: 0
-    speedBuffValue: -0.3
+    speedBuffValue: 0
+    InGamePerformer: {fileID: 0}
   paternA:
     cueList:
     - enemyType: 4
-      positionNumber: 0
+      positionNumber: -1
     - enemyType: 7
-      positionNumber: 0
-    - enemyType: 0
-      positionNumber: 0
-    - enemyType: 0
-      positionNumber: 0
-    - enemyType: 6
-      positionNumber: 3
-    - enemyType: 7
-      positionNumber: 0
+      positionNumber: -1
     - enemyType: 4
-      positionNumber: 0
-    - enemyType: 3
-      positionNumber: 0
-    - enemyType: 3
-      positionNumber: 0
-    - enemyType: 6
-      positionNumber: 3
+      positionNumber: -1
+    - enemyType: 4
+      positionNumber: -1
+    - enemyType: 7
+      positionNumber: -1
+    - enemyType: 4
+      positionNumber: -1
+    - enemyType: 7
+      positionNumber: -1
+    - enemyType: 2
+      positionNumber: -1
   paternB:
     cueList:
-    - enemyType: 0
-      positionNumber: 0
-    - enemyType: 1
-      positionNumber: 0
-    - enemyType: 3
-      positionNumber: 0
     - enemyType: 4
-      positionNumber: 0
-    - enemyType: 6
-      positionNumber: 3
-    - enemyType: 5
-      positionNumber: 0
-    - enemyType: 0
-      positionNumber: 0
+      positionNumber: -1
+    - enemyType: 4
+      positionNumber: -2
     - enemyType: 3
-      positionNumber: 0
-    - enemyType: 0
-      positionNumber: 0
-    - enemyType: 6
+      positionNumber: -1
+    - enemyType: 4
+      positionNumber: -2
+    - enemyType: 3
+      positionNumber: 3
+    - enemyType: 4
+      positionNumber: 3
+    - enemyType: 3
+      positionNumber: 3
+    - enemyType: 2
       positionNumber: 3
   paternC:
     cueList:
     - enemyType: 4
-      positionNumber: 0
+      positionNumber: -1
     - enemyType: 7
-      positionNumber: 0
+      positionNumber: -1
     - enemyType: 4
-      positionNumber: 0
-    - enemyType: 3
-      positionNumber: 0
+      positionNumber: -1
+    - enemyType: 4
+      positionNumber: -1
+    - enemyType: 7
+      positionNumber: -1
+    - enemyType: 4
+      positionNumber: -1
+    - enemyType: 7
+      positionNumber: -1
+    - enemyType: 2
+      positionNumber: -1
   paternD:
-    cueList: []
+    cueList:
+    - enemyType: 5
+      positionNumber: -1
+    - enemyType: 5
+      positionNumber: -1
+    - enemyType: 1
+      positionNumber: -1
   paternE:
     cueList: []
   paternF:
