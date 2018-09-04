@@ -32,7 +32,7 @@ if(isset( $_POST['userinfo'])
     $query=  "insert into score values(' ";
 	$query.= $_POST['userinfo'];	
 	$query.= " ', ";
- 	$query.= $_POST['month'] . $_POST['day']; 		
+ 	$query.= $_POST['date']; 		
 	$query.= " , "; 
 	$query.= $_POST['score']; 	
 	$query.= " , "; 

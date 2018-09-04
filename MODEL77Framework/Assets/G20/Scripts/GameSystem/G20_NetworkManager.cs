@@ -22,7 +22,7 @@ public class G20_NetworkManager : MonoBehaviour
 
     int month;
     int day;
-
+    int date;
     // Use this for initialization
     void Start()
     {
@@ -32,10 +32,9 @@ public class G20_NetworkManager : MonoBehaviour
         Scorereceive();
         IDReceive();
         month = DateTime.Now.Month;
+        month *= 100;
         day = DateTime.Now.Day;
-
-        
-
+        date = month + day;
     }
 
     // Update is called once per frame
@@ -100,10 +99,10 @@ public class G20_NetworkManager : MonoBehaviour
         form.AddField("userinfo", "Guest");
         form.AddField("month", month);
         form.AddField("day", day);
-        form.AddField("date", 0904);
+        form.AddField("date", date);
         form.AddField("score", G20_Score.GetInstance().Score);
         form.AddField("ID", userIDstr);
-        form.AddField("difficulty", 1);
+        form.AddField("difficulty", 1);//どっかからとってこれるようにする？
 
         WWW www = new WWW(scoreSendAdress, form);
         yield return www;
