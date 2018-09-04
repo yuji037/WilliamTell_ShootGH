@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class G20_NetworkManager : MonoBehaviour
@@ -18,6 +19,10 @@ public class G20_NetworkManager : MonoBehaviour
     bool scoreSendComp = false;
     //オフラインモードでの実行はfalse
     [SerializeField] bool networkflag = false;
+
+    int month;
+    int day;
+
     // Use this for initialization
     void Start()
     {
@@ -26,6 +31,10 @@ public class G20_NetworkManager : MonoBehaviour
         IDReceiveAdress = adress + ip + dir + "IDSend.php";
         Scorereceive();
         IDReceive();
+        month = DateTime.Now.Month;
+        day = DateTime.Now.Day;
+
+        
 
     }
 
@@ -74,6 +83,7 @@ public class G20_NetworkManager : MonoBehaviour
 
     ////////////////↑受信系↑////////////////////////////
 
+
     ////////////////↓送信系↓////////////////////////////
     public void Scoresend()
     {
@@ -88,6 +98,8 @@ public class G20_NetworkManager : MonoBehaviour
 
         WWWForm form = new WWWForm();
         form.AddField("userinfo", "Guest");
+        form.AddField("month", month);
+        form.AddField("day", day);
         form.AddField("date", 0904);
         form.AddField("score", G20_Score.GetInstance().Score);
         form.AddField("ID", userIDstr);

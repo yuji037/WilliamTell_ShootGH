@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 header("Conect-Type: application/json; charset=UTF-8");
 header("X-content-Type-Options: nosniff");
