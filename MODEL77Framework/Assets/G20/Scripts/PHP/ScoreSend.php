@@ -1,7 +1,8 @@
-<?php
+﻿<?php
 
 header("Conect-Type: application/json; charset=UTF-8");
 header("X-content-Type-Options: nosniff");
+
 
 //tryの中に通常処理
 try{
@@ -22,7 +23,7 @@ $dsn = 'mysql:dbname=WT;host=localhost';
     	$score_array[] =$row["date"];
 		$score_array[] =$row["score"];    	
 		$score_array[] =$row["ID"];    	
-		$score_array[] =$row["difficulty"];    	
+		$score_array[] =$row["difficulty"];    
 	}
 		//配列の文字列結合のための関数
 	$score=implode(",",$score_array);
