@@ -60,6 +60,7 @@ public class G20_NetworkManager : MonoBehaviour
         G20_SQLModel sample = JsonUtility.FromJson<G20_SQLModel>(jsonText);
 
         Debug.Log("スコア情報(score)：" + sample.score[0].score);
+        Debug.Log("jsonText" + jsonText);
 
         yield return null;
     }
