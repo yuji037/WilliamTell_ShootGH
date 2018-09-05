@@ -46,7 +46,7 @@ if(isset( $_POST['userinfo'])
     
    
 
-	echo "userinfo:".$_POST['userinfo']."\ndate:".$_POST['date']."\nscore:".$_POST['score']."\nID:".$_POST['ID']."\ndifficulty:".$_POST['difficulty'];
+	echo "データ送信完了";
 
     }
 //catchの中に例外処理

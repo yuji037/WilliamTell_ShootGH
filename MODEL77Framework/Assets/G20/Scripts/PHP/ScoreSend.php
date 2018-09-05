@@ -11,22 +11,24 @@ $dsn = 'mysql:dbname=WT;host=localhost';
 	$password = '';
 	$con =new PDO($dsn,$user,$password);
 
-    $query="select * from score";
+    $query="select * from score order by score desc";
     $stmt = $con->prepare($query);
     $stmt -> execute();
 	$result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
     
-    $score_array = array();
+	$json=json_encode($result);
 
-    foreach($result as $row){
-		$score_array[] =$row["userinfo"];
-    	$score_array[] =$row["date"];
-		$score_array[] =$row["score"];    	
-		$score_array[] =$row["ID"];    	
-		$score_array[] =$row["difficulty"];    
-	}
+//    $score_array = array();
+
+//    foreach($result as $row){
+//		$score_array[] =$row["userinfo"];
+//    	$score_array[] =$row["date"];
+//		$score_array[] =$row["score"];    	
+//		$score_array[] =$row["ID"];    	
+//		$score_array[] =$row["difficulty"];    
+//	}
 		//配列の文字列結合のための関数
-	$score=implode(",",$score_array);
+//	$score=implode(",",$score_array);
 
     
     
@@ -38,5 +40,5 @@ catch(PDOEException $Exception){
 
 //var_dump($result);
 
-echo $score;
+echo $json;
 ?>

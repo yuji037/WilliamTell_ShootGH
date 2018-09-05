@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
+
 public class G20_NetworkManager : MonoBehaviour
 {
     [SerializeField] string adress = "http://";
@@ -19,10 +20,9 @@ public class G20_NetworkManager : MonoBehaviour
     bool scoreSendComp = false;
     //オフラインモードでの実行はfalse
     [SerializeField] bool networkflag = false;
-
-    int month;
-    int day;
+    
     int date;
+
     // Use this for initialization
     void Start()
     {
@@ -31,10 +31,8 @@ public class G20_NetworkManager : MonoBehaviour
         IDReceiveAdress = adress + ip + dir + "IDSend.php";
         Scorereceive();
         IDReceive();
-        month = DateTime.Now.Month;
-        month *= 100;
-        day = DateTime.Now.Day;
-        date = month + day;
+        date = DateTime.Now.Month * 100 + DateTime.Now.Day;
+        G20_GameManager.GetInstance().ChangedStateAction += Scoresend;
     }
 
     // Update is called once per frame
@@ -42,10 +40,7 @@ public class G20_NetworkManager : MonoBehaviour
     {
         if (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME) scoreSendComp = false;
 
-        if (G20_GameManager.GetInstance().gameState == G20_GameState.CLEAR)
-        {
-            Scoresend();
-        }
+       
         Debug.Log("send:" + scoreSendComp);
     }
 
@@ -60,8 +55,11 @@ public class G20_NetworkManager : MonoBehaviour
     {
         WWW www = new WWW(scoreReceiveAdress);
         yield return www;
+        string jsonText = "{ \"score\" : " + www.text + "}";
+        
+        G20_SQLModel sample = JsonUtility.FromJson<G20_SQLModel>(jsonText);
 
-        Debug.Log("スコア情報(CSV)：" + www.text);
+        Debug.Log("スコア情報(score)：" + sample.score[0].score);
 
         yield return null;
     }
@@ -79,17 +77,15 @@ public class G20_NetworkManager : MonoBehaviour
         Debug.Log("ユーザーID : " + userIDstr);
         yield return null;
     }
-
     ////////////////↑受信系↑////////////////////////////
 
 
     ////////////////↓送信系↓////////////////////////////
-    public void Scoresend()
+    public void Scoresend(G20_GameState state)
     {
-        if (networkflag && !scoreSendComp)
+        if (networkflag && state==G20_GameState.CLEAR)
         {
             StartCoroutine(ScoreSendCoroutine());
-            scoreSendComp = true;
         }
     }
     IEnumerator ScoreSendCoroutine()
@@ -97,8 +93,6 @@ public class G20_NetworkManager : MonoBehaviour
 
         WWWForm form = new WWWForm();
         form.AddField("userinfo", "Guest");
-        form.AddField("month", month);
-        form.AddField("day", day);
         form.AddField("date", date);
         form.AddField("score", G20_Score.GetInstance().Score);
         form.AddField("ID", userIDstr);
@@ -114,3 +108,22 @@ public class G20_NetworkManager : MonoBehaviour
     ////////////////↑送信系↑////////////////////////////
 
 }
+
+
+
+////////////// ↓　モデルクラス　　絶対に触るな！！！！　↓//////////////////
+[Serializable] public class G20_SQLModel
+{
+    public List<G20_ScoreModel> score;
+}
+
+
+[Serializable] public class G20_ScoreModel
+{
+    public string userinfo;
+    public string date;
+    public string score;
+    public string ID;
+    public string difficulty;
+}
+//////////////↑　モデルクラス　　絶対に触るな！！！！　↑///////////////////
