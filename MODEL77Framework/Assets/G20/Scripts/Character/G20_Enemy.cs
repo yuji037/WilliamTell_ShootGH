@@ -14,13 +14,13 @@ public class G20_Enemy : G20_Unit {
     public G20_EnemyAnimation anim;
     public int Attack { get { return attack; } }
     //移動スピード
-    [SerializeField] float speed=1.0f;
+    [SerializeField,Range(0.5f,5)] float speed=1.0f;
     public float Speed
     {
         get { return speed; }
         set {
             speed = value;
-            speed=Mathf.Clamp(speed,0,100);
+            speed=Mathf.Clamp(speed,0.5f,100);
         }
     }
     List<G20_EnemyBuff> buffList=new List<G20_EnemyBuff>();

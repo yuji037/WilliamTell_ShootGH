@@ -19,8 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4420593265736056}
-  - component: {fileID: 33571675071302752}
-  - component: {fileID: 23757805752332848}
   - component: {fileID: 135955011090763152}
   - component: {fileID: 114756031538484048}
   - component: {fileID: 114230303433394880}
@@ -28,6 +26,8 @@ GameObject:
   - component: {fileID: 114329152376004154}
   - component: {fileID: 114331029675624522}
   - component: {fileID: 54564887420531714}
+  - component: {fileID: 33904649430388050}
+  - component: {fileID: 23225856998660218}
   m_Layer: 0
   m_Name: ScoreGoldenApple
   m_TagString: Untagged
@@ -76,7 +76,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1317072536677658}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.746, z: -5.835}
+  m_LocalPosition: {x: -0.29690623, y: 0.421, z: -2.256}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4823752485438990}
@@ -110,7 +110,7 @@ Transform:
   m_Father: {fileID: 4420593265736056}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!23 &23757805752332848
+--- !u!23 &23225856998660218
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -123,8 +123,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c8e453266cec5374fa839d26d65ec356, type: 2}
-  - {fileID: 2100000, guid: c2196ff171537d248a13e1c073f4f689, type: 2}
+  - {fileID: 2100000, guid: 8c64d8c995019734c854beb647379045, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -143,13 +142,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33571675071302752
+--- !u!33 &33904649430388050
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1317072536677658}
-  m_Mesh: {fileID: 4300000, guid: d1a9c8e81e8a1014dab64aa083beadab, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 8e5aab3c454838e408d3e4c591966dae, type: 3}
 --- !u!54 &54564887420531714
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -214,10 +213,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71840c62fe5c86479ff068be9a8798c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mesh: {fileID: 23757805752332848}
+  mesh: {fileID: 0}
+  meshR: {fileID: 23225856998660218}
   changeMaterials:
-  - {fileID: 2100000, guid: d3cb0f4a0d434e5459f0f7e6488814e8, type: 2}
-  - {fileID: 2100000, guid: 24d8e18c0109dcf43b8a02501a0285ef, type: 2}
+  - {fileID: 2100000, guid: ff29c63384a30b54bbed3427c142ba2b, type: 2}
+  - {fileID: 2100000, guid: bf19171c509c61b468b0b03bff54e6a6, type: 2}
 --- !u!114 &114756031538484048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -299,7 +299,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1619449324
+  randomSeed: 877082387
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3430,7 +3430,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1082288506
+  randomSeed: -1947832865
   InitialModule:
     serializedVersion: 3
     enabled: 1

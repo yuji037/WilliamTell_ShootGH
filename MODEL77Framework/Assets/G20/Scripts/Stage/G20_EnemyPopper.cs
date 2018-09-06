@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class G20_EnemyPopper : MonoBehaviour {
 
-    [SerializeField]
-    GameObject[] enemyPrefabs;
 
+    [SerializeField]
+    G20_PopEnemySelector popEnemySelector;
     [SerializeField]
     Transform enemysParent;
 
@@ -22,7 +22,8 @@ public class G20_EnemyPopper : MonoBehaviour {
     public G20_Enemy EnemyPop(G20_EnemyType enemyType, Vector3 position)
     {
         // 敵のオブジェクト生成
-        var ene = Instantiate(enemyPrefabs[(int)enemyType],enemysParent);
+        var ene = popEnemySelector.GetPopEnemy(enemyType);
+        ene.transform.SetParent(transform.parent);
         ene.transform.position = position + new Vector3(0, spawnHeight, 0);
 
         //敵の召喚エフェクト生成(少し魔法陣を浮かす)
