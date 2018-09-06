@@ -1,17 +1,22 @@
 fileFormatVersion: 2
-guid: 750f24932e5202943bbf9f375913fde4
-timeCreated: 1536157200
+guid: 5a5983b73ad819344801eb2ad73fb71a
+timeCreated: 1536256117
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: apple_mesh
+    100002: polySurface1
+    100004: polySurface2
     400000: //RootNode
-    400002: apple_mesh
-    2300000: apple_mesh
-    3300000: apple_mesh
-    4300000: apple_mesh
+    400002: polySurface1
+    400004: polySurface2
+    2300000: polySurface1
+    2300002: polySurface2
+    3300000: polySurface1
+    3300002: polySurface2
+    4300000: polySurface1
+    4300002: polySurface2
   materials:
     importMaterials: 1
     materialName: 0
