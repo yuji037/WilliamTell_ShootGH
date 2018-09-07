@@ -46,10 +46,10 @@ public class G20_PlayDebugger : MonoBehaviour
         stageManager = G20_StageManager.GetInstance();
         stageSelectObj.hitAction += () =>
         {
-            stageIndex++;
-            if ( stageIndex >= stagePrefabs.Length ) stageIndex = 0;
-            stageManager.stageBehaviourPrefab = stagePrefabs[stageIndex];
-            UpdateStageNameTextMesh();
+            //stageIndex++;
+            //if ( stageIndex >= stagePrefabs.Length ) stageIndex = 0;
+            //stageManager.stageBehaviourPrefabs = stagePrefabs[stageIndex];
+            //UpdateStageNameTextMesh();
         };
         UpdateStageNameTextMesh();
     }
@@ -81,9 +81,9 @@ public class G20_PlayDebugger : MonoBehaviour
 
     void UpdateStageNameTextMesh()
     {
-        var name = stageManager.stageBehaviourPrefab.name;
-        name = name.Substring(9);
-        stageNameTextMesh.text = name;
+        //var name = stageManager.stageBehaviourPrefabs.name;
+        //name = name.Substring(9);
+        //stageNameTextMesh.text = name;
     }
 
     void ChangePlayerInvin(bool _active)
