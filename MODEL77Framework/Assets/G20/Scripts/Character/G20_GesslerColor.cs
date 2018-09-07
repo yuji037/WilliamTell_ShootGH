@@ -21,7 +21,7 @@ public class G20_GesslerColor : MonoBehaviour {
         {
             foreach (var cr in cubismRenderers )
             {
-                Debug.Log("iro : " + Color);
+                //Debug.Log("iro : " + Color);
                 cr.Color = new Color(Color, Color, Color, 1f);
             }
             _color = Color;

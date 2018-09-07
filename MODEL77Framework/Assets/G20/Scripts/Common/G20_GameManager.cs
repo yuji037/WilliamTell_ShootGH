@@ -28,7 +28,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     G20_Player playerObj;
 
     [SerializeField]
-    GameObject titleApple;
+    GameObject[] titleApples;
 
     [SerializeField]
     GameObject uiTextSurvive;
@@ -60,7 +60,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         gesslerShootPerformer = G20_ComponentUtility.FindComponentOnScene<G20_GesslerShootPerformer>();
 
         titleCanvas.SetActive(true);
-        titleApple.SetActive(true);
+        foreach(var apl in titleApples) apl.SetActive(true);
         G20_BGMManager.GetInstance().Play(G20_BGMType.TITLE);
         paramCanvas.SetActive(false);
 
@@ -81,7 +81,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         G20_BulletShooter.GetInstance().CanShoot = false;
 
         titleCanvas.SetActive(false);
-        titleApple.SetActive(false);
+        foreach ( var apl in titleApples ) apl.SetActive(false);
         G20_BGMManager.GetInstance().FadeOut();
 
         yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 1f);
