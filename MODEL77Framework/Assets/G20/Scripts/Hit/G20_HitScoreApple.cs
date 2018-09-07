@@ -45,19 +45,19 @@ public class G20_HitScoreApple : G20_HitAction {
         G20_Score.GetInstance().AddScore(1);
         score--;
 
-        foreach(var ps in particleSystems )
-        {
+        //foreach(var ps in particleSystems )
+        //{
 
-            var cMin = ps.main.startColor.colorMin;
-            var cMax = ps.main.startColor.colorMax;
-            if ( score >= 0 ) {
-                cMin = new Color(cMin.r, cMin.g, cMin.b, cMin.a * (float)score / (float)( score + 1f ));
-                cMax = new Color(cMax.r, cMax.g, cMax.b, cMax.a * (float)score / (float)( score + 1f ));
-            }
-            ParticleSystem.MinMaxGradient grad = new ParticleSystem.MinMaxGradient(cMin, cMax);
+        //    var cMin = ps.main.startColor.colorMin;
+        //    var cMax = ps.main.startColor.colorMax;
+        //    if ( score >= 0 ) {
+        //        cMin = new Color(cMin.r, cMin.g, cMin.b, cMin.a * (float)score / (float)( score + 1f ));
+        //        cMax = new Color(cMax.r, cMax.g, cMax.b, cMax.a * (float)score / (float)( score + 1f ));
+        //    }
+        //    ParticleSystem.MinMaxGradient grad = new ParticleSystem.MinMaxGradient(cMin, cMax);
 
-            //ps.SetParticles(;
-        }
+        //    //ps.SetParticles(;
+        //}
 
         // 落ちて消える処理
         if( score <= 0 )
