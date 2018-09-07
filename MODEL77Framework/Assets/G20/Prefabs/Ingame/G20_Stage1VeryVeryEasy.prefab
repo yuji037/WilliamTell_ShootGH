@@ -191,7 +191,7 @@ MonoBehaviour:
     popIntervalTime: 0.3
     popEnemyCountByOneChance: 1
     limitEnemyCount: 4
-    conditionToNextSequence: 1
+    conditionToNextSequence: 0
     conditionValue: 0
     speedBuffValue: 0
     InGamePerformer: {fileID: 0}
