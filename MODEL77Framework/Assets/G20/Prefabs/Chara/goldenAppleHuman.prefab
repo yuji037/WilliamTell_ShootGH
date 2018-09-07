@@ -1673,7 +1673,7 @@ MonoBehaviour:
   isPouse: 0
   enemy: {fileID: 0}
   attackRange: 3
-  deathposition_y: 2
+  deathposition_y: -2
   deathvec: {x: 0, y: -2, z: 0}
   attacktime: 1
   changePhase: 5
@@ -1784,7 +1784,7 @@ MonoBehaviour:
   isPouse: 0
   enemy: {fileID: 0}
   attackRange: 3
-  deathposition_y: 2
+  deathposition_y: -2
   deathvec: {x: 0, y: -2, z: 0}
   attacktime: 1
   changePhase: 5
