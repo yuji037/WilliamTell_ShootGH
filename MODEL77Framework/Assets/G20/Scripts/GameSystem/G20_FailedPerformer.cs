@@ -11,7 +11,7 @@ public class G20_FailedPerformer : G20_Singleton<G20_FailedPerformer>
     [SerializeField] Text ScoreText;
     [SerializeField] GameObject[] ActiveObjs;
     [SerializeField] GameObject[] DeActiveObjs;
-    [SerializeField] float fadeAlpha = 0.5f;
+    [SerializeField,Range(0,1.0f)] float fadeAlpha = 0.7f;
     [SerializeField] float fadeTime = 3.0f;
     public void Excute(Action on_end_action)
     {
