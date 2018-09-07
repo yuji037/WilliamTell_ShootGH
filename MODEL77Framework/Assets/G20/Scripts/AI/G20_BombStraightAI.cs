@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class G20_StraightBombAI : G20_AI
+public class G20_BombStraightAI : G20_AI
 {
     //移動方向の回転にかける時間
     [SerializeField] float rotationTime = 1.0f;
@@ -50,6 +50,9 @@ public class G20_StraightBombAI : G20_AI
                 yield return StartCoroutine(TargetRun());
 
                 yield return StartCoroutine(AttackCoroutine());
+
+                yield return StartCoroutine(SusideCoroutine());
+
             }
             else
             {
@@ -86,17 +89,7 @@ public class G20_StraightBombAI : G20_AI
         bomb.Bombthrow(attackRange, enemy.Attack);
         bomb.transform.parent = enemy.transform.parent;
         
-        while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
-        {
-            transform.position += AITime * deathvec;
-            yield return null;
-            if (transform.position.y < deathposition_y)
-            {
-                Debug.Log("自殺");
-                GetComponent<G20_Unit>().ExecuteDeathAction();
-            }
-        }
-  
+       
     }
 
     //とにかく前に走る

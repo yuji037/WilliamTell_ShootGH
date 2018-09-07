@@ -64,6 +64,9 @@ public class G20_NormalAI : G20_AI
                 Debug.Log("攻撃開始");
                 // 攻撃選択
                 yield return StartCoroutine(AttackCoroutine());
+
+                yield return StartCoroutine(SusideCoroutine());
+
             }
             else
             if (distance < changePhase)
@@ -107,17 +110,7 @@ public class G20_NormalAI : G20_AI
         Debug.Log("攻撃中");
         stateController.Attack(attacktime, () => G20_EnemyAttack.GetInstance().Attack(enemy.Attack));
         yield return new WaitForSeconds(attacktime);
-        while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
-        {
-            transform.position += AITime * deathvec;
-            yield return null;
-            if (transform.position.y < deathposition_y)
-            {
-                Debug.Log("自殺");
-                GetComponent<G20_Unit>().ExecuteDeathAction();
-            }
-        }
- 
+       
     }
 
     IEnumerator RunCoroutine()

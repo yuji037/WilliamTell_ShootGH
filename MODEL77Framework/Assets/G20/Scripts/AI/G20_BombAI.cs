@@ -56,14 +56,6 @@ public class G20_BombAI : G20_AI
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
             // 以下の処理（1フレーム間）で行動を決定する
-
-            // ターゲットが目の前にいたら攻撃する
-            //if (distance < attackRange)
-            //{
-            //    Debug.Log("攻撃開始");
-            //    // 攻撃選択
-            //}
-            //else
             if (distance < changePhase)
             {
 
@@ -71,6 +63,8 @@ public class G20_BombAI : G20_AI
                 yield return StartCoroutine(TargetRun());
                 //爆弾なげる
                 yield return StartCoroutine(AttackCoroutine());
+                //自殺
+                yield return StartCoroutine(SusideCoroutine());
             }
             else
             {
@@ -117,18 +111,10 @@ public class G20_BombAI : G20_AI
         bomb.Bombthrow(attackRange,enemy.Attack);
         bomb.transform.parent = enemy.transform.parent;
         
-
-        while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
-        {
-            transform.position += AITime * deathvec;
-            yield return null;
-            if (transform.position.y < deathposition_y )
-            {
-                Debug.Log("自殺");
-                GetComponent<G20_Unit>().ExecuteDeathAction();
-            }
-        }
     }
+
+    
+
 
     IEnumerator RunCoroutine()
     {
@@ -163,6 +149,8 @@ public class G20_BombAI : G20_AI
             yield return null;
         }
     }
+
+    
 
     IEnumerator TargetRun()
     {

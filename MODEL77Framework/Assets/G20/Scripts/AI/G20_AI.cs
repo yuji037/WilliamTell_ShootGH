@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 public abstract class G20_AI : MonoBehaviour
 {
+    [SerializeField] GameObject me;
     bool isAIStarted = false;
     public bool isPouse;
     public G20_Enemy enemy;
@@ -63,4 +64,30 @@ public abstract class G20_AI : MonoBehaviour
     }
     protected abstract void childAIStart();
 
+
+    protected IEnumerator SusideCoroutine()
+    {
+        while (true)
+        {
+            if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
+            {
+                Debug.Log("インゲーム状態を抜けたのでAIを終了");
+                yield break;
+            }
+
+            transform.position += Time.deltaTime * deathvec;
+
+            if (transform.position.y < deathposition_y)
+            {
+                if (enemy.HP <= 0) yield break;
+   
+                Debug.Log("自殺");
+                GetComponent<G20_Unit>().ExecuteDeathAction();
+                Destroy(me);
+
+            }
+
+            yield return null;
+        }
+    }
 }

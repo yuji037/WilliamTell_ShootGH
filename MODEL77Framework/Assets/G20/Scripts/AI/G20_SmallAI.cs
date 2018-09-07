@@ -61,10 +61,13 @@ public class G20_SmallAI : G20_AI
             // 以下の処理（1フレーム間）で行動を決定する
 
             // ターゲットが目の前にいたら攻撃する
-            if (distance < attackRange )
+            if (distance < attackRange)
             {
-                    // 攻撃選択
-                    yield return StartCoroutine(AttackCoroutine());
+                // 攻撃選択
+                yield return StartCoroutine(AttackCoroutine());
+
+                yield return StartCoroutine(SusideCoroutine());
+
             }
             else
             if (distance < changePhase)
@@ -108,22 +111,12 @@ public class G20_SmallAI : G20_AI
         }
 
         Debug.Log("攻撃中");
-        stateController.Attack(attacktime, () => G20_EnemyAttack.GetInstance().Attack(enemy.Attack));
-        yield return new WaitForSeconds(attacktime);
-
-
-        //自殺
-        while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
-        {
-            transform.position += AITime * deathvec;
-            yield return null;
-            if (transform.position.y < deathposition_y)
-            {
-                Debug.Log("自殺");
-                GetComponent<G20_Unit>().ExecuteDeathAction();
-            }
-        }
+        G20_EnemyAttack.GetInstance().Attack(enemy.Attack);
+        Debug.Log("攻撃終了");
+       
     }
+
+    
 
     IEnumerator RunCoroutine()
     {
