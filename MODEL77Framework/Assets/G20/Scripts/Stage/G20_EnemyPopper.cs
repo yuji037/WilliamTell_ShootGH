@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class G20_EnemyPopper : MonoBehaviour {
+public class G20_EnemyPopper : MonoBehaviour
+{
 
 
     [SerializeField]
@@ -27,8 +28,8 @@ public class G20_EnemyPopper : MonoBehaviour {
         ene.transform.position = position + new Vector3(0, spawnHeight, 0);
 
         //敵の召喚エフェクト生成(少し魔法陣を浮かす)
-        G20_EffectManager.GetInstance().Create(G20_EffectType.SUMMON_APPLE, position + new Vector3(0,0.02f,0));
-        G20_SEManager.GetInstance().Play(G20_SEType.SUMMON_APPLE, position +new Vector3(0, 0.02f, 0));
+        G20_EffectManager.GetInstance().Create(G20_EffectType.SUMMON_APPLE, position + new Vector3(0, 0.02f, 0));
+        G20_SEManager.GetInstance().Play(G20_SEType.SUMMON_APPLE, position + new Vector3(0, 0.02f, 0));
         // 出現演出
         StartCoroutine(RiseUp(ene));
 
@@ -41,9 +42,9 @@ public class G20_EnemyPopper : MonoBehaviour {
         //{
         //    enemy_buff = new G20_SpeedBuff(enemy,100.0f,1.2f);
         //}
-        if ( onPopSpeedBuffValue != 0 ) enemy_buff = new G20_SpeedBuff(enemy, 100.0f, onPopSpeedBuffValue);
+        if (onPopSpeedBuffValue != 0) enemy_buff = new G20_SpeedBuff(enemy, 100.0f, onPopSpeedBuffValue);
 
-        if ( enemy_buff!=null)
+        if (enemy_buff != null)
         {
             enemy.AddBuff(enemy_buff);
         }
@@ -66,7 +67,7 @@ public class G20_EnemyPopper : MonoBehaviour {
         yield return new WaitForSeconds(0.3f);
 
 
-        while ( ene && enemy.HP > 0 && ene.transform.position.y < 0 )
+        while (ene && enemy.HP > 0 && ene.transform.position.y < 0)
         {
             ene.transform.position += new Vector3(0, riseUpSpeed * Time.deltaTime, 0);
             yield return null;
@@ -77,7 +78,12 @@ public class G20_EnemyPopper : MonoBehaviour {
         ene.transform.position = new Vector3(pos.x, 0, pos.z);
 
         // 敵AI開始
-        if ( G20_GameManager.GetInstance().gameState == G20_GameState.INGAME )
-            ene.GetComponent<G20_Enemy>().enemyAI.AIStart();
+        if (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
+        {
+            var eneAI = ene.GetComponent<G20_Enemy>().enemyAI;
+            eneAI.AIStart();
+            Debug.Log(eneAI);
+        }
+
     }
 }

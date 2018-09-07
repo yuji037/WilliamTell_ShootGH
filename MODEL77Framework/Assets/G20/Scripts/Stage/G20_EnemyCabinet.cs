@@ -62,7 +62,7 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
         foreach ( var enemy in enemys )
         {
             Debug.Log("AIStart");
-            enemy.GetComponent<G20_AI>().AIStart();
+            enemy.enemyAI.AIStart();
         }
     }
 

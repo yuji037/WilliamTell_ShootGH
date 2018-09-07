@@ -27,9 +27,8 @@ public abstract class G20_AI : MonoBehaviour
     private void Awake()
     {
         enemy = GetComponent<G20_Enemy>();
-        stateController = new G20_StateController(this);
-        stateController.Start();
-        StartCoroutine(StateRoutine());
+        Debug.Log(this);
+
     }
     IEnumerator StateRoutine()
     {
@@ -58,6 +57,9 @@ public abstract class G20_AI : MonoBehaviour
     {
         if (isAIStarted) return;
         if (enemy.HP <= 0) return;
+        stateController = new G20_StateController(this);
+        stateController.Start();
+        StartCoroutine(StateRoutine());
         childAIStart();
         isAIStarted = true;
     }
