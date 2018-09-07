@@ -7,6 +7,25 @@ public enum G20_ScoreAppleType {
     GOLDEN,
 }
 
+//public static class G20_ScoreAppleExt {
+//    public static string GetTypeName(this G20_ScoreAppleType _type)
+//    {
+//        string retStr = "";
+//        switch ( _type )
+//        {
+//            case G20_ScoreAppleType.APPLE:
+//                retStr = "ScoreApple";
+//                break;
+//            case G20_ScoreAppleType.GOLDEN:
+//                retStr = "ScoreGoldenApple";
+//                break;
+//        }
+
+//        return retStr;
+//    }
+//}
+
+
 public class G20_ScoreApplePopper : G20_Singleton<G20_ScoreApplePopper> {
 
     [SerializeField] GameObject[] scoreApplePrefabs;
@@ -15,8 +34,13 @@ public class G20_ScoreApplePopper : G20_Singleton<G20_ScoreApplePopper> {
     G20_ScoreApplePopPosition[] popPositions;
     bool isFullApples = false;
 
-	// Use this for initialization
-	void Start () {
+    //protected override void Awake()
+    //{
+        
+    //}
+
+    // Use this for initialization
+    void Start () {
         popPositions = GetComponentsInChildren<G20_ScoreApplePopPosition>();
         holdingApples = new G20_HitScoreApple[popPositions.Length];
 	}
@@ -45,7 +69,7 @@ public class G20_ScoreApplePopper : G20_Singleton<G20_ScoreApplePopper> {
         if ( SearchEmptyPosition(out positionNumber) )
         {
             var obj = Instantiate(scoreApplePrefabs[(int)appleType], popPositions[positionNumber].transform);
-            holdingApples[positionNumber] = obj.GetComponent<G20_HitScoreApple>();
+            holdingApples[positionNumber] = obj.GetComponentInChildren<G20_HitScoreApple>();
         }
 
         // 全て埋まったかチェック

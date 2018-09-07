@@ -9,8 +9,23 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1317072536677658}
+  m_RootGameObject: {fileID: 1085428369758538}
   m_IsPrefabParent: 1
+--- !u!1 &1085428369758538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4304012291697846}
+  m_Layer: 0
+  m_Name: ScoreGoldenApple
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1317072536677658
 GameObject:
   m_ObjectHideFlags: 0
@@ -20,16 +35,16 @@ GameObject:
   m_Component:
   - component: {fileID: 4420593265736056}
   - component: {fileID: 135955011090763152}
-  - component: {fileID: 114756031538484048}
   - component: {fileID: 114230303433394880}
   - component: {fileID: 114363794636092226}
   - component: {fileID: 114329152376004154}
   - component: {fileID: 114331029675624522}
-  - component: {fileID: 54564887420531714}
   - component: {fileID: 33904649430388050}
   - component: {fileID: 23225856998660218}
+  - component: {fileID: 54906030226522898}
+  - component: {fileID: 114929213540266216}
   m_Layer: 0
-  m_Name: ScoreGoldenApple
+  m_Name: GoldenApple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +52,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1595613363186000
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -54,7 +69,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1687014390744776
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -69,6 +84,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4304012291697846
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1085428369758538}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4420593265736056}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4420593265736056
 Transform:
   m_ObjectHideFlags: 1
@@ -76,12 +105,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1317072536677658}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.029121, y: 0.24449313, z: 0.6940414}
+  m_LocalPosition: {x: 0, y: -0.239, z: 0}
   m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_Children:
   - {fileID: 4823752485438990}
   - {fileID: 4498234095592208}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 4304012291697846}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4498234095592208
@@ -150,7 +179,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1317072536677658}
   m_Mesh: {fileID: 4300000, guid: 844cc51e70584874e87b56f6d8aeabae, type: 3}
---- !u!54 &54564887420531714
+--- !u!54 &54906030226522898
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -220,7 +249,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ff29c63384a30b54bbed3427c142ba2b, type: 2}
   - {fileID: 2100000, guid: bf19171c509c61b468b0b03bff54e6a6, type: 2}
   - {fileID: 2100000, guid: 6ca5f40bac638eb4b935211750d1b382, type: 2}
---- !u!114 &114756031538484048
+--- !u!114 &114929213540266216
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -301,7 +330,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 877082387
+  randomSeed: -838195220
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3432,7 +3461,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1947832865
+  randomSeed: -178308681
   InitialModule:
     serializedVersion: 3
     enabled: 1

@@ -31,12 +31,18 @@ public class G20_HitScoreApple : G20_HitAction {
 
     IEnumerator FadeIn()
     {
-        Color c = meshRenderer.material.color;
+        //Color c = meshRenderer.material.color;
+        //for ( float t = 0; t < 1; t += Time.deltaTime )
+        //{
+        //    meshRenderer.material.color = new Color(c.r, c.g, c.b, t);
+        //    yield return null;
+        //}
         for ( float t = 0; t < 1; t += Time.deltaTime )
         {
-            meshRenderer.material.color = new Color(c.r, c.g, c.b, t);
+            transform.parent.localScale = new Vector3(t, t, t);
             yield return null;
         }
+        transform.parent.localScale = Vector3.one;
     }
 
     public override void Execute(Vector3 hit_point)
@@ -45,19 +51,19 @@ public class G20_HitScoreApple : G20_HitAction {
         G20_Score.GetInstance().AddScore(1);
         score--;
 
-        foreach(var ps in particleSystems )
-        {
+        //foreach(var ps in particleSystems )
+        //{
 
-            var cMin = ps.main.startColor.colorMin;
-            var cMax = ps.main.startColor.colorMax;
-            if ( score >= 0 ) {
-                cMin = new Color(cMin.r, cMin.g, cMin.b, cMin.a * (float)score / (float)( score + 1f ));
-                cMax = new Color(cMax.r, cMax.g, cMax.b, cMax.a * (float)score / (float)( score + 1f ));
-            }
-            ParticleSystem.MinMaxGradient grad = new ParticleSystem.MinMaxGradient(cMin, cMax);
+        //    var cMin = ps.main.startColor.colorMin;
+        //    var cMax = ps.main.startColor.colorMax;
+        //    if ( score >= 0 ) {
+        //        cMin = new Color(cMin.r, cMin.g, cMin.b, cMin.a * (float)score / (float)( score + 1f ));
+        //        cMax = new Color(cMax.r, cMax.g, cMax.b, cMax.a * (float)score / (float)( score + 1f ));
+        //    }
+        //    ParticleSystem.MinMaxGradient grad = new ParticleSystem.MinMaxGradient(cMin, cMax);
 
-            //ps.SetParticles(;
-        }
+        //    //ps.SetParticles(;
+        //}
 
         // 落ちて消える処理
         if( score <= 0 )
@@ -129,7 +135,7 @@ public class G20_HitScoreApple : G20_HitAction {
         // 消える
         yield return StartCoroutine(FadeOut());
 
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 
     //IEnumerator DestroyCoroutine()
