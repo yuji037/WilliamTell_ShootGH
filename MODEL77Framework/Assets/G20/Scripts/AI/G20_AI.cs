@@ -4,7 +4,6 @@ using UnityEngine;
 using System;
 public abstract class G20_AI : MonoBehaviour
 {
-    [SerializeField] GameObject me;
     bool isAIStarted = false;
     public bool isPouse;
     public G20_Enemy enemy;
@@ -83,7 +82,7 @@ public abstract class G20_AI : MonoBehaviour
    
                 Debug.Log("自殺");
                 GetComponent<G20_Unit>().ExecuteDeathAction();
-                Destroy(me);
+                Destroy(gameObject);
 
             }
 
