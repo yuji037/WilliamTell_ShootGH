@@ -821,6 +821,7 @@ GameObject:
   - component: {fileID: 114562488254360678}
   - component: {fileID: 114282343669644676}
   - component: {fileID: 114701395011025104}
+  - component: {fileID: 114760300299686356}
   m_Layer: 0
   m_Name: head_jint_T
   m_TagString: Untagged
@@ -3728,6 +3729,21 @@ MonoBehaviour:
   rotspeed: 0.3
   runTimeRate: 1.5
   runTimeMin: 1.5
+--- !u!114 &114760300299686356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1422917720036238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71840c62fe5c86479ff068be9a8798c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mesh: {fileID: 137678772655881006}
+  meshR: {fileID: 0}
+  changeMaterials:
+  - {fileID: 2100000, guid: 6ca5f40bac638eb4b935211750d1b382, type: 2}
 --- !u!114 &114850331849066852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3788,7 +3804,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300000, guid: dfd3977812fe59e4987e98deebe4a530, type: 3}
+  m_Mesh: {fileID: 4300000, guid: c4d9a477663feb14593b469f8e551582, type: 3}
   m_Bones:
   - {fileID: 4202641353610990}
   - {fileID: 4060173496777564}
@@ -3853,7 +3869,8 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 97c9f769e81d670408ed527c0f56c895, type: 2}
+  - {fileID: 2100000, guid: bf19171c509c61b468b0b03bff54e6a6, type: 2}
+  - {fileID: 2100000, guid: b037c18a850aa474097a71e53313f227, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3876,7 +3893,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300002, guid: dfd3977812fe59e4987e98deebe4a530, type: 3}
+  m_Mesh: {fileID: 4300002, guid: c4d9a477663feb14593b469f8e551582, type: 3}
   m_Bones:
   - {fileID: 4202641353610990}
   - {fileID: 4060173496777564}

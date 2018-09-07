@@ -1753,9 +1753,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mesh: {fileID: 137930183048692616}
+  meshR: {fileID: 0}
   changeMaterials:
-  - {fileID: 2100000, guid: 9b30c59b2707a4441bf732efb28fd5c8, type: 2}
-  - {fileID: 2100000, guid: 99e5ade2c1104a242b33b450bb053a9d, type: 2}
+  - {fileID: 2100000, guid: ff29c63384a30b54bbed3427c142ba2b, type: 2}
+  - {fileID: 2100000, guid: bf19171c509c61b468b0b03bff54e6a6, type: 2}
+  - {fileID: 2100000, guid: 6ca5f40bac638eb4b935211750d1b382, type: 2}
 --- !u!114 &114734122297641176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1860,7 +1862,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300000, guid: e6d2065383b24c545ae31b3c213ba678, type: 3}
+  m_Mesh: {fileID: 4300000, guid: dffb241a9570ecd4d9c797b2577a91f4, type: 3}
   m_Bones:
   - {fileID: 4389493751005842}
   - {fileID: 4704557102626314}
@@ -1930,7 +1932,8 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: a9c572719788e3a40b7691fcaa9aabd1, type: 2}
+  - {fileID: 2100000, guid: 8c64d8c995019734c854beb647379045, type: 2}
+  - {fileID: 2100000, guid: 1e59713ea24271c49bd9fe23f1b2f47d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1953,7 +1956,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300002, guid: e6d2065383b24c545ae31b3c213ba678, type: 3}
+  m_Mesh: {fileID: 4300002, guid: dffb241a9570ecd4d9c797b2577a91f4, type: 3}
   m_Bones:
   - {fileID: 4203844496573602}
   - {fileID: 4639784051413328}

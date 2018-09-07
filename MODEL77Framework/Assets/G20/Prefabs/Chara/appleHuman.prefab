@@ -801,6 +801,7 @@ GameObject:
   - component: {fileID: 114282333449346146}
   - component: {fileID: 114192671330501834}
   - component: {fileID: 114054724965558166}
+  - component: {fileID: 114452329397906096}
   m_Layer: 0
   m_Name: head_jnt
   m_TagString: Untagged
@@ -1729,6 +1730,21 @@ MonoBehaviour:
   enemy: {fileID: 114379341233133208}
   damage: 1
   damageType: 1
+--- !u!114 &114452329397906096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1943102228883536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71840c62fe5c86479ff068be9a8798c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mesh: {fileID: 137885923545860202}
+  meshR: {fileID: 0}
+  changeMaterials:
+  - {fileID: 2100000, guid: 6ca5f40bac638eb4b935211750d1b382, type: 2}
 --- !u!114 &114512994700352884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1844,7 +1860,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300000, guid: e6d2065383b24c545ae31b3c213ba678, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 1210914394da1714cbc2233065d89e99, type: 3}
   m_Bones:
   - {fileID: 4325717492223600}
   - {fileID: 4311209205340186}
@@ -1914,7 +1930,8 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 99e5ade2c1104a242b33b450bb053a9d, type: 2}
+  - {fileID: 2100000, guid: bf19171c509c61b468b0b03bff54e6a6, type: 2}
+  - {fileID: 2100000, guid: b037c18a850aa474097a71e53313f227, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1937,7 +1954,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300002, guid: e6d2065383b24c545ae31b3c213ba678, type: 3}
+  m_Mesh: {fileID: 4300002, guid: 1210914394da1714cbc2233065d89e99, type: 3}
   m_Bones:
   - {fileID: 4721784045373026}
   - {fileID: 4997724660146090}
