@@ -25,16 +25,12 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     [SerializeField] GameObject gesuraObj;
     [SerializeField] Light directionLight2;
 
+    [SerializeField] Text yourScore;
+    [SerializeField] Text creatorsHighScore;
+    [SerializeField] Text dailyHighScore;
 
     [SerializeField] GameObject clearTexts;
-    [SerializeField] Image ScorePanel;
-    [SerializeField] Text yourScoreText;
-    [SerializeField] Text yourScore;
-    [SerializeField] Text highScore;
-    [SerializeField] Text creators;
-    [SerializeField] Text creatorsHighScore;
-    [SerializeField] Text daily;
-    [SerializeField] Text dailyHighScore;
+    
 
     
     [SerializeField] float fadetime=0;
@@ -95,56 +91,24 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         dailyHighScore.text = "0";
         yield return null;
 
-        for(float t = 0; t < fadetime; t+=Time.deltaTime)
-        {
-            ScorePanel.color += new Color(0,0,0,Time.deltaTime * 200 / 255);
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(1.0f); 
-
-        for(float t = 0; t < fadetime; t += Time.deltaTime)
-        {
-            yourScoreText.color += new Color(0, 0, 0, Time.deltaTime);
-            yield return null;
-        }
-
-        for (float t = 0; t < fadetime; t += Time.deltaTime)
-        {
-            yourScore.color += new Color(0, 0, 0, Time.deltaTime);
-            yield return null;
-        }
-
-        for (float t = 0; t < fadetime; t += Time.deltaTime)
-        {
-            creators.color += new Color(0, 0, 0, Time.deltaTime);
-            creatorsHighScore.color += new Color(0, 0, 0, Time.deltaTime);
-            daily.color += new Color(0, 0, 0, Time.deltaTime);
-            dailyHighScore.color += new Color(0, 0, 0, Time.deltaTime);
-            highScore.color += new Color(0, 0, 0, Time.deltaTime);
-            yield return null;
-        }
-        
-
-        yield return null;
     }
 
 
     //ホワイトアウトしている間にする処理
     void SetClearObjects()
-    {
-        paramObjs.SetActive(false);
-        backGroundMesh.material = clearBackGroundMaterial;
+        {
+            paramObjs.SetActive(false);
+            backGroundMesh.material = clearBackGroundMaterial;
 
-        foreach ( var obj in onClearDeactivateFieldObjs )
-        {
-            obj.SetActive(false);
+            foreach (var obj in onClearDeactivateFieldObjs)
+            {
+                obj.SetActive(false);
+            }
+            foreach (var obj in onClearActivateFieldObjs)
+            {
+                obj.SetActive(true);
+            }
         }
-        foreach ( var obj in onClearActivateFieldObjs )
-        {
-            obj.SetActive(true);
-        }
-    }
 
 
     void SetUIsActive()
