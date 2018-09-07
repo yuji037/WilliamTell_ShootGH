@@ -171,7 +171,7 @@ public class G20_SmallAI : G20_AI
         yield return null;
         if ( enemy.HP <= 0 ) yield break;
         //ジャンプモーション開始
-        stateController.Attack(100.0f, null);
+        stateController.Jump();
         yield return new WaitForSeconds(1.0f/enemy.anim.AnimSpeed);
         //放物線
         float hight = 0;
