@@ -1090,7 +1090,7 @@ ModelImporter:
       name: stand_bomb
       takeName: Take 001
       firstFrame: 196
-      lastFrame: 196
+      lastFrame: 196.1
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
