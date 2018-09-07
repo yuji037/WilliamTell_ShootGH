@@ -13,6 +13,7 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
     public bool isCheating;
     //AIM補正の値
     public float aimAssistValue = 0f;
+    public float aimAssistValueMax = 0f;
     int shotCount;
     public int ShotCount
     {
@@ -20,7 +21,7 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
     }
     private void Update()
     {
-
+      
         Vector2? shotPoint = null;
 
         shotPoint = G20_InputPointGetter.GetInstance().GetInputPoint();
@@ -32,7 +33,11 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
         {
 
             shotCount++;
+            Debug.Log("ショットカウント：" + shotCount);
 
+            aIMAssistant.AimasistvalueSet();
+
+            Debug.Log("アシスト：" + aimAssistValue);
             Vector3 hitPoint = Vector3.zero;
             //AIM補正
             if (aimAssistValue > 0)
