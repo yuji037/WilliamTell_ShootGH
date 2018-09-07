@@ -32,4 +32,8 @@ public class G20_EnemyAnimation : MonoBehaviour {
     {
         animator.CrossFadeInFixedTime("idle",0.4f);
     }
+    public void Jump()
+    {
+        animator.CrossFadeInFixedTime("Jump",0.4f);
+    }
 }

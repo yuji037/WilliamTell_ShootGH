@@ -42,6 +42,10 @@ public class G20_StateController {
     {
         ChangeState(new G20_AIAttackState(owner, attack_action));
     }
+    public void Jump()
+    {
+        ChangeState(new G20_AIJumpState(owner));
+    }
     public void Falter(float hirumi_time)
     {
         //attack中は怯まない
