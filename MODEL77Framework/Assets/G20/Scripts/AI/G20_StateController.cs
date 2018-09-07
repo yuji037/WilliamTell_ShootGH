@@ -53,6 +53,14 @@ public class G20_StateController {
             ChangeState(new G20_AIFalterState(hirumi_time, owner, currentState));
         }
     }
+    public void Stance()
+    {
+        ChangeState(new G20_AIStanceState(owner));
+    }
+    public void Dash()
+    {
+        ChangeState(new G20_AIDashState(owner));
+    }
     public void Death()
     {
         ChangeState(new G20_AIDeathState(owner));

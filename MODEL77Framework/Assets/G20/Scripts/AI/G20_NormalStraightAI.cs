@@ -100,7 +100,7 @@ public class G20_NormalStraightAI : G20_AI {
 
     IEnumerator TargetRun()
     {
-        stateController.Run();
+        stateController.Stance();
         //向き変更
         Vector3 targetfront = distanceVec.normalized;
         targetfront.y = 0;
@@ -123,6 +123,7 @@ public class G20_NormalStraightAI : G20_AI {
 
         yield return null;
         //走る
+        stateController.Dash();
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
             transform.position += transform.forward * AITime;
