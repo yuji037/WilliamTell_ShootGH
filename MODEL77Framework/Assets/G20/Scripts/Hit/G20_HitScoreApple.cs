@@ -42,6 +42,7 @@ public class G20_HitScoreApple : G20_HitAction {
             transform.parent.localScale = new Vector3(t, t, t);
             yield return null;
         }
+        transform.parent.localScale = Vector3.one;
     }
 
     public override void Execute(Vector3 hit_point)
