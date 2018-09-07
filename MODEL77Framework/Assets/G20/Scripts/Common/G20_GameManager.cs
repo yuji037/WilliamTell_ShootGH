@@ -210,6 +210,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
 
     public void StartGesslerBattle()
     {
+        gesslerAnim.enabled = false;
         // ゲスラー撃った後、クリア
         gesslerShootPerformer.ToGesslerBattle(GameClear);
     }

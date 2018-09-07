@@ -17,6 +17,13 @@ public class G20_GesslerShootPerformer : MonoBehaviour {
 
     IEnumerator GesslerShootCoroutine(System.Action on_end_action)
     {
+        var anim = GameObject.Find("G20_Root").GetComponent<Animator>();
+        anim.enabled = true;
+        anim.CrossFade("ToGesslerBattle", 0.4f);
+
+        yield return new WaitForSeconds(2f);
+        anim.enabled = false;
+
         // 「SHOOT」表示
         foreach(var o in activateObjs )
         {

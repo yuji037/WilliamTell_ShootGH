@@ -26,7 +26,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer> {
 
     [SerializeField] GameObject clearTexts;
 
-
+    [SerializeField] GameObject playerObj;
 
     [SerializeField] float fadetime = 0;
 
@@ -46,6 +46,8 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer> {
         G20_FadeChanger.GetInstance().StartWhiteFadeOut(2.0f);
         yield return new WaitForSeconds(2.0f);
         SetClearObjects();
+        playerObj.transform.position = new Vector3(0, 1f, -9.5f);
+        playerObj.transform.eulerAngles = Vector3.zero;
         yield return new WaitForSeconds(0.1f);
         G20_FadeChanger.GetInstance().StartWhiteFadeIn(2.0f);
         yield return new WaitForSeconds(2.0f);
@@ -55,6 +57,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer> {
 
         //リンゴ積み上げ
         balanceNum = -fallSize.x;
+        fallAppleDelay = 20.0f / apple_value;
         for ( int i = 0; i < apple_value; i++ )
         {
             var apple = Instantiate(appleObj);
