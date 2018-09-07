@@ -27,7 +27,6 @@ public abstract class G20_AI : MonoBehaviour
     private void Awake()
     {
         enemy = GetComponent<G20_Enemy>();
-        Debug.Log(this);
 
     }
     IEnumerator StateRoutine()
