@@ -8,11 +8,9 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     //この値を変えることでランダムに降らすか整列して降らすかを変えられる
     [SerializeField] bool IsRandomlyFall;
     [SerializeField] GameObject appleObj;
-    [SerializeField] GameObject clearTexts;
     [SerializeField] Vector3 fallPoint;
     [SerializeField] Vector3 fallSize;
     [SerializeField] float fallAppleDelay;
-    [SerializeField] Text clearScoreText;
     [SerializeField] GameObject paramObjs;
 
     
@@ -26,6 +24,22 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     [SerializeField] Light directionLight;
     [SerializeField] GameObject gesuraObj;
     [SerializeField] Light directionLight2;
+
+
+    [SerializeField] GameObject clearTexts;
+    [SerializeField] Image ScorePanel;
+    [SerializeField] Text yourScoreText;
+    [SerializeField] Text yourScore;
+    [SerializeField] Text highScore;
+    [SerializeField] Text creators;
+    [SerializeField] Text creatorsHighScore;
+    [SerializeField] Text daily;
+    [SerializeField] Text dailyHighScore;
+
+    
+    [SerializeField] float fadetime=0;
+
+
     float balanceNum;
     public void Excute(Action on_end_action)
     {
@@ -44,11 +58,11 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         yield return new WaitForSeconds(0.1f);
         G20_FadeChanger.GetInstance().StartWhiteFadeIn(2.0f);
         yield return new WaitForSeconds(2.0f);
-        SetUIsActive();
+        
+        var apple_value = G20_Score.GetInstance().Score;
+        StartCoroutine(UIRoutine(apple_value));
 
         //リンゴ積み上げ
-        var apple_value = G20_Score.GetInstance().Score;
-        clearScoreText.text = "SHOT APPLE:"+apple_value;
         balanceNum = -fallSize.x;
         for (int i = 0; i < apple_value; i++)
         {
@@ -66,6 +80,56 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         }
         if (on_end_action != null) on_end_action();
     }
+
+
+    IEnumerator UIRoutine(int score)
+    {
+        SetUIsActive();
+
+        yield return new WaitForSeconds(1.0f);
+
+        yourScore.text = score.ToString();
+        //creatorsHighScore.text = G20_NetworkManager.GetInstance().userData.scoreList[0].score;
+        //dailyHighScore.text    = G20_NetworkManager.GetInstance().userData.scoreList[0].score;
+        creatorsHighScore.text = "0";
+        dailyHighScore.text = "0";
+        yield return null;
+
+        for(float t = 0; t < fadetime; t+=Time.deltaTime)
+        {
+            ScorePanel.color += new Color(0,0,0,Time.deltaTime * 200 / 255);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1.0f); 
+
+        for(float t = 0; t < fadetime; t += Time.deltaTime)
+        {
+            yourScoreText.color += new Color(0, 0, 0, Time.deltaTime);
+            yield return null;
+        }
+
+        for (float t = 0; t < fadetime; t += Time.deltaTime)
+        {
+            yourScore.color += new Color(0, 0, 0, Time.deltaTime);
+            yield return null;
+        }
+
+        for (float t = 0; t < fadetime; t += Time.deltaTime)
+        {
+            creators.color += new Color(0, 0, 0, Time.deltaTime);
+            creatorsHighScore.color += new Color(0, 0, 0, Time.deltaTime);
+            daily.color += new Color(0, 0, 0, Time.deltaTime);
+            dailyHighScore.color += new Color(0, 0, 0, Time.deltaTime);
+            highScore.color += new Color(0, 0, 0, Time.deltaTime);
+            yield return null;
+        }
+        
+
+        yield return null;
+    }
+
+
     //ホワイトアウトしている間にする処理
     void SetClearObjects()
     {
@@ -81,6 +145,8 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
             obj.SetActive(true);
         }
     }
+
+
     void SetUIsActive()
     {
         clearTexts.SetActive(true);
