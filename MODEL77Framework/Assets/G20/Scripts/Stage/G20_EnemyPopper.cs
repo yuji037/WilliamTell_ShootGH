@@ -78,6 +78,6 @@ public class G20_EnemyPopper : MonoBehaviour {
 
         // 敵AI開始
         if ( G20_GameManager.GetInstance().gameState == G20_GameState.INGAME )
-            ene.GetComponent<G20_AI>().AIStart();
+            ene.GetComponent<G20_Enemy>().enemyAI.AIStart();
     }
 }

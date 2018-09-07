@@ -15,6 +15,7 @@ public class G20_Enemy : G20_Unit {
     public int Attack { get { return attack; } }
     //移動スピード
     [SerializeField,Range(0.5f,5)] float speed=1.0f;
+    [System.NonSerialized] public G20_AI enemyAI;
     public float Speed
     {
         get { return speed; }
