@@ -1,17 +1,28 @@
 fileFormatVersion: 2
-guid: 750f24932e5202943bbf9f375913fde4
-timeCreated: 1536157200
+guid: c043bf7594a0f9247959c30dca48b21f
+timeCreated: 1536299678
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: apple_mesh
+    100002: polySurface1
+    100004: polySurface1 1
+    100006: polySurface2
+    100008: position
+    100010: transform1
+    100012: transform2
     400000: //RootNode
-    400002: apple_mesh
-    2300000: apple_mesh
-    3300000: apple_mesh
-    4300000: apple_mesh
+    400002: polySurface1
+    400004: polySurface1 1
+    400006: polySurface2
+    400008: position
+    400010: transform1
+    400012: transform2
+    2300000: polySurface1
+    3300000: polySurface1
+    4300000: polySurface1
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -76,7 +87,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
