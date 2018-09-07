@@ -69,7 +69,7 @@ public class G20_ScoreApplePopper : G20_Singleton<G20_ScoreApplePopper> {
         if ( SearchEmptyPosition(out positionNumber) )
         {
             var obj = Instantiate(scoreApplePrefabs[(int)appleType], popPositions[positionNumber].transform);
-            holdingApples[positionNumber] = obj.GetComponent<G20_HitScoreApple>();
+            holdingApples[positionNumber] = obj.GetComponentInChildren<G20_HitScoreApple>();
         }
 
         // 全て埋まったかチェック

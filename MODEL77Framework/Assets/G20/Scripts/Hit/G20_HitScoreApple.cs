@@ -31,10 +31,15 @@ public class G20_HitScoreApple : G20_HitAction {
 
     IEnumerator FadeIn()
     {
-        Color c = meshRenderer.material.color;
+        //Color c = meshRenderer.material.color;
+        //for ( float t = 0; t < 1; t += Time.deltaTime )
+        //{
+        //    meshRenderer.material.color = new Color(c.r, c.g, c.b, t);
+        //    yield return null;
+        //}
         for ( float t = 0; t < 1; t += Time.deltaTime )
         {
-            meshRenderer.material.color = new Color(c.r, c.g, c.b, t);
+            transform.parent.localScale = new Vector3(t, t, t);
             yield return null;
         }
     }
@@ -129,7 +134,7 @@ public class G20_HitScoreApple : G20_HitAction {
         // 消える
         yield return StartCoroutine(FadeOut());
 
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 
     //IEnumerator DestroyCoroutine()
