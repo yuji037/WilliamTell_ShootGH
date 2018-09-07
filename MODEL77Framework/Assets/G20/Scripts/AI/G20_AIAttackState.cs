@@ -5,7 +5,7 @@ using System;
 public class G20_AIAttackState : G20_AIState
 {
     Action attackAction;
-    public G20_AIAttackState(float end_time, G20_AI _owner,Action attack_action) : base(end_time, _owner) { attackAction = attack_action; }
+    public G20_AIAttackState(G20_AI _owner,Action attack_action) : base(_owner.enemy.anim.AnimSpeed/1.0f, _owner) { attackAction = attack_action; }
     public override void OnEnd()
     {
     }
@@ -20,7 +20,6 @@ public class G20_AIAttackState : G20_AIState
         if (CheckOver())
         {
             if(attackAction!=null)attackAction();
-            return new G20_AIDeathState(1.0f,owner);
         }
         return null;
     }

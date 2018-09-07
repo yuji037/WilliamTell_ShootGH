@@ -19,7 +19,7 @@ public class G20_StateController {
             owner.enemy.recvDamageActions += _ => Falter(owner.enemy.hirumiTime/owner.enemy.Speed);
         }
         owner.enemy.deathActions += _ => Death();
-        currentState=new G20_AIIdleState(100.0f,owner);
+        currentState=new G20_AIIdleState(owner);
     }
     public void Update()
     {
@@ -40,7 +40,7 @@ public class G20_StateController {
     //attack_time秒後に、attack_actionを実行し死ぬ
     public void Attack(float attack_time,System.Action attack_action)
     {
-        ChangeState(new G20_AIAttackState(attack_time, owner, attack_action));
+        ChangeState(new G20_AIAttackState(owner, attack_action));
     }
     public void Falter(float hirumi_time)
     {
@@ -57,7 +57,7 @@ public class G20_StateController {
     }
     public void Death()
     {
-        ChangeState(new G20_AIDeathState(1.0f, owner));
+        ChangeState(new G20_AIDeathState(owner));
     }
     void ChangeState(G20_AIState ai_state)
     {
@@ -65,6 +65,7 @@ public class G20_StateController {
         if (currentState is G20_AIDeathState) return;
         if (currentState != null) currentState.OnEnd();
         currentState = ai_state;
+        Debug.Log(currentState);
         currentState.OnStart();
     }
 }
