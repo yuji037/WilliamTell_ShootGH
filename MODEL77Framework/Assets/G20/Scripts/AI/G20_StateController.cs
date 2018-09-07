@@ -13,12 +13,6 @@ public class G20_StateController {
     }
     public void Start()
     {
-        //0だったら怯まないように設定
-        if (owner.enemy.hirumiTime>0f)
-        {
-            owner.enemy.recvDamageActions += _ => Falter(owner.enemy.hirumiTime/owner.enemy.Speed);
-        }
-        owner.enemy.deathActions += _ => Death();
         currentState=new G20_AIIdleState(owner);
     }
     public void Update()

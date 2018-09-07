@@ -15,7 +15,7 @@ public abstract class G20_AI : MonoBehaviour
     //攻撃に移行する距離
     [SerializeField] protected float attackRange = 3.0f;
     //キャラクターを消す高さ
-    [SerializeField] protected float deathposition_y = 2.0f;
+    [SerializeField] protected float deathposition_y = -2.0f;
     //自殺の時の沈むスピードと向き
     [SerializeField] protected Vector3 deathvec = new Vector3(0, -2, 0);
     //攻撃している時間
@@ -24,10 +24,23 @@ public abstract class G20_AI : MonoBehaviour
     [SerializeField] protected float changePhase = 5.0f;
 
 
-    private void Awake()
+
+    public void Init()
     {
         enemy = GetComponent<G20_Enemy>();
-
+        stateController = new G20_StateController(this);
+        //0だったら怯まないように設定
+        if (enemy.hirumiTime > 0f)
+        {
+            enemy.recvDamageActions += _ => stateController.Falter(enemy.hirumiTime / (enemy.Speed*enemy.anim.AnimSpeed));
+        }
+        //死んだときデスステートに移行するように設定
+        enemy.deathActions += _ => stateController.Death();
+        //死んだときにデストロイするように設定
+        enemy.deathActions += _ => StartCoroutine(DestroyCoroutine(1.0f / (enemy.anim.AnimSpeed)));
+        //stateをスタート
+        stateController.Start();
+        StartCoroutine(StateRoutine());
     }
     IEnumerator StateRoutine()
     {
@@ -56,15 +69,16 @@ public abstract class G20_AI : MonoBehaviour
     {
         if (isAIStarted) return;
         if (enemy.HP <= 0) return;
-        stateController = new G20_StateController(this);
-        stateController.Start();
-        StartCoroutine(StateRoutine());
         childAIStart();
         isAIStarted = true;
     }
     protected abstract void childAIStart();
 
-
+    protected IEnumerator DestroyCoroutine(float duration_time)
+    {
+        yield return new WaitForSeconds(duration_time);
+        Destroy(gameObject);
+    }
     protected IEnumerator SusideCoroutine()
     {
         while (true)

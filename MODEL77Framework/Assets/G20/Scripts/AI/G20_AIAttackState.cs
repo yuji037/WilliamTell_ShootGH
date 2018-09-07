@@ -20,6 +20,7 @@ public class G20_AIAttackState : G20_AIState
         if (CheckOver())
         {
             if(attackAction!=null)attackAction();
+            return new G20_AIIdleState(owner);
         }
         return null;
     }
