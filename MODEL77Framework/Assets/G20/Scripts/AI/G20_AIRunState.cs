@@ -5,7 +5,7 @@ using UnityEngine;
 //能動的にStateが変わらない
 public class G20_AIRunState : G20_AIState
 {
-    public G20_AIRunState(float end_time,G20_AI _owner) : base(end_time,_owner) { }
+    public G20_AIRunState(G20_AI _owner) : base(100f,_owner) { }
     public override void OnEnd()
     {
     }

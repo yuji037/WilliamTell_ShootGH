@@ -95,7 +95,7 @@ public class G20_SmallAI : G20_AI
                 yield break;
 
             }
-            yield return null;
+            if (enemy.HP <= 0) yield break;
         }
     }
     IEnumerator AttackCoroutine()
@@ -123,7 +123,6 @@ public class G20_SmallAI : G20_AI
                 GetComponent<G20_Unit>().ExecuteDeathAction();
             }
         }
-        yield return null;
     }
 
     IEnumerator RunCoroutine()
@@ -153,9 +152,6 @@ public class G20_SmallAI : G20_AI
             }
             yield return null;
         }
-
-
-        yield return null;
     }
 
     IEnumerator TargetJump()
@@ -205,7 +201,6 @@ public class G20_SmallAI : G20_AI
             }
             yield return null;
         }
-        yield return null;
     }
 
     IEnumerator RotateCoroutine()
@@ -224,7 +219,6 @@ public class G20_SmallAI : G20_AI
 
             yield return null;
         }
-        yield return null;
     }
     
 }

@@ -63,8 +63,6 @@ public class G20_StraightBombAI : G20_AI
 
             }
             if (enemy.HP <= 0) yield break;
-
-            yield return null;
         }
     }
 
@@ -98,7 +96,7 @@ public class G20_StraightBombAI : G20_AI
                 GetComponent<G20_Unit>().ExecuteDeathAction();
             }
         }
-        yield return null;
+  
     }
 
     //とにかく前に走る
@@ -117,7 +115,7 @@ public class G20_StraightBombAI : G20_AI
             yield return null;
         }
 
-        yield return null;
+      
     }
 
     //ターゲットに向いてから走る
@@ -156,6 +154,6 @@ public class G20_StraightBombAI : G20_AI
         //    }
         //    yield return null;
         //}
-        yield return null;
+
     }
 }
