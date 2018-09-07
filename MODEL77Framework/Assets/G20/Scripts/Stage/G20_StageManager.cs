@@ -2,7 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum G20_StageType {
+    NORMAL,
+    HARD,
+}
+
 public class G20_StageManager : G20_Singleton<G20_StageManager> {
+
+    public G20_StageType stageType;
 
     [SerializeField]
     public GameObject stageBehaviourPrefab;
