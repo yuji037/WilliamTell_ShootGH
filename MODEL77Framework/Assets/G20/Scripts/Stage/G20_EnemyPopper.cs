@@ -82,7 +82,6 @@ public class G20_EnemyPopper : MonoBehaviour
         {
             var eneAI = ene.GetComponent<G20_Enemy>().EnemyAI;
             eneAI.AIStart();
-            Debug.Log(eneAI);
         }
 
     }

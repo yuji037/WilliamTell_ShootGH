@@ -71,7 +71,6 @@ public class G20_StateController {
         if (currentState is G20_AIDeathState) return;
         if (currentState != null) currentState.OnEnd();
         currentState = ai_state;
-        Debug.Log(currentState);
         currentState.OnStart();
     }
 }

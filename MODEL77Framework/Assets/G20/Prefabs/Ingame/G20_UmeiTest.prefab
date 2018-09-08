@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e6f8efd94a00764d94a8b66bd6f1f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageTotalTime: 60.7
+  stageTotalTime: 90
   popSequenceList:
   - sequencePopType: 1
     addEnemyCueList:
@@ -59,47 +59,30 @@ MonoBehaviour:
       positionNumber: 3
     popPaternType: 0
     popIntervalTime: 3.04
-    popEnemyCountByOneChance: 2
-    limitEnemyCount: 4
-    conditionToNextSequence: 0
+    popEnemyCountByOneChance: 1
+    limitEnemyCount: 1
+    conditionToNextSequence: 1
     conditionValue: 0
-    speedBuffValue: 1
+    speedBuffValue: 0
     InGamePerformer: {fileID: 0}
   - sequencePopType: 1
     addEnemyCueList:
-    - enemyType: 4
+    - enemyType: 6
       positionNumber: 3
     popPaternType: 0
-    popIntervalTime: 0
-    popEnemyCountByOneChance: 2
-    limitEnemyCount: 4
+    popIntervalTime: 2
+    popEnemyCountByOneChance: 1
+    limitEnemyCount: 1
     conditionToNextSequence: 1
-    conditionValue: 30
-    speedBuffValue: -0.5
-    InGamePerformer: {fileID: 1771258280347622, guid: afb59b635b9663d439a16954a0ae1c4e,
-      type: 2}
+    conditionValue: 0
+    speedBuffValue: 0
+    InGamePerformer: {fileID: 0}
   paternA:
     cueList:
-    - enemyType: 6
-      positionNumber: -4
-    - enemyType: 6
-      positionNumber: -2
-    - enemyType: 6
-      positionNumber: -2
-    - enemyType: 6
-      positionNumber: -2
-    - enemyType: 7
-      positionNumber: -2
-    - enemyType: 7
-      positionNumber: -2
-    - enemyType: 7
-      positionNumber: -2
-    - enemyType: 7
-      positionNumber: -2
-    - enemyType: 7
-      positionNumber: -2
-    - enemyType: 7
-      positionNumber: -2
+    - enemyType: 5
+      positionNumber: -1
+    - enemyType: 1
+      positionNumber: -1
   paternB:
     cueList:
     - enemyType: 0

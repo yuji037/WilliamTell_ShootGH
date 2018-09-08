@@ -7,6 +7,8 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
 {
     G20_AIMAssistant aIMAssistant = new G20_AIMAssistant();
     [SerializeField] Camera effectCamera;
+    [SerializeField] LayerMask panelMask;
+    [SerializeField] LayerMask fieldMask;
     //弾の射出を制限出来る
     public bool CanShoot = true;
     //チートモード
@@ -44,15 +46,14 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
             {
                 shotPoint = aIMAssistant.AssistAIM((Vector2)shotPoint, aimAssistValue);
             }
-            var hitObj = G20_RayShooter.GetHitObject((Vector2)shotPoint, ref hitPoint,Camera.main);
+            var hitObj = G20_RayShooter.GetHitObject((Vector2)shotPoint, ref hitPoint,Camera.main, fieldMask);
             if (hitObj)
             {
                 hitObj.ExcuteActions(hitPoint);
             }
-
             //effect出す用のパネルのRay判定
             Vector3 panelhitPoint = Vector3.zero;
-            var hitPanel = G20_RayShooter.GetHitObject((Vector2)shotPoint, ref panelhitPoint,effectCamera);
+            var hitPanel = G20_RayShooter.GetHitObject((Vector2)shotPoint, ref panelhitPoint,effectCamera,panelMask);
             if (hitPanel)
             {
                 hitPanel.ExcuteActions(panelhitPoint);

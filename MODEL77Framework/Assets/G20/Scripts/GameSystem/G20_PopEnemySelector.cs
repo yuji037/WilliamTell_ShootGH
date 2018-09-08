@@ -19,7 +19,7 @@ public class G20_PopEnemySelector : MonoBehaviour {
             case G20_EnemyType.NORMAL:
                 return SelectEnemyAI<G20_NormalAI>(G20_EnemyModelType.Normal);
             case G20_EnemyType.GOLDEN:
-                return SelectEnemyAI<G20_NormalAI>(G20_EnemyModelType.Normal);
+                return SelectEnemyAI<G20_NormalAI>(G20_EnemyModelType.Golden);
             case G20_EnemyType.BOMB:
                 return SelectEnemyAI<G20_BombAI>(G20_EnemyModelType.Bomb);
             case G20_EnemyType.SMALL:
