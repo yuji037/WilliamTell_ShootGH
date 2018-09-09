@@ -22,7 +22,7 @@ public static class G20_BGMExt {
                 retStr = "title";
                 break;
             case G20_BGMType.INGAME_0:
-                retStr = "stageBGM_first half";
+                retStr = "stageBGM";
                 break;
             case G20_BGMType.INGAME_1:
                 retStr = "";
