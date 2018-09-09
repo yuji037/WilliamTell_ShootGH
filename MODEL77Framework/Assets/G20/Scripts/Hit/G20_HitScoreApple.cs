@@ -78,6 +78,9 @@ public class G20_HitScoreApple : G20_HitAction {
         // 落下
         Vector3 velocity = Vector3.zero;
         rb.useGravity = true;
+        rb.isKinematic = false;
+        transform.parent.GetComponent<Animator>().enabled = false;
+        rb.velocity = Vector3.zero;
         while ( transform.position.y > hitGroundHeight )
         {
             //velocity += Physics.gravity * Time.deltaTime;
