@@ -47,6 +47,14 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     [SerializeField]
     Color ingameAmbient;
     [SerializeField]
+    Color startFogColor;
+    [SerializeField]
+    float startFogDensity;
+    [SerializeField]
+    Color ingameFogColor;
+    [SerializeField]
+    float endFogIntensity;
+    [SerializeField]
     Animator gesslerAnim;
 
     public bool isSkipPerformance = false;
@@ -68,6 +76,8 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         playerObj.deathActions += (_) => GameFailed();
 
         RenderSettings.ambientLight = startAmbient;
+        RenderSettings.fogColor = startFogColor;
+        RenderSettings.fogDensity = startFogDensity;
     }
 
     public void StartIngameCoroutine()
@@ -133,6 +143,8 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         for ( float t = 0; t < 1f; t += Time.deltaTime )
         {
             RenderSettings.ambientLight = startAmbient * ( 1f - t ) + ingameAmbient * t;
+            RenderSettings.fogColor = startFogColor * ( 1f - t ) + ingameFogColor * t;
+            RenderSettings.fogDensity = startFogDensity * ( 1f - t ) + endFogIntensity * t;
             yield return null;
         }
     }
