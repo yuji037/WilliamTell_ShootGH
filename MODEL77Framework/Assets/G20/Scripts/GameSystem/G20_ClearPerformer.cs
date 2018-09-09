@@ -4,13 +4,15 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 
-public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer> {
+public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
+{
     //この値を変えることでランダムに降らすか整列して降らすかを変えられる
     [SerializeField] bool IsRandomlyFall;
     [SerializeField] GameObject appleObj;
     [SerializeField] Vector3 fallPoint;
     [SerializeField] Vector3 fallSize;
-    [SerializeField] float fallAppleDelay;
+    [SerializeField] float fallTime = 20.0f;
+    [SerializeField] float endWaitTime = 10.0f;
     [SerializeField] GameObject paramObjs;
 
 
@@ -29,7 +31,6 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer> {
     [SerializeField] GameObject playerObj;
 
     [SerializeField] float fadetime = 0;
-
 
     float balanceNum;
     public void Excute(Action on_end_action)
@@ -57,12 +58,12 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer> {
 
         //リンゴ積み上げ
         balanceNum = -fallSize.x;
-        fallAppleDelay = 20.0f / apple_value;
-        for ( int i = 0; i < apple_value; i++ )
+        var fallAppleDelay = fallTime / apple_value;
+        for (int i = 0; i < apple_value; i++)
         {
             var apple = Instantiate(appleObj);
             apple.transform.SetParent(transform);
-            if ( IsRandomlyFall )
+            if (IsRandomlyFall)
             {
                 apple.transform.position = GetRandomPosition();
             }
@@ -72,7 +73,8 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer> {
             }
             yield return new WaitForSeconds(fallAppleDelay);
         }
-        if ( on_end_action != null ) on_end_action();
+        yield return new WaitForSeconds(endWaitTime);
+        if (on_end_action != null) on_end_action();
     }
 
 
@@ -88,7 +90,6 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer> {
         creatorsHighScore.text = "0";
         dailyHighScore.text = "0";
         yield return null;
-
     }
 
 
@@ -99,11 +100,11 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer> {
         backGroundMesh.material = clearBackGroundMaterial;
         backGroundMesh.enabled = true;
 
-        foreach ( var obj in onClearDeactivateFieldObjs )
+        foreach (var obj in onClearDeactivateFieldObjs)
         {
             obj.SetActive(false);
         }
-        foreach ( var obj in onClearActivateFieldObjs )
+        foreach (var obj in onClearActivateFieldObjs)
         {
             obj.SetActive(true);
         }
@@ -118,7 +119,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer> {
     {
         Vector3 retPos = fallPoint + new Vector3(balanceNum, 0, 0);
         balanceNum += 0.5f;
-        if ( balanceNum > fallSize.x )
+        if (balanceNum > fallSize.x)
         {
             balanceNum = -fallSize.x;
         }

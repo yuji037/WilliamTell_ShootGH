@@ -245,6 +245,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     {
         Debug.Log("ゲームエンド。フレームワークに処理を返します。");
         _gameController.GameEnd();
+        G20_ReloadScene.GetInstance().ReloadScene();
         //GameObject.Find("GameManager").GetComponent<GameController>().GameEnd();
     }
 }

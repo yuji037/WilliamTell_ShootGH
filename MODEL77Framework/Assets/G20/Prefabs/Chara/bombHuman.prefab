@@ -862,6 +862,7 @@ GameObject:
   - component: {fileID: 114235025540601286}
   - component: {fileID: 114610099390844256}
   - component: {fileID: 114684188562558174}
+  - component: {fileID: 114280314981239374}
   m_Layer: 5
   m_Name: bombHuman
   m_TagString: Untagged
@@ -1890,6 +1891,19 @@ MonoBehaviour:
   runTimeRate: 1.5
   runTimeMin: 1.5
   bomb: {fileID: 114091790049258610}
+--- !u!114 &114280314981239374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1983737840519902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5832349080cc76c4da6a13d03f83ffa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 4319345109940388}
+  pivot: {fileID: 4355866022005818}
 --- !u!114 &114378564606996168
 MonoBehaviour:
   m_ObjectHideFlags: 1

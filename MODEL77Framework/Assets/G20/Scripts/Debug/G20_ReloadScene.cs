@@ -2,12 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class G20_ReloadScene : G20_Singleton<G20_ReloadScene> {
+public class G20_ReloadScene : G20_Singleton<G20_ReloadScene>
+{
+    [SerializeField] string MainSceneName;
+    [SerializeField] string SubSceneName;
     public void ReloadScene()
     {
-        // 現在のScene名を取得する
-        Scene loadScene = SceneManager.GetActiveScene();
-        // Sceneの読み直し
-        SceneManager.LoadScene(loadScene.name);
+        //MainSceneの読み直し
+        if (MainSceneName.Length > 0)
+        {
+            SceneManager.LoadScene(MainSceneName,LoadSceneMode.Single);
+        }
+        //SubSceneの読み直し
+        if (SubSceneName.Length > 0)
+        {
+            SceneManager.LoadScene(SubSceneName,LoadSceneMode.Additive);
+        }
     }
 }
