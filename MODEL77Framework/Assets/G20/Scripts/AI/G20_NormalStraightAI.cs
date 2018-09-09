@@ -34,6 +34,10 @@ public class G20_NormalStraightAI : G20_AI {
         
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
+            while (isPouse)
+            {
+                yield return null;
+            }
             // 以下の処理（1フレーム間）で行動を決定する
 
             // ターゲットが目の前にいたら攻撃する
@@ -64,7 +68,7 @@ public class G20_NormalStraightAI : G20_AI {
                 yield break;
 
             }
-            if (enemy.HP <= 0) yield break;
+            if (!enemy.IsLife) yield break;
         }
     }
 
@@ -78,14 +82,17 @@ public class G20_NormalStraightAI : G20_AI {
         }
 
         Debug.Log("攻撃中");
-        stateController.Attack(attacktime, ()=>G20_EnemyAttack.GetInstance().Attack(enemy.Attack));
-        yield return new WaitForSeconds(attacktime);
-       
+        animPlayer.PlayAnimation(G20_AnimType.Attack);
+
+        yield return new WaitForSeconds(attacktime / enemy.Speed);
+        if (!enemy.IsLife) yield break;
+        G20_EnemyAttack.GetInstance().Attack(enemy.Attack);
     }
 
     IEnumerator RunCoroutine()
     {
-        stateController.Run();
+        animPlayer.PlayAnimation(G20_AnimType.Run);
+
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
             transform.position += transform.forward * AITime;
@@ -100,7 +107,8 @@ public class G20_NormalStraightAI : G20_AI {
 
     IEnumerator TargetRun()
     {
-        stateController.Stance();
+        animPlayer.PlayAnimation(G20_AnimType.Stance);
+        enemy.isSuperArmor = true;
         //向き変更
         Vector3 targetfront = distanceVec.normalized;
         targetfront.y = 0;
@@ -123,7 +131,7 @@ public class G20_NormalStraightAI : G20_AI {
 
         yield return null;
         //走る
-        stateController.Dash();
+        animPlayer.PlayAnimation(G20_AnimType.Dash);
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
             transform.position += transform.forward * AITime;

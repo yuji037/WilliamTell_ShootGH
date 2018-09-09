@@ -58,6 +58,10 @@ public class G20_SmallAI : G20_AI
        
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
+            while (isPouse)
+            {
+                yield return null;
+            }
             // 以下の処理（1フレーム間）で行動を決定する
 
             // ターゲットが目の前にいたら攻撃する
@@ -98,7 +102,7 @@ public class G20_SmallAI : G20_AI
                 yield break;
 
             }
-            if (enemy.HP <= 0) yield break;
+            if (!enemy.IsLife) yield break;
         }
     }
     IEnumerator AttackCoroutine()
@@ -120,7 +124,8 @@ public class G20_SmallAI : G20_AI
 
     IEnumerator RunCoroutine()
     {
-        stateController.Run();
+        animPlayer.PlayAnimation(G20_AnimType.Run);
+
         //走る時間の計算
         runTime = (targetPos.x - transform.position.x) * runTimeRate;
         if (runTime < 0) runTime *= (-1);
@@ -169,19 +174,19 @@ public class G20_SmallAI : G20_AI
         }
 
         yield return null;
-        if ( enemy.HP <= 0 ) yield break;
+        if ( !enemy.IsLife ) yield break;
         //ジャンプモーション開始
-        stateController.Jump();
+        animPlayer.PlayAnimation(G20_AnimType.Jump);
         yield return new WaitForSeconds(1.0f/enemy.anim.AnimSpeed);
         //放物線
         float hight = 0;
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME && transform.position.y >= -0.1f)
         {
 
-            transform.position += (enemy.HP <= 0 ? -1 : 1) * transform.forward * Time.deltaTime * enemy.Speed;
+            transform.position += (!enemy.IsLife ? -1 : 1) * transform.forward * Time.deltaTime * enemy.Speed;
 
-            if ( enemy.HP <= 0 && init_v > 0 ) init_v = 0;
-            init_v -= gravity * Time.deltaTime * ( enemy.HP <= 0 ? 4 : 1 );
+            if ( !enemy.IsLife && init_v > 0 ) init_v = 0;
+            init_v -= gravity * Time.deltaTime * ( !enemy.IsLife ? 4 : 1 );
             hight += init_v * Time.deltaTime;
 
 

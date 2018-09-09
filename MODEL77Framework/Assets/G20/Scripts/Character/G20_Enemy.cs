@@ -33,14 +33,19 @@ public class G20_Enemy : G20_Unit
         {
             speed = value;
             speed = Mathf.Clamp(speed, 0.5f, 100);
+            anim.AnimSpeed = speed;
         }
     }
+    bool isLife = true;
+    public bool IsLife { get { return isLife; } }
+    //trueの場合怯まない
+    public bool isSuperArmor;
     List<G20_EnemyBuff> buffList = new List<G20_EnemyBuff>();
     private void Awake()
     {
         Speed = speed;
-        anim.AnimSpeed = Speed;
         deathActions += _ => KillCollider();
+        deathActions += _ =>isLife = false;
         if (!head) head = transform;
     }
     public void AddBuff(G20_EnemyBuff enemy_buff)
