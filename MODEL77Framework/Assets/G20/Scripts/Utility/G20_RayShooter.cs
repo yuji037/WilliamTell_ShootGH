@@ -11,7 +11,6 @@ public class G20_RayShooter
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 1000.0f,layer_mask)){
             var hitObj = hit.transform.GetComponent<G20_HitObject>();
-            Debug.Log(hit.transform.gameObject);
             if (!hitObj) return null;
             hit_point = hit.point;
             return hitObj;
