@@ -40,10 +40,12 @@ public class G20_BombStraightAI : G20_AI
 
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
+            while (isPouse)
+            {
+                yield return null;
+            }
             // 以下の処理（1フレーム間）で行動を決定する
 
-            
-            
             if (distance < changePhase)
             {
                 //ある程度近づいたらカメラに向かう
@@ -65,12 +67,13 @@ public class G20_BombStraightAI : G20_AI
                 yield break;
 
             }
-            if (enemy.HP <= 0) yield break;
+            if (!enemy.IsLife) yield break;
         }
     }
 
     IEnumerator AttackCoroutine()
     {
+        enemy.isSuperArmor = true;
         if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
         {
             Debug.Log("インゲーム状態を抜けたのでAIを終了");
@@ -78,13 +81,13 @@ public class G20_BombStraightAI : G20_AI
 
         }
         Debug.Log("攻撃中");
-        stateController.Attack(attacktime,null);
+        animPlayer.PlayAnimation(G20_AnimType.Attack);
         //なげるアニメーションの実行
 
-        yield return new WaitForSeconds(attacktime);
+        yield return new WaitForSeconds(attacktime / enemy.Speed);
         //アニメーション終了と同時に爆弾の親変更と爆弾の動く処理実行
 
-        if (enemy.HP <= 0) yield break;
+        if (!enemy.IsLife) yield break;
 
         bomb.Bombthrow(attackRange, enemy.Attack);
         bomb.transform.parent = enemy.transform.parent;
@@ -95,7 +98,8 @@ public class G20_BombStraightAI : G20_AI
     //とにかく前に走る
     IEnumerator RunCoroutine()
     {
-        stateController.Run();
+        animPlayer.PlayAnimation(G20_AnimType.Run);
+
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
             transform.Rotate(0, bombrot_speed * AITime, 0);
@@ -114,7 +118,8 @@ public class G20_BombStraightAI : G20_AI
     //ターゲットに向いてから走る
     IEnumerator TargetRun()
     {
-        stateController.Run();
+        animPlayer.PlayAnimation(G20_AnimType.Run);
+
         //ターゲットに向く
         Vector3 targetfront = distanceVec.normalized;
         for (float t = 0; t < rotationTime; t += AITime)

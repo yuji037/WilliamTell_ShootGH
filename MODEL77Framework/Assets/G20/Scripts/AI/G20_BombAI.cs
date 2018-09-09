@@ -55,6 +55,10 @@ public class G20_BombAI : G20_AI
     {
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
+            while (isPouse)
+            {
+                yield return null;
+            }
             // 以下の処理（1フレーム間）で行動を決定する
             if (distance < changePhase)
             {
@@ -86,27 +90,27 @@ public class G20_BombAI : G20_AI
                 yield break;
             }
 
-            if (enemy.HP <= 0) yield break;
+            if (!enemy.IsLife) yield break;
         }
     }
 
     IEnumerator AttackCoroutine()
     {
-
+        enemy.isSuperArmor = true;
         if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
         {
             Debug.Log("インゲーム状態を抜けたのでAIを終了");
             yield break;
         }
         Debug.Log("攻撃中");
-        stateController.Attack(attacktime,null);
+        animPlayer.PlayAnimation(G20_AnimType.Attack);
 
         //なげるアニメーションの実行
-        yield return new WaitForSeconds(attacktime);
+        yield return new WaitForSeconds(attacktime / enemy.Speed);
         
         //アニメーション終了と同時に爆弾の親変更と爆弾の動く処理実行
 
-        if (enemy.HP <= 0) yield break;
+        if (!enemy.IsLife) yield break;
 
         bomb.Bombthrow(attackRange,enemy.Attack);
         bomb.transform.parent = enemy.transform.parent;
@@ -118,7 +122,8 @@ public class G20_BombAI : G20_AI
 
     IEnumerator RunCoroutine()
     {
-        stateController.Run();
+        animPlayer.PlayAnimation(G20_AnimType.Run);
+
         runTime = (targetPos.x - transform.position.x) * runTimeRate;
         if (runTime < 0)
         {
@@ -154,7 +159,8 @@ public class G20_BombAI : G20_AI
 
     IEnumerator TargetRun()
     {
-        stateController.Run();
+        animPlayer.PlayAnimation(G20_AnimType.Run);
+
         //向き変更
         Vector3 targetfront = distanceVec.normalized;
         targetfront.y = 0;

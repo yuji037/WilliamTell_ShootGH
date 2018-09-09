@@ -72,7 +72,7 @@ public class G20_EnemyPopper : MonoBehaviour
             ene.transform.position += new Vector3(0, riseUpSpeed * Time.deltaTime, 0);
             yield return null;
         }
-        if (!ene || enemy.HP <= 0) yield break;
+        if (!ene || !enemy.IsLife) yield break;
         // Y座標を0に補正
         Vector3 pos = ene.transform.position;
         ene.transform.position = new Vector3(pos.x, 0, pos.z);

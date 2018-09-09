@@ -11,7 +11,7 @@ public abstract class G20_AI : MonoBehaviour
     protected Vector3 targetPos;
     protected Vector3 distanceVec = Vector3.zero;
     protected float distance = 9999;
-    protected G20_StateController stateController;
+    protected G20_EnemyAnimation animPlayer;
     //攻撃に移行する距離
     [SerializeField] protected float attackRange = 3.0f;
     //キャラクターを消す高さ
@@ -28,28 +28,17 @@ public abstract class G20_AI : MonoBehaviour
     public void Init()
     {
         enemy = GetComponent<G20_Enemy>();
-        stateController = new G20_StateController(this);
+        animPlayer = enemy.anim;
         //0だったら怯まないように設定
         if (enemy.hirumiTime > 0f)
         {
-            enemy.recvDamageActions += _ => stateController.Falter(enemy.hirumiTime / (enemy.Speed*enemy.anim.AnimSpeed));
+            enemy.recvDamageActions += _ => Falter();
         }
-        //死んだときデスステートに移行するように設定
-        enemy.deathActions += _ => stateController.Death();
+        enemy.deathActions += _ => animPlayer.PlayAnimation(G20_AnimType.Death);
         //死んだときにデストロイするように設定
         enemy.deathActions += _ => StartCoroutine(DestroyCoroutine(1.0f / (enemy.anim.AnimSpeed)));
-        //stateをスタート
-        stateController.Start();
-        StartCoroutine(StateRoutine());
     }
-    IEnumerator StateRoutine()
-    {
-        while (true)
-        {
-            stateController.Update();
-            yield return null;
-        }
-    }
+
     protected float AITime
     {
         get
@@ -67,15 +56,44 @@ public abstract class G20_AI : MonoBehaviour
 
     public void AIStart()
     {
-        if (isAIStarted) return;
-        if (enemy.HP <= 0) return;
-        childAIStart();
+        if (isAIStarted || !enemy.IsLife) return;
         isAIStarted = true;
+        childAIStart();
     }
+
     protected abstract void childAIStart();
 
+    G20_AnimType lastAnim;
+    float falterTime;
+
+    void Falter()
+    {
+        if (enemy.isSuperArmor || !enemy.IsLife) return;
+        StartCoroutine(FalterRoutine());
+    }
+    IEnumerator FalterRoutine()
+    {
+        if (!isPouse) lastAnim = animPlayer.lastAnim;
+        animPlayer.PlayAnimation(G20_AnimType.Falter, enemy.hirumiTime);
+        falterTime = enemy.hirumiTime;
+        if (isPouse)yield break;
+        isPouse = true;
+
+        while (falterTime > 0)
+        {
+            yield return null;
+            falterTime -= Time.deltaTime;
+        }
+        if (enemy.IsLife)
+        {
+            //最後のTime
+            animPlayer.PlayAnimation(lastAnim);
+            isPouse = false;
+        }
+    }
     protected IEnumerator DestroyCoroutine(float duration_time)
     {
+        isPouse = true;
         yield return new WaitForSeconds(duration_time);
         Destroy(gameObject);
     }
@@ -93,8 +111,8 @@ public abstract class G20_AI : MonoBehaviour
 
             if (transform.position.y < deathposition_y)
             {
-                if (enemy.HP <= 0) yield break;
-   
+                if (!enemy.IsLife) yield break;
+
                 Debug.Log("自殺");
                 GetComponent<G20_Unit>().ExecuteDeathAction();
                 Destroy(gameObject);
