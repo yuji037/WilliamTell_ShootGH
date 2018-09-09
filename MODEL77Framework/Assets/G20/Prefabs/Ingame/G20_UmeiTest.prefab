@@ -79,9 +79,9 @@ MonoBehaviour:
     InGamePerformer: {fileID: 0}
   paternA:
     cueList:
-    - enemyType: 5
+    - enemyType: 6
       positionNumber: -1
-    - enemyType: 1
+    - enemyType: 2
       positionNumber: -1
   paternB:
     cueList:

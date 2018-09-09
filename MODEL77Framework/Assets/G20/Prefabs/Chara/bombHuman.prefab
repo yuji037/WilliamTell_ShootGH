@@ -862,6 +862,7 @@ GameObject:
   - component: {fileID: 114235025540601286}
   - component: {fileID: 114610099390844256}
   - component: {fileID: 114684188562558174}
+  - component: {fileID: 114397596438121372}
   m_Layer: 0
   m_Name: bombHuman
   m_TagString: Untagged
@@ -948,7 +949,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1920862919132584}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.020097714, y: 0.106, z: 0.254}
+  m_LocalPosition: {x: 0, y: 0.078, z: 0.349}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4580890512711398}
@@ -1881,7 +1882,7 @@ MonoBehaviour:
   attackRange: 3
   deathposition_y: -2
   deathvec: {x: 0, y: -2, z: 0}
-  attacktime: 1
+  attacktime: 0.5
   changePhase: 5
   rotationTime: 1
   rot: 80
@@ -1926,6 +1927,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectType: 1
+--- !u!114 &114397596438121372
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1983737840519902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5832349080cc76c4da6a13d03f83ffa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 4319345109940388}
+  pivot: {fileID: 4355866022005818}
 --- !u!114 &114483941258364408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1961,6 +1975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50966d0e787ced94bbdd40964d9b4371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastAnim: 0
   animator: {fileID: 95816806910628394}
 --- !u!114 &114623280414624976
 MonoBehaviour:
@@ -1993,6 +2008,7 @@ MonoBehaviour:
   HeadRate: 5
   anim: {fileID: 114610099390844256}
   speed: 1
+  isSuperArmor: 0
 --- !u!114 &114681259260431068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2023,7 +2039,7 @@ MonoBehaviour:
   attackRange: 3
   deathposition_y: -2
   deathvec: {x: 0, y: -2, z: 0}
-  attacktime: 1
+  attacktime: 0.5
   changePhase: 5
   rotationTime: 1
   bombrot_speed: 100
@@ -2289,7 +2305,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 122002345
+  randomSeed: 1557483796
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -8541,7 +8557,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1998537381
+  randomSeed: -818469083
   InitialModule:
     serializedVersion: 3
     enabled: 1
