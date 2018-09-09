@@ -243,6 +243,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
 
     public void GameEnd()
     {
+        Time.timeScale = 1f;
         Debug.Log("ゲームエンド。フレームワークに処理を返します。");
         _gameController.GameEnd();
         G20_ReloadScene.GetInstance().ReloadScene();
