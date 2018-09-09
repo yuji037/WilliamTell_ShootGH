@@ -19,7 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4304012291697846}
-  m_Layer: 0
+  - component: {fileID: 95598963703946062}
+  m_Layer: 5
   m_Name: ScoreGoldenApple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,8 +44,8 @@ GameObject:
   - component: {fileID: 23225856998660218}
   - component: {fileID: 54906030226522898}
   - component: {fileID: 114929213540266216}
-  m_Layer: 0
-  m_Name: GoldenApple
+  m_Layer: 5
+  m_Name: Apple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +61,7 @@ GameObject:
   - component: {fileID: 4498234095592208}
   - component: {fileID: 198082394858368376}
   - component: {fileID: 199270297188281010}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +78,7 @@ GameObject:
   - component: {fileID: 4823752485438990}
   - component: {fileID: 198563298872622910}
   - component: {fileID: 199279114131568094}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,8 +106,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1317072536677658}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.239, z: 0}
-  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
+  m_LocalPosition: {x: 0, y: -0.355, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4823752485438990}
   - {fileID: 4498234095592208}
@@ -190,10 +191,27 @@ Rigidbody:
   m_Drag: 1
   m_AngularDrag: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &95598963703946062
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1085428369758538}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f6a76f2b72b7e9145bd552a9fb91f4bf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114230303433394880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -337,7 +355,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -482,7 +500,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.52
+      scalar: 1.16
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -887,7 +905,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -3461,7 +3479,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -178308681
+  randomSeed: 439718629
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3613,7 +3631,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.06
+      scalar: 0.03
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3911,7 +3929,7 @@ ParticleSystem:
     boxY: 1
     boxZ: 1
     radius:
-      value: 0.44
+      value: 0.38
       mode: 0
       spread: 0
       speed:
