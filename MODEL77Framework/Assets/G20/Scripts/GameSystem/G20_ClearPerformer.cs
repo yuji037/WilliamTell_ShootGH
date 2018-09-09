@@ -30,7 +30,11 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
 
     [SerializeField] GameObject playerObj;
 
-    [SerializeField] float fadetime = 0;
+
+
+    [SerializeField] GameObject highScore;
+    [SerializeField] Text highScoreText;
+    Animator clearFadeanimator;
 
     float balanceNum;
     public void Excute(Action on_end_action)
@@ -77,18 +81,34 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         if (on_end_action != null) on_end_action();
     }
 
-
+    
     IEnumerator UIRoutine(int score)
     {
         SetUIsActive();
 
-        yield return new WaitForSeconds(1.0f);
 
         yourScore.text = score.ToString();
         //creatorsHighScore.text = G20_NetworkManager.GetInstance().userData.scoreList[0].score;
         //dailyHighScore.text    = G20_NetworkManager.GetInstance().userData.scoreList[0].score;
         creatorsHighScore.text = "0";
         dailyHighScore.text = "0";
+
+        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(5.5f);
+
+        int num = int.Parse(dailyHighScore.text);
+
+        if (num < score)
+        {
+            highScore.SetActive(true);
+            highScoreText.text = score.ToString();
+            yield return null;
+
+            clearFadeanimator = clearTexts.GetComponent<Animator>();
+            clearFadeanimator.SetBool("newHighScore", true);
+
+        }
+
         yield return null;
     }
 
