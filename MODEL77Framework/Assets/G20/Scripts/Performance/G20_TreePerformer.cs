@@ -15,6 +15,11 @@ public class G20_TreePerformer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         animators = GetComponentsInChildren<Animator>();
+        //foreach(var anim in animators )
+        //{
+        //    anim.CrossFade("WindReceive", 0.4f);
+        //    anim.speed = Random.Range(0.1f, 0.4f);
+        //}
 	}
 	
 	// Update is called once per frame
@@ -27,7 +32,7 @@ public class G20_TreePerformer : MonoBehaviour {
 
             int num = Random.Range(0, animators.Length);
             animators[num].CrossFade("WindReceive", 0.4f);
-            animators[num].speed = Random.Range(0.1f, 0.2f);
+            animators[num].speed = Random.Range(0.1f, 0.4f);
 
             float intervalMin = animInterval - 0.5f;
             float intervalMax = animInterval + 0.5f;
