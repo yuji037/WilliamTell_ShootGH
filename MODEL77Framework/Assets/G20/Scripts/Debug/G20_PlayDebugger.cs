@@ -30,7 +30,7 @@ public class G20_PlayDebugger : MonoBehaviour
         cheatShotObj.toggleAction += ChangeCheatShoot;
         skipObj.toggleAction += ChangeIsSkipIngamePerformance;
         debugObjToggle.toggleAction += ChangeAllActive;
-        replayObj.hitAction += () => { Time.timeScale = 1.0f; G20_ReloadScene.GetInstance().ReloadScene(); };
+        replayObj.hitAction += () => { G20_ReloadScene.GetInstance().ReloadScene(); };
         minusSpeed.hitAction += () =>
          {
              popper.onPopSpeedBuffValue -= 0.1f;

@@ -13,6 +13,7 @@ public class G20_FailedPerformer : G20_Singleton<G20_FailedPerformer>
     [SerializeField] GameObject[] DeActiveObjs;
     [SerializeField,Range(0,1.0f)] float fadeAlpha = 0.7f;
     [SerializeField] float fadeTime = 3.0f;
+    [SerializeField] float EndDelay = 10.0f;
     public void Excute(Action on_end_action)
     {
         fadeAlpha= Mathf.Clamp(fadeAlpha, 0, 1.0f); 
@@ -29,6 +30,7 @@ public class G20_FailedPerformer : G20_Singleton<G20_FailedPerformer>
         ScoreText.text = "SHOT APPLE:" + G20_Score.GetInstance().Score;
         Debug.Log(Time.unscaledDeltaTime);
     }
+    
     IEnumerator FailedTextRoutine(Action on_end_action)
     {
         var fColor = FailedText.color;
@@ -37,6 +39,12 @@ public class G20_FailedPerformer : G20_Singleton<G20_FailedPerformer>
         for (float t = 0; t < fadeTime; t += Time.unscaledDeltaTime)
         {
             FailedText.color += new Color(0, 0, 0, Time.unscaledDeltaTime * (1.0f / fadeTime));
+            yield return null;
+        }
+        float endtimer = 0f;
+        while (EndDelay > endtimer)
+        {
+            endtimer += Time.unscaledDeltaTime;
             yield return null;
         }
         if (on_end_action != null) on_end_action();
