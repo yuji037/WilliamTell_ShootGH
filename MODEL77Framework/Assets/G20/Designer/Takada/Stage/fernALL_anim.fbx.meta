@@ -195,7 +195,199 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 210
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Fern1
+        weight: 1
+      - path: joint1
+        weight: 1
+      - path: joint1/joint1_1
+        weight: 1
+      - path: joint2
+        weight: 1
+      - path: joint2/joint2_1
+        weight: 1
+      - path: joint3
+        weight: 1
+      - path: joint3/joint3_1
+        weight: 1
+      - path: joint4
+        weight: 1
+      - path: joint4/joint4_2
+        weight: 1
+      - path: joint5
+        weight: 1
+      - path: joint5/joint5_1
+        weight: 1
+      - path: joint6
+        weight: 1
+      - path: joint6/joint6_1
+        weight: 1
+      - path: joint7
+        weight: 1
+      - path: joint7/joint7_1
+        weight: 1
+      - path: joint8
+        weight: 1
+      - path: joint8/joint8_1
+        weight: 1
+      - path: joint9
+        weight: 1
+      - path: joint9/joint9_1
+        weight: 1
+      - path: joint10
+        weight: 1
+      - path: joint10/joint10_1
+        weight: 1
+      - path: joint11
+        weight: 1
+      - path: joint11/joint11_1
+        weight: 1
+      - path: joint12
+        weight: 1
+      - path: joint12/joint12_1
+        weight: 1
+      - path: joint13
+        weight: 1
+      - path: joint13/joint13_1
+        weight: 1
+      - path: joint14
+        weight: 1
+      - path: joint14/joint14_1
+        weight: 1
+      - path: joint15
+        weight: 1
+      - path: joint15/joint15_1
+        weight: 1
+      - path: joint16
+        weight: 1
+      - path: joint16/joint16_1
+        weight: 1
+      - path: joint17
+        weight: 1
+      - path: joint17/joint17_1
+        weight: 1
+      - path: joint18
+        weight: 1
+      - path: joint18/joint18_1
+        weight: 1
+      - path: joint19
+        weight: 1
+      - path: joint19/joint19_1
+        weight: 1
+      - path: joint20
+        weight: 1
+      - path: joint20/joint20_1
+        weight: 1
+      - path: joint21
+        weight: 1
+      - path: joint21/joint21_1
+        weight: 1
+      - path: joint22
+        weight: 1
+      - path: joint22/joint22_1
+        weight: 1
+      - path: joint23
+        weight: 1
+      - path: joint23/joint23_1
+        weight: 1
+      - path: joint24
+        weight: 1
+      - path: joint24/joint24_1
+        weight: 1
+      - path: joint25
+        weight: 1
+      - path: joint25/joint25_1
+        weight: 1
+      - path: joint26
+        weight: 1
+      - path: joint26/joint26_1
+        weight: 1
+      - path: joint27
+        weight: 1
+      - path: joint27/joint27_1
+        weight: 1
+      - path: joint28
+        weight: 1
+      - path: joint28/joint28_1
+        weight: 1
+      - path: joint29
+        weight: 1
+      - path: joint29/joint29_1
+        weight: 1
+      - path: joint30
+        weight: 1
+      - path: joint30/joint30_1
+        weight: 1
+      - path: joint31
+        weight: 1
+      - path: joint31/joint31_1
+        weight: 1
+      - path: joint32
+        weight: 1
+      - path: joint32/joint32_1
+        weight: 1
+      - path: joint33
+        weight: 1
+      - path: joint33/joint33_1
+        weight: 1
+      - path: joint34
+        weight: 1
+      - path: joint34/joint34_1
+        weight: 1
+      - path: joint35
+        weight: 1
+      - path: joint35/joint35_1
+        weight: 1
+      - path: joint36
+        weight: 1
+      - path: joint36/joint36_1
+        weight: 1
+      - path: joint37
+        weight: 1
+      - path: joint37/joint37_1
+        weight: 1
+      - path: joint38
+        weight: 1
+      - path: joint38/joint38_1
+        weight: 1
+      - path: joint39
+        weight: 1
+      - path: joint39/joint19_1 1
+        weight: 1
+      - path: joint40
+        weight: 1
+      - path: joint40/joint40_1
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
