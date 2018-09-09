@@ -72,6 +72,8 @@ ModelImporter:
     100128: trunk_7
     100130: trunk_8
     100132: trunk_9
+    100134: Stone_MeshPart0
+    100136: Stone_MeshPart1
     400000: back
     400002: camera1
     400004: cedar_1
@@ -139,6 +141,8 @@ ModelImporter:
     400128: trunk_7
     400130: trunk_8
     400132: trunk_9
+    400134: Stone_MeshPart0
+    400136: Stone_MeshPart1
     2300000: back
     2300002: Fern3
     2300004: Ground
@@ -181,6 +185,8 @@ ModelImporter:
     2300078: trunk_7
     2300080: trunk_8
     2300082: trunk_9
+    2300084: Stone_MeshPart0
+    2300086: Stone_MeshPart1
     3300000: back
     3300002: Fern3
     3300004: Ground
@@ -223,6 +229,8 @@ ModelImporter:
     3300078: trunk_7
     3300080: trunk_8
     3300082: trunk_9
+    3300084: Stone_MeshPart0
+    3300086: Stone_MeshPart1
     4300000: Ground
     4300002: back
     4300004: NotFieldArea
@@ -265,6 +273,8 @@ ModelImporter:
     4300078: leaf_19
     4300080: Stone
     4300082: Fern3
+    4300084: Stone_MeshPart0
+    4300086: Stone_MeshPart1
     7400000: Take 001
     9500000: //RootNode
   materials:

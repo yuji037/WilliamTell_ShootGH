@@ -219,8 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 966cb9778deaa584ab2586fedf843fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAssistValue: 60
-  assistCount: 10
 --- !u!135 &135043897206607308
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -379,8 +377,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 0.43867922, b: 0.6884009, a: 1}
-      maxColor: {r: 0.49900538, g: 0.03470988, b: 0.5660378, a: 1}
+      minColor: {r: 1, g: 0.43867922, b: 0.6884009, a: 0.316}
+      maxColor: {r: 0.49900538, g: 0.03470988, b: 0.5660378, a: 0.353}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
