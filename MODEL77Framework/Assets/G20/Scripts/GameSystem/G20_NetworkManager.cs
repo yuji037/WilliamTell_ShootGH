@@ -28,7 +28,7 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
 
     bool scoreSendComp = false;
     //オフラインモードでの実行はfalse
-    [SerializeField] bool networkflag = false;
+    [SerializeField] public bool networkflag = false;
     
     int date;
 

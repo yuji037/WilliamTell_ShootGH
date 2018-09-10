@@ -88,13 +88,18 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
 
 
         yourScore.text = score.ToString();
-        //creatorsHighScore.text = G20_NetworkManager.GetInstance().userData.scoreList[0].score;
-        //dailyHighScore.text    = G20_NetworkManager.GetInstance().userData.scoreList[0].score;
-        creatorsHighScore.text = "0";
-        dailyHighScore.text = "0";
-
-        yield return new WaitForSeconds(1.0f);
-        yield return new WaitForSeconds(5.5f);
+        if (G20_NetworkManager.GetInstance().isActiveAndEnabled)
+        {
+            creatorsHighScore.text = G20_NetworkManager.GetInstance().userData.scoreList[0].score;
+            dailyHighScore.text = "100";//後日入れるかどうするか悩み中
+        }
+        else
+        {
+            creatorsHighScore.text = "0";
+            dailyHighScore.text = "0";
+        }
+        
+        yield return new WaitForSeconds(6.5f);
 
         int num = int.Parse(dailyHighScore.text);
 
