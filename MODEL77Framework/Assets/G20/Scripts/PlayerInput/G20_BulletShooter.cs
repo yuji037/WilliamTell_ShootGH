@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 //hitObjectのactionを起動するclass
 public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
@@ -9,6 +10,7 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
     [SerializeField] Camera effectCamera;
     [SerializeField] LayerMask panelMask;
     [SerializeField] LayerMask fieldMask;
+    [SerializeField] Text AIMText;
     //弾の射出を制限出来る
     public bool CanShoot = true;
     //チートモード
@@ -23,7 +25,14 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
     }
     private void Update()
     {
-      
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            aimAssistValueMax += 20;
+        }else if (Input.GetKeyDown(KeyCode.D))
+        {
+            aimAssistValueMax -= 20;
+        }
+        AIMText.text = "A : " + aimAssistValue + "\n" + "AMAX : " + aimAssistValueMax;
         Vector2? shotPoint = null;
 
         shotPoint = G20_InputPointGetter.GetInstance().GetInputPoint();
@@ -40,6 +49,7 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
             aIMAssistant.AimasistvalueSet();
 
             Debug.Log("アシスト：" + aimAssistValue);
+            
             Vector3 hitPoint = Vector3.zero;
             //AIM補正
             if (aimAssistValue > 0)

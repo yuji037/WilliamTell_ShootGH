@@ -34,9 +34,9 @@ public abstract class G20_AI : MonoBehaviour
         {
             enemy.recvDamageActions += _ => Falter();
         }
-        enemy.deathActions += _ => animPlayer.PlayAnimation(G20_AnimType.Death);
+        enemy.deathActions += _ => animPlayer.PlayAnimation(G20_AnimType.Death,1.0f);
         //死んだときにデストロイするように設定
-        enemy.deathActions += _ => StartCoroutine(DestroyCoroutine(1.0f / (enemy.anim.AnimSpeed)));
+        enemy.deathActions += _ => StartCoroutine(DestroyCoroutine(1.0f ));
     }
 
     protected float AITime
