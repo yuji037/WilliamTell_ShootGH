@@ -4,18 +4,27 @@ using System;
 using UnityEngine;
 
 
-public class G20_NetworkManager : MonoBehaviour
+public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
 {
-    [SerializeField] string adress = "http://";
-    [SerializeField] string ip = "127.0.0.1:10080";
-    [SerializeField] string dir = "/gp17op17/WT/";
+    public G20_SQLModel userData;
+
     string userIDstr;
     public int userID;
-    int difficulty;
 
-    string scoreSendAdress;
-    string scoreReceiveAdress;
-    string IDReceiveAdress;
+    [SerializeField] string adress  = "http://";
+    [SerializeField] string ip      = "192.168.40.129";
+    [SerializeField] string dir     = "/gp17op17/WT/";
+    [SerializeField] string scoreSendFile = "ScoreReceive.php";
+    [SerializeField] string scoreReceiveFile = "ScoreSend.php";
+    [SerializeField] string IDReceiveFile = "IDSend.php";
+
+
+     string scoreSendAdress   ;
+     string scoreReceiveAdress;
+     string IDReceiveAdress   ;
+
+
+
 
     bool scoreSendComp = false;
     //オフラインモードでの実行はfalse
@@ -26,13 +35,19 @@ public class G20_NetworkManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        scoreReceiveAdress = adress + ip + dir + "ScoreSend.php";
-        scoreSendAdress = adress + ip + dir + "ScoreReceive.php";
-        IDReceiveAdress = adress + ip + dir + "IDSend.php";
-        Scorereceive();
-        IDReceive();
+        scoreSendAdress = adress + ip + dir + scoreSendFile;
+        Debug.Log("スコア送信アドレス : " + scoreSendAdress);
+        scoreReceiveAdress = adress + ip + dir + scoreReceiveFile;
+        Debug.Log("スコア受信アドレス : " + scoreReceiveAdress);
+        IDReceiveAdress = adress + ip + dir + IDReceiveFile;
+        Debug.Log("ID受信アドレス : " + IDReceiveAdress);
         date = DateTime.Now.Month * 100 + DateTime.Now.Day;
+
+        IDReceive();
         G20_GameManager.GetInstance().ChangedStateAction += Scoresend;
+        G20_GameManager.GetInstance().ChangedStateAction += Scorereceive;
+
+        //Scoresendtest();
     }
 
     // Update is called once per frame
@@ -46,21 +61,35 @@ public class G20_NetworkManager : MonoBehaviour
 
     ////////////////↓受信系↓////////////////////////////
     //ランキング用スコアの取得
-    public void Scorereceive()
+    public void Scorereceive(G20_GameState state)
     {
-        if (networkflag) StartCoroutine(ScoreReceiveCoroutine());
+
+        if (networkflag && state == G20_GameState.INGAME)
+        {
+            StartCoroutine(ScoreReceiveCoroutine());
+        }
     }
     //現状取得してくるだけ
     IEnumerator ScoreReceiveCoroutine()
     {
-        WWW www = new WWW(scoreReceiveAdress);
-        yield return www;
-        string jsonText = "{ \"score\" : " + www.text + "}";
-        
-        G20_SQLModel sample = JsonUtility.FromJson<G20_SQLModel>(jsonText);
+        Debug.Log("スコア表受信開始 難易度：" + G20_StageManager.GetInstance().stageType + (int)G20_StageManager.GetInstance().stageType);
+        WWWForm form = new WWWForm();
+        form.AddField("date", date);
+        form.AddField("difficulty", (int)G20_StageManager.GetInstance().stageType);
 
-        Debug.Log("スコア情報(score)：" + sample.score[0].score);
+        WWW www = new WWW(scoreReceiveAdress, form);
+        yield return www;
+        Debug.Log("スコア表：" + www.text);
+      
+        string jsonText = "{ \"scoreList\" : " + www.text + "}";
+
+
         Debug.Log("jsonText" + jsonText);
+
+        userData = JsonUtility.FromJson<G20_SQLModel>(jsonText);
+
+        Debug.Log("スコア情報(score)：" + userData.scoreList[0].score);
+
 
         yield return null;
     }
@@ -72,6 +101,7 @@ public class G20_NetworkManager : MonoBehaviour
     }
     IEnumerator IDReceiveCoroutine()
     {
+        Debug.Log("ID取得");
         WWW www = new WWW(IDReceiveAdress);
         yield return www;
         userIDstr = www.text;
@@ -82,6 +112,29 @@ public class G20_NetworkManager : MonoBehaviour
 
 
     ////////////////↓送信系↓////////////////////////////
+    public void Scoresendtest()
+    {
+        if (networkflag)
+        {
+            StartCoroutine(ScoreSendtestCoroutine());
+        }
+    }
+    IEnumerator ScoreSendtestCoroutine()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("userinfo", "Guest");
+        form.AddField("date", 0);
+        form.AddField("score", 0);
+        form.AddField("ID", 0);
+        form.AddField("difficulty", 1);//どっかからとってこれるようにする？
+
+        WWW www = new WWW(scoreSendAdress);
+        yield return www;
+
+        Debug.Log(www.text);
+
+        yield return null;
+    }
     public void Scoresend(G20_GameState state)
     {
         if (networkflag && state==G20_GameState.CLEAR)
@@ -97,10 +150,12 @@ public class G20_NetworkManager : MonoBehaviour
         form.AddField("date", date);
         form.AddField("score", G20_Score.GetInstance().Score);
         form.AddField("ID", userIDstr);
-        form.AddField("difficulty", 1);//どっかからとってこれるようにする？
+        form.AddField("difficulty", (int)G20_StageManager.GetInstance().stageType);//どっかからとってこれるようにする？
 
         WWW www = new WWW(scoreSendAdress, form);
         yield return www;
+
+  
 
         Debug.Log(www.text);
 
@@ -115,7 +170,7 @@ public class G20_NetworkManager : MonoBehaviour
 ////////////// ↓　モデルクラス　　絶対に触るな！！！！　↓//////////////////
 [Serializable] public class G20_SQLModel
 {
-    public List<G20_ScoreModel> score;
+    public List<G20_ScoreModel> scoreList;
 }
 
 
