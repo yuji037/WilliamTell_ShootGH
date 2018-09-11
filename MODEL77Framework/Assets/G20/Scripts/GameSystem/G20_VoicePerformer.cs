@@ -37,13 +37,12 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
 
     Text serifuText;
 
+    [SerializeField]
+    G20_CaptionPerformer captionPerformer;
+
 	// Use this for initialization
 	void Start () {
         serifuText = uiSerifuAnim.GetComponentInChildren<Text>();
-
-        for ( int i = 0; i < serifuList.Length; i++ )
-        {
-        }
 	}
 
     // ボイス番号0～最大まで
@@ -59,31 +58,31 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
 
     IEnumerator PlayCoroutine(int voiceNumber)
     {
-        // 改行処理
-        char[] c = { 'n' };
+        //// 改行処理
+        //char[] c = { 'n' };
 
-        var _strs = serifuList[voiceNumber].Split(c);
+        //var _strs = serifuList[voiceNumber].Split(c);
 
-        serifuText.text = "";
-        for(int i = 0; i < _strs.Length; ++i )
-        {
-            serifuText.text += _strs[i];
-            if ( i < _strs.Length - 1 ) serifuText.text += "\n";
-        }
-
+        //serifuText.text = "";
+        //for(int i = 0; i < _strs.Length; ++i )
+        //{
+        //    serifuText.text += _strs[i];
+        //    if ( i < _strs.Length - 1 ) serifuText.text += "\n";
+        //}
+        
         G20_SEType seType = G20_SEType.VOICE0 + voiceNumber;
 
         var sePlayer = G20_SEManager.GetInstance().Play(seType, Vector3.zero, false);
 
-        uiSerifuAnim.CrossFade("Serifu_FadeIn", 0f);
-
+        //uiSerifuAnim.CrossFade("Serifu_FadeIn", 0f);
+        captionPerformer.StartPerformance(serifuList[voiceNumber]);
         yield return new WaitForSeconds(2);
         while ( sePlayer.isPlaying )
         {
             yield return null;
         }
-
-        uiSerifuAnim.CrossFade("Serifu_FadeOut", 0f);
+        captionPerformer.StopPerformance();
+        //uiSerifuAnim.CrossFade("Serifu_FadeOut", 0f);
     }
 
 }
