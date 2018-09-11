@@ -45,6 +45,7 @@ public class G20_Enemy : G20_Unit
     {
         Speed = speed;
         deathActions += _ => KillCollider();
+        deathActions += _ => ChangeHitObjectNormal();
         deathActions += _ =>isLife = false;
         if (!head) head = transform;
     }
@@ -72,6 +73,15 @@ public class G20_Enemy : G20_Unit
                 break;
         }
         hp -= damage_value;
+    }
+    //全部ノーマルに変える
+    void ChangeHitObjectNormal()
+    {
+        var hitObjects = GetComponentsInChildren<G20_HitObject>();
+        foreach (var hit in hitObjects)
+        {
+            hit.ChangeHitTag(G20_HitTag.NORMAL);
+        }
     }
     //子オブジェクトのコライダーを非アクティブにする
     void KillCollider()

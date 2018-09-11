@@ -69,6 +69,7 @@ public class G20_HitScoreApple : G20_HitAction {
         if( score <= 0 )
         {
             GetComponent<Collider>().enabled = false;
+            GetComponent<G20_HitObject>().ChangeHitTag(G20_HitTag.NORMAL);
             StartCoroutine(FallCoroutine());
         }
     }

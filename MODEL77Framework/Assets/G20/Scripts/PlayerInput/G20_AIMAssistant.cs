@@ -34,6 +34,5 @@ public class G20_AIMAssistant
         if (assistlate < 0) assistlate = 0;
 
         G20_BulletShooter.GetInstance().aimAssistValue = G20_BulletShooter.GetInstance().aimAssistValueMax * assistlate;
-        Debug.Log("アシストレート：" + assistlate);
     }
 }
