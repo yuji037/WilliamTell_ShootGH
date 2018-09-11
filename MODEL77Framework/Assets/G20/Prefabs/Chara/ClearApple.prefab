@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5d871fc801f324fbccabc165c9924f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playSEMaxCount: 2
+  playSEMaxCount: 1
 --- !u!114 &114548162749076810
 MonoBehaviour:
   m_ObjectHideFlags: 1

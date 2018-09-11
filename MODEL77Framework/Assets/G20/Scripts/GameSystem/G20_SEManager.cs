@@ -96,7 +96,9 @@ public class G20_SEManager : G20_Singleton<G20_SEManager> {
         var obj = Instantiate(sePlayPrefab, transform);
         obj.transform.position = position;
         var audioSource = obj.GetComponent<AudioSource>();
-        audioSource.clip = seClips[(int)seType];
+        var clip = seClips[(int)seType];
+        if ( clip == null ) return audioSource;
+        audioSource.clip = clip;
 
         if ( !playIn3DVolume )
         {
@@ -113,6 +115,14 @@ public class G20_SEManager : G20_Singleton<G20_SEManager> {
             Debug.Log("エラー：SE音量設定ミス");
             audioSource.volume = 1f;
         }
+
+        // 自動消滅時間の設定
+        var autoDestroy = obj.GetComponent<G20_AutoDestroy>();
+        if ( autoDestroy ) autoDestroy.destroyTime = clip.length + 0.5f;
+
+        // ボイスは必ず鳴って欲しい
+        if ( seType >= G20_SEType.TEST_VOICE
+            && seType <= G20_SEType.VOICE19 ) audioSource.priority = 118;
 
         audioSource.Play();
 

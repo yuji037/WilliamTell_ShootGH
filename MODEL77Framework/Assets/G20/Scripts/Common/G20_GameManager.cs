@@ -158,6 +158,11 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
             Application.Quit();
         }
 
+        if ( Input.GetKey(KeyCode.X) )
+        {
+            G20_Score.GetInstance().AddScore(10);
+        }
+
         //// 画面に弾がヒットした場合 isUpdate() はtrueを返す。
         //if ( _coordinateManager.isUpdate() && !_isGameEnd )
         //{
