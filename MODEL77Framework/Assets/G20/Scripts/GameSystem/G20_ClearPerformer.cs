@@ -53,7 +53,8 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         SetClearObjects();
         playerObj.transform.position = new Vector3(0, 1f, -9.5f);
         playerObj.transform.eulerAngles = Vector3.zero;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1f);
+        G20_BGMManager.GetInstance().Play(G20_BGMType.CLEAR);
         G20_FadeChanger.GetInstance().StartWhiteFadeIn(2.0f);
         yield return new WaitForSeconds(2.0f);
 

@@ -9,6 +9,7 @@ public class G20_HitBomb : G20_HitAction {
     public override void Execute(Vector3 hit_point)
     {
         Camera.main.GetComponent<G20_CameraShake>().Shake(G20_CameraShakeType.DOWNWARD, 0.4f, 20f, 1.4f);
+        G20_FernPerformer.GetInstance().Shake();
         G20_EnemyCabinet.GetInstance().DamageAllEnemys(damage);
         gameObject.SetActive(false);
     }
