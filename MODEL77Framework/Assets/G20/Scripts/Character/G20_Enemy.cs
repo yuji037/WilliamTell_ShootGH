@@ -10,10 +10,9 @@ public class G20_Enemy : G20_Unit
     //頭にスコア出すためのTransform
     [SerializeField] Transform head;
     public Transform Head { get { return head; } }
-    //頭に当たった時のダメージ倍率
-    [SerializeField] uint HeadRate = 1;
     public G20_EnemyAnimation anim;
     public int Attack { get { return attack; } }
+    [SerializeField] G20_DamageReceiver damageReceiver;
     //移動スピード
     [SerializeField, Range(0.5f, 5)] float speed = 1.0f;
     public void SetEnemyAI(G20_AI _ai)
@@ -61,18 +60,7 @@ public class G20_Enemy : G20_Unit
     }
     protected override void uRecvDamage(int damage_value, G20_DamageType damage_type)
     {
-
-        switch (damage_type)
-        {
-            case G20_DamageType.HEAD:
-                damage_value *= (int)HeadRate;
-                G20_EffectManager.GetInstance().Create(G20_EffectType.PLUS_ONE_SCORE, head.position);
-                G20_Score.GetInstance().AddScore(1);
-                break;
-            case G20_DamageType.BODY:
-                break;
-        }
-        hp -= damage_value;
+        hp -= damageReceiver.ReceiveDamage(damage_value,damage_type,this);
     }
     //全部ノーマルに変える
     void ChangeHitObjectNormal()

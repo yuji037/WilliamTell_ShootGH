@@ -2004,9 +2004,11 @@ MonoBehaviour:
   IsInvincible: 0
   attack: 1
   hirumiTime: 1
-  head: {fileID: 0}
-  HeadRate: 5
+  head: {fileID: 4845645979249600}
   anim: {fileID: 114610099390844256}
+  damageReceiver:
+    receiveType: 0
+    HeadRate: 5
   speed: 1
   isSuperArmor: 0
 --- !u!114 &114681259260431068

@@ -67,10 +67,11 @@ public class G20_EffectManager : G20_Singleton<G20_EffectManager>
         }
     }
 
-    public void Create(G20_EffectType effectType, Vector3 position)
+    public GameObject Create(G20_EffectType effectType, Vector3 position)
     {
         var obj = Instantiate(effectPrefabs[(int)effectType], transform);
         obj.transform.position = position;
         Destroy(obj, 5.0f);
+        return obj;
     }
 }

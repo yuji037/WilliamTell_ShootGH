@@ -10,6 +10,7 @@ public class G20_UIScore : MonoBehaviour {
     private void Awake()
     {
         G20_Score.GetInstance().ScoreChangedAction+=ApplyScore;
+        ApplyScore(0);
     }
     void ApplyScore(int _score)
     {

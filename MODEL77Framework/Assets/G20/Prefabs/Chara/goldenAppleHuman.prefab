@@ -1738,8 +1738,10 @@ MonoBehaviour:
   attack: 1
   hirumiTime: 1
   head: {fileID: 4521281988551610}
-  HeadRate: 5
   anim: {fileID: 114734122297641176}
+  damageReceiver:
+    receiveType: 1
+    HeadRate: 5
   speed: 1
   isSuperArmor: 0
 --- !u!114 &114544567996252482
