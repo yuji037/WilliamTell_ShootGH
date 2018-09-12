@@ -12,7 +12,8 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
     public int userID;//いらないかも　一応まだ残しとく
 
     [SerializeField] string adress = "http://";
-    [SerializeField] string ip = "192.168.40.129";
+
+    [SerializeField,Header("ビルド時は空にする")] string ip = "192.168.40.129";
     [SerializeField] string dir = "/gp17op17/WT/";
     [SerializeField] string scoreSendFile = "ScoreReceive.php";
     [SerializeField] string scoreReceiveFile = "ScoreSend.php";
@@ -27,9 +28,18 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
 
     int date;
 
+    public bool is_network = false;
     // Use this for initialization
     void Start()
     {
+
+        if (is_network)
+        {
+            IPReceive();
+            G20_GameManager.GetInstance().ChangedStateAction += Scoresend;
+            G20_GameManager.GetInstance().ChangedStateAction += Scorereceive;
+        }
+
         scoreSendAdress = adress + ip + dir + scoreSendFile;
         Debug.Log("スコア送信アドレス : " + scoreSendAdress);
         scoreReceiveAdress = adress + ip + dir + scoreReceiveFile;
@@ -37,11 +47,7 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
         IDReceiveAdress = adress + ip + dir + IDReceiveFile;
         Debug.Log("ID受信アドレス : " + IDReceiveAdress);
         date = DateTime.Now.Month * 100 + DateTime.Now.Day;
-
-        IDReceive();
-        G20_GameManager.GetInstance().ChangedStateAction += Scoresend;
-        G20_GameManager.GetInstance().ChangedStateAction += Scorereceive;
-
+        
     }
 
     // Update is called once per frame
@@ -54,6 +60,30 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
     }
 
     ////////////////↓受信系↓////////////////////////////
+    void IPReceive()
+    {
+        
+        StartCoroutine(IPReceiveCoroutine());
+    }
+
+    IEnumerator IPReceiveCoroutine()
+    {
+       
+        WWW www = new WWW("http://api.max-bullet.com/wt/");
+        yield return www;
+
+        Debug.Log("接続先IP : " + www.text);
+
+        if (string.IsNullOrEmpty(ip))
+        {
+            ip = www.text;
+        }
+
+        yield return null;
+        IDReceive();
+    }
+
+
     //ランキング用スコアの取得
     public void Scorereceive(G20_GameState state)
     {
@@ -95,6 +125,7 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
         Debug.Log("ID取得");
         WWW www = new WWW(IDReceiveAdress);
         yield return www;
+
         userIDstr = www.text;
         Debug.Log("ユーザーID : " + userIDstr);
         yield return null;
