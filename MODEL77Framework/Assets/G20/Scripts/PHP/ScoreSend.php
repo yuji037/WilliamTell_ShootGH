@@ -6,33 +6,26 @@ header("X-content-Type-Options: nosniff");
 
 //tryの中に通常処理
 try{
-$dsn = 'mysql:dbname=WT;host=localhost';
+    $dsn = 'mysql:dbname=WT;host=localhost';
 	$user = 'root';
 	$password = '';
 	$con =new PDO($dsn,$user,$password);
 
-    $query="select * from score order by score desc";
+
+
+    $query="select * from score where (date = " . $_POST['date'] . " or date = 9999) and (difficulty=" . $_POST['difficulty'] .  ") order by score desc limit 1";
+    //$query="select * from score where (date = 910 or date = 9999) and (difficulty=1) order by score desc limit 1";
+
+    
     $stmt = $con->prepare($query);
     $stmt -> execute();
 	$result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
     
-	$json=json_encode($result);
 
-//    $score_array = array();
-
-//    foreach($result as $row){
-//		$score_array[] =$row["userinfo"];
-//    	$score_array[] =$row["date"];
-//		$score_array[] =$row["score"];    	
-//		$score_array[] =$row["ID"];    	
-//		$score_array[] =$row["difficulty"];    
-//	}
-		//配列の文字列結合のための関数
-//	$score=implode(",",$score_array);
-
+	    $json=json_encode($result);
     
     
-    }
+}
 //catchの中に例外処理
 catch(PDOEException $Exception){
     die('接続エラー'.$Exception->getMessage());

@@ -27,11 +27,10 @@ if(isset( $_POST['userinfo'])
 	$user = 'root';
 	$password = '';
 	$con =new PDO($dsn,$user,$password);
-//insert into score values(' $userinfo ' , $date , $score , $ID , $difficulty);
 
-    $query=  "insert into score values(' ";
+    $query=  "insert into score values('";
 	$query.= $_POST['userinfo'];	
-	$query.= " ', ";
+	$query.= "', ";
  	$query.= $_POST['date']; 		
 	$query.= " , "; 
 	$query.= $_POST['score']; 	
@@ -39,6 +38,8 @@ if(isset( $_POST['userinfo'])
 	$query.= $_POST['ID']; 		
 	$query.= " , "; 
 	$query.= $_POST['difficulty'] . ")";
+	
+	//$query="insert into score values('init' , 9999 , 0 , 0 , 1)";
 	
     $stmt = $con->prepare($query);
     $stmt -> execute();
