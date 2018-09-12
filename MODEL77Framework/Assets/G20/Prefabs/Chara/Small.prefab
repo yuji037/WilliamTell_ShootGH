@@ -3655,7 +3655,7 @@ MonoBehaviour:
   damageReceiver:
     receiveType: 0
     HeadRate: 5
-  speed: 1.5
+  speed: 2
   isSuperArmor: 0
 --- !u!114 &114282343669644676
 MonoBehaviour:
