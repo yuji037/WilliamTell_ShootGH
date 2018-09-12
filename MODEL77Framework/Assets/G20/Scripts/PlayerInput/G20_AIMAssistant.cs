@@ -27,12 +27,4 @@ public class G20_AIMAssistant
             nearest_diff= diffVec;
         };
     }
-    public void AimasistvalueSet()
-    {
-
-        float assistlate = 1 - ((float)(G20_Score.GetInstance().Score + 1) / (float)G20_BulletShooter.GetInstance().ShotCount);
-        if (assistlate < 0) assistlate = 0;
-
-        G20_BulletShooter.GetInstance().aimAssistValue = G20_BulletShooter.GetInstance().aimAssistValueMax * assistlate;
-    }
 }
