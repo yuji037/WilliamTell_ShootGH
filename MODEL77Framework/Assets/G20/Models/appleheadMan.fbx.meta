@@ -54,6 +54,8 @@ ModelImporter:
     100092: upArm_jnt_R
     100094: upLeg_jnt_L
     100096: upReg_jnt_R
+    100098: apple_mesh_motion
+    100100: body_mesh_motion
     400000: ankle_jnt_L
     400002: ankle_jnt_R
     400004: apple_mesh
@@ -103,8 +105,12 @@ ModelImporter:
     400092: upArm_jnt_R
     400094: upLeg_jnt_L
     400096: upReg_jnt_R
+    400098: apple_mesh_motion
+    400100: body_mesh_motion
     4300000: body_mesh
     4300002: apple_mesh
+    4300004: body_mesh_motion
+    4300006: apple_mesh_motion
     7400000: stand
     7400002: run
     7400004: jump
@@ -112,6 +118,8 @@ ModelImporter:
     9500000: //RootNode
     13700000: apple_mesh
     13700002: body_mesh
+    13700004: apple_mesh_motion
+    13700006: body_mesh_motion
   materials:
     importMaterials: 1
     materialName: 0

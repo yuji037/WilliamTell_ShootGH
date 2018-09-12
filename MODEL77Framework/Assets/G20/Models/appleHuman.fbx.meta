@@ -58,6 +58,8 @@ ModelImporter:
     100100: upArm_jnt_R
     100102: upLeg_jnt_L
     100104: upReg_jnt_R
+    100106: apple_mesh_motion
+    100108: body_mesh_motion
     400000: ankle_jnt_L
     400002: ankle_jnt_R
     400004: apple_mesh
@@ -111,8 +113,12 @@ ModelImporter:
     400100: upArm_jnt_R
     400102: upLeg_jnt_L
     400104: upReg_jnt_R
+    400106: apple_mesh_motion
+    400108: body_mesh_motion
     4300000: body_mesh
     4300002: apple_mesh
+    4300004: body_mesh_motion
+    4300006: apple_mesh_motion
     7400000: stand_human
     7400002: wark
     7400004: stance
@@ -125,6 +131,8 @@ ModelImporter:
     9500000: //RootNode
     13700000: apple_mesh
     13700002: body_mesh
+    13700004: apple_mesh_motion
+    13700006: body_mesh_motion
   materials:
     importMaterials: 1
     materialName: 0
@@ -141,7 +149,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -293,7 +301,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
