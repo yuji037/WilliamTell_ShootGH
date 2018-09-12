@@ -10,6 +10,7 @@ public class G20_PlayDebugger : MonoBehaviour
     [SerializeField] G20_HitEmpty replayObj;
     [SerializeField] G20_HitEmpty minusSpeed;
     [SerializeField] G20_HitEmpty plusSpeed;
+    [SerializeField] G20_HitEmpty gameEnd;
     [SerializeField] TextMesh speedTextMesh;
     [SerializeField] G20_EnemyPopper popper;
     [SerializeField] G20_HitDebugToggle debugObjToggle;
@@ -30,7 +31,14 @@ public class G20_PlayDebugger : MonoBehaviour
         cheatShotObj.toggleAction += ChangeCheatShoot;
         skipObj.toggleAction += ChangeIsSkipIngamePerformance;
         debugObjToggle.toggleAction += ChangeAllActive;
-        replayObj.hitAction += () => {Time.timeScale=1.0f; G20_ReloadScene.GetInstance().ReloadScene(); };
+        replayObj.hitAction += () => { Time.timeScale = 1.0f; G20_ReloadScene.GetInstance().ReloadScene(); };
+        gameEnd.hitAction += () =>
+        {
+            if (G20_StageManager.GetInstance().nowStageBehaviour)
+            {
+                G20_StageManager.GetInstance().nowStageBehaviour.EndStage();
+            }
+        };
         minusSpeed.hitAction += () =>
          {
              popper.onPopSpeedBuffValue -= 0.1f;
@@ -55,15 +63,15 @@ public class G20_PlayDebugger : MonoBehaviour
     }
     void ChangeAllActive(bool _active)
     {
-            foreach (var i in ActiveObjects)
-            {
-                i.SetActive(_active);
-            }
-            foreach (var i in DeActiveObjects)
-            {
-                i.SetActive(!_active);
-            }
-     
+        foreach (var i in ActiveObjects)
+        {
+            i.SetActive(_active);
+        }
+        foreach (var i in DeActiveObjects)
+        {
+            i.SetActive(!_active);
+        }
+
         if (_active)
         {
             Time.timeScale = 0f;

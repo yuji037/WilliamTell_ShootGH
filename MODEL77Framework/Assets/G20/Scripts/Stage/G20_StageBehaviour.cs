@@ -120,7 +120,13 @@ public class G20_StageBehaviour : MonoBehaviour
     {
         updateCall = callCount;
     }
-
+    //デバッグ用
+    public void EndStage()
+    {
+        sequenceCounter = popSequenceList.Length;
+        G20_GameManager.GetInstance().StartGesslerBattle();
+        Debug.Log("ゲスラー戦");
+    }
     // Update is called once per frame
     void Update()
     {
