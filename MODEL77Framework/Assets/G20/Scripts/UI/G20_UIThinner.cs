@@ -2,12 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class G20_UIThinner : MonoBehaviour {
+public class G20_UIThinner : MonoBehaviour
+{
     [SerializeField] Vector3 halfBox;
-    [SerializeField] CanvasGroup paramGroup;
-    [SerializeField] float hittingAlpha=0.5f;
+    [SerializeField] Image[] paramImages;
+    [SerializeField] Color changeColor;
+    Color[] defaultColors;
     private void Start()
     {
+        defaultColors = new Color[paramImages.Length];
+        for(int i=0;i<defaultColors.Length;i++)
+        {
+            defaultColors[i]=paramImages[i].color;
+        }
         G20_GameManager.GetInstance().ChangedStateAction += StartRoutine;
     }
     void StartRoutine(G20_GameState _state)
@@ -23,8 +30,8 @@ public class G20_UIThinner : MonoBehaviour {
         {
             //インゲームじゃなかったら終了
             if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME) yield break;
-            var colliders=Physics.OverlapBox(transform.position,halfBox,transform.rotation);
-            bool isHit=false;
+            var colliders = Physics.OverlapBox(transform.position, halfBox, transform.rotation);
+            bool isHit = false;
             foreach (var col in colliders)
             {
                 if (col.GetComponent<G20_HitDamage>())
@@ -35,14 +42,21 @@ public class G20_UIThinner : MonoBehaviour {
             }
             if (isHit)
             {
-                paramGroup.alpha= hittingAlpha;
+                foreach (var i in paramImages)
+                {
+                    i.color = changeColor;
+                }
             }
             else
             {
-                paramGroup.alpha = 1.0f;
+
+                for (int i =0;i<paramImages.Length;i++)
+                {
+                    paramImages[i].color = defaultColors[i];
+                }
             }
             yield return new WaitForSeconds(0.5f);
         }
     }
-    
+
 }
