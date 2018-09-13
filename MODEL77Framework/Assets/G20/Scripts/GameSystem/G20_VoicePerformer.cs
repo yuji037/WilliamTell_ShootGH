@@ -85,4 +85,11 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
         //uiSerifuAnim.CrossFade("Serifu_FadeOut", 0f);
     }
 
+    public void PlayIngame(int voiceNumber)
+    {
+        // 字幕表示しないボイス再生
+        G20_SEType seType = G20_SEType.VOICE0 + voiceNumber;
+        var sePlayer = G20_SEManager.GetInstance().Play(seType, Vector3.zero, false);
+    }
+
 }

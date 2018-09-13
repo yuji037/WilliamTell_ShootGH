@@ -1882,9 +1882,9 @@ MonoBehaviour:
   attackRange: 3
   deathposition_y: -2
   deathvec: {x: 0, y: -2, z: 0}
-  attacktime: 1
+  attacktime: 0.2
   changePhase: 5
-  rotationTime: 1
+  rotationTime: 0.5
   rot: 80
   bombrot_speed: 100
   rotspeed: 0.3
@@ -2041,9 +2041,9 @@ MonoBehaviour:
   attackRange: 3
   deathposition_y: -2
   deathvec: {x: 0, y: -2, z: 0}
-  attacktime: 1
+  attacktime: 0.2
   changePhase: 5
-  rotationTime: 1
+  rotationTime: 0.5
   bombrot_speed: 100
   bomb: {fileID: 114091790049258610}
 --- !u!114 &114902284250548846

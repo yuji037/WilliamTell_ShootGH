@@ -117,7 +117,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 1.5f);
 
         // セリフ再生と字幕表示
-        G20_VoicePerformer.GetInstance().Play(0);
+        //G20_VoicePerformer.GetInstance().Play(0);
 
         yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 4.5f);
 
@@ -250,7 +250,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         Time.timeScale = 1f;
         Debug.Log("ゲームエンド。フレームワークに処理を返します。");
         _gameController.GameEnd();
-        G20_ReloadScene.GetInstance().ReloadScene();
+        //G20_ReloadScene.GetInstance().ReloadScene();
         //GameObject.Find("GameManager").GetComponent<GameController>().GameEnd();
     }
 }

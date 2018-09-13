@@ -91,7 +91,8 @@ public class G20_BombStraightAI : G20_AI
 
         bomb.Bombthrow(attackRange, enemy.Attack);
         bomb.transform.parent = enemy.transform.parent;
-        
+
+        //yield return new WaitForSeconds(1);
        
     }
 
