@@ -40,13 +40,7 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
             G20_GameManager.GetInstance().ChangedStateAction += Scorereceive;
         }
 
-        scoreSendAdress = adress + ip + dir + scoreSendFile;
-        Debug.Log("スコア送信アドレス : " + scoreSendAdress);
-        scoreReceiveAdress = adress + ip + dir + scoreReceiveFile;
-        Debug.Log("スコア受信アドレス : " + scoreReceiveAdress);
-        IDReceiveAdress = adress + ip + dir + IDReceiveFile;
-        Debug.Log("ID受信アドレス : " + IDReceiveAdress);
-        date = DateTime.Now.Month * 100 + DateTime.Now.Day;
+        
         
     }
 
@@ -74,10 +68,21 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
 
         Debug.Log("接続先IP : " + www.text);
 
-        if (string.IsNullOrEmpty(ip))
-        {
+
+        yield return null;
+
+        //if (string.IsNullOrEmpty(ip))
+        //{
             ip = www.text;
-        }
+        //}
+
+        scoreSendAdress = adress + ip + dir + scoreSendFile;
+        Debug.Log("スコア送信アドレス : " + scoreSendAdress);
+        scoreReceiveAdress = adress + ip + dir + scoreReceiveFile;
+        Debug.Log("スコア受信アドレス : " + scoreReceiveAdress);
+        IDReceiveAdress = adress + ip + dir + IDReceiveFile;
+        Debug.Log("ID受信アドレス : " + IDReceiveAdress);
+        date = DateTime.Now.Month * 100 + DateTime.Now.Day;
 
         yield return null;
         IDReceive();
