@@ -50,9 +50,13 @@ public class G20_BGMManager : G20_Singleton<G20_BGMManager> {
     [SerializeField]
     Dictionary<int, AudioClip> bgmClips = new Dictionary<int, AudioClip>();
 
+    float defaultVolume = 1.0f;
+    AudioSource audioSource;
+
     protected override void Awake()
     {
         base.Awake();
+        audioSource = GetComponent<AudioSource>();
         foreach ( G20_BGMType i in Enum.GetValues(typeof(G20_BGMType)) )
         {
             string resourcesName = "G20/BGM/" + i.GetTypeName();
@@ -60,11 +64,12 @@ public class G20_BGMManager : G20_Singleton<G20_BGMManager> {
 
             bgmClips.Add((int)i, (AudioClip)Resources.Load(resourcesName, typeof(AudioClip)));
         }
+        defaultVolume = audioSource.volume;
     }
 
     public void Play(G20_BGMType bgmType)
     {
-        var audioSource = GetComponent<AudioSource>();
+        if(!audioSource) audioSource = GetComponent<AudioSource>();
         audioSource.clip = bgmClips[(int)bgmType];
 
         bool isLoopPlay = !( bgmType == G20_BGMType.CLEAR || bgmType == G20_BGMType.GAMEOVER );
@@ -74,7 +79,7 @@ public class G20_BGMManager : G20_Singleton<G20_BGMManager> {
 
     public void Stop()
     {
-        GetComponent<AudioSource>().Stop();
+        audioSource.Stop();
     }
 
     public void FadeOut()
@@ -84,7 +89,6 @@ public class G20_BGMManager : G20_Singleton<G20_BGMManager> {
 
     public IEnumerator FadeOutCoroutine()
     {
-        var audioSource = GetComponent<AudioSource>();
         float startVolume = audioSource.volume;
 
         for (float t = fadeOutSpan; t > 0; t-=Time.deltaTime )
@@ -96,5 +100,30 @@ public class G20_BGMManager : G20_Singleton<G20_BGMManager> {
         audioSource.volume = 0.0f;
         audioSource.Stop();
         audioSource.volume = startVolume;
+    }
+
+    public void VolumeDown(float length)
+    {
+        StartCoroutine(VolumeDownCoroutine(length));
+    }
+
+    IEnumerator VolumeDownCoroutine(float length)
+    {
+        float downFadeTime = 0.1f;
+        float fadeTime = 0.4f;
+        float downedVolume = 0.2f;
+        for(float t = 0; t < downFadeTime; t += Time.deltaTime )
+        {
+            audioSource.volume = defaultVolume * ( ( downFadeTime - t ) / downFadeTime ) + downedVolume * ( t / downFadeTime );
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(length);
+
+        for ( float t = 0; t < fadeTime; t += Time.deltaTime )
+        {
+            audioSource.volume = defaultVolume * ( ( t ) / fadeTime ) + downedVolume * ( ( fadeTime - t ) / fadeTime );
+            yield return null;
+        }
     }
 }

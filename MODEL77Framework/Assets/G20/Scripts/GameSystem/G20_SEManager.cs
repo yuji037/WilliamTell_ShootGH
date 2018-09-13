@@ -128,4 +128,9 @@ public class G20_SEManager : G20_Singleton<G20_SEManager> {
 
         return audioSource;
     }
+
+    public float GetClipLength(G20_SEType seType)
+    {
+        return seClips[(int)seType].length;
+    }
 }

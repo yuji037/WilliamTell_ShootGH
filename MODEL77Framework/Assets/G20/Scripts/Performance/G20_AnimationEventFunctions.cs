@@ -11,6 +11,6 @@ public class G20_AnimationEventFunctions : MonoBehaviour {
 
     public void PlayVoice(int num)
     {
-        G20_VoicePerformer.GetInstance().Play((G20_VoiceType)num);
+        G20_VoicePerformer.GetInstance().PlayWithSubtitle((G20_VoiceType)num);
     }
 }

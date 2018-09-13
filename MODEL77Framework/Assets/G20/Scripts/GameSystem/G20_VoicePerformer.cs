@@ -35,27 +35,22 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
     [SerializeField]
     Animator uiSerifuAnim;
 
-    Text serifuText;
+    //Text serifuText;
 
     [SerializeField]
     G20_CaptionPerformer captionPerformer;
 
 	// Use this for initialization
 	void Start () {
-        serifuText = uiSerifuAnim.GetComponentInChildren<Text>();
+        //serifuText = uiSerifuAnim.GetComponentInChildren<Text>();
 	}
 
-    // ボイス番号0～最大まで
-    public void Play(int voiceNumber)
-    {
-        StartCoroutine(PlayCoroutine(voiceNumber));
-    }
-
-    public void Play(G20_VoiceType voiceType)
+    // 字幕表示含む再生
+    public void PlayWithSubtitle(G20_VoiceType voiceType)
     {
         StartCoroutine(PlayCoroutine((int)voiceType));
     }
-
+    
     IEnumerator PlayCoroutine(int voiceNumber)
     {
         //// 改行処理
@@ -85,11 +80,22 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
         //uiSerifuAnim.CrossFade("Serifu_FadeOut", 0f);
     }
 
-    public void PlayIngame(int voiceNumber)
+    // 字幕表示なし
+    // 再生中はBGM音量下げる
+    public void PlayWithNoSubtitle(G20_VoiceType voiceNumber)
     {
         // 字幕表示しないボイス再生
-        G20_SEType seType = G20_SEType.VOICE0 + voiceNumber;
+        G20_SEType seType = G20_SEType.VOICE0 + (int)voiceNumber;
         var sePlayer = G20_SEManager.GetInstance().Play(seType, Vector3.zero, false);
+        float clipLength = G20_SEManager.GetInstance().GetClipLength(seType);
+        G20_BGMManager.GetInstance().VolumeDown(clipLength);
     }
 
+    // 字幕表示なし
+    // BGMも音量そのまま
+    // 扱いは効果音と同じ
+    public void PlayWithNoControll(G20_VoiceType voiceType)
+    {
+
+    }
 }

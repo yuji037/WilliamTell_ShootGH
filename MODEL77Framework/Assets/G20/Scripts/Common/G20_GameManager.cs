@@ -220,7 +220,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         gameState = G20_GameState.GAMEOVER;
         Time.timeScale = 0;
         G20_BGMManager.GetInstance().Play(G20_BGMType.GAMEOVER);
-        G20_VoicePerformer.GetInstance().Play(G20_VoiceType.GAME_OVER1);
+        G20_VoicePerformer.GetInstance().PlayWithSubtitle(G20_VoiceType.GAME_OVER1);
         //ゲームオーバー演出の開始
         G20_FailedPerformer.GetInstance().Excute(GameEnd);
     }

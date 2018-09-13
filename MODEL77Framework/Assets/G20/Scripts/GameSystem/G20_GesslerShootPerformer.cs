@@ -41,7 +41,7 @@ public class G20_GesslerShootPerformer : MonoBehaviour {
             yield return null;
         }
         // ゲスラー撃破
-        G20_VoicePerformer.GetInstance().Play(G20_VoiceType.GAME_CLEAR1);
+        G20_VoicePerformer.GetInstance().PlayWithSubtitle(G20_VoiceType.GAME_CLEAR1);
 
         // 「SHOOT」非表示
         foreach ( var o in activateObjs )

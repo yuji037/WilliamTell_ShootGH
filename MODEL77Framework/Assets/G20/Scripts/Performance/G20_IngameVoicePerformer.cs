@@ -8,7 +8,7 @@ public class G20_IngameVoicePerformer : G20_IngamePerformer
     public override void StartPerformance()
     {
         Debug.Log("voicePlay");
-        //G20_VoicePerformer.GetInstance().Play(voiceType);
-        G20_SEManager.GetInstance().Play((G20_SEType)( G20_SEType.VOICE0 + (int)voiceType ), Vector3.zero, false);
+        G20_VoicePerformer.GetInstance().PlayWithNoSubtitle(voiceType);
+        //G20_SEManager.GetInstance().Play((G20_SEType)( G20_SEType.VOICE0 + (int)voiceType ), Vector3.zero, false);
     }
 }
