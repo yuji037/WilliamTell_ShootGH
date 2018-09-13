@@ -103,9 +103,9 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
 
         // プレイヤー後ずさり等のアニメーション開始
         gameRootAnim.CrossFade("ToIngame", 0f);
-        paramCanvas.SetActive(true);
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(7f);
+        paramCanvas.SetActive(true);
 
         gameRootAnim.enabled = false;
         // ゲスラーふわふわアニメーション開始
@@ -119,9 +119,9 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         // セリフ再生と字幕表示
         //G20_VoicePerformer.GetInstance().Play(0);
 
-        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 3.5f);
+        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 2.5f);
 
-        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 1.0f);
+        //yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 1.0f);
         // 戦闘開始
         G20_BulletShooter.GetInstance().CanShoot = true;
         gameState = G20_GameState.INGAME;

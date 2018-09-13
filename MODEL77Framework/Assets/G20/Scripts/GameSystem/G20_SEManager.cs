@@ -17,6 +17,7 @@ public enum G20_SEType {
     WALK_WEAK,
     WALK_STRONG,
     WALK_STOP,
+    FOREST,
     TEST_VOICE,
     VOICE0,
     VOICE1,
@@ -81,6 +82,9 @@ public static class G20_SEExt {
                 break;
             case G20_SEType.WALK_STOP:
                 retStr = "walk_stop";
+                break;
+            case G20_SEType.FOREST:
+                retStr = "forest_BGM";
                 break;
             case G20_SEType.TEST_VOICE:
                 retStr = "test_voice";
