@@ -100,12 +100,12 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         // 環境光は別のコルーチンで遷移
         StartCoroutine(LightSettingCoroutine());
 
-        paramCanvas.SetActive(true);
 
         // プレイヤー後ずさり等のアニメーション開始
         gameRootAnim.CrossFade("ToIngame", 0f);
+        paramCanvas.SetActive(true);
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(5f);
 
         gameRootAnim.enabled = false;
         // ゲスラーふわふわアニメーション開始
@@ -119,8 +119,9 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         // セリフ再生と字幕表示
         //G20_VoicePerformer.GetInstance().Play(0);
 
-        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 4.5f);
+        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 3.5f);
 
+        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 1.0f);
         // 戦闘開始
         G20_BulletShooter.GetInstance().CanShoot = true;
         gameState = G20_GameState.INGAME;
@@ -220,7 +221,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         gameState = G20_GameState.GAMEOVER;
         Time.timeScale = 0;
         G20_BGMManager.GetInstance().Play(G20_BGMType.GAMEOVER);
-        G20_VoicePerformer.GetInstance().PlayWithSubtitle(G20_VoiceType.GAME_OVER1);
+        G20_VoicePerformer.GetInstance().PlayWithCaption(G20_VoiceType.GAME_OVER1);
         //ゲームオーバー演出の開始
         G20_FailedPerformer.GetInstance().Excute(GameEnd);
     }

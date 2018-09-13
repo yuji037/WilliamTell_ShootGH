@@ -46,7 +46,7 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
 	}
 
     // 字幕表示含む再生
-    public void PlayWithSubtitle(G20_VoiceType voiceType)
+    public void PlayWithCaption(G20_VoiceType voiceType)
     {
         StartCoroutine(PlayCoroutine((int)voiceType));
     }
@@ -71,18 +71,17 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
 
         //uiSerifuAnim.CrossFade("Serifu_FadeIn", 0f);
         captionPerformer.StartPerformance(serifuList[voiceNumber]);
-        yield return new WaitForSeconds(2);
-        while ( sePlayer.isPlaying )
-        {
-            yield return null;
-        }
+        float seLength = G20_SEManager.GetInstance().GetClipLength(seType);
+        float minLength = 1.0f;
+        float displayCaptionLength = Mathf.Max(minLength, seLength - 1.0f);
+        yield return new WaitForSeconds(displayCaptionLength);
         captionPerformer.StopPerformance();
         //uiSerifuAnim.CrossFade("Serifu_FadeOut", 0f);
     }
 
     // 字幕表示なし
     // 再生中はBGM音量下げる
-    public void PlayWithNoSubtitle(G20_VoiceType voiceNumber)
+    public void PlayWithNoCaption(G20_VoiceType voiceNumber)
     {
         // 字幕表示しないボイス再生
         G20_SEType seType = G20_SEType.VOICE0 + (int)voiceNumber;

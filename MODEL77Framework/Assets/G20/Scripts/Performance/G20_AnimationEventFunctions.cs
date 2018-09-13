@@ -6,11 +6,11 @@ public class G20_AnimationEventFunctions : MonoBehaviour {
     
     public void PlaySE(int num)
     {
-        G20_SEManager.GetInstance().Play(G20_SEType.TEST_VOICE, Vector3.zero, false);
+        G20_SEManager.GetInstance().Play((G20_SEType)num, Vector3.zero, false);
     }
 
-    public void PlayVoice(int num)
+    public void PlayVoiceWithCaption(int num)
     {
-        G20_VoicePerformer.GetInstance().PlayWithSubtitle((G20_VoiceType)num);
+        G20_VoicePerformer.GetInstance().PlayWithCaption((G20_VoiceType)num);
     }
 }

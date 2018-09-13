@@ -11,6 +11,12 @@ public enum G20_SEType {
     SUMMON_APPLE,
     BOMB,
     APPLE_FALL,
+    GESSLER_FLIGHT,
+    PLAYER_DAMAGE,
+    SMALL_APPLE_ATTACK,
+    WALK_WEAK,
+    WALK_STRONG,
+    WALK_STOP,
     TEST_VOICE,
     VOICE0,
     VOICE1,
@@ -57,6 +63,24 @@ public static class G20_SEExt {
                 break;
             case G20_SEType.APPLE_FALL:
                 retStr = "apple_fall";
+                break;
+            case G20_SEType.GESSLER_FLIGHT:
+                retStr = "gesura-flight";
+                break;
+            case G20_SEType.PLAYER_DAMAGE:
+                retStr = "player_damage";
+                break;
+            case G20_SEType.SMALL_APPLE_ATTACK:
+                retStr = "smallapple_attack";
+                break;
+            case G20_SEType.WALK_WEAK:
+                retStr = "walk_weak";
+                break;
+            case G20_SEType.WALK_STRONG:
+                retStr = "walk_strong";
+                break;
+            case G20_SEType.WALK_STOP:
+                retStr = "walk_stop";
                 break;
             case G20_SEType.TEST_VOICE:
                 retStr = "test_voice";
