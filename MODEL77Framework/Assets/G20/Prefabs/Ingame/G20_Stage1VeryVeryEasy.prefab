@@ -130,7 +130,8 @@ MonoBehaviour:
     conditionToNextSequence: 1
     conditionValue: 30
     speedBuffValue: -0.45
-    InGamePerformer: {fileID: 0}
+    InGamePerformer: {fileID: 1771258280347622, guid: afb59b635b9663d439a16954a0ae1c4e,
+      type: 2}
   - sequencePopType: 0
     addEnemyCueList:
     - enemyType: 5
@@ -194,7 +195,8 @@ MonoBehaviour:
     conditionToNextSequence: 0
     conditionValue: 0
     speedBuffValue: 0
-    InGamePerformer: {fileID: 0}
+    InGamePerformer: {fileID: 1735883093269054, guid: cc69c9b83442fdf45bc8794d9bede135,
+      type: 2}
   paternA:
     cueList:
     - enemyType: 4
