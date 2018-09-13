@@ -91,8 +91,8 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         yourScore.text = score.ToString();
         if (G20_NetworkManager.GetInstance().is_network)
         {
-            creatorsHighScore.text = G20_NetworkManager.GetInstance().userData.scoreList[0].score;
-            dailyHighScore.text = "100";//後日入れるかどうするか悩み中
+            creatorsHighScore.text = "100";//後日入れるかどうするか悩み中
+            dailyHighScore.text = G20_NetworkManager.GetInstance().userData.scoreList[0].score;
         }
         else
         {

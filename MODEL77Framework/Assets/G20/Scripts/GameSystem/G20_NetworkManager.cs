@@ -92,7 +92,7 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
             StartCoroutine(ScoreReceiveCoroutine());
         }
     }
-    //難易度、日付に沿った最高スコア取得
+    //難易度、その日の最高スコア取得
     IEnumerator ScoreReceiveCoroutine()
     {
         Debug.Log("スコア表受信開始 " 
