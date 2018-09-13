@@ -21,7 +21,7 @@ public class G20_GesslerShootPerformer : MonoBehaviour {
         anim.enabled = true;
         anim.CrossFade("ToGesslerBattle", 0.3f);
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.9f);
         anim.enabled = false;
 
         // 「SHOOT」表示

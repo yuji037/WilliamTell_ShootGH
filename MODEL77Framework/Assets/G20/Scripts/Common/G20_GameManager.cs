@@ -119,7 +119,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         // セリフ再生と字幕表示
         //G20_VoicePerformer.GetInstance().Play(0);
 
-        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 2.5f);
+        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 2f);
 
         //yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 1.0f);
         // 戦闘開始
@@ -236,6 +236,9 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     public void GameClear()
     {
         gameState = G20_GameState.CLEAR;
+        gameRootAnim.enabled = true;
+        gameRootAnim.CrossFade("ToClear", 0.1f);
+        StartCoroutine(RootAnimOff(2f));
 
         // 敵（残ってれば）全滅
         G20_EnemyCabinet.GetInstance().KillAllEnemys();
@@ -244,6 +247,12 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
 
         // クリア演出の開始
         G20_ClearPerformer.GetInstance().Excute(GameEnd);
+    }
+
+    IEnumerator RootAnimOff(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        gameRootAnim.enabled = false;
     }
 
     public void GameEnd()
