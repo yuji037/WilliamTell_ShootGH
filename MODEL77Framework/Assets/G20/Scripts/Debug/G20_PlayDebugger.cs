@@ -10,9 +10,7 @@ public class G20_PlayDebugger : MonoBehaviour
     [SerializeField] GameObject[] DeActiveObjects;
     [SerializeField] Text AIMText;
     [SerializeField] Text EnemySpeedText;
-    [SerializeField] Text InvinText;
-    [SerializeField] Text CheetShotText;
-    [SerializeField] Text Description;
+    [SerializeField] Text ShotCountText;
     bool DebugActive;
 
     private void Awake()
@@ -123,6 +121,7 @@ public class G20_PlayDebugger : MonoBehaviour
             + "AMAX : " + G20_BulletShooter.GetInstance().param.MaxValue + "\n" 
             + "AOne : " + G20_BulletShooter.GetInstance().param.OneChangeValue + "\n"
             + "ADefault : " + G20_BulletShooter.GetInstance().param.DefaultValue+"\n";
+        ShotCountText.text = "ShotCount : "+G20_BulletShooter.GetInstance().ShotCount;
 
     }
 }

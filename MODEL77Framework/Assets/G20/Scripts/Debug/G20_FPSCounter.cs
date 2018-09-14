@@ -9,7 +9,7 @@ public class G20_FPSCounter : MonoBehaviour
     [SerializeField]float showFPSDuration;
     Coroutine fpsCoroutine;
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         StartCoroutine(CountFPS());
     }

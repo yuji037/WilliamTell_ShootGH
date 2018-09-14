@@ -32,8 +32,7 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
     [SerializeField]
     string[] serifuList;
 
-    [SerializeField]
-    Animator uiSerifuAnim;
+
 
     //Text serifuText;
 
@@ -69,14 +68,12 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
 
         var sePlayer = G20_SEManager.GetInstance().Play(seType, Vector3.zero, false);
 
-        //uiSerifuAnim.CrossFade("Serifu_FadeIn", 0f);
         captionPerformer.StartPerformance(serifuList[voiceNumber]);
         float seLength = G20_SEManager.GetInstance().GetClipLength(seType);
         float minLength = 1.0f;
         float displayCaptionLength = Mathf.Max(minLength, seLength - 1.0f);
         yield return new WaitForSeconds(displayCaptionLength);
         captionPerformer.StopPerformance();
-        //uiSerifuAnim.CrossFade("Serifu_FadeOut", 0f);
     }
 
     // 字幕表示なし

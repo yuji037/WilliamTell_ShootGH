@@ -59,14 +59,14 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
         Vector2? shotPoint = null;
 
         shotPoint = G20_InputPointGetter.GetInstance().GetInputPoint();
+        
+        if (shotPoint != null) shotCount++;
         if (isCheating && shotPoint == null)
         {
             shotPoint = G20_CheatShoot.GetInstance().GetEnemyHeadPoint();
         }
         if (CanShoot && shotPoint != null)
         {
-
-            shotCount++;
 
             Vector3 hitPoint = Vector3.zero;
             //AIM補正
