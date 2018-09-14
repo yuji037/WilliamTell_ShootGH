@@ -5,64 +5,24 @@ using UnityEngine.UI;
 public class G20_PlayDebugger : MonoBehaviour
 {
     [SerializeField] G20_Player player;
-    [SerializeField] G20_HitDebugToggle invinObj;
-    [SerializeField] G20_HitDebugToggle cheatShotObj;
-    [SerializeField] G20_HitEmpty replayObj;
-    [SerializeField] G20_HitEmpty minusSpeed;
-    [SerializeField] G20_HitEmpty plusSpeed;
-    [SerializeField] G20_HitEmpty gameEnd;
-    [SerializeField] TextMesh speedTextMesh;
     [SerializeField] G20_EnemyPopper popper;
-    [SerializeField] G20_HitDebugToggle debugObjToggle;
     [SerializeField] GameObject[] ActiveObjects;
     [SerializeField] GameObject[] DeActiveObjects;
-
-    [SerializeField] G20_HitEmpty stageSelectObj;
-    [SerializeField] TextMesh stageNameTextMesh;
-    [SerializeField] GameObject[] stagePrefabs;
-    G20_StageManager stageManager;
-    int stageIndex = 0;
-
-    [SerializeField] G20_HitDebugToggle skipObj;
+    [SerializeField] Text AIMText;
+    [SerializeField] Text EnemySpeedText;
+    [SerializeField] Text InvinText;
+    [SerializeField] Text CheetShotText;
+    [SerializeField] Text Description;
+    bool DebugActive;
 
     private void Awake()
     {
-        invinObj.toggleAction += ChangePlayerInvin;
-        cheatShotObj.toggleAction += ChangeCheatShoot;
-        skipObj.toggleAction += ChangeIsSkipIngamePerformance;
-        debugObjToggle.toggleAction += ChangeAllActive;
-        replayObj.hitAction += () => { Time.timeScale = 1.0f; G20_ReloadScene.GetInstance().ReloadScene(); };
-        gameEnd.hitAction += () =>
-        {
-            if (G20_StageManager.GetInstance().nowStageBehaviour)
-            {
-                G20_StageManager.GetInstance().nowStageBehaviour.EndStage();
-            }
-        };
-        minusSpeed.hitAction += () =>
-         {
-             popper.onPopSpeedBuffValue -= 0.1f;
-             speedTextMesh.text = string.Format("{0:0.0}", popper.onPopSpeedBuffValue);
-         };
-        plusSpeed.hitAction += () =>
-        {
-            popper.onPopSpeedBuffValue += 0.1f;
-            speedTextMesh.text = string.Format("{0:0.0}", popper.onPopSpeedBuffValue);
-        };
-        speedTextMesh.text = string.Format("{0:0.0}", popper.onPopSpeedBuffValue);
-
-        stageManager = G20_StageManager.GetInstance();
-        stageSelectObj.hitAction += () =>
-        {
-            //stageIndex++;
-            //if ( stageIndex >= stagePrefabs.Length ) stageIndex = 0;
-            //stageManager.stageBehaviourPrefabs = stagePrefabs[stageIndex];
-            //UpdateStageNameTextMesh();
-        };
-        UpdateStageNameTextMesh();
+        DebugActivate(false);
     }
-    void ChangeAllActive(bool _active)
+
+    void DebugActivate(bool _active)
     {
+        DebugActive = _active;
         foreach (var i in ActiveObjects)
         {
             i.SetActive(_active);
@@ -71,35 +31,98 @@ public class G20_PlayDebugger : MonoBehaviour
         {
             i.SetActive(!_active);
         }
-
-        if (_active)
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F3))
         {
-            Time.timeScale = 0f;
+            DebugActivate(!DebugActive);
         }
-        else
+        if (DebugActive)
         {
-            Time.timeScale = 1.0f;
+            InputInvin();
+            InputCheatShoot();
+            InputClear();
+            InputEnemySpeed();
+            InputAIMAssist();
+            InputSaveAIM();
         }
     }
-
-    void ChangeIsSkipIngamePerformance(bool _active)
+    void InputSaveAIM()
     {
-        G20_GameManager.GetInstance().isSkipPerformance = _active;
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            G20_BulletShooter.GetInstance().SaveAIMParam();
+        }
     }
+   
+    void InputEnemySpeed()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            popper.onPopSpeedBuffValue += 0.1f;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            popper.onPopSpeedBuffValue -= 0.1f;
+        }
+        EnemySpeedText.text = string.Format("{0:0.0}", popper.onPopSpeedBuffValue);
 
-    void UpdateStageNameTextMesh()
-    {
-        //var name = stageManager.stageBehaviourPrefabs.name;
-        //name = name.Substring(9);
-        //stageNameTextMesh.text = name;
     }
+    void InputClear()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (G20_StageManager.GetInstance().nowStageBehaviour)
+            {
+                G20_StageManager.GetInstance().nowStageBehaviour.EndStage();
+            }
+        }
+    }
+    void InputInvin()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            player.IsInvincible = !player.IsInvincible;
+        }
+    }
+    void InputCheatShoot()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            G20_BulletShooter.GetInstance().isCheating = !G20_BulletShooter.GetInstance().isCheating;
+        }
+    }
+    void InputAIMAssist()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            G20_BulletShooter.GetInstance().param.MaxValue += 20;
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            G20_BulletShooter.GetInstance().param.MaxValue -= 20;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            G20_BulletShooter.GetInstance().param.OneChangeValue += 1.0f;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            G20_BulletShooter.GetInstance().param.OneChangeValue -= 1.0f;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            G20_BulletShooter.GetInstance().param.DefaultValue += 10.0f;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            G20_BulletShooter.GetInstance().param.DefaultValue -= 10.0f;
+        }
+        AIMText.text = "A : " + G20_BulletShooter.GetInstance().aimAssistValue + "\n" 
+            + "AMAX : " + G20_BulletShooter.GetInstance().param.MaxValue + "\n" 
+            + "AOne : " + G20_BulletShooter.GetInstance().param.OneChangeValue + "\n"
+            + "ADefault : " + G20_BulletShooter.GetInstance().param.DefaultValue+"\n";
 
-    void ChangePlayerInvin(bool _active)
-    {
-        player.IsInvincible = _active;
-    }
-    void ChangeCheatShoot(bool _active)
-    {
-        G20_BulletShooter.GetInstance().isCheating = _active;
     }
 }

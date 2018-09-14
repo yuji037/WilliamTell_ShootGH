@@ -12,7 +12,7 @@ where T : G20_Singleton<T>
     //debug用
     static T Instance
     {
-        set { instance = value; Debug.Log("新しくSingletonの" + value + "が作成されました。"); }
+        set { instance = value;}
         get { return instance; }
     }
     public static T GetInstance()
