@@ -9,12 +9,10 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
     public G20_SQLModel userData;
 
     string userIDstr;
-    public int userID;//いらないかも　一応まだ残しとく
 
     [SerializeField] string adress = "http://";
-
     [SerializeField,Header("ビルド時は空にする")] string ip = "192.168.40.129";
-    [SerializeField] string dir = "/gp17op17/WT/";
+    [SerializeField] string dir = "/WT/";
     [SerializeField] string scoreSendFile = "ScoreReceive.php";
     [SerializeField] string scoreReceiveFile = "ScoreSend.php";
     [SerializeField] string IDReceiveFile = "IDSend.php";
@@ -24,7 +22,6 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
     string scoreReceiveAdress;
     string IDReceiveAdress;
 
-    bool scoreSendComp = false;
 
     int date;
 
@@ -39,24 +36,12 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
             G20_GameManager.GetInstance().ChangedStateAction += Scoresend;
             G20_GameManager.GetInstance().ChangedStateAction += Scorereceive;
         }
-
-        
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME) scoreSendComp = false;
-
-
-        Debug.Log("send:" + scoreSendComp);
-    }
-
-    ////////////////↓受信系↓////////////////////////////
+    ////////////////↓受信系↓///////////////////////////////////////////////////
     void IPReceive()
     {
-        
         StartCoroutine(IPReceiveCoroutine());
     }
 
@@ -71,10 +56,11 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
 
         yield return null;
 
-        //if (string.IsNullOrEmpty(ip))
-        //{
+        if (string.IsNullOrEmpty(ip))
+        {
             ip = www.text;
-        //}
+        }
+        
 
         scoreSendAdress = adress + ip + dir + scoreSendFile;
         Debug.Log("スコア送信アドレス : " + scoreSendAdress);
@@ -106,6 +92,9 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
         WWWForm form = new WWWForm();
         form.AddField("date", date);
         form.AddField("difficulty", (int)G20_StageManager.GetInstance().stageType);
+
+        Debug.Log("スコア受信アドレス : " + scoreReceiveAdress);
+
 
         WWW www = new WWW(scoreReceiveAdress, form);
         yield return www;

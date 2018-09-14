@@ -91,13 +91,13 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         yourScore.text = score.ToString();
         if (G20_NetworkManager.GetInstance().is_network)
         {
-            creatorsHighScore.text = "100";//後日入れるかどうするか悩み中
+            creatorsHighScore.text = "110";//後日入れるかどうするか悩み中
             dailyHighScore.text = G20_NetworkManager.GetInstance().userData.scoreList[0].score;
         }
         else
         {
-            creatorsHighScore.text = "0";
-            dailyHighScore.text = "0";
+            creatorsHighScore.text = "110";
+            dailyHighScore.text = "110";
         }
         
         yield return new WaitForSeconds(6.5f);
