@@ -58,14 +58,18 @@ public class G20_ScoreApplePopper : G20_Singleton<G20_ScoreApplePopper> {
 
     public void PopSameAppleWithEnemy(G20_EnemyType enemyType)
     {
-        int positionNumber = 0;
         G20_ScoreAppleType appleType = G20_ScoreAppleType.APPLE;
 
         if (    enemyType == G20_EnemyType.GOLDEN
             ||  enemyType == G20_EnemyType.GOLDEN_STRAIGHT )
             appleType = G20_ScoreAppleType.GOLDEN;
 
+        PopApple(appleType);
+    }
 
+    public void PopApple(G20_ScoreAppleType appleType)
+    {
+        int positionNumber = 0;
         if ( SearchEmptyPosition(out positionNumber) )
         {
             var obj = Instantiate(scoreApplePrefabs[(int)appleType], popPositions[positionNumber].transform);
