@@ -92,7 +92,18 @@ public class G20_StageBehaviour : MonoBehaviour
     int sequenceCounter = 0;
     int paternCueCounter = 0;
 
-    float popTimer = 0;
+    float popTimer = 0f;
+    float scoreApplePopTimer = 0f;
+
+    [SerializeField]
+    float scoreApplePopInterval = 3.0f;
+
+    // スコアアップルはステージ終了間際ではポップさせない
+    float scoreAppleCanPopTimeMin = 10f;
+    int scoreApplePaternCueCounter = 0;
+
+    [SerializeField]
+    G20_ScoreAppleType[] scoreApplePatern;
 
     G20_GameManager gameManager;
 
@@ -110,6 +121,8 @@ public class G20_StageBehaviour : MonoBehaviour
         popPositions = enemyPopper.transform.GetComponentsInChildren<G20_EnemyPopPosition>();
         Array.Sort(popPositions, (a, b) => a.number - b.number);
         gameManager = G20_GameManager.GetInstance();
+
+        scoreAppleCanPopTimeMin = stageTotalTime * 0.1f;
 
         SequenceEnter();
     }
@@ -150,6 +163,7 @@ public class G20_StageBehaviour : MonoBehaviour
         }
 
         SequenceUpdate();
+        ScoreAppleUpdate();
 
         // 状態遷移判定
         if (IsNextStateCondition())
@@ -173,6 +187,20 @@ public class G20_StageBehaviour : MonoBehaviour
             }
 
             SequenceEnter();
+        }
+    }
+
+    void ScoreAppleUpdate()
+    {
+        scoreApplePopTimer += Time.deltaTime;
+
+        if(timer > scoreAppleCanPopTimeMin
+            && scoreApplePopTimer > scoreApplePopInterval )
+        {
+            scoreApplePopTimer = 0f;
+            G20_ScoreApplePopper.GetInstance().PopApple(scoreApplePatern[scoreApplePaternCueCounter]);
+            scoreApplePaternCueCounter++;
+            if ( scoreApplePaternCueCounter >= scoreApplePatern.Length ) scoreApplePaternCueCounter = 0;
         }
     }
 
@@ -280,7 +308,7 @@ public class G20_StageBehaviour : MonoBehaviour
                 var enemy = enemyPopper.EnemyPop(cue.enemyType, _popPos);
 
                 // 同時に試しにステージ脇リンゴ生成
-                G20_ScoreApplePopper.GetInstance().PopSameAppleWithEnemy(cue.enemyType);
+                //G20_ScoreApplePopper.GetInstance().PopSameAppleWithEnemy(cue.enemyType);
 
                 // スピードバフ
                 G20_SpeedBuff speedBuff = null;
