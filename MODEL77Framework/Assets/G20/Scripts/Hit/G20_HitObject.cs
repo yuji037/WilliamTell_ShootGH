@@ -31,7 +31,7 @@ public class G20_HitObject : MonoBehaviour {
     public void ChangeHitTag(G20_HitTag hit_tag)
     {
         hitTag = hit_tag;
-        G20_HitObjectCabinet.GetInstance().ChangeTag(this);
+        G20_HitObjectCabinet.GetInstance().UpdateTagList(this);
     }
     public void ExcuteActions(Vector3 hit_point)
     {

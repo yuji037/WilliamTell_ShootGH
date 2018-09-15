@@ -9,11 +9,15 @@ public class G20_HitObjectCabinet : G20_Singleton<G20_HitObjectCabinet> {
     {
         get { return assitObjectList; }
     }
-    public void ChangeTag(G20_HitObject hit_object)
+    public void UpdateTagList(G20_HitObject hit_object)
     {
         if (assitObjectList.Contains(hit_object)&&hit_object.HitTag!=G20_HitTag.ASSIST)
         {
             assitObjectList.Remove(hit_object);
+        }
+        if (!assitObjectList.Contains(hit_object) && hit_object.HitTag==G20_HitTag.ASSIST)
+        {
+            assitObjectList.Add(hit_object);
         }
     }
     public void Add(G20_HitObject hit_object)
