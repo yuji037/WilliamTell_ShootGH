@@ -20,6 +20,8 @@ public class G20_GesslerShootPerformer : MonoBehaviour {
 
     IEnumerator GesslerShootCoroutine(System.Action on_end_action)
     {
+        G20_VoicePerformer.GetInstance().PlayWithNoControll(G20_VoiceType.INGAME6);
+        Destroy(stageBoss.GetComponent<G20_HitReactionVoice>());
         var anim = GameObject.Find("G20_Root").GetComponent<Animator>();
         anim.enabled = true;
         anim.CrossFade("ToGesslerBattle", 0.3f);
@@ -36,7 +38,6 @@ public class G20_GesslerShootPerformer : MonoBehaviour {
         stageBoss.IsInvincible = false;
         stageBoss.GetComponent<G20_HitEffect>().ChangeEffectType(G20_EffectType.HIT_APPLE_BODY);
         Destroy(stageBoss.GetComponent<G20_HitSE>());
-        Destroy(stageBoss.GetComponent<G20_HitReactionVoice>());
         headHitObject.ChangeHitTag(G20_HitTag.ASSIST);
 
 
