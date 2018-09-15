@@ -23,6 +23,9 @@ public class G20_HitReactionVoice : G20_HitAction {
     {
         if(reactionIntervalTimer > reactionInterval )
         {
+            // 他ボイス再生中は再生しない
+            if ( G20_VoicePerformer.GetInstance().IsPlaying ) return;
+
             reactionIntervalTimer = 0f;
             int randNum = 0;
             do{randNum = Random.Range(0, voices.Length);}

@@ -43,6 +43,16 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
     // 同時再生数：１
     AudioSource audioSource;
 
+    public bool IsPlaying
+    {
+        get
+        {
+            if ( audioSource && audioSource.isPlaying )
+                return true;
+            return false;
+        }
+    }
+
 	// Use this for initialization
 	void Start () {
         //serifuText = uiSerifuAnim.GetComponentInChildren<Text>();
