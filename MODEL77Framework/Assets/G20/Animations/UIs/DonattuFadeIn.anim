@@ -21,20 +21,20 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: -831
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
+        value: -1540
+        inSlope: 3613.9678
+        outSlope: 3613.9678
+        tangentMode: 0
       - serializedVersion: 2
         time: 1
-        value: 111
+        value: -190.99994
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalPosition.z
+    attribute: m_AnchoredPosition.x
     path: 
     classID: 224
     script: {fileID: 0}
@@ -48,10 +48,10 @@ AnimationClip:
     genericBindings:
     - serializedVersion: 2
       path: 0
-      attribute: 2033536083
+      attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
-      customType: 28
+      customType: 0
       isPPtrCurve: 0
     pptrCurveMapping: []
   m_AnimationClipSettings:
@@ -80,20 +80,20 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: -831
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
+        value: -1540
+        inSlope: 3613.9678
+        outSlope: 3613.9678
+        tangentMode: 0
       - serializedVersion: 2
         time: 1
-        value: 111
+        value: -190.99994
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalPosition.z
+    attribute: m_AnchoredPosition.x
     path: 
     classID: 224
     script: {fileID: 0}
