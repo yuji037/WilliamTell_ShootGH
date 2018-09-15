@@ -23,13 +23,13 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     [SerializeField] Material clearBackGroundMaterial;
 
     [SerializeField] Text yourScore;
+    [SerializeField] Text yourScore_copy;
     [SerializeField] Text creatorsHighScore;
     [SerializeField] Text dailyHighScore;
 
     [SerializeField] GameObject clearTexts;
 
     [SerializeField] GameObject playerObj;
-
 
 
     [SerializeField] GameObject highScore;
@@ -156,7 +156,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         scorecount += 1;
 
         //テキストを入れ替える
-        highScoreText.text = scorecount.ToString();
+        yourScore_copy.text = scorecount.ToString();
         yourScore.text = scorecount.ToString();
 
         //デイリーハイスコアと比べる
