@@ -104,7 +104,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         // プレイヤー後ずさり等のアニメーション開始
         gameRootAnim.CrossFade("ToIngame", 0f);
 
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(7.2f);
         paramCanvas.SetActive(true);
 
         gameRootAnim.enabled = false;
@@ -119,7 +119,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         // セリフ再生と字幕表示
         //G20_VoicePerformer.GetInstance().Play(0);
 
-        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 2f);
+        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 0.5f);
 
         //yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 1.0f);
         // 戦闘開始

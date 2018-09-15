@@ -192,6 +192,8 @@ public class G20_StageBehaviour : MonoBehaviour
 
     void ScoreAppleUpdate()
     {
+        if ( scoreApplePatern.Length == 0 ) return;
+
         scoreApplePopTimer += Time.deltaTime;
 
         if(timer > scoreAppleCanPopTimeMin

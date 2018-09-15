@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[System.Serializable]
+public class TestClass {
+    int a;
+    float b;
+}
+
+
 public class G20_AnimationEventFunctions : MonoBehaviour {
     
     [System.Serializable]
@@ -37,4 +45,5 @@ public class G20_AnimationEventFunctions : MonoBehaviour {
         var s = shakeParams[num];
         cameraShake.Shake(s.shakeType, s.strength, s.frequency, s.timeLength);
     }
+
 }

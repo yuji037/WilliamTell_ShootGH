@@ -37,7 +37,7 @@ public class G20_HitObject : MonoBehaviour {
     {
         foreach (var i in hitActions)
         {
-            i.Execute(hit_point);
+            if ( i != null ) i.Execute(hit_point);
         }
     }
 }

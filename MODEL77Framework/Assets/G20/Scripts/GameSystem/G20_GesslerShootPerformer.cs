@@ -10,6 +10,9 @@ public class G20_GesslerShootPerformer : MonoBehaviour {
     [SerializeField]
     G20_Enemy stageBoss;
 
+    [SerializeField]
+    G20_HitObject headHitObject;
+
     public void ToGesslerBattle(System.Action on_end_action)
     {
         StartCoroutine(GesslerShootCoroutine(on_end_action));
@@ -32,7 +35,9 @@ public class G20_GesslerShootPerformer : MonoBehaviour {
         // ゲスラー撃てるようになる
         stageBoss.IsInvincible = false;
         stageBoss.GetComponent<G20_HitEffect>().ChangeEffectType(G20_EffectType.HIT_APPLE_BODY);
-        stageBoss.GetComponent<G20_HitSE>().ChangeSEType(G20_SEType.HIT_BODY);
+        Destroy(stageBoss.GetComponent<G20_HitSE>());
+        Destroy(stageBoss.GetComponent<G20_HitReactionVoice>());
+        headHitObject.ChangeHitTag(G20_HitTag.ASSIST);
 
 
         while ( stageBoss.HP > 0 )

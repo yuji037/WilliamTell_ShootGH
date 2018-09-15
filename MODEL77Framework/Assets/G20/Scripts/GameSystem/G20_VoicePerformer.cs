@@ -32,12 +32,16 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
     [SerializeField]
     string[] serifuList;
 
-
+    [SerializeField]
+    float voiceDelayFromCaption = 0.5f;
 
     //Text serifuText;
 
     [SerializeField]
     G20_CaptionPerformer captionPerformer;
+
+    // 同時再生数：１
+    AudioSource audioSource;
 
 	// Use this for initialization
 	void Start () {
@@ -64,11 +68,11 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
         //    if ( i < _strs.Length - 1 ) serifuText.text += "\n";
         //}
         
-        G20_SEType seType = G20_SEType.VOICE0 + voiceNumber;
-
-        var sePlayer = G20_SEManager.GetInstance().Play(seType, Vector3.zero, false);
+        G20_SEType seType = GetSEType((G20_VoiceType)voiceNumber);
 
         captionPerformer.StartPerformance(serifuList[voiceNumber]);
+        yield return new WaitForSeconds(voiceDelayFromCaption);
+        PlaySELimit(seType);
         float seLength = G20_SEManager.GetInstance().GetClipLength(seType);
         float minLength = 1.0f;
         float displayCaptionLength = Mathf.Max(minLength, seLength - 1.0f);
@@ -81,8 +85,8 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
     public void PlayWithNoCaption(G20_VoiceType voiceNumber)
     {
         // 字幕表示しないボイス再生
-        G20_SEType seType = G20_SEType.VOICE0 + (int)voiceNumber;
-        var sePlayer = G20_SEManager.GetInstance().Play(seType, Vector3.zero, false);
+        G20_SEType seType = GetSEType(voiceNumber);
+        PlaySELimit(seType);
         float clipLength = G20_SEManager.GetInstance().GetClipLength(seType);
         G20_BGMManager.GetInstance().VolumeDown(clipLength);
     }
@@ -92,6 +96,21 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
     // 扱いは効果音と同じ
     public void PlayWithNoControll(G20_VoiceType voiceType)
     {
+        var seType = GetSEType(voiceType);
+        PlaySELimit(seType);
+    }
 
+    G20_SEType GetSEType(G20_VoiceType voiceType)
+    {
+        return G20_SEType.VOICE0 + (int)voiceType;
+    }
+
+    void PlaySELimit(G20_SEType seType)
+    {
+        if ( audioSource && audioSource.isPlaying )
+        {
+            audioSource.Stop();
+        }
+        audioSource = G20_SEManager.GetInstance().Play(seType, Vector3.zero, false);
     }
 }
