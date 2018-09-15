@@ -36,6 +36,8 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     [SerializeField] Text highScoreText;
     Animator clearFadeanimator;
 
+    public int scorecount = 0;
+
     float balanceNum;
     public void Excute(Action on_end_action)
     {
@@ -59,14 +61,16 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         yield return new WaitForSeconds(2.0f);
 
         var apple_value = G20_Score.GetInstance().Score;
-        StartCoroutine(UIRoutine(apple_value));
 
+        initUI();
+        
         //リンゴ積み上げ
         balanceNum = -fallSize.x;
         var fallAppleDelay = fallTime / apple_value;
         for (int i = 0; i < apple_value; i++)
         {
             var apple = Instantiate(appleObj);
+            apple.GetComponent<G20_FallAppleSound>().test += test;
             apple.transform.SetParent(transform);
             if (IsRandomlyFall)
             {
@@ -83,40 +87,6 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     }
 
     
-    IEnumerator UIRoutine(int score)
-    {
-        SetUIsActive();
-
-
-        yourScore.text = score.ToString();
-        if (G20_NetworkManager.GetInstance().is_network)
-        {
-            creatorsHighScore.text = "110";//後日入れるかどうするか悩み中
-            dailyHighScore.text = G20_NetworkManager.GetInstance().userData.scoreList[0].score;
-        }
-        else
-        {
-            creatorsHighScore.text = "110";
-            dailyHighScore.text = "110";
-        }
-        
-        yield return new WaitForSeconds(6.5f);
-
-        int num = int.Parse(dailyHighScore.text);
-
-        if (num < score)
-        {
-            highScore.SetActive(true);
-            highScoreText.text = score.ToString();
-            yield return null;
-
-            clearFadeanimator = clearTexts.GetComponent<Animator>();
-            clearFadeanimator.SetBool("newHighScore", true);
-
-        }
-
-        yield return null;
-    }
 
 
     //ホワイトアウトしている間にする処理
@@ -156,4 +126,53 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         var randPos = new Vector3(UnityEngine.Random.Range(-fallSize.x, fallSize.x), UnityEngine.Random.Range(-fallSize.y, fallSize.y), UnityEngine.Random.Range(-fallSize.z, fallSize.z));
         return randPos + fallPoint;
     }
+
+    void initUI()
+    {
+        yourScore.text = "0";
+        
+        if (G20_NetworkManager.GetInstance().is_network)
+        {
+            creatorsHighScore.text = "110";//後日入れるかどうするか悩み中
+            dailyHighScore.text = G20_NetworkManager.GetInstance().userData.scoreList[0].score;
+        }
+        else
+        {
+            creatorsHighScore.text = "110";
+            dailyHighScore.text = "80";
+        }
+
+        SetUIsActive();
+
+    }
+
+    
+   
+
+    void test()
+    {
+        Debug.Log("アクションのテスト");
+        //スコアを＋1する
+        scorecount += 1;
+
+        //テキストを入れ替える
+        highScoreText.text = scorecount.ToString();
+        yourScore.text = scorecount.ToString();
+
+        //デイリーハイスコアと比べる
+        //デイリーハイスコアより大きかったらなアニメーション開始
+        int num = int.Parse(dailyHighScore.text);
+        if (num < scorecount)
+        {
+            clearFadeanimator = clearTexts.GetComponent<Animator>();
+            clearFadeanimator.SetBool("newHighScore", true);
+        }
+    }
+
+
 }
+
+
+
+
+
