@@ -268,3 +268,5 @@ MonoBehaviour:
   paternH:
     cueList: []
   timer: 0
+  scoreApplePopInterval: 3
+  scoreApplePatern: 000000000000000000000000000000000000000001000000

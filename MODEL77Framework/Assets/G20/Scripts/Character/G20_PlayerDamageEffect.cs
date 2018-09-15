@@ -17,5 +17,6 @@ public class G20_PlayerDamageEffect : MonoBehaviour {
     {
         //anim.CrossFadeInFixedTime("CameraYure", 0f);
         if ( cameraShake ) cameraShake.Shake(G20_CameraShakeType.DOWNWARD, 0.2f, 6f, 0.8f);
+        G20_SEManager.GetInstance().Play(G20_SEType.PLAYER_DAMAGE, Vector3.zero, false);
     }
 }
