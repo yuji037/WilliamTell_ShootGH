@@ -9,6 +9,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     //この値を変えることでランダムに降らすか整列して降らすかを変えられる
     [SerializeField] bool IsRandomlyFall;
     [SerializeField] GameObject appleObj;
+    [SerializeField] GameObject goldenAppleObj;
     [SerializeField] Vector3 fallPoint;
     [SerializeField] Vector3 fallSize;
     [SerializeField] float fallTime = 20.0f;
@@ -60,17 +61,33 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         G20_FadeChanger.GetInstance().StartWhiteFadeIn(2.0f);
         yield return new WaitForSeconds(2.0f);
 
-        var apple_value = G20_Score.GetInstance().Score;
+        // リンゴ落下数の計算
+        var goldFallCount = G20_Score.GetInstance().GoldPoint;
+        // 全リンゴ
+        var totalAppleCount = G20_Score.GetInstance().Score - goldFallCount * 2;
+        // 全リンゴ25、金4のとき
+        // 5,11,17,23番目に落とす（6の倍数-1）
+        // 全リンゴ25、金5のとき
+        // 4,9,14,19,24番目に落とす（5の倍数-1）
+        int goldRate = 9999;
+        if ( goldFallCount != 0 ) goldRate = totalAppleCount / goldFallCount;
 
         initUI();
         
         //リンゴ積み上げ
         balanceNum = -fallSize.x;
-        var fallAppleDelay = fallTime / apple_value;
-        for (int i = 0; i < apple_value; i++)
+        var fallAppleDelay = fallTime / totalAppleCount;
+        for (int i = 0; i < totalAppleCount; i++)
         {
-            var apple = Instantiate(appleObj);
-            apple.GetComponent<G20_FallAppleSound>().test += test;
+            GameObject apple;
+            bool isGoldenApple = (i % goldRate == goldRate - 1);
+
+            if ( isGoldenApple ) apple = Instantiate(goldenAppleObj);
+            else apple = Instantiate(appleObj);
+
+            var fallAppleSound = apple.GetComponent<G20_FallAppleSound>();
+            fallAppleSound.test += test;
+            fallAppleSound.eventArgInteger = isGoldenApple ? 3 : 1;
             apple.transform.SetParent(transform);
             if (IsRandomlyFall)
             {
@@ -149,11 +166,11 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     
    
 
-    void test()
+    void test(int addValue)
     {
         Debug.Log("アクションのテスト");
         //スコアを＋1する
-        scorecount += 1;
+        scorecount += addValue;
 
         //テキストを入れ替える
         yourScore_copy.text = scorecount.ToString();

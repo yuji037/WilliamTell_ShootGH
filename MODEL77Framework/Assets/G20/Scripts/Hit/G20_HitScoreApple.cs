@@ -68,6 +68,11 @@ public class G20_HitScoreApple : G20_HitAction {
         // 落ちて消える処理
         if( score <= 0 )
         {
+            if(scoreMax == 3 )
+            {
+                G20_Score.GetInstance().AddGoldPoint(1);
+            }
+
             GetComponent<Collider>().enabled = false;
             GetComponent<G20_HitObject>().ChangeHitTag(G20_HitTag.NORMAL);
             StartCoroutine(FallCoroutine());

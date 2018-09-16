@@ -5,7 +5,8 @@ using System;
 
 public class G20_FallAppleSound : MonoBehaviour {
 
-    public event Action test;
+    public event Action<int> test;
+    public int eventArgInteger;
 
     Rigidbody _rigidbody;
 
@@ -23,7 +24,7 @@ public class G20_FallAppleSound : MonoBehaviour {
     {
         if (!isScoreCounted)
         {
-            test();
+            test(eventArgInteger);
             isScoreCounted = true;
         }
 

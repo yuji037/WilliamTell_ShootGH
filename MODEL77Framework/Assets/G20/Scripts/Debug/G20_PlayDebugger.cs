@@ -23,6 +23,7 @@ public class G20_PlayDebugger : MonoBehaviour
                 +"I(Invin)" + "\n"
                   + "C(Clear)"+"\n"
                   + "U(UpScore)" + "\n"
+                  + "G(UpGoldPoint)" + "\n"
                   + "S(ShotCheat)" + "\n"
                   + "←(EneSpe)→" + "\n";
     }
@@ -82,7 +83,11 @@ public class G20_PlayDebugger : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.U))
         {
-            G20_Score.GetInstance().AddScore(30);
+            G20_Score.GetInstance().AddScore(10);
+        }
+        if ( Input.GetKeyDown(KeyCode.G) )
+        {
+            G20_Score.GetInstance().AddGoldPoint(1);
         }
     }
     void InputEnemySpeed()

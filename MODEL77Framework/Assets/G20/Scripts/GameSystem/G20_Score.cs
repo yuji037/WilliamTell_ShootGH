@@ -6,6 +6,7 @@ public class G20_Score : G20_Singleton<G20_Score>
 {
     public event Action<int> ScoreChangedAction;
     public int Score { get; private set; }
+    public int GoldPoint { get; private set; }
     void ChangeScore(int _score)
     {
         Score = _score;
@@ -20,6 +21,11 @@ public class G20_Score : G20_Singleton<G20_Score>
     {
         sub_value = Mathf.Abs(sub_value);
         ChangeScore(Score - sub_value);
+    }
+    public void AddGoldPoint(int add_value)
+    {
+        add_value = Mathf.Abs(add_value);
+        GoldPoint += add_value;
     }
 
 }
