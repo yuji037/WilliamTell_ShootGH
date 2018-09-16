@@ -11,13 +11,36 @@ public class G20_PlayDebugger : MonoBehaviour
     [SerializeField] Text AIMText;
     [SerializeField] Text EnemySpeedText;
     [SerializeField] Text ShotCountText;
+    [SerializeField] Text Description;
+    [SerializeField] Text LogText;
+    Coroutine logCoroutine;
     bool DebugActive;
 
     private void Awake()
     {
         DebugActivate(false);
+        if (Description) Description.text ="F3(Debug)"+"\n"
+                +"I(Invin)" + "\n"
+                  + "C(Clear)"+"\n"
+                  + "U(UpScore)" + "\n"
+                  + "S(ShotCheat)" + "\n"
+                  + "←(EneSpe)→" + "\n";
     }
-
+    void ShowLog(string _log, float duration_time)
+    {
+        if (logCoroutine!=null)
+        {
+            StopCoroutine(logCoroutine);
+        }
+        logCoroutine=StartCoroutine(ShowLogRoutine(_log, duration_time));
+    }
+    IEnumerator ShowLogRoutine(string _log,float duration_time)
+    {
+        LogText.text=_log;
+        LogText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(duration_time);
+        LogText.gameObject.SetActive(false);
+    }
     void DebugActivate(bool _active)
     {
         DebugActive = _active;
@@ -44,6 +67,7 @@ public class G20_PlayDebugger : MonoBehaviour
             InputEnemySpeed();
             InputAIMAssist();
             InputSaveAIM();
+            InputPlusScore();
         }
     }
     void InputSaveAIM()
@@ -51,9 +75,16 @@ public class G20_PlayDebugger : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Tab))
         {
             G20_BulletShooter.GetInstance().SaveAIMParam();
+            ShowLog("AIMParamをSaveしました",1.0f);
         }
     }
-   
+   void InputPlusScore()
+    {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            G20_Score.GetInstance().AddScore(30);
+        }
+    }
     void InputEnemySpeed()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -117,10 +148,11 @@ public class G20_PlayDebugger : MonoBehaviour
         {
             G20_BulletShooter.GetInstance().param.DefaultValue -= 10.0f;
         }
-        AIMText.text = "A : " + G20_BulletShooter.GetInstance().aimAssistValue + "\n" 
-            + "AMAX : " + G20_BulletShooter.GetInstance().param.MaxValue + "\n" 
-            + "AOne : " + G20_BulletShooter.GetInstance().param.OneChangeValue + "\n"
-            + "ADefault : " + G20_BulletShooter.GetInstance().param.DefaultValue+"\n";
+        AIMText.text = "A : " + G20_BulletShooter.GetInstance().aimAssistValue + "\n"
+            + "A(AMAX)D : " + G20_BulletShooter.GetInstance().param.MaxValue + "\n"
+            + "1(AOne)2 : " + G20_BulletShooter.GetInstance().param.OneChangeValue + "\n"
+            + "3(ADefault)4 : " + G20_BulletShooter.GetInstance().param.DefaultValue + "\n"
+            + "Tab(AIMSave)"+"\n";
         ShotCountText.text = "ShotCount : "+G20_BulletShooter.GetInstance().ShotCount;
 
     }
