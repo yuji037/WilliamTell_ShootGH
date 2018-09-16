@@ -18,7 +18,7 @@ public class G20_FPSSaver : MonoBehaviour {
             FileInfo fi;
             fi = new FileInfo(Application.dataPath+ logPath + "/FPSLog.csv");
             sw = fi.AppendText();
-            sw.WriteLine(counter.GetGameFPS());
+            sw.WriteLine(System.DateTime.Now.ToString()+"  "+"FPS:"+counter.GetGameFPS());
             sw.Flush();
             sw.Close();
         }
