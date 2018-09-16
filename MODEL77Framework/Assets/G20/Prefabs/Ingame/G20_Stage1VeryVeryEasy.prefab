@@ -114,7 +114,7 @@ MonoBehaviour:
     popPaternType: 0
     popIntervalTime: 1
     popEnemyCountByOneChance: 1
-    limitEnemyCount: 99
+    limitEnemyCount: 2
     conditionToNextSequence: 2
     conditionValue: 5
     speedBuffValue: -0.45
@@ -150,19 +150,19 @@ MonoBehaviour:
     - enemyType: 7
       positionNumber: 3
     popPaternType: 0
-    popIntervalTime: 0.3
+    popIntervalTime: 0.2
     popEnemyCountByOneChance: 1
     limitEnemyCount: 99
     conditionToNextSequence: 0
     conditionValue: 0
-    speedBuffValue: 0.2
+    speedBuffValue: 0.5
     InGamePerformer: {fileID: 0}
   - sequencePopType: 1
     addEnemyCueList: []
     popPaternType: 1
     popIntervalTime: 1
     popEnemyCountByOneChance: 1
-    limitEnemyCount: 3
+    limitEnemyCount: 2
     conditionToNextSequence: 1
     conditionValue: 30
     speedBuffValue: -0.45
@@ -171,13 +171,11 @@ MonoBehaviour:
   - sequencePopType: 0
     addEnemyCueList:
     - enemyType: 5
-      positionNumber: 11
-    - enemyType: 5
-      positionNumber: 20
+      positionNumber: 18
     popPaternType: 0
     popIntervalTime: 0
     popEnemyCountByOneChance: 2
-    limitEnemyCount: 5
+    limitEnemyCount: 3
     conditionToNextSequence: 0
     conditionValue: 0
     speedBuffValue: -0.7
@@ -228,7 +226,7 @@ MonoBehaviour:
     popPaternType: 3
     popIntervalTime: 1
     popEnemyCountByOneChance: 1
-    limitEnemyCount: 2
+    limitEnemyCount: 3
     conditionToNextSequence: 1
     conditionValue: 10
     speedBuffValue: -0.45
@@ -236,7 +234,7 @@ MonoBehaviour:
   - sequencePopType: 0
     addEnemyCueList:
     - enemyType: 5
-      positionNumber: 15
+      positionNumber: 18
     popPaternType: 3
     popIntervalTime: 0.3
     popEnemyCountByOneChance: 1
@@ -281,7 +279,7 @@ MonoBehaviour:
     limitEnemyCount: 99
     conditionToNextSequence: 0
     conditionValue: 0
-    speedBuffValue: 0.2
+    speedBuffValue: 0.5
     InGamePerformer: {fileID: 0}
   paternA:
     cueList:
