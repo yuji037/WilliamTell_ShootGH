@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 0086adb5b44d31e47ad3b2f56b03e40c
-  - enabled: 1
+  - enabled: 0
     path: Assets/G99/Scenes/G99.unity
     guid: 04d8a169b6da7b449936a8f539f0419d
+  - enabled: 1
+    path: Assets/G20/Scenes/G20.unity
+    guid: 3e915345d170a1f4aaffb6df3a80aabf

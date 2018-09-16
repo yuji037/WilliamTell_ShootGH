@@ -48,7 +48,7 @@ public static class G20_SEExt {
         switch ( _type )
         {
             case G20_SEType.HIT_HEAD:
-                retStr = "hit_head2";
+                retStr = "hit_head";
                 break;
             case G20_SEType.HIT_GOLDHEAD:
                 retStr = "hit_goldhead";
