@@ -23,7 +23,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
             if(ChangedStateAction!=null)ChangedStateAction(gState);
         }
     }
-
+    public System.Action OnGameEndAction;
     [SerializeField]
     G20_Player playerObj;
 
@@ -255,6 +255,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     public void GameEnd()
     {
         Time.timeScale = 1f;
+        if (OnGameEndAction != null) OnGameEndAction();
         Debug.Log("ゲームエンド。フレームワークに処理を返します。");
         _gameController.GameEnd();
         if(isReloadMode) G20_ReloadScene.GetInstance().ReloadScene();

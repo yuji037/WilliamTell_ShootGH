@@ -4,10 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 public class G20_FPSCounter : MonoBehaviour
 {
-    [SerializeField]float CalcDuration;
+    [SerializeField] float CalcDuration;
     [SerializeField] Text fpsText;
-    [SerializeField]float showFPSDuration;
+    [SerializeField] float showFPSDuration;
     Coroutine fpsCoroutine;
+    int gameFrameCount;
+    float gameTime;
+    public float GetGameFPS()
+    {
+        return ((float)gameFrameCount / gameTime);
+    }
     // Use this for initialization
     void Awake()
     {
@@ -21,19 +27,21 @@ public class G20_FPSCounter : MonoBehaviour
             float timer = 0f;
             while (CalcDuration >= timer)
             {
+                gameFrameCount++;
                 frameCount++;
-                timer += Time.deltaTime;
+                gameTime += Time.unscaledDeltaTime;
+                timer += Time.unscaledDeltaTime;
                 yield return null;
             }
             //FPS算出
-            float fps=(frameCount / timer);
-            if (fps<60.0f)
+            float fps = (frameCount / timer);
+            if (fps < 60.0f)
             {
-                fpsText.text = "FPS:" +(int)fps;
+                fpsText.text = "FPS:" + (int)fps;
                 //前のコルーチンを削除
                 if (fpsCoroutine != null) StopCoroutine(fpsCoroutine);
                 //表示コルーチン
-                fpsCoroutine =StartCoroutine(ShowFPS(fps));
+                fpsCoroutine = StartCoroutine(ShowFPS(fps));
             }
         }
     }

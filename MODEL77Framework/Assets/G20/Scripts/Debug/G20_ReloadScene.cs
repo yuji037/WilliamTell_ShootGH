@@ -6,8 +6,10 @@ public class G20_ReloadScene : G20_Singleton<G20_ReloadScene>
 {
     [SerializeField] string MainSceneName;
     [SerializeField] string SubSceneName;
+    public event System.Action ReloadAction;
     public void ReloadScene()
     {
+        if (ReloadAction != null) ReloadAction();
         //MainSceneの読み直し
         if (MainSceneName.Length > 0)
         {
