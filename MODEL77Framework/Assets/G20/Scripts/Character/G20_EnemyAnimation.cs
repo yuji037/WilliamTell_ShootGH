@@ -26,9 +26,9 @@ public class G20_EnemyAnimation : MonoBehaviour {
         animator.SetFloat("Speed",AnimationSpeed);
         animator.CrossFadeInFixedTime(Enum.GetName(typeof(G20_AnimType),anim_type),0.4f);
     }
-    public G20_AnimType lastAnim=G20_AnimType.Idle;
+    [NonSerialized]public G20_AnimType lastAnim=G20_AnimType.Idle;
     [SerializeField] Animator animator;
-    float animSpeed;
+    float animSpeed=1.0f;
     public float AnimSpeed{
         set { animSpeed = value; }
         get { return animSpeed; }

@@ -10,6 +10,9 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     [SerializeField] bool IsRandomlyFall;
     [SerializeField] GameObject appleObj;
     [SerializeField] GameObject goldenAppleObj;
+    [SerializeField] GameObject smallEneAppleObj;
+    //1/smallEneRateの確率で出現
+    [SerializeField] int smallEneRate;
     [SerializeField] Vector3 fallPoint;
     [SerializeField] Vector3 fallSize;
     [SerializeField] float fallTime = 20.0f;
@@ -81,12 +84,13 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         {
             GameObject apple;
             bool isGoldenApple = (i % goldRate == goldRate - 1);
-
+            bool isSmalleEne = (UnityEngine.Random.Range(0,smallEneRate)==1);
             if ( isGoldenApple ) apple = Instantiate(goldenAppleObj);
+            else if (isSmalleEne) apple = Instantiate(smallEneAppleObj);
             else apple = Instantiate(appleObj);
 
             var fallAppleSound = apple.GetComponent<G20_FallAppleSound>();
-            fallAppleSound.test += test;
+            fallAppleSound.firstCollisionHItAction += PlusAppleScore;
             fallAppleSound.eventArgInteger = isGoldenApple ? 3 : 1;
             apple.transform.SetParent(transform);
             if (IsRandomlyFall)
@@ -164,11 +168,10 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     }
 
     
-   
-
-    void test(int addValue)
+  
+    //一番最後にスコアを直接いれたほうがいいかも
+    void PlusAppleScore(int addValue)
     {
-        Debug.Log("アクションのテスト");
         //スコアを＋1する
         scorecount += addValue;
 
