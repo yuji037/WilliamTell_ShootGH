@@ -56,7 +56,8 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     float endFogIntensity;
     [SerializeField]
     Animator gesslerAnim;
-
+    [SerializeField]
+    bool isReloadMode;
     public bool isSkipPerformance = false;
 
     G20_GesslerShootPerformer gesslerShootPerformer;
@@ -256,7 +257,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         Time.timeScale = 1f;
         Debug.Log("ゲームエンド。フレームワークに処理を返します。");
         _gameController.GameEnd();
-        //G20_ReloadScene.GetInstance().ReloadScene();
+        if(isReloadMode) G20_ReloadScene.GetInstance().ReloadScene();
         //GameObject.Find("GameManager").GetComponent<GameController>().GameEnd();
     }
 }

@@ -5,6 +5,10 @@ using System;
 public abstract class G20_AI : MonoBehaviour
 {
     bool isAIStarted = false;
+    public bool IsAIStarted
+    {
+        get { return isAIStarted; }
+    }
     public bool isPouse;
     public G20_Enemy enemy;
     protected GameObject target;

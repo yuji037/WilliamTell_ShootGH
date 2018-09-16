@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
-
+using System;
 public class G20_AIMParam
 {
     //初期値
@@ -22,13 +22,20 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
     [SerializeField] LayerMask fieldMask;
     //AIMのパラメーター
    public G20_AIMParam param=new G20_AIMParam();
-    //弾の射出を制限出来る
+    //trueの時弾を発射
     public bool CanShoot = true;
-    //チートモード
-    public bool isCheating;
     //AIM補正の値
     public float aimAssistValue = 0f;
     int shotCount;
+    Func<Vector2?> GetShtPointFunc;
+    public void ChangeGetShotPointFunc(Func<Vector2?> getShtPointFunc)
+    {
+        GetShtPointFunc = getShtPointFunc;
+    }
+    public void RemoveGetShotPointFunc()
+    {
+        GetShtPointFunc = null;
+    }
     public int ShotCount
     {
         get { return shotCount; }
@@ -61,9 +68,9 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
         shotPoint = G20_InputPointGetter.GetInstance().GetInputPoint();
         
         if (shotPoint != null) shotCount++;
-        if (isCheating && shotPoint == null)
+        if (shotPoint == null&&GetShtPointFunc!=null)
         {
-            shotPoint = G20_CheatShoot.GetInstance().GetEnemyHeadPoint();
+            shotPoint = GetShtPointFunc();
         }
         if (CanShoot && shotPoint != null)
         {

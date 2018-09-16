@@ -15,7 +15,7 @@ public class G20_PlayDebugger : MonoBehaviour
     [SerializeField] Text LogText;
     Coroutine logCoroutine;
     bool DebugActive;
-
+    G20_DebugAutoShooter autoShooter;
     private void Awake()
     {
         DebugActivate(false);
@@ -26,6 +26,7 @@ public class G20_PlayDebugger : MonoBehaviour
                   + "G(UpGoldPoint)" + "\n"
                   + "S(ShotCheat)" + "\n"
                   + "←(EneSpe)→" + "\n";
+        autoShooter = G20_ComponentUtility.FindComponentOnScene<G20_DebugAutoShooter>();
     }
     void ShowLog(string _log, float duration_time)
     {
@@ -69,6 +70,14 @@ public class G20_PlayDebugger : MonoBehaviour
             InputAIMAssist();
             InputSaveAIM();
             InputPlusScore();
+            InputChangeAutoShoot();
+        }
+    }
+    void InputChangeAutoShoot()
+    {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            autoShooter.IsAutoShooting = !autoShooter.IsAutoShooting;
         }
     }
     void InputSaveAIM()
@@ -124,7 +133,7 @@ public class G20_PlayDebugger : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            G20_BulletShooter.GetInstance().isCheating = !G20_BulletShooter.GetInstance().isCheating;
+            G20_CheatShoot.GetInstance().IsChaeting = !G20_CheatShoot.GetInstance().IsChaeting;
         }
     }
     void InputAIMAssist()
