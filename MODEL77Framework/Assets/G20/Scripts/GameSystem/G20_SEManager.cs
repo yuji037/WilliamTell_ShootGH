@@ -18,6 +18,8 @@ public enum G20_SEType {
     WALK_STRONG,
     WALK_STOP,
     FOREST,
+    BARRIER,
+    HIGH_SCORE,
     TEST_VOICE,
     VOICE0,
     VOICE1,
@@ -86,6 +88,12 @@ public static class G20_SEExt {
             case G20_SEType.FOREST:
                 retStr = "forest_BGM";
                 break;
+            case G20_SEType.BARRIER:
+                retStr = "barrier_pattern1";
+                break;
+            case G20_SEType.HIGH_SCORE:
+                retStr = "score";
+                break;
             case G20_SEType.TEST_VOICE:
                 retStr = "test_voice";
                 break;
@@ -113,7 +121,7 @@ public class G20_SEManager : G20_Singleton<G20_SEManager> {
         foreach ( G20_SEType i in Enum.GetValues(typeof(G20_SEType)) )
         {
             string resourcesName = "G20/SE/" + i.GetTypeName();
-            Debug.Log(resourcesName);
+            //Debug.Log(resourcesName);
 
             seClips.Add((int)i, (AudioClip)Resources.Load(resourcesName, typeof(AudioClip)));
         }

@@ -81,7 +81,7 @@ public class G20_VoicePerformer : G20_Singleton<G20_VoicePerformer> {
         G20_SEType seType = GetSEType((G20_VoiceType)voiceNumber);
 
         captionPerformer.StartPerformance(serifuList[voiceNumber], new G20_CaptionParam(0.5f, 0.4f, 0f));
-        yield return new WaitForSeconds(voiceDelayFromCaption);
+        yield return new WaitForSecondsRealtime(voiceDelayFromCaption);
         PlaySELimit(seType);
         float seLength = G20_SEManager.GetInstance().GetClipLength(seType);
         float minLength = 1.0f;

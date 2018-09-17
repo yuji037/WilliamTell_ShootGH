@@ -114,7 +114,7 @@ public class G20_BombAI : G20_AI
 
         bomb.Bombthrow(attackRange,enemy.Attack);
         bomb.transform.parent = enemy.transform.parent;
-        
+        bomb = null;
     }
 
     
