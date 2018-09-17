@@ -17,24 +17,27 @@ public class G20_PlayDebugger : MonoBehaviour
     Coroutine logCoroutine;
     bool DebugActive;
     G20_DebugAutoShooter autoShooter;
-    int editingCreScoNumber=0;
+    int editingCreScoNumber = 0;
     private void Awake()
     {
         DebugActivate(false);
         if (Description) Description.text = "F3(Debug)" + "\n"
                 + "I(Invin)" + "\n"
-                  + "C(Clear)" + "\n"
-                  + "U(UpScore)" + "\n"
-                  + "G(UpGoldPoint)" + "\n"
-                  + "S(ShotCheat)" + "\n"
-                  + "←(EneSpe)→" + "\n"
-                  + "O(CreSco10)P" + "\n"
-                  + "K(CreSco1)L" + "\n"
-                  + "F12(CreScoSave)" + "\n";
+                + "C(Clear)" + "\n"
+                + "U(UpScore)" + "\n"
+                + "G(UpGoldPoint)" + "\n"
+                + "S(ShotCheat)" + "\n"
+                + "←(EneSpe)→" + "\n"
+                + "O(CreSco10)P" + "\n"
+                + "K(CreSco1)L" + "\n"
+                + "F12(CreScoSave)" + "\n"
+                + "7(ClearWait5)8" + "\n"
+                +"Tab(Save)";
         autoShooter = G20_ComponentUtility.FindComponentOnScene<G20_DebugAutoShooter>();
         G20_NetworkManager.GetInstance().creatorScore[0] = LoadCreatorsScore(0);
         G20_NetworkManager.GetInstance().creatorScore[1] = LoadCreatorsScore(1);
-        UpdateCreScoText();
+        G20_ClearPerformer.GetInstance().endWaitTime = LoadEndWait();
+        UpdateCreScoAndClearWait();
     }
     void ShowLog(string _log, float duration_time)
     {
@@ -76,10 +79,11 @@ public class G20_PlayDebugger : MonoBehaviour
             InputClear();
             InputEnemySpeed();
             InputAIMAssist();
-            InputSaveAIM();
             InputPlusScore();
             InputChangeAutoShoot();
             InputCreatorScore();
+            InputClearWait();
+            InputSave();
         }
     }
     void InputCreatorScore()
@@ -88,7 +92,7 @@ public class G20_PlayDebugger : MonoBehaviour
         {
             if (editingCreScoNumber == 0) editingCreScoNumber = 1;
             else if (editingCreScoNumber == 1) editingCreScoNumber = 0;
-            UpdateCreScoText();
+            UpdateCreScoAndClearWait();
         }
         int addScore = 0;
         if (Input.GetKeyDown(KeyCode.O))
@@ -111,22 +115,50 @@ public class G20_PlayDebugger : MonoBehaviour
         if (addScore != 0)
         {
             G20_NetworkManager.GetInstance().creatorScore[editingCreScoNumber] += addScore;
-            UpdateCreScoText();
-        }
-        if (Input.GetKeyDown(KeyCode.F12))
-        {
-            SaveCreatorsScore();
+            UpdateCreScoAndClearWait();
         }
     }
-    void UpdateCreScoText()
+    void InputClearWait()
     {
-        CreatorScore.text = "(F6)change(F12)Save\nCreatorScore:[" + editingCreScoNumber + "]" + G20_NetworkManager.GetInstance().creatorScore[editingCreScoNumber].ToString();
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            G20_ClearPerformer.GetInstance().endWaitTime -= 5.0f;
+            UpdateCreScoAndClearWait();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            G20_ClearPerformer.GetInstance().endWaitTime += 5.0f;
+            UpdateCreScoAndClearWait();
+        }
+
+    }
+    void SaveEndWait()
+    {
+        PlayerPrefs.SetFloat("G20_EndWait",G20_ClearPerformer.GetInstance().endWaitTime);
+    }
+    float LoadEndWait()
+    {
+       return PlayerPrefs.GetFloat("G20_EndWait",10.0f);
+    }
+    void InputSave()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            G20_BulletShooter.GetInstance().SaveAIMParam();
+            SaveEndWait();
+            SaveCreatorsScore();
+            PlayerPrefs.Save();
+            ShowLog("Saveしました", 1.0f);
+        }
+    }
+    void UpdateCreScoAndClearWait()
+    {
+        CreatorScore.text = "(F6)change(F12)Save\nCreatorScore:[" + editingCreScoNumber + "]" + G20_NetworkManager.GetInstance().creatorScore[editingCreScoNumber].ToString() + "\n"
+            +"ClearWaitTime:"+G20_ClearPerformer.GetInstance().endWaitTime.ToString() ;
     }
     void SaveCreatorsScore()
     {
-        PlayerPrefs.SetInt("G20_CreSco"+editingCreScoNumber,G20_NetworkManager.GetInstance().creatorScore[editingCreScoNumber]);
-        PlayerPrefs.Save();
-        ShowLog("CreSco"+editingCreScoNumber+"をSaveしました", 1.0f);
+        PlayerPrefs.SetInt("G20_CreSco" + editingCreScoNumber, G20_NetworkManager.GetInstance().creatorScore[editingCreScoNumber]);
     }
     int LoadCreatorsScore(int num)
     {
@@ -137,14 +169,6 @@ public class G20_PlayDebugger : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.B))
         {
             autoShooter.IsAutoShooting = !autoShooter.IsAutoShooting;
-        }
-    }
-    void InputSaveAIM()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            G20_BulletShooter.GetInstance().SaveAIMParam();
-            ShowLog("AIMParamをSaveしました", 1.0f);
         }
     }
     void InputPlusScore()

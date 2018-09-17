@@ -15,8 +15,8 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     [SerializeField] int smallEneRate;
     [SerializeField] Vector3 fallPoint;
     [SerializeField] Vector3 fallSize;
-    [SerializeField] float fallTime = 20.0f;
-    [SerializeField] float endWaitTime = 10.0f;
+    public float fallTime = 20.0f;
+    public float endWaitTime = 10.0f;
     [SerializeField] GameObject paramObjs;
 
 
