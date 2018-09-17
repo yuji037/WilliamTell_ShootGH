@@ -56,7 +56,12 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
         yield return www;
 
         //Debug.Log("接続先IP : " + www.text);
-
+        if (!string.IsNullOrEmpty(www.error))
+        {
+            is_network = false;
+            //Debug.Log("ネットワークエラー");
+            yield break;
+        }
 
         yield return null;
 
@@ -105,6 +110,13 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
         WWW www = new WWW(scoreReceiveAdress, form);
         yield return www;
 
+        if (!string.IsNullOrEmpty(www.error))
+        {
+            is_network = false;
+            //Debug.Log("ネットワークエラー");
+            yield break;
+        }
+
         string jsonText = "{ \"scoreList\" : " + www.text + "}";
 
         //Debug.Log("jsonText" + jsonText);
@@ -125,13 +137,14 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
         WWW www = new WWW(IDReceiveAdress);
         yield return www;
 
-        userIDstr = www.text;
 
         if (!string.IsNullOrEmpty(www.error))
         {
             is_network = false;
             //Debug.Log("ネットワークエラー");
+            yield break;
         }
+        userIDstr = www.text;
 
         //Debug.Log("ユーザーID : " + userIDstr);
         yield return null;
