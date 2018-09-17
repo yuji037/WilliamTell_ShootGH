@@ -21,7 +21,7 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
     {
         if (!enemy)
         {
-            Debug.Log("EnemyCabinetに登録しようとしましたが、対象がnullでした");
+            //Debug.Log("EnemyCabinetに登録しようとしましたが、対象がnullでした");
             return;
         }
 
@@ -31,7 +31,7 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
         }
         else
         {
-            Debug.Log("エラー：敵以外の登録");
+            //Debug.Log("エラー：敵以外の登録");
         }
     }
 
@@ -39,7 +39,7 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
     {
         if (!enemy)
         {
-            Debug.Log("EnemyCabinetから除外しようとしましたが、対象がnullでした");
+            //Debug.Log("EnemyCabinetから除外しようとしましたが、対象がnullでした");
             return;
         }
 
@@ -51,7 +51,7 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
         }
         else
         {
-            Debug.Log("エラー：敵以外の登録解除");
+            //Debug.Log("エラー：敵以外の登録解除");
         }
     }
 
@@ -61,7 +61,7 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
 
         foreach ( var enemy in enemys )
         {
-            Debug.Log("AIStart");
+            //Debug.Log("AIStart");
             enemy.EnemyAI.AIStart();
         }
     }
@@ -105,7 +105,7 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
         foreach (var enemy in enemys)
         {
             if (!enemy) continue;
-            Debug.Log(enemy + "キル");
+            //Debug.Log(enemy + "キル");
             enemy.RecvDamage(enemy.HP, G20_DamageType.BODY);
         }
     }

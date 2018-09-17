@@ -225,7 +225,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
 
     public void StartGesslerBattle()
     {
-        Debug.Log("GoldenApple : " + G20_Score.GetInstance().GoldPoint);
+        //Debug.Log("GoldenApple : " + G20_Score.GetInstance().GoldPoint);
         gesslerAnim.enabled = false;
         // ゲスラー撃った後、クリア
         gesslerShootPerformer.ToGesslerBattle(GameClear);
@@ -262,7 +262,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     {
         Time.timeScale = 1f;
         if (OnGameEndAction != null) OnGameEndAction();
-        Debug.Log("ゲームエンド。フレームワークに処理を返します。");
+        //Debug.Log("ゲームエンド。フレームワークに処理を返します。");
         _gameController.GameEnd();
         if(isReloadMode) G20_ReloadScene.GetInstance().ReloadScene();
         //GameObject.Find("GameManager").GetComponent<GameController>().GameEnd();

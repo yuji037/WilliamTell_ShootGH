@@ -28,7 +28,7 @@ public class G20_FPSCounter : MonoBehaviour
     IEnumerator CountFPS()
     {
         gameStartTime = Time.time;
-        Debug.Log(gameStartTime);
+        //Debug.Log(gameStartTime);
         while (true)
         {
             int frameCount = 0;

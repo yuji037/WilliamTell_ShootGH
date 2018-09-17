@@ -62,7 +62,7 @@ public class G20_EffectManager : G20_Singleton<G20_EffectManager>
         foreach (G20_EffectType i in Enum.GetValues(typeof(G20_EffectType)))
         {
             string resourcesName = "G20/Effect/" + i.GetTypeName();
-            Debug.Log(resourcesName);
+            //Debug.Log(resourcesName);
             effectPrefabs.Add((int)i, (GameObject)Resources.Load(resourcesName, typeof(GameObject)));
         }
     }

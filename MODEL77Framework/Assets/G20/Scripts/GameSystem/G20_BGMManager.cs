@@ -60,7 +60,7 @@ public class G20_BGMManager : G20_Singleton<G20_BGMManager> {
         foreach ( G20_BGMType i in Enum.GetValues(typeof(G20_BGMType)) )
         {
             string resourcesName = "G20/BGM/" + i.GetTypeName();
-            Debug.Log(resourcesName);
+            //Debug.Log(resourcesName);
 
             bgmClips.Add((int)i, (AudioClip)Resources.Load(resourcesName, typeof(AudioClip)));
         }

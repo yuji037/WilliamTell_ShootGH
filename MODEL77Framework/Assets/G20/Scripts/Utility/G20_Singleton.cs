@@ -38,11 +38,11 @@ where T : G20_Singleton<T>
         //staticのinstanceが自分じゃない場合自殺
         if (Instance != this)
         {
-            Debug.Log(
-            typeof(T) +
-               " は既に" + Instance.gameObject.name + "にアタッチされているため" +
-               "このinstanceを破棄しました。");
-            Destroy(this);
+            //Debug.Log(
+            //typeof(T) +
+            //   " は既に" + Instance.gameObject.name + "にアタッチされているため" +
+            //   "このinstanceを破棄しました。");
+            //Destroy(this);
         }
     }
     protected void OnDestroy()

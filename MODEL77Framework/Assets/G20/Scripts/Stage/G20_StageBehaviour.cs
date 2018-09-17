@@ -138,7 +138,7 @@ public class G20_StageBehaviour : MonoBehaviour
     {
         sequenceCounter = popSequenceList.Length;
         G20_GameManager.GetInstance().StartGesslerBattle();
-        Debug.Log("ゲスラー戦");
+        //Debug.Log("ゲスラー戦");
     }
     // Update is called once per frame
     void Update()
@@ -182,7 +182,7 @@ public class G20_StageBehaviour : MonoBehaviour
                 // これ以上敵出現しない
                 // ゲスラー戦へ移行
                 G20_GameManager.GetInstance().StartGesslerBattle();
-                Debug.Log("ゲスラー戦");
+                //Debug.Log("ゲスラー戦");
                 return;
             }
 
@@ -301,7 +301,7 @@ public class G20_StageBehaviour : MonoBehaviour
 
                 if (positionNumber < 0 || popPositions.Length < positionNumber)
                 {
-                    Debug.LogError("ポップ位置の選択が不正");
+                    //Debug.LogError("ポップ位置の選択が不正");
                 }
                 Vector3 _popPos = popPositions[positionNumber].transform.position;
                 poppedNumberList.Add(positionNumber);
@@ -380,7 +380,7 @@ public class G20_StageBehaviour : MonoBehaviour
     }
     void SequenceEnter()
     {
-        Debug.Log("EnemyPop Sequence " + sequenceCounter);
+        //Debug.Log("EnemyPop Sequence " + sequenceCounter);
 
         paternCueCounter = 0;
         thisSequenceStartTime = timer;
@@ -428,7 +428,7 @@ public class G20_StageBehaviour : MonoBehaviour
                 return true;
 
             default:
-                Debug.LogWarning("エラー：StageBehaviourのNextStateConditionの設定がおかしい");
+                //Debug.LogWarning("エラー：StageBehaviourのNextStateConditionの設定がおかしい");
                 return true;
         }
     }

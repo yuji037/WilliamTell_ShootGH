@@ -46,7 +46,7 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
         PlayerPrefs.SetFloat("G20_AIMDefault", param.DefaultValue);
         PlayerPrefs.SetFloat("G20_AIMOneChange", param.OneChangeValue);
         PlayerPrefs.Save();
-        Debug.Log("AIMパラメーターをセーブしました。");
+        //Debug.Log("AIMパラメーターをセーブしました。");
     }
     public void LoadAIMParam()
     {
