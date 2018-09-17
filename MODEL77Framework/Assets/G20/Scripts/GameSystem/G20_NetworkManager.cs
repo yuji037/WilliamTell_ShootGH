@@ -155,6 +155,31 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
 
         yield return null;
     }
+
+    public void FpsLogSend(string logtext)
+    {
+
+        if (is_network)
+        {
+            StartCoroutine(FpslogSendCol(logtext));
+
+        }
+    }
+
+
+    IEnumerator FpslogSendCol(string sendtext)
+    {
+        if (!is_network) yield break;
+
+        WWWForm form = new WWWForm();
+        form.AddField("fpslog",sendtext);
+
+        WWW www = new WWW(FPSSendAdress, form);
+        yield return www;
+
+        Debug.Log("sendOK?" + www.text);
+       
+    }
     ////////////////↑送信系↑////////////////////////////
 
 }
