@@ -89,7 +89,7 @@ public static class G20_SEExt {
                 retStr = "forest_BGM";
                 break;
             case G20_SEType.BARRIER:
-                retStr = "barrier_pattern1";
+                retStr = "barrier_pattern2";
                 break;
             case G20_SEType.HIGH_SCORE:
                 retStr = "score";
