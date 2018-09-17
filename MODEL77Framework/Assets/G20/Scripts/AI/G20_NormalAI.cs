@@ -65,7 +65,7 @@ public class G20_NormalAI : G20_AI
             // ターゲットが目の前にいたら攻撃する
             if (distance < attackRange )
             {
-                Debug.Log("攻撃開始");
+                //Debug.Log("攻撃開始");
                 // 攻撃選択
                 yield return StartCoroutine(AttackCoroutine());
 
@@ -95,7 +95,7 @@ public class G20_NormalAI : G20_AI
 
             if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
             {
-                Debug.Log("インゲーム状態を抜けたのでAIを終了");
+                //Debug.Log("インゲーム状態を抜けたのでAIを終了");
                 yield break;
 
             }
@@ -107,11 +107,11 @@ public class G20_NormalAI : G20_AI
     {
         if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
         {
-            Debug.Log("インゲーム状態を抜けたのでAIを終了");
+            //Debug.Log("インゲーム状態を抜けたのでAIを終了");
             yield break;
 
         }
-        Debug.Log("攻撃中");
+        //Debug.Log("攻撃中");
         animPlayer.PlayAnimation(G20_AnimType.Attack);
 
         yield return new WaitForSeconds(attacktime/enemy.Speed);
@@ -137,7 +137,7 @@ public class G20_NormalAI : G20_AI
         {
             if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
             {
-                Debug.Log("インゲーム状態を抜けたのでAIを終了");
+                //Debug.Log("インゲーム状態を抜けたのでAIを終了");
                 yield break;
 
             }
@@ -166,7 +166,7 @@ public class G20_NormalAI : G20_AI
         {
             if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
             {
-                Debug.Log("インゲーム状態を抜けたのでAIを終了");
+                //Debug.Log("インゲーム状態を抜けたのでAIを終了");
                 yield break;
 
             }
@@ -204,7 +204,7 @@ public class G20_NormalAI : G20_AI
         {
             if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
             {
-                Debug.Log("インゲーム状態を抜けたのでAIを終了");
+                //Debug.Log("インゲーム状態を抜けたのでAIを終了");
                 yield break;
 
             }

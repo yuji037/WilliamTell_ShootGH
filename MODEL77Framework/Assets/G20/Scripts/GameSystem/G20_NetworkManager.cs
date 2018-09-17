@@ -55,7 +55,7 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
         WWW www = new WWW("http://api.max-bullet.com/wt/");
         yield return www;
 
-        Debug.Log("接続先IP : " + www.text);
+        //Debug.Log("接続先IP : " + www.text);
 
 
         yield return null;
@@ -67,15 +67,15 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
         
 
         scoreSendAdress = adress + ip + dir + scoreSendFile;
-        Debug.Log("スコア送信アドレス : " + scoreSendAdress);
         scoreReceiveAdress = adress + ip + dir + scoreReceiveFile;
-        Debug.Log("スコア受信アドレス : " + scoreReceiveAdress);
         IDReceiveAdress = adress + ip + dir + IDReceiveFile;
-        Debug.Log("ID受信アドレス : " + IDReceiveAdress);
-        date = DateTime.Now.Month * 100 + DateTime.Now.Day;
-
         FPSSendAdress = adress + ip + dir + FPSSendFile;
-        Debug.Log("FPSLog送信アドレス : " + FPSSendAdress);
+        //Debug.Log("スコア送信アドレス : " + scoreSendAdress);
+        //Debug.Log("スコア受信アドレス : " + scoreReceiveAdress);
+        //Debug.Log("ID受信アドレス : " + IDReceiveAdress);
+        //Debug.Log("FPSLog送信アドレス : " + FPSSendAdress);
+
+        date = DateTime.Now.Month * 100 + DateTime.Now.Day;
         yield return null;
         IDReceive();
         
@@ -94,23 +94,20 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
     //難易度、その日の最高スコア取得
     IEnumerator ScoreReceiveCoroutine()
     {
-        Debug.Log("スコア表受信開始 " 
-            +"\n日付："+date
-            +"\n難易度：" + G20_StageManager.GetInstance().stageType +"("+ (int)G20_StageManager.GetInstance().stageType+")");
+        //Debug.Log("スコア表受信開始 " 
+        //    +"\n日付："+date
+        //    +"\n難易度：" + G20_StageManager.GetInstance().stageType +"("+ (int)G20_StageManager.GetInstance().stageType+")");
+
         WWWForm form = new WWWForm();
         form.AddField("date", date);
         form.AddField("difficulty", (int)G20_StageManager.GetInstance().stageType);
-
-        Debug.Log("スコア受信アドレス : " + scoreReceiveAdress);
-
 
         WWW www = new WWW(scoreReceiveAdress, form);
         yield return www;
 
         string jsonText = "{ \"scoreList\" : " + www.text + "}";
 
-
-        Debug.Log("jsonText" + jsonText);
+        //Debug.Log("jsonText" + jsonText);
 
         userData = JsonUtility.FromJson<G20_SQLModel>(jsonText);
         
@@ -124,7 +121,7 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
     }
     IEnumerator IDReceiveCoroutine()
     {
-        Debug.Log("ID取得");
+        //Debug.Log("ID取得");
         WWW www = new WWW(IDReceiveAdress);
         yield return www;
 
@@ -133,10 +130,10 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
         if (!string.IsNullOrEmpty(www.error))
         {
             is_network = false;
-            Debug.Log("ネットワークエラー");
+            //Debug.Log("ネットワークエラー");
         }
 
-        Debug.Log("ユーザーID : " + userIDstr);
+        //Debug.Log("ユーザーID : " + userIDstr);
         yield return null;
     }
     ////////////////↑受信系↑////////////////////////////
@@ -164,37 +161,32 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
 
         WWW www = new WWW(scoreSendAdress, form);
         yield return www;
-
-
-
-        Debug.Log(www.text);
+        
+        //Debug.Log(www.text);
 
         yield return null;
     }
 
+
     public void FpsLogSend(string logtext)
     {
-
         if (is_network)
         {
             StartCoroutine(FpslogSendCol(logtext));
-
         }
     }
-
 
     IEnumerator FpslogSendCol(string sendtext)
     {
         if (!is_network) yield break;
 
         WWWForm form = new WWWForm();
-        form.AddField("fpslog",sendtext);
+        form.AddField("fpslog", sendtext);
 
         WWW www = new WWW(FPSSendAdress, form);
         yield return www;
 
-        Debug.Log("sendOK?" + www.text);
-       
+        //Debug.Log("sendOK?" + www.text);
     }
     ////////////////↑送信系↑////////////////////////////
 

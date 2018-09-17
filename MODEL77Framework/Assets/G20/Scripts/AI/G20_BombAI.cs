@@ -86,7 +86,7 @@ public class G20_BombAI : G20_AI
 
             if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
             {
-                Debug.Log("インゲーム状態を抜けたのでAIを終了");
+                //Debug.Log("インゲーム状態を抜けたのでAIを終了");
                 yield break;
             }
 
@@ -99,10 +99,10 @@ public class G20_BombAI : G20_AI
         enemy.isSuperArmor = true;
         if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
         {
-            Debug.Log("インゲーム状態を抜けたのでAIを終了");
+            //Debug.Log("インゲーム状態を抜けたのでAIを終了");
             yield break;
         }
-        Debug.Log("攻撃中");
+        //Debug.Log("攻撃中");
         animPlayer.PlayAnimation(G20_AnimType.Attack);
 
         //なげるアニメーションの実行
@@ -138,7 +138,7 @@ public class G20_BombAI : G20_AI
         {
             if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
             {
-                Debug.Log("インゲーム状態を抜けたのでAIを終了");
+                //Debug.Log("インゲーム状態を抜けたのでAIを終了");
                 yield break;
             }
             transform.position += moveVec * AITime;
@@ -168,7 +168,7 @@ public class G20_BombAI : G20_AI
         {
             if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
             {
-                Debug.Log("インゲーム状態を抜けたのでAIを終了");
+                //Debug.Log("インゲーム状態を抜けたのでAIを終了");
                 yield break;
 
             }
@@ -202,7 +202,7 @@ public class G20_BombAI : G20_AI
         {
             if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
             {
-                Debug.Log("インゲーム状態を抜けたのでAIを終了");
+                //Debug.Log("インゲーム状態を抜けたのでAIを終了");
                 yield break;
 
             }

@@ -98,7 +98,7 @@ public class G20_SmallAI : G20_AI
 
             if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
             {
-                Debug.Log("インゲーム状態を抜けたのでAIを終了");
+                //Debug.Log("インゲーム状態を抜けたのでAIを終了");
                 yield break;
 
             }
@@ -109,14 +109,14 @@ public class G20_SmallAI : G20_AI
     {
         if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
         {
-            Debug.Log("インゲーム状態を抜けたのでAIを終了");
+            //Debug.Log("インゲーム状態を抜けたのでAIを終了");
             yield break;
 
         }
 
-        Debug.Log("攻撃中");
+        //Debug.Log("攻撃中");
         G20_EnemyAttack.GetInstance().Attack(enemy.Attack);
-        Debug.Log("攻撃終了");
+       // Debug.Log("攻撃終了");
        
     }
 
@@ -136,7 +136,7 @@ public class G20_SmallAI : G20_AI
         {
             if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
             {
-                Debug.Log("インゲーム状態を抜けたのでAIを終了");
+                //Debug.Log("インゲーム状態を抜けたのでAIを終了");
                 yield break;
 
             }
@@ -161,7 +161,7 @@ public class G20_SmallAI : G20_AI
         {
             if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
             {
-                Debug.Log("インゲーム状態を抜けたのでAIを終了");
+                //Debug.Log("インゲーム状態を抜けたのでAIを終了");
                 yield break;
 
             }
@@ -208,7 +208,7 @@ public class G20_SmallAI : G20_AI
         {
             if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
             {
-                Debug.Log("インゲーム状態を抜けたのでAIを終了");
+                //Debug.Log("インゲーム状態を抜けたのでAIを終了");
                 yield break;
 
             }

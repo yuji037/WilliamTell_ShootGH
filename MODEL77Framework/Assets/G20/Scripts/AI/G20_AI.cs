@@ -107,7 +107,7 @@ public abstract class G20_AI : MonoBehaviour
         {
             if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
             {
-                Debug.Log("インゲーム状態を抜けたのでAIを終了");
+                //Debug.Log("インゲーム状態を抜けたのでAIを終了");
                 yield break;
             }
 
@@ -117,7 +117,7 @@ public abstract class G20_AI : MonoBehaviour
             {
                 if (!enemy.IsLife) yield break;
 
-                Debug.Log("自殺");
+                //Debug.Log("自殺");
                 GetComponent<G20_Unit>().ExecuteDeathAction();
                 Destroy(gameObject);
 
