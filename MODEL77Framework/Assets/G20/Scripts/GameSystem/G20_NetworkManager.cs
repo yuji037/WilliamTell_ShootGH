@@ -16,12 +16,12 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
     [SerializeField] string scoreSendFile = "ScoreReceive.php";
     [SerializeField] string scoreReceiveFile = "ScoreSend.php";
     [SerializeField] string IDReceiveFile = "IDSend.php";
-
+    string FPSSendFile = "FPSlogReceive.php";
 
     string scoreSendAdress;
     string scoreReceiveAdress;
     string IDReceiveAdress;
-
+    string FPSSendAdress;
 
     int date;
 
@@ -70,8 +70,12 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
         Debug.Log("ID受信アドレス : " + IDReceiveAdress);
         date = DateTime.Now.Month * 100 + DateTime.Now.Day;
 
+        FPSSendAdress = adress + ip + dir + FPSSendFile;
+        Debug.Log("FPSLog送信アドレス : " + FPSSendAdress);
         yield return null;
         IDReceive();
+        
+      
     }
 
 
@@ -121,6 +125,13 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
         yield return www;
 
         userIDstr = www.text;
+
+        if (!string.IsNullOrEmpty(www.error))
+        {
+            is_network = false;
+            Debug.Log("ネットワークエラー");
+        }
+
         Debug.Log("ユーザーID : " + userIDstr);
         yield return null;
     }
@@ -138,6 +149,7 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
     }
     IEnumerator ScoreSendCoroutine()
     {
+        if (!is_network) yield break;
 
         WWWForm form = new WWWForm();
         form.AddField("userinfo", "Guest");
