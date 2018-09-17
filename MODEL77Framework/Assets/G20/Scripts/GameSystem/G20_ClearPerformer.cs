@@ -41,16 +41,10 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     Animator clearFadeanimator;
 
     public int scorecount = 0;
-
     float balanceNum;
     public void Excute(Action on_end_action)
     {
         StartCoroutine(FallAppleRoutine(on_end_action));
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(fallPoint, fallSize * 2);
     }
     IEnumerator FallAppleRoutine(Action on_end_action)
     {
@@ -154,12 +148,12 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         
         if (G20_NetworkManager.GetInstance().is_network)
         {
-            creatorsHighScore.text = "110";//後日入れるかどうするか悩み中
+            creatorsHighScore.text = G20_NetworkManager.GetInstance().creatorScore.ToString();//後日入れるかどうするか悩み中
             dailyHighScore.text = G20_NetworkManager.GetInstance().userData.scoreList[0].score;
         }
         else
         {
-            creatorsHighScore.text = "110";
+            creatorsHighScore.text = G20_NetworkManager.GetInstance().creatorScore.ToString();
             dailyHighScore.text = "80";
         }
 

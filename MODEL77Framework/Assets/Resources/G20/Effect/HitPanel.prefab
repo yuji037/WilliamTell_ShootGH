@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4205852354457330}
   - component: {fileID: 198539988003278912}
   - component: {fileID: 199132553326419160}
+  - component: {fileID: 114692280625180794}
   m_Layer: 5
   m_Name: HitPanel
   m_TagString: Untagged
@@ -72,6 +73,18 @@ Transform:
   m_Father: {fileID: 4205852354457330}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114692280625180794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1273337256439012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b6bd7e612c5d94fa3a7a46db37cf8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 5
 --- !u!198 &198539988003278912
 ParticleSystem:
   m_ObjectHideFlags: 1

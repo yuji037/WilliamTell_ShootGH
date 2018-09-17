@@ -13,32 +13,38 @@ public class G20_PlayDebugger : MonoBehaviour
     [SerializeField] Text ShotCountText;
     [SerializeField] Text Description;
     [SerializeField] Text LogText;
+    [SerializeField] Text CreatorScore;
     Coroutine logCoroutine;
     bool DebugActive;
     G20_DebugAutoShooter autoShooter;
     private void Awake()
     {
         DebugActivate(false);
-        if (Description) Description.text ="F3(Debug)"+"\n"
-                +"I(Invin)" + "\n"
-                  + "C(Clear)"+"\n"
+        if (Description) Description.text = "F3(Debug)" + "\n"
+                + "I(Invin)" + "\n"
+                  + "C(Clear)" + "\n"
                   + "U(UpScore)" + "\n"
                   + "G(UpGoldPoint)" + "\n"
                   + "S(ShotCheat)" + "\n"
-                  + "←(EneSpe)→" + "\n";
+                  + "←(EneSpe)→" + "\n"
+                  + "O(CreSco10)P" + "\n"
+                  + "K(CreSco1)L" + "\n"
+                  + "F12(CreScoSave)" + "\n";
         autoShooter = G20_ComponentUtility.FindComponentOnScene<G20_DebugAutoShooter>();
+        G20_NetworkManager.GetInstance().creatorScore = LoadCreatorsScore();
+        CreatorScore.text = "CreatorScore:"+G20_NetworkManager.GetInstance().creatorScore.ToString();
     }
     void ShowLog(string _log, float duration_time)
     {
-        if (logCoroutine!=null)
+        if (logCoroutine != null)
         {
             StopCoroutine(logCoroutine);
         }
-        logCoroutine=StartCoroutine(ShowLogRoutine(_log, duration_time));
+        logCoroutine = StartCoroutine(ShowLogRoutine(_log, duration_time));
     }
-    IEnumerator ShowLogRoutine(string _log,float duration_time)
+    IEnumerator ShowLogRoutine(string _log, float duration_time)
     {
-        LogText.text=_log;
+        LogText.text = _log;
         LogText.gameObject.SetActive(true);
         yield return new WaitForSeconds(duration_time);
         LogText.gameObject.SetActive(false);
@@ -71,7 +77,46 @@ public class G20_PlayDebugger : MonoBehaviour
             InputSaveAIM();
             InputPlusScore();
             InputChangeAutoShoot();
+            InputCreatorScore();
         }
+    }
+    void InputCreatorScore()
+    {
+        int addScore = 0;
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            addScore -= 10;
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            addScore += 10;
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            addScore -= 1;
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            addScore += 1;
+        }
+        if (addScore != 0)
+        {
+            G20_NetworkManager.GetInstance().creatorScore += addScore;
+            CreatorScore.text = "CreatorScore:" + G20_NetworkManager.GetInstance().creatorScore.ToString();
+        }
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            SaveCreatorsScore();
+        }
+    }
+    void SaveCreatorsScore()
+    {
+        PlayerPrefs.SetInt("G20_CreSco",G20_NetworkManager.GetInstance().creatorScore);
+        PlayerPrefs.Save();
+    }
+    int LoadCreatorsScore()
+    {
+        return PlayerPrefs.GetInt("G20_CreSco", G20_NetworkManager.GetInstance().creatorScore);
     }
     void InputChangeAutoShoot()
     {
@@ -82,19 +127,19 @@ public class G20_PlayDebugger : MonoBehaviour
     }
     void InputSaveAIM()
     {
-        if(Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             G20_BulletShooter.GetInstance().SaveAIMParam();
-            ShowLog("AIMParamをSaveしました",1.0f);
+            ShowLog("AIMParamをSaveしました", 1.0f);
         }
     }
-   void InputPlusScore()
+    void InputPlusScore()
     {
         if (Input.GetKeyDown(KeyCode.U))
         {
             G20_Score.GetInstance().AddScore(10);
         }
-        if ( Input.GetKeyDown(KeyCode.G) )
+        if (Input.GetKeyDown(KeyCode.G))
         {
             G20_Score.GetInstance().AddGoldPoint(1);
         }
@@ -166,8 +211,8 @@ public class G20_PlayDebugger : MonoBehaviour
             + "A(AMAX)D : " + G20_BulletShooter.GetInstance().param.MaxValue + "\n"
             + "1(AOne)2 : " + G20_BulletShooter.GetInstance().param.OneChangeValue + "\n"
             + "3(ADefault)4 : " + G20_BulletShooter.GetInstance().param.DefaultValue + "\n"
-            + "Tab(AIMSave)"+"\n";
-        ShotCountText.text = "ShotCount : "+G20_BulletShooter.GetInstance().ShotCount;
+            + "Tab(AIMSave)" + "\n";
+        ShotCountText.text = "ShotCount : " + G20_BulletShooter.GetInstance().ShotCount;
 
     }
 }

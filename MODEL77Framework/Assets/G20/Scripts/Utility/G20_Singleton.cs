@@ -45,5 +45,9 @@ where T : G20_Singleton<T>
             Destroy(this);
         }
     }
+    protected void OnDestroy()
+    {
+        instance = null;
+    }
 }
 

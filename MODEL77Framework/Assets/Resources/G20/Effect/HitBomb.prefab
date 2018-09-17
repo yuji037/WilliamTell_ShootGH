@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 4720747894810862}
   - component: {fileID: 198680675744324400}
   - component: {fileID: 199814887778849314}
+  - component: {fileID: 114329790697239036}
   m_Layer: 0
   m_Name: HitBomb
   m_TagString: Untagged
@@ -165,6 +166,18 @@ Transform:
   m_Father: {fileID: 4720747894810862}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &114329790697239036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1594253415332830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b6bd7e612c5d94fa3a7a46db37cf8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 5
 --- !u!198 &198312676365109940
 ParticleSystem:
   m_ObjectHideFlags: 1

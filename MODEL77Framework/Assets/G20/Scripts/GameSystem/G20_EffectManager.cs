@@ -71,7 +71,6 @@ public class G20_EffectManager : G20_Singleton<G20_EffectManager>
     {
         var obj = Instantiate(effectPrefabs[(int)effectType], transform);
         obj.transform.position = position;
-        Destroy(obj, 5.0f);
         return obj;
     }
 }

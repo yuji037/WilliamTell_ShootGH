@@ -14,13 +14,22 @@ public class G20_FPSSaver : MonoBehaviour {
     {
         if (isSaving)
         {
-            StreamWriter sw;
-            FileInfo fi;
-            fi = new FileInfo(Application.dataPath+ logPath + "/FPSLog.csv");
-            sw = fi.AppendText();
-            sw.WriteLine(System.DateTime.Now.ToString()+"  "+"FPS:"+counter.GetGameFPS());
-            sw.Flush();
-            sw.Close();
+            string logData = System.DateTime.Now.ToString() + "  " + "FPS:" + counter.GetGameFPS();
+            if (G20_NetworkManager.GetInstance().is_network)
+            {
+                G20_NetworkManager.GetInstance().FpsLogSend(logData);
+            }
+            else
+            {
+                //後でネットワーク
+                StreamWriter sw;
+                FileInfo fi;
+                fi = new FileInfo(Application.dataPath + logPath + "/FPSLog.csv");
+                sw = fi.AppendText();
+                sw.WriteLine(logData);
+                sw.Flush();
+                sw.Close();
+            }
         }
     }
 }

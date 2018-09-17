@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 23186055063529764}
   - component: {fileID: 102354263769256916}
   - component: {fileID: 114931467434966628}
+  - component: {fileID: 114984488802046428}
   m_Layer: 0
   m_Name: PlusOneScore
   m_TagString: Untagged
@@ -109,3 +110,15 @@ MonoBehaviour:
   textMesh: {fileID: 102354263769256916}
   lifeDuration: 1
   floatingValue: 1
+--- !u!114 &114984488802046428
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1719382952090564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b6bd7e612c5d94fa3a7a46db37cf8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 5

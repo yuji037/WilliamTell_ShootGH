@@ -10,4 +10,16 @@ public class G20_AutoDestroy : MonoBehaviour {
 	void Start () {
         Destroy(gameObject, destroyTime);
 	}
+    private void OnDestroy()
+    {
+        // レンダラのマテリアルを破棄(パーティクルシステムのレンダラも含まれる)
+        var thisRenderer = this.GetComponent<Renderer>();
+        if (thisRenderer != null && thisRenderer.materials != null)
+        {
+            foreach (var m in thisRenderer.materials)
+            {
+                DestroyImmediate(m);
+            }
+        }
+    }
 }

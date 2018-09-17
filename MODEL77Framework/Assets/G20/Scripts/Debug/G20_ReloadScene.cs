@@ -21,4 +21,9 @@ public class G20_ReloadScene : G20_Singleton<G20_ReloadScene>
             SceneManager.LoadScene(SubSceneName,LoadSceneMode.Additive);
         }
     }
+    private void OnDestroy()
+    {
+        ReloadAction = null;
+        base.OnDestroy();
+    }
 }

@@ -101,4 +101,9 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
             }
         }
     }
+    private void OnDestroy()
+    {
+        GetShtPointFunc = null;
+        base.OnDestroy();
+    }
 }

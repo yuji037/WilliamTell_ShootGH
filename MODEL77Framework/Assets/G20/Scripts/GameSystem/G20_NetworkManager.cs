@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
 {
+    //TGS用のクリエイタースコア
+    public int creatorScore;
+
     public G20_SQLModel userData;
 
     string userIDstr;
@@ -22,6 +25,7 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
     string scoreReceiveAdress;
     string IDReceiveAdress;
     string FPSSendAdress;
+
 
     int date;
 

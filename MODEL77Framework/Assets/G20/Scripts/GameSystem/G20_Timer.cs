@@ -29,4 +29,9 @@ public class G20_Timer : G20_Singleton<G20_Timer> {
             TimerZeroAction();
         }
     }
+    private void OnDestroy()
+    {
+        TimerZeroAction = null;
+        base.OnDestroy();
+    }
 }

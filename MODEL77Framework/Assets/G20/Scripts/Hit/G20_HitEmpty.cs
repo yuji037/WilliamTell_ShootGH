@@ -9,4 +9,8 @@ public class G20_HitEmpty : G20_HitAction {
     {
         if (hitAction != null) hitAction();
     }
+    private void OnDestroy()
+    {
+        hitAction = null;
+    }
 }

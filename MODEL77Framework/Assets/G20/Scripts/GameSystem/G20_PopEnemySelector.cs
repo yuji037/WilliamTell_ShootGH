@@ -51,8 +51,10 @@ public class G20_PopEnemySelector : MonoBehaviour {
             else
             {
                 Destroy(AIs[i]);
+                AIs[i] = null;
             }
         }
+        
         enemy.SetEnemyAI(selectAI);
         return enemyObj;
     }

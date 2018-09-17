@@ -15,6 +15,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
 
     private bool _isGameEnd;
     public event System.Action<G20_GameState> ChangedStateAction;
+   
     G20_GameState gState = G20_GameState.TITLE;
     public G20_GameState gameState {
         get { return gState; }
@@ -251,7 +252,12 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         yield return new WaitForSeconds(delay);
         gameRootAnim.enabled = false;
     }
-
+    void OnDestroy()
+    {
+        ChangedStateAction = null;
+        OnGameEndAction = null;
+        base.OnDestroy();
+    }
     public void GameEnd()
     {
         Time.timeScale = 1f;

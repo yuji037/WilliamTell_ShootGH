@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 199623900052775294}
   - component: {fileID: 108750034948725846}
   - component: {fileID: 95739821927841444}
+  - component: {fileID: 114457993482632606}
   m_Layer: 0
   m_Name: SummonApple
   m_TagString: Untagged
@@ -158,6 +159,18 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114457993482632606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1230672215763992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b6bd7e612c5d94fa3a7a46db37cf8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 5
 --- !u!198 &198121981644456622
 ParticleSystem:
   m_ObjectHideFlags: 1
