@@ -9,12 +9,12 @@ public class G20_FPSCounter : MonoBehaviour
     [SerializeField] float showFPSDuration;
     [SerializeField] bool isShowFPS;
     Coroutine fpsCoroutine;
-    float gameStartTime=0f;
+    float gameStartTime = 0f;
     int gameFrameCount = 0;
     public float GetGameFPS()
     {
         var gameTime = Time.time - gameStartTime;
-        return((float)gameFrameCount / gameTime);
+        return ((float)gameFrameCount / gameTime);
     }
     // Use this for initialization
     void Awake()
@@ -40,21 +40,19 @@ public class G20_FPSCounter : MonoBehaviour
                 yield return null;
                 //FPS算出
                 float fps = (frameCount / timer);
-               if(isShowFPS)ShowFPS(fps);
+                if (isShowFPS) ShowFPS(fps);
             }
 
         }
     }
     void ShowFPS(float _fps)
     {
-        if (_fps < 60.0f)
-        {
-            fpsText.text = "FPS:" + (int)_fps;
-            //前のコルーチンを削除
-            if (fpsCoroutine != null) StopCoroutine(fpsCoroutine);
-            //表示コルーチン
-            fpsCoroutine = StartCoroutine(ShowRoutine(_fps));
-        }
+        fpsText.text = "FPS:" + (int)_fps;
+        //前のコルーチンを削除
+        if (fpsCoroutine != null) StopCoroutine(fpsCoroutine);
+        //表示コルーチン
+        fpsCoroutine = StartCoroutine(ShowRoutine(_fps));
+
     }
     IEnumerator ShowRoutine(float _fps)
     {

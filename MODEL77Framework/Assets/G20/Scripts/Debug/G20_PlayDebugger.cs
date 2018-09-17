@@ -17,6 +17,7 @@ public class G20_PlayDebugger : MonoBehaviour
     Coroutine logCoroutine;
     bool DebugActive;
     G20_DebugAutoShooter autoShooter;
+    int editingCreScoNumber=0;
     private void Awake()
     {
         DebugActivate(false);
@@ -31,8 +32,9 @@ public class G20_PlayDebugger : MonoBehaviour
                   + "K(CreSco1)L" + "\n"
                   + "F12(CreScoSave)" + "\n";
         autoShooter = G20_ComponentUtility.FindComponentOnScene<G20_DebugAutoShooter>();
-        G20_NetworkManager.GetInstance().creatorScore = LoadCreatorsScore();
-        CreatorScore.text = "CreatorScore:"+G20_NetworkManager.GetInstance().creatorScore.ToString();
+        G20_NetworkManager.GetInstance().creatorScore[0] = LoadCreatorsScore(0);
+        G20_NetworkManager.GetInstance().creatorScore[1] = LoadCreatorsScore(1);
+        UpdateCreScoText();
     }
     void ShowLog(string _log, float duration_time)
     {
@@ -82,6 +84,12 @@ public class G20_PlayDebugger : MonoBehaviour
     }
     void InputCreatorScore()
     {
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            if (editingCreScoNumber == 0) editingCreScoNumber = 1;
+            else if (editingCreScoNumber == 1) editingCreScoNumber = 0;
+            UpdateCreScoText();
+        }
         int addScore = 0;
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -99,24 +107,30 @@ public class G20_PlayDebugger : MonoBehaviour
         {
             addScore += 1;
         }
+
         if (addScore != 0)
         {
-            G20_NetworkManager.GetInstance().creatorScore += addScore;
-            CreatorScore.text = "CreatorScore:" + G20_NetworkManager.GetInstance().creatorScore.ToString();
+            G20_NetworkManager.GetInstance().creatorScore[editingCreScoNumber] += addScore;
+            UpdateCreScoText();
         }
         if (Input.GetKeyDown(KeyCode.F12))
         {
             SaveCreatorsScore();
         }
     }
+    void UpdateCreScoText()
+    {
+        CreatorScore.text = "(F6)change(F12)Save\nCreatorScore:[" + editingCreScoNumber + "]" + G20_NetworkManager.GetInstance().creatorScore[editingCreScoNumber].ToString();
+    }
     void SaveCreatorsScore()
     {
-        PlayerPrefs.SetInt("G20_CreSco",G20_NetworkManager.GetInstance().creatorScore);
+        PlayerPrefs.SetInt("G20_CreSco"+editingCreScoNumber,G20_NetworkManager.GetInstance().creatorScore[editingCreScoNumber]);
         PlayerPrefs.Save();
+        ShowLog("CreSco"+editingCreScoNumber+"をSaveしました", 1.0f);
     }
-    int LoadCreatorsScore()
+    int LoadCreatorsScore(int num)
     {
-        return PlayerPrefs.GetInt("G20_CreSco", G20_NetworkManager.GetInstance().creatorScore);
+        return PlayerPrefs.GetInt("G20_CreSco" + num, 0);
     }
     void InputChangeAutoShoot()
     {

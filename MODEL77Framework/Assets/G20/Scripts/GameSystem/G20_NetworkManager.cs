@@ -7,7 +7,7 @@ using UnityEngine;
 public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
 {
     //TGS用のクリエイタースコア
-    public int creatorScore;
+    [NonSerialized]public int[] creatorScore=new int[2];
 
     public G20_SQLModel userData;
 
