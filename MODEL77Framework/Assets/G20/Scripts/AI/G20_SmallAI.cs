@@ -177,6 +177,7 @@ public class G20_SmallAI : G20_AI
         if ( !enemy.IsLife ) yield break;
         //ジャンプモーション開始
         animPlayer.PlayAnimation(G20_AnimType.Jump);
+        G20_SEManager.GetInstance().Play(G20_SEType.SMALL_APPLE_ATTACK, Vector3.zero, false);
         yield return new WaitForSeconds(1.0f/enemy.anim.AnimSpeed);
         //放物線
         float hight = 0;
