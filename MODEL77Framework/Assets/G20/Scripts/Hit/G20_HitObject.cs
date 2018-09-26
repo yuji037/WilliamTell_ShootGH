@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[Flags]
 public enum G20_HitTag
 {
     NORMAL = 0X001,

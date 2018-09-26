@@ -27,6 +27,7 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
     //AIM補正の値
     public float aimAssistValue = 0f;
     int shotCount;
+    //プレイヤーのInput以外で着弾座標を決める時に実行するFunc(例：自動射撃など)
     Func<Vector2?> GetShtPointFunc;
     public void ChangeGetShotPointFunc(Func<Vector2?> getShtPointFunc)
     {
@@ -61,45 +62,64 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
     }
     private void Update()
     {
- 
-       
-        Vector2? shotPoint = null;
+        Vector2? shootPoint = G20_InputPointGetter.GetInstance().GetInputPoint();
 
-        shotPoint = G20_InputPointGetter.GetInstance().GetInputPoint();
-        
-        if (shotPoint != null) shotCount++;
-        if (shotPoint == null&&GetShtPointFunc!=null)
+        if (!CanShoot) return;
+
+        if (shootPoint==null&& GetShtPointFunc != null)
         {
-            shotPoint = GetShtPointFunc();
+            shootPoint = GetShtPointFunc();
         }
-        if (CanShoot && shotPoint != null)
-        {
 
-            Vector3 hitPoint = Vector3.zero;
-            //AIM補正
+        if (CanShoot && shootPoint != null)
+        {
+            shotCount++;
+            //AIM補正の値をshotPointに代入
             if (aimAssistValue > 0)
             {
-                shotPoint = G20_AIMAssistant.AssistAIM((Vector2)shotPoint, aimAssistValue);
+                shootPoint = G20_AIMAssistant.AssistAIM((Vector2)shootPoint, aimAssistValue);
             }
-            var hitObj = G20_RayShooter.GetHitObject((Vector2)shotPoint, ref hitPoint,Camera.main, fieldMask);
-            if (hitObj)
-            {
-                hitObj.ExcuteActions(hitPoint);
-                aimAssistValue -= param.OneChangeValue;
-            }
-            else
-            {
-                aimAssistValue += param.OneChangeValue;
-            }
-            aimAssistValue = Mathf.Clamp(aimAssistValue, 0, param.MaxValue);
-            //effect出す用のパネルのRay判定
-            Vector3 panelhitPoint = Vector3.zero;
-            var hitPanel = G20_RayShooter.GetHitObject((Vector2)shotPoint, ref panelhitPoint,effectCamera,panelMask);
-            if (hitPanel)
-            {
-                hitPanel.ExcuteActions(panelhitPoint);
-            }
+
+            var hitObject = ShootHitObject((Vector2)shootPoint);
+
+            ShootPanel((Vector2)shootPoint);
+
         }
+    }
+    G20_HitObject ShootHitObject(Vector2 shootPoint)
+    {
+        Vector3 hitPoint = Vector3.zero;
+        var hitObject = G20_RayShooter.GetHitObject(shootPoint, ref hitPoint, Camera.main, fieldMask);
+        //aimAssistの値を増減
+        AdjustAIMAssist(hitObject);
+        if (hitObject)
+        {
+          
+            hitObject.ExcuteActions(hitPoint);
+        }
+        return hitObject;
+    }
+    G20_HitObject ShootPanel(Vector2 shootPoint)
+    {
+        Vector3 panelhitPoint = Vector3.zero;
+        var hitPanel = G20_RayShooter.GetHitObject(shootPoint, ref panelhitPoint, effectCamera, panelMask);
+        if (hitPanel)
+        {
+            hitPanel.ExcuteActions(panelhitPoint);
+        }
+        return hitPanel;
+    }
+    void AdjustAIMAssist(G20_HitObject hitObject)
+    {
+        if (hitObject && (hitObject.HitTag == G20_HitTag.ASSIST))
+        {
+            aimAssistValue -= param.OneChangeValue;
+        }
+        else
+        {
+            aimAssistValue += param.OneChangeValue;
+        }
+        aimAssistValue = Mathf.Clamp(aimAssistValue, 0, param.MaxValue);
     }
     private void OnDestroy()
     {
