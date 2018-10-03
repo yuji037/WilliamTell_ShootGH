@@ -1201,6 +1201,7 @@ GameObject:
   - component: {fileID: 114097652476467726}
   - component: {fileID: 114645434565230548}
   - component: {fileID: 114721877903200404}
+  - component: {fileID: 114171981278495680}
   m_Layer: 5
   m_Name: Small
   m_TagString: Untagged
@@ -3657,6 +3658,28 @@ MonoBehaviour:
     HeadRate: 5
   speed: 2
   isSuperArmor: 0
+--- !u!114 &114171981278495680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1624674485546374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e50c4bfb365f80c479e95cc670009ed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPouse: 0
+  enemy: {fileID: 0}
+  attackRange: 3
+  deathposition_y: -2
+  deathvec: {x: 0, y: -2, z: 0}
+  attacktime: 1
+  changePhase: 5
+  rotationTime: 1
+  gravity: 0.9
+  init_v: 1.2
+  rotspeed: 0.3
 --- !u!114 &114282343669644676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3669,6 +3692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectType: 0
+  isCorrect: 1
 --- !u!114 &114562488254360678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3694,7 +3718,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50966d0e787ced94bbdd40964d9b4371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastAnim: 5
   animator: {fileID: 95024313387410260}
 --- !u!114 &114701395011025104
 MonoBehaviour:

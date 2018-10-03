@@ -198,8 +198,8 @@ public class G20_NormalAI : G20_AI
 
     IEnumerator RotateCoroutine()
     {
-       
 
+        bool _isRight = isRight;
         for (float t = 0; t < rotationTime; t += AITime )
         {
             if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
@@ -208,7 +208,7 @@ public class G20_NormalAI : G20_AI
                 yield break;
 
             }
-            transform.Rotate(0, rot * AITime *(isRight ? 1 : -1), 0);
+            transform.Rotate(0, rot * AITime *(_isRight ? 1 : -1), 0);
             transform.position += transform.forward * (AITime / 2);
 
             yield return null;

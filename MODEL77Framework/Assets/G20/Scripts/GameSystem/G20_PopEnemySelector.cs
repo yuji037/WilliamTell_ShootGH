@@ -31,7 +31,7 @@ public class G20_PopEnemySelector : MonoBehaviour {
             case G20_EnemyType.BOMB_STRAIGHT:
                 return SelectEnemyAI<G20_BombStraightAI>(G20_EnemyModelType.Bomb);
             case G20_EnemyType.SMALL_STRAIGHT:
-                return SelectEnemyAI<G20_SmallAI>(G20_EnemyModelType.Small);
+                return SelectEnemyAI<G20_SmallStraightAI>(G20_EnemyModelType.Small);
         }
         return null;
     }

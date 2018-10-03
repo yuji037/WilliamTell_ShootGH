@@ -196,7 +196,7 @@ public class G20_BombAI : G20_AI
 
     IEnumerator RotateCoroutine()
     {
-
+        bool _isRight = isRight;
 
         for (float t = 0; t < rotationTime; t += AITime)
         {
@@ -207,7 +207,7 @@ public class G20_BombAI : G20_AI
 
             }
 
-            moveVec = Quaternion.Euler(0, rot * AITime * (isRight ? 1 : -1), 0) * moveVec;
+            moveVec = Quaternion.Euler(0, rot * AITime * (_isRight ? 1 : -1), 0) * moveVec;
             transform.Rotate(0, bombrot_speed * AITime, 0);
 
             transform.position += moveVec * (AITime / 2);
