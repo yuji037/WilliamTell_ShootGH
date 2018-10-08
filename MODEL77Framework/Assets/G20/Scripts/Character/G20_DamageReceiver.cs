@@ -23,7 +23,7 @@ public class G20_DamageReceiver
                     case G20_DamageType.HEAD:
                         _damage *= (int)HeadRate;
                         G20_EffectManager.GetInstance().Create(G20_EffectType.PLUS_ONE_SCORE, owner.Head.position);
-                        G20_Score.GetInstance().AddScore(1);
+                        G20_ScoreManager.GetInstance().Base.AddScore(1);
                         break;
                     case G20_DamageType.BODY:
                         break;
@@ -39,7 +39,7 @@ public class G20_DamageReceiver
                         score = _damage / (int)HeadRate;
                         var obj = G20_EffectManager.GetInstance().Create(G20_EffectType.PLUS_ONE_SCORE, owner.Head.position);
                         obj.GetComponent<TextMesh>().text = "+" + score;
-                        G20_Score.GetInstance().AddScore(score);
+                        G20_ScoreManager.GetInstance().Base.AddScore(score);
                         break;
                     case G20_DamageType.BODY:
                         break;

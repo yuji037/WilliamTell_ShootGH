@@ -15,7 +15,7 @@ public class G20_HitScore : G20_HitAction
         if (!RecvArmor())
         {
             G20_EffectManager.GetInstance().Create(G20_EffectType.PLUS_ONE_SCORE,hit_point);
-            G20_Score.GetInstance().AddScore(scoreValue);
+            G20_ScoreManager.GetInstance().Base.AddScore(scoreValue);
             canHitValue--;
         }
     }

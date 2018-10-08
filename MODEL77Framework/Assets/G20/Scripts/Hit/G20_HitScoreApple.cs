@@ -48,7 +48,7 @@ public class G20_HitScoreApple : G20_HitAction {
     public override void Execute(Vector3 hit_point)
     {
         G20_EffectManager.GetInstance().Create(G20_EffectType.PLUS_ONE_SCORE, hit_point);
-        G20_Score.GetInstance().AddScore(1);
+        G20_ScoreManager.GetInstance().Base.AddScore(1);
         score--;
 
         //foreach(var ps in particleSystems )
@@ -70,7 +70,7 @@ public class G20_HitScoreApple : G20_HitAction {
         {
             if(scoreMax == 3 )
             {
-                G20_Score.GetInstance().AddGoldPoint(1);
+                G20_ScoreManager.GetInstance().GoldPoint.AddScore(1);
             }
 
             GetComponent<Collider>().enabled = false;

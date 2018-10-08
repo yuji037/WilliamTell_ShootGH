@@ -168,7 +168,7 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
         WWWForm form = new WWWForm();
         form.AddField("userinfo", "Guest");
         form.AddField("date", date);
-        form.AddField("score", G20_Score.GetInstance().Score);
+        form.AddField("score", G20_ScoreManager.GetInstance().GetSumScore());
         form.AddField("ID", userIDstr);
         form.AddField("difficulty", (int)G20_StageManager.GetInstance().stageType);//どっかからとってこれるようにする？
 

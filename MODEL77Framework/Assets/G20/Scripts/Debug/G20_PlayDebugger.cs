@@ -175,11 +175,11 @@ public class G20_PlayDebugger : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.U))
         {
-            G20_Score.GetInstance().AddScore(10);
+            G20_ScoreManager.GetInstance().Base.AddScore(10);
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
-            G20_Score.GetInstance().AddGoldPoint(1);
+            G20_ScoreManager.GetInstance().GoldPoint.AddScore(1);
         }
     }
     void InputEnemySpeed()

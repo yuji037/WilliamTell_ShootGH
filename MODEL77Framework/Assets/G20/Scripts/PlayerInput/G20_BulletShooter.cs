@@ -26,7 +26,8 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
     public bool CanShoot = true;
     //AIM補正の値
     public float aimAssistValue = 0f;
-    int shotCount;
+    //HitObjectに弾が当たった時のAction
+    public event Action<G20_HitObject> ActionHitObject;
     //プレイヤーのInput以外で着弾座標を決める時に実行するFunc(例：自動射撃など)
     Func<Vector2?> GetShtPointFunc;
     public void ChangeGetShotPointFunc(Func<Vector2?> getShtPointFunc)
@@ -37,10 +38,9 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
     {
         GetShtPointFunc = null;
     }
-    public int ShotCount
-    {
-        get { return shotCount; }
-    }
+    public int ShotCount { get; private set; }
+    public int AssistHitCount { get; private set;}
+    public float HitRate { get; private set; }
     public void SaveAIMParam()
     {
         PlayerPrefs.SetFloat("G20_AIMMax", param.MaxValue);
@@ -55,6 +55,7 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
        param.DefaultValue= PlayerPrefs.GetFloat("G20_AIMDefault", 40);
        param.OneChangeValue= PlayerPrefs.GetFloat("G20_AIMOneChange", 3);
     }
+    
     private void Start()
     {
         LoadAIMParam();
@@ -71,16 +72,21 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
             shootPoint = GetShtPointFunc();
         }
 
-        if (CanShoot && shootPoint != null)
+        if (shootPoint != null)
         {
-            shotCount++;
-            //AIM補正の値をshotPointに代入
+            ShotCount++;
             if (aimAssistValue > 0)
             {
+                //AIM補正の値をshotPointに代入
                 shootPoint = G20_AIMAssistant.AssistAIM((Vector2)shootPoint, aimAssistValue);
             }
 
-            var hitObject = ShootHitObject((Vector2)shootPoint);
+            var hitObject=ShootHitObject((Vector2)shootPoint);
+            if (hitObject&&hitObject.HitTag == G20_HitTag.ASSIST)
+            {
+                AssistHitCount++;
+            }
+            HitRate = AssistHitCount/ShotCount;
 
             ShootPanel((Vector2)shootPoint);
 
@@ -92,9 +98,9 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
         var hitObject = G20_RayShooter.GetHitObject(shootPoint, ref hitPoint, Camera.main, fieldMask);
         //aimAssistの値を増減
         AdjustAIMAssist(hitObject);
+        if (ActionHitObject != null) ActionHitObject(hitObject);
         if (hitObject)
         {
-          
             hitObject.ExcuteActions(hitPoint);
         }
         return hitObject;
