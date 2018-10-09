@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class G20_HitDamage : G20_HitAction
 {
-    [SerializeField]G20_Enemy enemy;
-    public G20_Enemy targetEnemy
+    [SerializeField]G20_Unit target;
+    public G20_Unit Target
     {
-        get { return enemy; }
+        get { return target; }
     }
     [SerializeField] int damage;
-    [SerializeField] G20_DamageType damageType;
     public override void Execute(Vector3 hit_point)
     {
-           enemy.RecvDamage(damage, damageType);
+        target.RecvDamage(damage);
     }
 }

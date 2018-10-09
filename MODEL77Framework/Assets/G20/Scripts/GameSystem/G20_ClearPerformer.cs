@@ -61,7 +61,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         // リンゴ落下数の計算
         var goldFallCount = G20_ScoreManager.GetInstance().GoldPoint.Value;
         // 全リンゴ
-        var totalAppleCount = G20_ScoreManager.GetInstance().GetSumScore() - goldFallCount * 2;
+        var totalAppleCount = (G20_ScoreManager.GetInstance().GetSumScore()/100) - goldFallCount * 2;
         // 全リンゴ25、金4のとき
         // 5,11,17,23番目に落とす（6の倍数-1）
         // 全リンゴ25、金5のとき

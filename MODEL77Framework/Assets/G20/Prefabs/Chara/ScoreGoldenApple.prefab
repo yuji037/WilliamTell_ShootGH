@@ -36,7 +36,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4420593265736056}
   - component: {fileID: 135955011090763152}
-  - component: {fileID: 114230303433394880}
   - component: {fileID: 114363794636092226}
   - component: {fileID: 114329152376004154}
   - component: {fileID: 114331029675624522}
@@ -44,6 +43,8 @@ GameObject:
   - component: {fileID: 23225856998660218}
   - component: {fileID: 54906030226522898}
   - component: {fileID: 114929213540266216}
+  - component: {fileID: 114185986341271578}
+  - component: {fileID: 114789912360343546}
   m_Layer: 5
   m_Name: Apple
   m_TagString: Untagged
@@ -212,7 +213,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114230303433394880
+--- !u!114 &114185986341271578
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -220,12 +221,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1317072536677658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7912ecb66d464bb479dae4abf0ec2168, type: 3}
+  m_Script: {fileID: 11500000, guid: d14e34d5096b7294280cbc5d06a22a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreMax: 3
+  hp: 3
+  IsInvincible: 0
+  scoreCaluclator:
+    oneDamageStealValue: 100
+    haveScore: 300
+    scoreEffectTransform: {fileID: 4420593265736056}
   hitGroundHeight: 0.35
   bounceRate: 0.1
+  scoreAppleType: 1
 --- !u!114 &114329152376004154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -250,6 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectss: 040000000400000000000000
+  isCorrect: 1
 --- !u!114 &114363794636092226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -267,6 +275,19 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ff29c63384a30b54bbed3427c142ba2b, type: 2}
   - {fileID: 2100000, guid: bf19171c509c61b468b0b03bff54e6a6, type: 2}
   - {fileID: 2100000, guid: 6ca5f40bac638eb4b935211750d1b382, type: 2}
+--- !u!114 &114789912360343546
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1317072536677658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a631651268e69740a5f6b1ab49dfeb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 114185986341271578}
+  damage: 1
 --- !u!114 &114929213540266216
 MonoBehaviour:
   m_ObjectHideFlags: 1

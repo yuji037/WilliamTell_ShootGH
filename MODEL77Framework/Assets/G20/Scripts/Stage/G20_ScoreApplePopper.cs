@@ -30,7 +30,7 @@ public class G20_ScoreApplePopper : G20_Singleton<G20_ScoreApplePopper> {
 
     [SerializeField] GameObject[] scoreApplePrefabs;
 
-    G20_HitScoreApple[] holdingApples;
+    G20_ScoreApple[] holdingApples;
     G20_ScoreApplePopPosition[] popPositions;
     bool isFullApples = false;
 
@@ -42,7 +42,7 @@ public class G20_ScoreApplePopper : G20_Singleton<G20_ScoreApplePopper> {
     // Use this for initialization
     void Start () {
         popPositions = GetComponentsInChildren<G20_ScoreApplePopPosition>();
-        holdingApples = new G20_HitScoreApple[popPositions.Length];
+        holdingApples = new G20_ScoreApple[popPositions.Length];
 	}
 
     public void DeleteAllScoreApples()
@@ -73,7 +73,7 @@ public class G20_ScoreApplePopper : G20_Singleton<G20_ScoreApplePopper> {
         if ( SearchEmptyPosition(out positionNumber) )
         {
             var obj = Instantiate(scoreApplePrefabs[(int)appleType], popPositions[positionNumber].transform);
-            holdingApples[positionNumber] = obj.GetComponentInChildren<G20_HitScoreApple>();
+            holdingApples[positionNumber] = obj.GetComponentInChildren<G20_ScoreApple>();
         }
 
         // 全て埋まったかチェック
@@ -88,7 +88,7 @@ public class G20_ScoreApplePopper : G20_Singleton<G20_ScoreApplePopper> {
         }
     }
 
-    public void UnregisterApple(G20_HitScoreApple apple)
+    public void UnregisterApple(G20_ScoreApple apple)
     {
         for(int i = 0; i < holdingApples.Length; ++i )
         {

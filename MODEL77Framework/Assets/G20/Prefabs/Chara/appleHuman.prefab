@@ -37,7 +37,6 @@ GameObject:
   - component: {fileID: 136047282825031874}
   - component: {fileID: 114019035417409664}
   - component: {fileID: 114512994700352884}
-  - component: {fileID: 114442821173205492}
   - component: {fileID: 114048080944601520}
   m_Layer: 5
   m_Name: COG_jnt
@@ -916,7 +915,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1483448444830846}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.58, y: 0, z: -3.24}
+  m_LocalPosition: {x: -0.58, y: 0, z: -1.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4148166878234508}
@@ -1670,9 +1669,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a631651268e69740a5f6b1ab49dfeb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 114379341233133208}
+  target: {fileID: 114379341233133208}
   damage: 1
-  damageType: 0
 --- !u!114 &114282333449346146
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1685,6 +1683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectType: 0
+  isCorrect: 1
 --- !u!114 &114340107924649228
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1696,7 +1695,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50966d0e787ced94bbdd40964d9b4371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastAnim: 5
   animator: {fileID: 95186083069578578}
 --- !u!114 &114379341233133208
 MonoBehaviour:
@@ -1709,31 +1707,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d7229e85c2cc6145b74bfd9be780d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  hp: 1
   IsInvincible: 0
+  scoreCaluclator:
+    oneDamageStealValue: 100
+    haveScore: 100
+    scoreEffectTransform: {fileID: 4248770991924188}
   attack: 1
   hirumiTime: 1
   head: {fileID: 4248770991924188}
   anim: {fileID: 114340107924649228}
-  damageReceiver:
-    receiveType: 0
-    HeadRate: 5
   speed: 1
   isSuperArmor: 0
---- !u!114 &114442821173205492
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1011560483480044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a631651268e69740a5f6b1ab49dfeb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 114379341233133208}
-  damage: 1
-  damageType: 1
 --- !u!114 &114452329397906096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1761,6 +1746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectType: 1
+  isCorrect: 1
 --- !u!114 &114515707277950082
 MonoBehaviour:
   m_ObjectHideFlags: 1

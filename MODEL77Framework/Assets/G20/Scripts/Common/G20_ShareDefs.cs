@@ -23,8 +23,3 @@ public enum G20_EnemyType {
     SMALL_STRAIGHT,
     //EnemyTypeMax,
 }
-public enum G20_DamageType
-{
-    HEAD,
-    BODY,
-}

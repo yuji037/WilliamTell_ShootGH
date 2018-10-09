@@ -3610,7 +3610,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1624674485546374}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 1.04, y: 0, z: -4.418}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3647,15 +3647,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d7229e85c2cc6145b74bfd9be780d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  hp: 1
   IsInvincible: 0
+  scoreCaluclator:
+    oneDamageStealValue: 100
+    haveScore: 100
+    scoreEffectTransform: {fileID: 4786975170440596}
   attack: 1
   hirumiTime: 1
   head: {fileID: 4786975170440596}
   anim: {fileID: 114645434565230548}
-  damageReceiver:
-    receiveType: 0
-    HeadRate: 5
   speed: 2
   isSuperArmor: 0
 --- !u!114 &114171981278495680
@@ -3704,9 +3705,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a631651268e69740a5f6b1ab49dfeb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 114097652476467726}
+  target: {fileID: 114097652476467726}
   damage: 1
-  damageType: 0
 --- !u!114 &114645434565230548
 MonoBehaviour:
   m_ObjectHideFlags: 1

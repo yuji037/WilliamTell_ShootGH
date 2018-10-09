@@ -23,11 +23,12 @@ GameObject:
   - component: {fileID: 114285455563140000}
   - component: {fileID: 114655488625585100}
   - component: {fileID: 114267953484516784}
-  - component: {fileID: 114359612257833912}
   - component: {fileID: 54743005423509592}
   - component: {fileID: 33159148921083776}
   - component: {fileID: 23802563720823642}
   - component: {fileID: 114626721699961642}
+  - component: {fileID: 114405966123673262}
+  - component: {fileID: 114697312161777696}
   m_Layer: 5
   m_Name: Apple
   m_TagString: Untagged
@@ -174,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitTag: 4
---- !u!114 &114359612257833912
+--- !u!114 &114405966123673262
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -182,12 +183,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1307270715325788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7912ecb66d464bb479dae4abf0ec2168, type: 3}
+  m_Script: {fileID: 11500000, guid: d14e34d5096b7294280cbc5d06a22a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreMax: 1
+  hp: 1
+  IsInvincible: 0
+  scoreCaluclator:
+    oneDamageStealValue: 100
+    haveScore: 100
+    scoreEffectTransform: {fileID: 4014984735338694}
   hitGroundHeight: 0.35
   bounceRate: 0.2
+  scoreAppleType: 0
 --- !u!114 &114626721699961642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -215,6 +222,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectType: 0
+  isCorrect: 1
+--- !u!114 &114697312161777696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1307270715325788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a631651268e69740a5f6b1ab49dfeb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 114405966123673262}
+  damage: 1
 --- !u!135 &135192233581151866
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -83,7 +83,7 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
             if ( !enemy ) continue;
 
             DamageEffectSEEnemy(enemy);
-            enemy.RecvDamage(damage, G20_DamageType.HEAD);
+            enemy.RecvDamage(damage);
             yield return new WaitForSeconds(interval);
         }
     }
@@ -106,7 +106,7 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
         {
             if (!enemy) continue;
             //Debug.Log(enemy + "キル");
-            enemy.RecvDamage(enemy.HP, G20_DamageType.BODY);
+            enemy.RecvDamage(enemy.HP);
         }
     }
 }

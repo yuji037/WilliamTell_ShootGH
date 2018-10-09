@@ -464,7 +464,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4389493751005842}
   - component: {fileID: 114389144884398510}
-  - component: {fileID: 114345710204248452}
   - component: {fileID: 114230403848973826}
   - component: {fileID: 114013344954464662}
   - component: {fileID: 136949668811790910}
@@ -1635,6 +1634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectss: 040000000400000000000000
+  isCorrect: 1
 --- !u!114 &114055932119985598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1659,6 +1659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectType: 1
+  isCorrect: 1
 --- !u!114 &114300818650962794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1682,20 +1683,6 @@ MonoBehaviour:
   rotspeed: 0.3
   runTimeRate: 1.5
   runTimeMin: 2.5
---- !u!114 &114345710204248452
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1501272159842554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a631651268e69740a5f6b1ab49dfeb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 114461186977350706}
-  damage: 1
-  damageType: 1
 --- !u!114 &114356847700931342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1707,9 +1694,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a631651268e69740a5f6b1ab49dfeb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 114461186977350706}
+  target: {fileID: 114461186977350706}
   damage: 1
-  damageType: 0
 --- !u!114 &114389144884398510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1733,17 +1719,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d7229e85c2cc6145b74bfd9be780d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 15
+  hp: 3
   IsInvincible: 0
+  scoreCaluclator:
+    oneDamageStealValue: 100
+    haveScore: 300
+    scoreEffectTransform: {fileID: 4521281988551610}
   attack: 1
   hirumiTime: 1
   head: {fileID: 4521281988551610}
   anim: {fileID: 114734122297641176}
-  damageReceiver:
-    receiveType: 1
-    HeadRate: 5
   speed: 1
-  isSuperArmor: 0
+  isSuperArmor: 1
 --- !u!114 &114544567996252482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1772,7 +1759,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50966d0e787ced94bbdd40964d9b4371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastAnim: 5
   animator: {fileID: 95570519565258508}
 --- !u!114 &114929943709183986
 MonoBehaviour:

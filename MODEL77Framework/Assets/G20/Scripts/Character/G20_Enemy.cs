@@ -12,7 +12,7 @@ public class G20_Enemy : G20_Unit
     public Transform Head { get { return head; } }
     public G20_EnemyAnimation anim;
     public int Attack { get { return attack; } }
-    [SerializeField] G20_DamageReceiver damageReceiver;
+
     //移動スピード
     [SerializeField, Range(0.5f, 5)] float speed = 1.0f;
     public void SetEnemyAI(G20_AI _ai)
@@ -45,7 +45,7 @@ public class G20_Enemy : G20_Unit
         Speed = speed;
         deathActions += _ => KillCollider();
         deathActions += _ => ChangeHitObjectNormal();
-        deathActions += _ =>isLife = false;
+        deathActions += _ => isLife = false;
         if (!head) head = transform;
     }
     public void AddBuff(G20_EnemyBuff enemy_buff)
@@ -57,10 +57,6 @@ public class G20_Enemy : G20_Unit
     {
         enemy_buff.wasRelease = true;
         buffList.Remove(enemy_buff);
-    }
-    protected override void uRecvDamage(int damage_value, G20_DamageType damage_type)
-    {
-        hp -= damageReceiver.ReceiveDamage(damage_value,damage_type,this);
     }
     //全部ノーマルに変える
     void ChangeHitObjectNormal()

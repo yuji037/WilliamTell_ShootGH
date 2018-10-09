@@ -2,23 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class G20_Unit : MonoBehaviour {
+public class G20_Unit : MonoBehaviour
+{
     [SerializeField] protected int hp;
     public int HP
     {
-        get { return hp;}
+        get { return hp; }
     }
-    public bool IsInvincible=false;
+
+    public bool IsInvincible = false;
     public event Action<G20_Unit> deathActions;
     public event Action<G20_Unit> OnDestroyAction;
     public event Action<G20_Unit> recvDamageActions;
+    [SerializeField] G20_ScoreCalculator scoreCaluclator;
     bool isStartDeath = false;
-    public void RecvDamage(int damage_value,G20_DamageType damage_type)
+
+    public void RecvDamage(int damage_value)
     {
-        if (0 >= hp|| IsInvincible) return;
-        uRecvDamage(damage_value,damage_type);
-        if (recvDamageActions!=null)recvDamageActions(this);
-        if (0>=hp)
+        if (0 >= hp || IsInvincible) return;
+        damage_value = Mathf.Clamp(damage_value,0,hp);
+        scoreCaluclator.CalcAndAddScore(damage_value);
+        hp -= damage_value;
+        if (recvDamageActions != null) recvDamageActions(this);
+        if (0 >= hp)
         {
             ExecuteDeathAction();
         }
@@ -29,11 +35,6 @@ public class G20_Unit : MonoBehaviour {
         {
             OnDestroyAction(this);
         }
-    }
-    //子classによってダメージの値を変更できる、仮想関数
-    protected virtual void uRecvDamage(int damage_value, G20_DamageType damage_type)
-    {
-        hp -= Mathf.Abs(damage_value);
     }
     //deathactionsが実際に実行されるのは1回のみ
     public void ExecuteDeathAction()

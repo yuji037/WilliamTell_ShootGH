@@ -1,11 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class G20_HitScoreApple : G20_HitAction {
-
-    [SerializeField] int scoreMax = 1;
-    int score = 0;
+public class G20_ScoreApple : G20_Unit
+{
 
     G20_HitAction[] hitActions;
 
@@ -13,18 +10,20 @@ public class G20_HitScoreApple : G20_HitAction {
 
     [SerializeField] float hitGroundHeight = 1f;
     [SerializeField] float bounceRate = 0.2f;
-
+    [SerializeField] G20_ScoreAppleType scoreAppleType;
     ParticleSystem[] particleSystems;
 
     Rigidbody rb;
-
+    private void Awake()
+    {
+        deathActions += _=>StartFall();
+    }
     private void Start()
     {
         hitActions = GetComponentsInChildren<G20_HitAction>();
         meshRenderer = GetComponent<Renderer>();
         particleSystems = GetComponentsInChildren<ParticleSystem>();
         rb = GetComponent<Rigidbody>();
-        score = scoreMax;
 
         StartCoroutine(FadeIn());
     }
@@ -37,48 +36,13 @@ public class G20_HitScoreApple : G20_HitAction {
         //    meshRenderer.material.color = new Color(c.r, c.g, c.b, t);
         //    yield return null;
         //}
-        for ( float t = 0; t < 1; t += Time.deltaTime )
+        for (float t = 0; t < 1; t += Time.deltaTime)
         {
             transform.parent.localScale = new Vector3(t, t, t);
             yield return null;
         }
         transform.parent.localScale = Vector3.one;
     }
-
-    public override void Execute(Vector3 hit_point)
-    {
-        G20_EffectManager.GetInstance().Create(G20_EffectType.PLUS_ONE_SCORE, hit_point);
-        G20_ScoreManager.GetInstance().Base.AddScore(1);
-        score--;
-
-        //foreach(var ps in particleSystems )
-        //{
-
-        //    var cMin = ps.main.startColor.colorMin;
-        //    var cMax = ps.main.startColor.colorMax;
-        //    if ( score >= 0 ) {
-        //        cMin = new Color(cMin.r, cMin.g, cMin.b, cMin.a * (float)score / (float)( score + 1f ));
-        //        cMax = new Color(cMax.r, cMax.g, cMax.b, cMax.a * (float)score / (float)( score + 1f ));
-        //    }
-        //    ParticleSystem.MinMaxGradient grad = new ParticleSystem.MinMaxGradient(cMin, cMax);
-
-        //    //ps.SetParticles(;
-        //}
-
-        // 落ちて消える処理
-        if( score <= 0 )
-        {
-            if(scoreMax == 3 )
-            {
-                G20_ScoreManager.GetInstance().GoldPoint.AddScore(1);
-            }
-
-            GetComponent<Collider>().enabled = false;
-            GetComponent<G20_HitObject>().ChangeHitTag(G20_HitTag.NORMAL);
-            StartCoroutine(FallCoroutine());
-        }
-    }
-
     IEnumerator FallCoroutine()
     {
         // 落下
@@ -87,7 +51,7 @@ public class G20_HitScoreApple : G20_HitAction {
         rb.isKinematic = false;
         transform.parent.GetComponent<Animator>().enabled = false;
         rb.velocity = Vector3.zero;
-        while ( transform.position.y > hitGroundHeight )
+        while (transform.position.y > hitGroundHeight)
         {
             //velocity += Physics.gravity * Time.deltaTime;
             //transform.position += velocity * Time.deltaTime;
@@ -136,7 +100,7 @@ public class G20_HitScoreApple : G20_HitAction {
         var rate = Random.Range(1f, 2f);
         rb.AddTorque(transform.forward * -rate, ForceMode.VelocityChange);
         //rb.velocity += 
-        while(transform.position.y > hitGroundHeight )
+        while (transform.position.y > hitGroundHeight)
         {
             yield return null;
         }
@@ -151,11 +115,37 @@ public class G20_HitScoreApple : G20_HitAction {
     //{
 
     //}
+    void StartFall()
+    {
+        //foreach(var ps in particleSystems )
+        //{
 
+        //    var cMin = ps.main.startColor.colorMin;
+        //    var cMax = ps.main.startColor.colorMax;
+        //    if ( score >= 0 ) {
+        //        cMin = new Color(cMin.r, cMin.g, cMin.b, cMin.a * (float)score / (float)( score + 1f ));
+        //        cMax = new Color(cMax.r, cMax.g, cMax.b, cMax.a * (float)score / (float)( score + 1f ));
+        //    }
+        //    ParticleSystem.MinMaxGradient grad = new ParticleSystem.MinMaxGradient(cMin, cMax);
+
+        //    //ps.SetParticles(;
+        //}
+
+        if (scoreAppleType == G20_ScoreAppleType.GOLDEN)
+        {
+            G20_ScoreManager.GetInstance().GoldPoint.AddScore(1);
+        }
+        // 落ちて消える処理
+
+        GetComponent<Collider>().enabled = false;
+        GetComponent<G20_HitObject>().ChangeHitTag(G20_HitTag.NORMAL);
+        StartCoroutine(FallCoroutine());
+
+    }
     IEnumerator FadeOut()
     {
         Color c = meshRenderer.material.color;
-        for ( float t = 0; t < 1; t += Time.deltaTime )
+        for (float t = 0; t < 1; t += Time.deltaTime)
         {
             meshRenderer.material.color = new Color(c.r, c.g, c.b, 1f - t);
             var _pos = transform.position;

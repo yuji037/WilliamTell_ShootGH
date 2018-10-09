@@ -8,7 +8,7 @@ class ShooterParam
     //見やすくするため名称を付ける
     [SerializeField] string paramName;
     //基本のインターバル
-    public float baseShotInterval;  
+    public float baseShotInterval;
     //追加のランダムインターバル
     public float addRandShotInterval;
     //基本のブレ
@@ -58,7 +58,7 @@ public class G20_DebugAutoShooter : MonoBehaviour
         //タイトル時にタイトルアップルを狙う
         if (G20_GameManager.GetInstance().gameState == G20_GameState.TITLE)
         {
-            var num=UnityEngine.Random.Range(0, titleApples.Length);
+            var num = UnityEngine.Random.Range(0, titleApples.Length);
             return Camera.main.WorldToScreenPoint(titleApples[num].transform.position);
         }
         var shotPoint = SearchShotPoint();
@@ -66,9 +66,9 @@ public class G20_DebugAutoShooter : MonoBehaviour
         {
             var radius = param[paramNumber].baseOffsetRadius;
             var randDir = GetRandomDir();
-            shotPoint += radius*randDir;
+            shotPoint += radius * randDir;
             var randRad = param[paramNumber].addRandOffsetRadius;
-            shotPoint += randDir*UnityEngine.Random.Range(0, randRad);
+            shotPoint += randDir * UnityEngine.Random.Range(0, randRad);
             return shotPoint;
         }
         return null;
@@ -105,7 +105,7 @@ public class G20_DebugAutoShooter : MonoBehaviour
             {
                 if (CanShootEnemy(i.gameObject))
                 {
-                    var pos=Camera.main.WorldToScreenPoint(i.transform.position);
+                    var pos = Camera.main.WorldToScreenPoint(i.transform.position);
                     if (InScreenRange(pos))
                     {
                         return pos;
@@ -131,18 +131,14 @@ public class G20_DebugAutoShooter : MonoBehaviour
     }
     bool CanShootEnemy(GameObject _enemy)
     {
-        var ai = _enemy.GetComponent<G20_HitDamage>().targetEnemy.EnemyAI;
-        if (ai && ai.IsAIStarted)
-        {
-            return true;
-        }
-        return false;
+        G20_Unit unit = _enemy.GetComponent<G20_HitDamage>().Target;
+        return (unit && unit is G20_Enemy && ((G20_Enemy)unit).EnemyAI.IsAIStarted);
     }
     bool IsEnemy(GameObject _gameObject)
     {
         return _gameObject.GetComponent<G20_HitDamage>();
     }
-    
+
     private void Update()
     {
         timer -= Time.deltaTime;
