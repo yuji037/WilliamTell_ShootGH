@@ -12,9 +12,9 @@ public class G20_BloodPerformer : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        player.recvDamageActions += ReceivedDamage;
+        player.recvDamageActions += (x, y) => ReceivedDamage();
     }
-    void ReceivedDamage(G20_Unit _unit)
+    void ReceivedDamage()
     {
         if (CheckBloodPanel(damageCount))
         {

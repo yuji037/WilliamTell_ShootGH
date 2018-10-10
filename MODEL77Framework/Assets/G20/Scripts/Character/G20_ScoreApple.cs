@@ -16,8 +16,10 @@ public class G20_ScoreApple : G20_Unit
     Rigidbody rb;
     private void Awake()
     {
-        deathActions += _=>StartFall();
+        deathActions += (x,y)=>StartFall();
+        deathActions += (_,damageType)=>UpChainCount(damageType);
     }
+   
     private void Start()
     {
         hitActions = GetComponentsInChildren<G20_HitAction>();

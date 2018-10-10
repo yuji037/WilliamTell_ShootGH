@@ -75,7 +75,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         paramCanvas.SetActive(false);
 
         //Playerが死んだときにGameOverに移行させるためにアクションを追加
-        playerObj.deathActions += (_) => GameFailed();
+        playerObj.deathActions += (x, y) => GameFailed();
 
         RenderSettings.ambientLight = startAmbient;
         RenderSettings.fogColor = startFogColor;

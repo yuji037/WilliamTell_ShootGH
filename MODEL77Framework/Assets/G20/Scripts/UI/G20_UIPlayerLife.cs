@@ -10,7 +10,7 @@ public class G20_UIPlayerLife : MonoBehaviour {
     int activeCount=0;
     // Use this for initialization
 	void Start () {
-        player.recvDamageActions += ChangeLife;
+        player.recvDamageActions += (x, y) => ChangeLife(x);
         int pLife= player.HP;
         for (int i=0;i<pLife-1;i++)
         {

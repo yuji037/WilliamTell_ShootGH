@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class G20_ChainCounter : MonoBehaviour
+public class G20_ChainCounter : G20_Singleton<G20_ChainCounter>
 {
     //ストリークの持続時間
     [SerializeField] float ChainDurationSeconds;
@@ -10,9 +10,6 @@ public class G20_ChainCounter : MonoBehaviour
     [SerializeField] Animator chainAnim;
     [SerializeField] UnityEngine.UI.Text chainText;
     int chainCount;
-    float timer = 0f;
-    //ストリークを数え始めるカウント
-    int startScore;
     // Use this for initialization
     private void Awake()
     {
@@ -35,21 +32,21 @@ public class G20_ChainCounter : MonoBehaviour
         chainCount = 0;
         chainText.text = "";
     }
+    public void UpChainCount()
+    {
+        chainCount++;
+        //2chain目だった場合スコア表示アニメショーン実行
+        if (chainCount == 2)
+        {
+            chainAnim.CrossFade("Serifu_FadeIn", 0f);
+        }
+        chainText.text = chainCount + "CHAIN";
+        ChainDurationTimer = ChainDurationSeconds;
+    }
     void CountUpdate(G20_HitObject hitObject)
     {
         //hitObjectに当たり、タグがアシストだった場合chainCount加算
-        if (hitObject != null && hitObject.HitTag == G20_HitTag.ASSIST)
-        {
-            chainCount++;
-            //2chain目だった場合スコア表示アニメショーン実行
-            if (chainCount == 2)
-            {
-                chainAnim.CrossFade("Serifu_FadeIn", 0f);
-            }
-            chainText.text = chainCount+"CHAIN";
-            ChainDurationTimer = ChainDurationSeconds;
-        }
-        else
+        if (!(hitObject &&hitObject.HitTag == G20_HitTag.ASSIST))
         {
             CutChain();
         }

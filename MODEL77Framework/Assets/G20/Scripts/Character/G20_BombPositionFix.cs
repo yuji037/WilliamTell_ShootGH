@@ -8,7 +8,7 @@ public class G20_BombPositionFix : MonoBehaviour {
     [SerializeField] Transform pivot;
 	// Use this for initialization
 	void Start () {
-        GetComponent<G20_Enemy>().deathActions += _=>StartCoroutine(FixPosition());
+        GetComponent<G20_Enemy>().deathActions += (x, y) => StartCoroutine(FixPosition());
     }
 	IEnumerator FixPosition()
     {

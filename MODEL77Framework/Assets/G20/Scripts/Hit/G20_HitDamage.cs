@@ -12,6 +12,6 @@ public class G20_HitDamage : G20_HitAction
     [SerializeField] int damage;
     public override void Execute(Vector3 hit_point)
     {
-        target.RecvDamage(damage);
+        target.RecvDamage(damage,G20_Unit.G20_DamageType.Player);
     }
 }

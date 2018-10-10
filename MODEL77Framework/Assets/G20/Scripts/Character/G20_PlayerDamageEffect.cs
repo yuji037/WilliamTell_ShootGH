@@ -10,10 +10,10 @@ public class G20_PlayerDamageEffect : MonoBehaviour {
     Image image;
 	// Use this for initialization
 	void Start () {
-        player.recvDamageActions += DamageEffect;
+        player.recvDamageActions += (x, y) => DamageEffect();
         cameraShake = Camera.main.GetComponent<G20_CameraShake>();
     }
-    void DamageEffect(G20_Unit _unit)
+    void DamageEffect()
     {
         //anim.CrossFadeInFixedTime("CameraYure", 0f);
         if ( cameraShake ) cameraShake.Shake(G20_CameraShakeType.DOWNWARD, 0.2f, 6f, 0.8f);

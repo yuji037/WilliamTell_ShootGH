@@ -33,14 +33,10 @@ public abstract class G20_AI : MonoBehaviour
     {
         enemy = GetComponent<G20_Enemy>();
         animPlayer = enemy.anim;
-        //0だったら怯まないように設定
-        if (enemy.hirumiTime > 0f)
-        {
-            enemy.recvDamageActions += _ => Falter();
-        }
-        enemy.deathActions += _ => animPlayer.PlayAnimation(G20_AnimType.Death,1.0f);
+    
+        enemy.deathActions += (x, y) => animPlayer.PlayAnimation(G20_AnimType.Death,1.0f);
         //死んだときにデストロイするように設定
-        enemy.deathActions += _ => StartCoroutine(DestroyCoroutine(1.0f ));
+        enemy.deathActions += (x, y) => StartCoroutine(DestroyCoroutine(1.0f ));
     }
 
     protected float AITime
@@ -118,7 +114,7 @@ public abstract class G20_AI : MonoBehaviour
                 if (!enemy.IsLife) yield break;
 
                 //Debug.Log("自殺");
-                GetComponent<G20_Unit>().ExecuteDeathAction();
+                GetComponent<G20_Unit>().ExecuteDeathAction(G20_Unit.G20_DamageType.Enemy);
                 Destroy(gameObject);
 
             }

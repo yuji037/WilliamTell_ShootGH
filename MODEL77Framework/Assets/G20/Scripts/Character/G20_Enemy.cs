@@ -43,9 +43,10 @@ public class G20_Enemy : G20_Unit
     private void Awake()
     {
         Speed = speed;
-        deathActions += _ => KillCollider();
-        deathActions += _ => ChangeHitObjectNormal();
-        deathActions += _ => isLife = false;
+        deathActions += (x, y) => KillCollider();
+        deathActions += (x, y) => ChangeHitObjectNormal();
+        deathActions += (x, y) => isLife = false;
+        deathActions += (_, damageType) => UpChainCount(damageType);
         if (!head) head = transform;
     }
     public void AddBuff(G20_EnemyBuff enemy_buff)
