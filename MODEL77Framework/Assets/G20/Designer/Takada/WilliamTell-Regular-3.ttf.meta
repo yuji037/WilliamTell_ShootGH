@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 0377e85feba8340468a8180a69b3ddc0
+timeCreated: 1539264293
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: William Tell
+  fontNames:
+  - William Tell
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 69337957f049e8446ac08adb1e576fd1, type: 3}
+  - {fileID: 12800000, guid: dc7b977b6a80c3f49a818c9b39ab8edd, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
