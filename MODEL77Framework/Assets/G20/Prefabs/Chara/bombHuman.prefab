@@ -858,6 +858,7 @@ GameObject:
   - component: {fileID: 114394393245470476}
   - component: {fileID: 114180830988649236}
   - component: {fileID: 136141193708500526}
+  - component: {fileID: 114933501541667136}
   m_Layer: 5
   m_Name: COG_jnt
   m_TagString: Untagged
@@ -1939,6 +1940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 9
+  explosionRadius: 2
 --- !u!114 &114394393245470476
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2058,6 +2060,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seType: 0
+--- !u!114 &114933501541667136
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1950576795497956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd9b49760b832442a0f2bf266ea66bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 114649730260422390}
+  hirumiCount: 1
 --- !u!114 &114944796348749100
 MonoBehaviour:
   m_ObjectHideFlags: 1

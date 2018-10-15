@@ -77,4 +77,32 @@ public class G20_Enemy : G20_Unit
             c.enabled = false;
         }
     }
+    G20_AnimType lastAnim;
+    float falterTime;
+
+    public void Falter()
+    {
+        if (isSuperArmor || !IsLife) return;
+        StartCoroutine(FalterRoutine());
+    }
+    IEnumerator FalterRoutine()
+    {
+        if (!enemyAI.isPouse) lastAnim = anim.lastAnim;
+        anim.PlayAnimation(G20_AnimType.Falter, 1.0f/hirumiTime);
+        falterTime = hirumiTime;
+        if (enemyAI.isPouse) yield break;
+        enemyAI.isPouse = true;
+
+        while (falterTime > 0)
+        {
+            yield return null;
+            falterTime -= Time.deltaTime;
+        }
+        if (IsLife)
+        {
+            //最後のTime
+            anim.PlayAnimation(lastAnim);
+            enemyAI.isPouse = false;
+        }
+    }
 }

@@ -63,34 +63,7 @@ public abstract class G20_AI : MonoBehaviour
 
     protected abstract void childAIStart();
 
-    G20_AnimType lastAnim;
-    float falterTime;
 
-    void Falter()
-    {
-        if (enemy.isSuperArmor || !enemy.IsLife) return;
-        StartCoroutine(FalterRoutine());
-    }
-    IEnumerator FalterRoutine()
-    {
-        if (!isPouse) lastAnim = animPlayer.lastAnim;
-        animPlayer.PlayAnimation(G20_AnimType.Falter, enemy.hirumiTime);
-        falterTime = enemy.hirumiTime;
-        if (isPouse)yield break;
-        isPouse = true;
-
-        while (falterTime > 0)
-        {
-            yield return null;
-            falterTime -= Time.deltaTime;
-        }
-        if (enemy.IsLife)
-        {
-            //最後のTime
-            animPlayer.PlayAnimation(lastAnim);
-            isPouse = false;
-        }
-    }
     protected IEnumerator DestroyCoroutine(float duration_time)
     {
         isPouse = true;
