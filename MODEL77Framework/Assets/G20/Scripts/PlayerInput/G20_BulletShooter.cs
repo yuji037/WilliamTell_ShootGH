@@ -82,7 +82,7 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
             }
 
             var hitObject=ShootHitObject((Vector2)shootPoint);
-            if (hitObject&&hitObject.HitTag == G20_HitTag.ASSIST)
+            if (hitObject&&hitObject.IsHitRateUp)
             {
                 AssistHitCount++;
             }

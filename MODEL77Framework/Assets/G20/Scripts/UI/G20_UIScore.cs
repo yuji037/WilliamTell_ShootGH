@@ -7,14 +7,43 @@ public class G20_UIScore : MonoBehaviour
 {
     G20_ScoreManager score;
     [SerializeField] Text scoreText;
-
-    private void Awake()
+    [SerializeField] float scoreChangeInterval = 0.1f;
+    float virtualCurrentScore = 0;
+    private void Start()
     {
-        G20_ScoreManager.GetInstance().Base.ScoreChangedAction += ApplyScore;
-        ApplyScore(0);
+        scoreText.text = "0";
+        StartCoroutine(ScoreRoutine());
     }
-    void ApplyScore(int _score)
+    IEnumerator ScoreRoutine()
     {
-        scoreText.text = "" + _score;
+        while (true)
+        {
+            var sub = G20_ScoreManager.GetInstance().Base.Value - (int)virtualCurrentScore;
+            var addValue = (1.0f / scoreChangeInterval) * Time.deltaTime;
+            if (sub > 0)
+            {
+                virtualCurrentScore += addValue;
+                if ((int)virtualCurrentScore > G20_ScoreManager.GetInstance().Base.Value)
+                {
+                    virtualCurrentScore = G20_ScoreManager.GetInstance().Base.Value;
+                }
+                scoreText.text = "" + (int)virtualCurrentScore;
+            }
+            else if (sub < 0)
+            {
+                virtualCurrentScore -= addValue;
+                if ((int)virtualCurrentScore < G20_ScoreManager.GetInstance().Base.Value)
+                {
+                    virtualCurrentScore = G20_ScoreManager.GetInstance().Base.Value;
+                }
+                scoreText.text = "" + (int)virtualCurrentScore;
+            }
+            else
+            {
+                //何もしない
+            }
+
+            yield return null;
+        }
     }
 }

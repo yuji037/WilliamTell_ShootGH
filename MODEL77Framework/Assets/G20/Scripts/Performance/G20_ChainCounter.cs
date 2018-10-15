@@ -45,8 +45,7 @@ public class G20_ChainCounter : G20_Singleton<G20_ChainCounter>
     }
     void CountUpdate(G20_HitObject hitObject)
     {
-        //hitObjectに当たり、タグがアシストだった場合chainCount加算
-        if (!(hitObject &&hitObject.HitTag == G20_HitTag.ASSIST))
+        if (!(hitObject &&hitObject.IsHitRateUp))
         {
             CutChain();
         }

@@ -1866,6 +1866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitTag: 4
+  isHitRateUP: 1
 --- !u!114 &114180830988649236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1928,6 +1929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitTag: 4
+  isHitRateUP: 1
 --- !u!114 &114382170976650070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1966,6 +1968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitTag: 1
+  isHitRateUP: 1
 --- !u!114 &114503864476762876
 MonoBehaviour:
   m_ObjectHideFlags: 1

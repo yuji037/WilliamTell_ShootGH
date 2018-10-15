@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitTag: 4
+  isHitRateUP: 1
 --- !u!135 &135955011090763152
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -10,10 +10,14 @@ public enum G20_HitTag
     //AIM補正をする対象
     ASSIST = 0X004,
 }
-
 public class G20_HitObject : MonoBehaviour {
     G20_HitAction[] hitActions;
     [SerializeField]G20_HitTag hitTag=G20_HitTag.NORMAL;
+    [SerializeField] bool isHitRateUP;
+    public bool IsHitRateUp
+    {
+        get { return isHitRateUP; }
+    }
     public G20_HitTag HitTag
     {
         get { return hitTag; }

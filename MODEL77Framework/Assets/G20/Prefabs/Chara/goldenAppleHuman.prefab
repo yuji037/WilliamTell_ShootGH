@@ -1709,6 +1709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitTag: 1
+  isHitRateUP: 1
 --- !u!114 &114461186977350706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1731,7 +1732,7 @@ MonoBehaviour:
   head: {fileID: 4521281988551610}
   anim: {fileID: 114734122297641176}
   speed: 1
-  isSuperArmor: 1
+  isSuperArmor: 0
 --- !u!114 &114544567996252482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1792,6 +1793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitTag: 4
+  isHitRateUP: 1
 --- !u!114 &114980998035829492
 MonoBehaviour:
   m_ObjectHideFlags: 1

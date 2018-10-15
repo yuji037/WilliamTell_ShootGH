@@ -1635,6 +1635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitTag: 1
+  isHitRateUP: 1
 --- !u!114 &114054724965558166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1647,6 +1648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitTag: 4
+  isHitRateUP: 1
 --- !u!114 &114099433378101380
 MonoBehaviour:
   m_ObjectHideFlags: 1
