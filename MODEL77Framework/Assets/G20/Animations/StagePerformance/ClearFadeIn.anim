@@ -119,12 +119,6 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
-        value: 0.75686276
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -147,12 +141,6 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
-        value: 0.79607844
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -172,12 +160,6 @@ AnimationClip:
       - serializedVersion: 2
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
-        value: 0.8235294
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -231,12 +213,6 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
-        value: 0.75686276
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -259,12 +235,6 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
-        value: 0.79607844
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -284,12 +254,6 @@ AnimationClip:
       - serializedVersion: 2
         time: 2.5
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
-        value: 0.8235294
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -333,18 +297,22 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Color.a
+    path: G20_YourScore/G20_ScoreCopy
+    classID: 114
+    script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
       - serializedVersion: 2
-        time: 4
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
+        time: 0
         value: 0.75686276
         inSlope: 0
         outSlope: 0
@@ -353,7 +321,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: G20_HighScore
+    path: G20_Cahin
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -361,18 +329,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 4
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
         value: 0.79607844
         inSlope: 0
         outSlope: 0
@@ -381,7 +337,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: G20_HighScore
+    path: G20_Cahin
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -389,18 +345,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 4
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
         value: 0.8235294
         inSlope: 0
         outSlope: 0
@@ -409,7 +353,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: G20_HighScore
+    path: G20_Cahin
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -437,7 +381,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: G20_HighScore
+    path: G20_Cahin
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -445,18 +389,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 5.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
         value: 0.75686276
         inSlope: 0
         outSlope: 0
@@ -465,7 +397,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: G20_Creators
+    path: G20_Cahin/G20_ChainCount
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -473,18 +405,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 5.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
         value: 0.79607844
         inSlope: 0
         outSlope: 0
@@ -493,7 +413,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: G20_Creators
+    path: G20_Cahin/G20_ChainCount
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -501,18 +421,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 5.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
         value: 0.8235294
         inSlope: 0
         outSlope: 0
@@ -521,7 +429,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: G20_Creators
+    path: G20_Cahin/G20_ChainCount
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -534,13 +442,13 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 5.5
+        time: 6
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 6.5
+        time: 7
         value: 1
         inSlope: 0
         outSlope: 0
@@ -549,7 +457,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: G20_Creators
+    path: G20_Cahin/G20_ChainCount
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -557,18 +465,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
         value: 0.75686276
         inSlope: 0
         outSlope: 0
@@ -577,7 +473,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: G20_Daily
+    path: G20_HitRate
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -585,18 +481,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
         value: 0.79607844
         inSlope: 0
         outSlope: 0
@@ -605,7 +489,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: G20_Daily
+    path: G20_HitRate
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -613,18 +497,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
         value: 0.8235294
         inSlope: 0
         outSlope: 0
@@ -633,7 +505,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: G20_Daily
+    path: G20_HitRate
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -646,13 +518,13 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 5.5
+        time: 7.5
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 6.5
+        time: 8.5
         value: 1
         inSlope: 0
         outSlope: 0
@@ -661,7 +533,73 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: G20_Daily
+    path: G20_HitRate
+    classID: 114
+    script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.75686276
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 8.5
+        value: 0.75686276
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Color.r
+    path: G20_HitRate/G20_HitRateScore
+    classID: 114
+    script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.79607844
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 8.5
+        value: 0.79607844
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Color.g
+    path: G20_HitRate/G20_HitRateScore
+    classID: 114
+    script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.8235294
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 8.5
+        value: 0.8235294
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Color.b
+    path: G20_HitRate/G20_HitRateScore
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -674,13 +612,13 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 5.5
+        time: 8.5
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 6.516667
+        time: 9.5
         value: 1
         inSlope: 0
         outSlope: 0
@@ -689,51 +627,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: G20_Creators/G20_Score
-    classID: 114
-    script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 5.5
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_Color.a
-    path: G20_Daily/G20_Score
-    classID: 114
-    script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_Color.a
-    path: G20_YourScore/G20_ScoreCopy
+    path: G20_HitRate/G20_HitRateScore
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_PPtrCurves: []
@@ -753,27 +647,6 @@ AnimationClip:
       isPPtrCurve: 0
     - serializedVersion: 2
       path: 1293358599
-      attribute: 2526845255
-      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 1293358599
-      attribute: 4215373228
-      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 1293358599
-      attribute: 2334886179
-      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 1293358599
       attribute: 304273561
       script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
       typeID: 114
@@ -781,125 +654,34 @@ AnimationClip:
       isPPtrCurve: 0
     - serializedVersion: 2
       path: 782431956
-      attribute: 2526845255
-      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 782431956
-      attribute: 4215373228
-      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 782431956
-      attribute: 2334886179
-      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 782431956
       attribute: 304273561
       script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
       typeID: 114
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1657791912
-      attribute: 2526845255
-      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 1657791912
-      attribute: 4215373228
-      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 1657791912
-      attribute: 2334886179
-      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 1657791912
+      path: 177309126
       attribute: 304273561
       script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
       typeID: 114
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 3647808110
-      attribute: 2526845255
-      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 3647808110
-      attribute: 4215373228
-      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 3647808110
-      attribute: 2334886179
-      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 3647808110
+      path: 363285656
       attribute: 304273561
       script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
       typeID: 114
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1205289571
-      attribute: 2526845255
-      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 1205289571
-      attribute: 4215373228
-      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 1205289571
-      attribute: 2334886179
-      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 1205289571
+      path: 1343398565
       attribute: 304273561
       script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
       typeID: 114
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1452971975
-      attribute: 304273561
-      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 130439901
+      path: 2744978311
       attribute: 304273561
       script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
       typeID: 114
@@ -923,6 +705,48 @@ AnimationClip:
       path: 3573745076
       attribute: 2334886179
       script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 1293358599
+      attribute: 2526845255
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 1293358599
+      attribute: 4215373228
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 1293358599
+      attribute: 2334886179
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 782431956
+      attribute: 2526845255
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 782431956
+      attribute: 4215373228
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 782431956
+      attribute: 2334886179
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
       typeID: 114
       customType: 0
       isPPtrCurve: 0
@@ -933,13 +757,97 @@ AnimationClip:
       typeID: 114
       customType: 0
       isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 177309126
+      attribute: 2526845255
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 177309126
+      attribute: 4215373228
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 177309126
+      attribute: 2334886179
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 363285656
+      attribute: 2526845255
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 363285656
+      attribute: 4215373228
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 363285656
+      attribute: 2334886179
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 1343398565
+      attribute: 2526845255
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 1343398565
+      attribute: 4215373228
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 1343398565
+      attribute: 2334886179
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2744978311
+      attribute: 2526845255
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2744978311
+      attribute: 4215373228
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2744978311
+      attribute: 2334886179
+      script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
     pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 6.516667
+    m_StopTime: 9.5
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -1058,12 +966,6 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
-        value: 0.75686276
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -1086,12 +988,6 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
-        value: 0.79607844
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -1111,12 +1007,6 @@ AnimationClip:
       - serializedVersion: 2
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
-        value: 0.8235294
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1170,12 +1060,6 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
-        value: 0.75686276
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -1198,12 +1082,6 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
-        value: 0.79607844
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -1223,12 +1101,6 @@ AnimationClip:
       - serializedVersion: 2
         time: 2.5
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
-        value: 0.8235294
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1272,18 +1144,22 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Color.a
+    path: G20_YourScore/G20_ScoreCopy
+    classID: 114
+    script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
       - serializedVersion: 2
-        time: 4
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
+        time: 0
         value: 0.75686276
         inSlope: 0
         outSlope: 0
@@ -1292,7 +1168,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: G20_HighScore
+    path: G20_Cahin
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1300,18 +1176,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 4
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
         value: 0.79607844
         inSlope: 0
         outSlope: 0
@@ -1320,7 +1184,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: G20_HighScore
+    path: G20_Cahin
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1328,18 +1192,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 4
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
         value: 0.8235294
         inSlope: 0
         outSlope: 0
@@ -1348,7 +1200,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: G20_HighScore
+    path: G20_Cahin
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1376,7 +1228,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: G20_HighScore
+    path: G20_Cahin
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1384,18 +1236,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 5.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
         value: 0.75686276
         inSlope: 0
         outSlope: 0
@@ -1404,7 +1244,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: G20_Creators
+    path: G20_Cahin/G20_ChainCount
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1412,18 +1252,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 5.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
         value: 0.79607844
         inSlope: 0
         outSlope: 0
@@ -1432,7 +1260,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: G20_Creators
+    path: G20_Cahin/G20_ChainCount
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1440,18 +1268,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 5.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
         value: 0.8235294
         inSlope: 0
         outSlope: 0
@@ -1460,7 +1276,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: G20_Creators
+    path: G20_Cahin/G20_ChainCount
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1473,13 +1289,13 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 5.5
+        time: 6
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 6.5
+        time: 7
         value: 1
         inSlope: 0
         outSlope: 0
@@ -1488,7 +1304,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: G20_Creators
+    path: G20_Cahin/G20_ChainCount
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1496,18 +1312,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
         value: 0.75686276
         inSlope: 0
         outSlope: 0
@@ -1516,7 +1320,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: G20_Daily
+    path: G20_HitRate
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1524,18 +1328,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
         value: 0.79607844
         inSlope: 0
         outSlope: 0
@@ -1544,7 +1336,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: G20_Daily
+    path: G20_HitRate
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1552,18 +1344,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
         value: 0.8235294
         inSlope: 0
         outSlope: 0
@@ -1572,7 +1352,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: G20_Daily
+    path: G20_HitRate
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1585,13 +1365,13 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 5.5
+        time: 7.5
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 6.5
+        time: 8.5
         value: 1
         inSlope: 0
         outSlope: 0
@@ -1600,7 +1380,73 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: G20_Daily
+    path: G20_HitRate
+    classID: 114
+    script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.75686276
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 8.5
+        value: 0.75686276
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Color.r
+    path: G20_HitRate/G20_HitRateScore
+    classID: 114
+    script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.79607844
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 8.5
+        value: 0.79607844
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Color.g
+    path: G20_HitRate/G20_HitRateScore
+    classID: 114
+    script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.8235294
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 8.5
+        value: 0.8235294
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Color.b
+    path: G20_HitRate/G20_HitRateScore
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   - curve:
@@ -1613,13 +1459,13 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 5.5
+        time: 8.5
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 6.516667
+        time: 9.5
         value: 1
         inSlope: 0
         outSlope: 0
@@ -1628,51 +1474,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: G20_Creators/G20_Score
-    classID: 114
-    script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 5.5
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 6.516667
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_Color.a
-    path: G20_Daily/G20_Score
-    classID: 114
-    script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_Color.a
-    path: G20_YourScore/G20_ScoreCopy
+    path: G20_HitRate/G20_HitRateScore
     classID: 114
     script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_EulerEditorCurves: []

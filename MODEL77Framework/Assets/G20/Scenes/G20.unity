@@ -46026,7 +46026,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &982751277
 RectTransform:
   m_ObjectHideFlags: 0
@@ -51262,7 +51262,7 @@ GameObject:
   - component: {fileID: 1177300690}
   - component: {fileID: 1177300689}
   m_Layer: 5
-  m_Name: G20_Daily
+  m_Name: G20_HitRate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
