@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum G20_EnemyPopType {
+    RISE_UP,
+    WALK_FORWARD,
+    FLYING_FORWARD,
+}
+
 public class G20_EnemyPopper : MonoBehaviour
 {
-
-
     [SerializeField]
     G20_PopEnemySelector popEnemySelector;
     [SerializeField]
@@ -13,25 +17,42 @@ public class G20_EnemyPopper : MonoBehaviour
 
     [SerializeField]
     // 下から出てくる
-    float spawnHeight = -2.0f;
+    float riseUpDifY = -2.0f;
     [SerializeField]
     float riseUpSpeed = 3.0f;
+
+    [SerializeField]
+    // 奥から歩いてくる
+    float walkForwardDifZ = 1.0f;
+    [SerializeField]
+    float walkForwardSpeed = 3.0f;
 
     // 一律全敵に付けるバフ
     public float onPopSpeedBuffValue = 0f;
 
-    public G20_Enemy EnemyPop(G20_EnemyType enemyType, Vector3 position)
+    public G20_Enemy EnemyPop(G20_EnemyType enemyType, Vector3 position, G20_EnemyPopType popType = G20_EnemyPopType.RISE_UP)
     {
         // 敵のオブジェクト生成
         var ene = popEnemySelector.GetPopEnemy(enemyType);
         ene.transform.SetParent(transform.parent);
-        ene.transform.position = position + new Vector3(0, spawnHeight, 0);
-
-        //敵の召喚エフェクト生成(少し魔法陣を浮かす)
-        G20_EffectManager.GetInstance().Create(G20_EffectType.SUMMON_APPLE, position + new Vector3(0, 0.02f, 0));
+        
         G20_SEManager.GetInstance().Play(G20_SEType.SUMMON_APPLE, position + new Vector3(0, 0.02f, 0));
         // 出現演出
-        StartCoroutine(RiseUp(ene));
+        switch ( popType )
+        {
+            case G20_EnemyPopType.RISE_UP:
+                //敵の召喚エフェクト生成(少し魔法陣を浮かす)
+                G20_EffectManager.GetInstance().Create(G20_EffectType.SUMMON_APPLE, position + new Vector3(0, 0.02f, 0));
+                ene.transform.position = position + new Vector3(0, riseUpDifY, 0);
+                StartCoroutine(RiseUp(ene));
+                break;
+            case G20_EnemyPopType.WALK_FORWARD:
+                G20_EffectManager.GetInstance().Create(G20_EffectType.SUMMON_APPLE_VERT, position);
+                position.y = 0f;
+                ene.transform.position = position + new Vector3(0, 0, walkForwardDifZ);
+                StartCoroutine(WalkForward(ene));
+                break;
+        }
 
         var enemy = ene.GetComponent<G20_Enemy>();
 
@@ -55,6 +76,50 @@ public class G20_EnemyPopper : MonoBehaviour
         enemy.OnDestroyAction += G20_EnemyCabinet.GetInstance().UnregisterEnemy;
 
         return enemy;
+    }
+    
+    // 一時的に敵を非表示
+    IEnumerator InvisibleDuringTime(GameObject ene, float time)
+    {
+        List<Renderer> rens = new List<Renderer>(ene.GetComponentsInChildren<Renderer>());
+        foreach(var r in rens )
+        {
+            r.enabled = false;
+        }
+
+        yield return new WaitForSeconds(time);
+
+        foreach ( var r in rens )
+        {
+            r.enabled = true;
+        }
+    }
+
+    // 奥から地面の高さを出てくる演出
+    IEnumerator WalkForward(GameObject ene)
+    {
+        var enemy = ene.GetComponent<G20_Enemy>();
+        //float[] rotPatern = { -45.0f, -22.5f, 22.5f, 45.0f };
+        //ene.transform.Rotate(0, rotPatern[Random.Range(0, rotPatern.Length)], 0);
+        StartCoroutine(InvisibleDuringTime(ene, 0.3f));
+        //魔法陣が出来てから少し間を置く
+        yield return new WaitForSeconds(0.3f);
+
+
+        while ( ene && enemy.HP > 0 && ene.transform.position.y < 0 )
+        {
+            ene.transform.position = new Vector3(0, 0, -walkForwardSpeed * Time.deltaTime);
+            yield return null;
+        }
+        if ( !ene || !enemy.IsLife ) yield break;
+
+        // 敵AI開始
+        if ( G20_GameManager.GetInstance().gameState == G20_GameState.INGAME )
+        {
+            var eneAI = ene.GetComponent<G20_Enemy>().EnemyAI;
+            eneAI.AIStart();
+        }
+
     }
 
     // 下から出てくる演出

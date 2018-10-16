@@ -58,7 +58,7 @@ public class G20_StageBehaviour : MonoBehaviour
     public class PopEnemyCue
     {
         public G20_EnemyType enemyType;
-        [SerializeField, Range(-4, 20)]
+        [SerializeField, Range(-5, 22)]
         public int positionNumber;
     }
 
@@ -107,6 +107,7 @@ public class G20_StageBehaviour : MonoBehaviour
 
     G20_GameManager gameManager;
 
+    // 空中から出現する
 
 
     // Use this for initialization
@@ -306,8 +307,15 @@ public class G20_StageBehaviour : MonoBehaviour
                 Vector3 _popPos = popPositions[positionNumber].transform.position;
                 poppedNumberList.Add(positionNumber);
 
+                G20_EnemyPopType popType = G20_EnemyPopType.RISE_UP;
+
+                if ( positionNumber <= 19 )
+                    popType = G20_EnemyPopType.RISE_UP;
+                else if ( 20 <= positionNumber && positionNumber <= 23 ) {
+                    popType = G20_EnemyPopType.WALK_FORWARD; }
+
                 // 敵出現
-                var enemy = enemyPopper.EnemyPop(cue.enemyType, _popPos);
+                var enemy = enemyPopper.EnemyPop(cue.enemyType, _popPos, popType);
 
                 // 同時に試しにステージ脇リンゴ生成
                 //G20_ScoreApplePopper.GetInstance().PopSameAppleWithEnemy(cue.enemyType);
@@ -324,6 +332,10 @@ public class G20_StageBehaviour : MonoBehaviour
     {
         switch (position_number)
         {
+            case -5:
+                _min = 21;
+                _max = 24;
+                break;
             case -4:
                 _min = 15;
                 _max = 19;
