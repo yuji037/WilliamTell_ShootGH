@@ -9,7 +9,9 @@ public class G20_ChainCounter : G20_Singleton<G20_ChainCounter>
     float ChainDurationTimer;
     [SerializeField] Animator chainAnim;
     [SerializeField] UnityEngine.UI.Text chainText;
-    int chainCount;
+    [SerializeField]int bonusValueEveryFive;
+    public int ChainCount { get; private set; }
+    public int MaxChainCount { get; private set; }
     // Use this for initialization
     private void Awake()
     {
@@ -25,22 +27,27 @@ public class G20_ChainCounter : G20_Singleton<G20_ChainCounter>
     }
     void CutChain()
     {
-        if (2 <= chainCount)
+        if (2 <= ChainCount)
         {
             chainAnim.CrossFade("Serifu_FadeOut", 0f);
         }
-        chainCount = 0;
+        ChainCount = 0;
         chainText.text = "";
+    }
+    public int GetOneTimeBonusScore()
+    {
+        return (ChainCount / 5) * bonusValueEveryFive;
     }
     public void UpChainCount()
     {
-        chainCount++;
+        ChainCount++;
+        if (ChainCount > MaxChainCount) MaxChainCount = ChainCount;
         //2chain目だった場合スコア表示アニメショーン実行
-        if (chainCount == 2)
+        if (ChainCount == 2)
         {
             chainAnim.CrossFade("Serifu_FadeIn", 0f);
         }
-        chainText.text = chainCount + "CHAIN";
+        chainText.text = ChainCount + "CHAIN";
         ChainDurationTimer = ChainDurationSeconds;
     }
     void CountUpdate(G20_HitObject hitObject)

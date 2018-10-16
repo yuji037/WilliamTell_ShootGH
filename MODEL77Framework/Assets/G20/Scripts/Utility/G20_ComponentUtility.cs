@@ -32,7 +32,7 @@ public class G20_ComponentUtility
         }
         catch
         {
-            Debug.Log("error:"+rootStr+"が見つかりませんでした。");
+            Debug.LogError("error:"+rootStr+"が見つかりませんでした。");
         }
         return ret;
     }

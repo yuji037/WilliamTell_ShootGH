@@ -227,8 +227,8 @@ MonoBehaviour:
   hp: 3
   IsInvincible: 0
   scoreCaluclator:
-    oneDamageStealValue: 100
-    haveScore: 300
+    oneDamageStealValue: 30
+    haveScore: 90
     scoreEffectTransform: {fileID: 4420593265736056}
   hitGroundHeight: 0.35
   bounceRate: 0.1

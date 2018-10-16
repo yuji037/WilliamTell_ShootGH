@@ -18,23 +18,24 @@ public class G20_UIScore : MonoBehaviour
     {
         while (true)
         {
-            var sub = G20_ScoreManager.GetInstance().Base.Value - (int)virtualCurrentScore;
+            var ScoreValue = G20_ScoreManager.GetInstance().GetSumScore();
+            var sub = ScoreValue - (int)virtualCurrentScore;
             var addValue = (1.0f / scoreChangeInterval) * Time.deltaTime;
             if (sub > 0)
             {
                 virtualCurrentScore += addValue;
-                if ((int)virtualCurrentScore > G20_ScoreManager.GetInstance().Base.Value)
+                if ((int)virtualCurrentScore > ScoreValue)
                 {
-                    virtualCurrentScore = G20_ScoreManager.GetInstance().Base.Value;
+                    virtualCurrentScore = ScoreValue;
                 }
                 scoreText.text = "" + (int)virtualCurrentScore;
             }
             else if (sub < 0)
             {
                 virtualCurrentScore -= addValue;
-                if ((int)virtualCurrentScore < G20_ScoreManager.GetInstance().Base.Value)
+                if ((int)virtualCurrentScore < ScoreValue)
                 {
-                    virtualCurrentScore = G20_ScoreManager.GetInstance().Base.Value;
+                    virtualCurrentScore = ScoreValue;
                 }
                 scoreText.text = "" + (int)virtualCurrentScore;
             }
