@@ -879,6 +879,7 @@ GameObject:
   - component: {fileID: 114610099390844256}
   - component: {fileID: 114684188562558174}
   - component: {fileID: 114280314981239374}
+  - component: {fileID: 114820106390373736}
   m_Layer: 5
   m_Name: bombHuman
   m_TagString: Untagged
@@ -1897,6 +1898,7 @@ MonoBehaviour:
   deathvec: {x: 0, y: -2, z: 0}
   attacktime: 0.2
   changePhase: 5
+  deathDelay: 0.2
   rotationTime: 0.5
   rot: 80
   bombrot_speed: 100
@@ -2048,9 +2050,25 @@ MonoBehaviour:
   deathvec: {x: 0, y: -2, z: 0}
   attacktime: 0.2
   changePhase: 5
+  deathDelay: 0.2
   rotationTime: 0.5
   bombrot_speed: 100
   bomb: {fileID: 114091790049258610}
+--- !u!114 &114820106390373736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1983737840519902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e817e7282e5fa34f9d0cc26ce25baa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidHead: {fileID: 1074294269714384, guid: c0c11511444c289478fdd8026044f9b2, type: 2}
+  headMesh: {fileID: 137387663254501232}
+  enemy: {fileID: 114649730260422390}
+  rollingPower: 3
 --- !u!114 &114902284250548846
 MonoBehaviour:
   m_ObjectHideFlags: 1

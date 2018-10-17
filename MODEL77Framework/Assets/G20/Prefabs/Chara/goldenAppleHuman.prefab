@@ -697,6 +697,7 @@ GameObject:
   - component: {fileID: 114300818650962794}
   - component: {fileID: 114734122297641176}
   - component: {fileID: 114929943709183986}
+  - component: {fileID: 114047214029498590}
   m_Layer: 5
   m_Name: goldenAppleHuman
   m_TagString: Untagged
@@ -1623,6 +1624,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seType: 2
+--- !u!114 &114047214029498590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1779069442428592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e817e7282e5fa34f9d0cc26ce25baa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidHead: {fileID: 1074294269714384, guid: c0c11511444c289478fdd8026044f9b2, type: 2}
+  headMesh: {fileID: 137930183048692616}
+  enemy: {fileID: 114461186977350706}
+  rollingPower: 3
 --- !u!114 &114051361071774506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1679,6 +1695,7 @@ MonoBehaviour:
   deathvec: {x: 0, y: -2, z: 0}
   attacktime: 1
   changePhase: 5
+  deathDelay: 0.2
   rotationTime: 1
   rot: 80
   rotspeed: 0.3
@@ -1780,6 +1797,7 @@ MonoBehaviour:
   deathvec: {x: 0, y: -2, z: 0}
   attacktime: 1
   changePhase: 5
+  deathDelay: 0.2
   rotationTime: 1
 --- !u!114 &114975076853725082
 MonoBehaviour:

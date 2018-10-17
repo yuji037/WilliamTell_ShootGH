@@ -26,19 +26,21 @@ public abstract class G20_AI : MonoBehaviour
     [SerializeField] protected float attacktime = 1.0f;
     //行動パターンの変更距離
     [SerializeField] protected float changePhase = 5.0f;
-
+    [SerializeField]float deathDelay=0.1f;
 
 
     public void Init()
     {
         enemy = GetComponent<G20_Enemy>();
         animPlayer = enemy.anim;
-    
-        enemy.deathActions += (x, y) => animPlayer.PlayAnimation(G20_AnimType.Death,1.0f);
-        //死んだときにデストロイするように設定
-        enemy.deathActions += (x, y) => StartCoroutine(DestroyCoroutine(1.0f ));
+        enemy.deathActions += (x, y) => StartCoroutine(DeathEnemy());
     }
-
+    IEnumerator DeathEnemy()
+    {
+        yield return new WaitForSeconds(deathDelay);
+        animPlayer.PlayAnimation(G20_AnimType.Death, 1.0f);
+        StartCoroutine(DestroyCoroutine(1.0f));
+    }
     protected float AITime
     {
         get
