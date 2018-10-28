@@ -3657,6 +3657,7 @@ MonoBehaviour:
   hirumiTime: 1
   head: {fileID: 4786975170440596}
   anim: {fileID: 114645434565230548}
+  deathAnimTypes: 0d0000000c000000
   speed: 2
   isSuperArmor: 0
 --- !u!114 &114171981278495680
@@ -3694,6 +3695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 0
   isCorrect: 1
+  effctParent: {fileID: 0}
 --- !u!114 &114562488254360678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3718,6 +3720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50966d0e787ced94bbdd40964d9b4371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnding: 0
   animator: {fileID: 95024313387410260}
 --- !u!114 &114701395011025104
 MonoBehaviour:

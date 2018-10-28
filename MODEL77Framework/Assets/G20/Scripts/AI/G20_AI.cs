@@ -26,20 +26,20 @@ public abstract class G20_AI : MonoBehaviour
     [SerializeField] protected float attacktime = 1.0f;
     //行動パターンの変更距離
     [SerializeField] protected float changePhase = 5.0f;
-    [SerializeField]float deathDelay=0.1f;
 
+   
 
     public void Init()
     {
         enemy = GetComponent<G20_Enemy>();
         animPlayer = enemy.anim;
-        enemy.deathActions += (x, y) => StartCoroutine(DeathEnemy());
+        enemy.deathActions += (x, y) => DeathEnemy();
     }
-    IEnumerator DeathEnemy()
+    void DeathEnemy()
     {
-        yield return new WaitForSeconds(deathDelay);
-        animPlayer.PlayAnimation(G20_AnimType.Death, 1.0f);
-        StartCoroutine(DestroyCoroutine(1.0f));
+        isPouse = true;
+        animPlayer.PlayAnimation(enemy.deathAnimTypes, 1.0f,()=>Destroy(gameObject));
+        animPlayer.isEnding = true;
     }
     protected float AITime
     {
@@ -66,12 +66,6 @@ public abstract class G20_AI : MonoBehaviour
     protected abstract void childAIStart();
 
 
-    protected IEnumerator DestroyCoroutine(float duration_time)
-    {
-        isPouse = true;
-        yield return new WaitForSeconds(duration_time);
-        Destroy(gameObject);
-    }
     protected IEnumerator SusideCoroutine()
     {
         while (true)

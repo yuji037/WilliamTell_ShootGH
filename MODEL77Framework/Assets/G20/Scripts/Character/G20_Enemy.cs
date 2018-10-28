@@ -12,7 +12,7 @@ public class G20_Enemy : G20_Unit
     public Transform Head { get { return head; } }
     public G20_EnemyAnimation anim;
     public int Attack { get { return attack; } }
-
+    public G20_AnimType[] deathAnimTypes;
     //移動スピード
     [SerializeField, Range(0.5f, 5)] float speed = 1.0f;
     public void SetEnemyAI(G20_AI _ai)
@@ -88,7 +88,7 @@ public class G20_Enemy : G20_Unit
     IEnumerator FalterRoutine()
     {
         if (!enemyAI.isPouse) lastAnim = anim.lastAnim;
-        anim.PlayAnimation(G20_AnimType.Falter, 1.0f/hirumiTime);
+        anim.PlayAnimation(G20_AnimType.Falter, 1.0f / hirumiTime);
         falterTime = hirumiTime;
         if (enemyAI.isPouse) yield break;
         enemyAI.isPouse = true;

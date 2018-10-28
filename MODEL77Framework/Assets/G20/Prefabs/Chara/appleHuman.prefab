@@ -435,7 +435,6 @@ GameObject:
   - component: {fileID: 114515707277950082}
   - component: {fileID: 114340107924649228}
   - component: {fileID: 114829126252319212}
-  - component: {fileID: 114986432508526818}
   m_Layer: 5
   m_Name: appleHuman
   m_TagString: Untagged
@@ -803,6 +802,7 @@ GameObject:
   - component: {fileID: 114192671330501834}
   - component: {fileID: 114054724965558166}
   - component: {fileID: 114452329397906096}
+  - component: {fileID: 114169989186913884}
   m_Layer: 5
   m_Name: head_jnt
   m_TagString: Untagged
@@ -1662,6 +1662,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seType: 0
+--- !u!114 &114169989186913884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1943102228883536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e817e7282e5fa34f9d0cc26ce25baa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidHead: {fileID: 1074294269714384, guid: c0c11511444c289478fdd8026044f9b2, type: 2}
+  headMesh: {fileID: 137885923545860202}
+  enemy: {fileID: 114379341233133208}
+  rollingPower: 30
 --- !u!114 &114192671330501834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1688,6 +1703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 0
   isCorrect: 1
+  effctParent: {fileID: 0}
 --- !u!114 &114340107924649228
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1699,6 +1715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50966d0e787ced94bbdd40964d9b4371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnding: 0
   animator: {fileID: 95186083069578578}
 --- !u!114 &114379341233133208
 MonoBehaviour:
@@ -1721,6 +1738,7 @@ MonoBehaviour:
   hirumiTime: 1
   head: {fileID: 4248770991924188}
   anim: {fileID: 114340107924649228}
+  deathAnimTypes: 0b000000090000000a00000002000000
   speed: 1
   isSuperArmor: 0
 --- !u!114 &114452329397906096
@@ -1751,6 +1769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 1
   isCorrect: 1
+  effctParent: {fileID: 0}
 --- !u!114 &114515707277950082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1769,7 +1788,6 @@ MonoBehaviour:
   deathvec: {x: 0, y: -2, z: 0}
   attacktime: 1
   changePhase: 5
-  deathDelay: 0.2
   rotationTime: 1
   rot: 80
   rotspeed: 0.3
@@ -1806,23 +1824,7 @@ MonoBehaviour:
   deathvec: {x: 0, y: -2, z: 0}
   attacktime: 1
   changePhase: 5
-  deathDelay: 0.2
   rotationTime: 1
---- !u!114 &114986432508526818
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1483448444830846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e817e7282e5fa34f9d0cc26ce25baa2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidHead: {fileID: 1074294269714384, guid: c0c11511444c289478fdd8026044f9b2, type: 2}
-  headMesh: {fileID: 137885923545860202}
-  enemy: {fileID: 114379341233133208}
-  rollingPower: 3
 --- !u!135 &135719273145514502
 SphereCollider:
   m_ObjectHideFlags: 1

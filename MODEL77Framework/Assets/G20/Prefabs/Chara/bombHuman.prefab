@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 114902284250548846}
   - component: {fileID: 135025595431014528}
   - component: {fileID: 114135682119397690}
+  - component: {fileID: 114768977838899792}
   m_Layer: 5
   m_Name: head_jnt
   m_TagString: Untagged
@@ -879,7 +880,6 @@ GameObject:
   - component: {fileID: 114610099390844256}
   - component: {fileID: 114684188562558174}
   - component: {fileID: 114280314981239374}
-  - component: {fileID: 114820106390373736}
   m_Layer: 5
   m_Name: bombHuman
   m_TagString: Untagged
@@ -1808,7 +1808,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 807312545c49ad94aa710d6eb3d5ef2f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1898,7 +1898,6 @@ MonoBehaviour:
   deathvec: {x: 0, y: -2, z: 0}
   attacktime: 0.2
   changePhase: 5
-  deathDelay: 0.2
   rotationTime: 0.5
   rot: 80
   bombrot_speed: 100
@@ -1918,7 +1917,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 4319345109940388}
-  pivot: {fileID: 4355866022005818}
 --- !u!114 &114378564606996168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1958,6 +1956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 1
   isCorrect: 1
+  effctParent: {fileID: 0}
 --- !u!114 &114483941258364408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1984,6 +1983,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 0
   isCorrect: 1
+  effctParent: {fileID: 0}
 --- !u!114 &114610099390844256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1995,6 +1995,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50966d0e787ced94bbdd40964d9b4371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnding: 0
   animator: {fileID: 95816806910628394}
 --- !u!114 &114623280414624976
 MonoBehaviour:
@@ -2009,6 +2010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 5
   isCorrect: 1
+  effctParent: {fileID: 0}
 --- !u!114 &114649730260422390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2030,6 +2032,7 @@ MonoBehaviour:
   hirumiTime: 1
   head: {fileID: 4845645979249600}
   anim: {fileID: 114610099390844256}
+  deathAnimTypes: 02000000090000000b0000000a000000
   speed: 1
   isSuperArmor: 0
 --- !u!114 &114684188562558174
@@ -2050,16 +2053,15 @@ MonoBehaviour:
   deathvec: {x: 0, y: -2, z: 0}
   attacktime: 0.2
   changePhase: 5
-  deathDelay: 0.2
   rotationTime: 0.5
   bombrot_speed: 100
   bomb: {fileID: 114091790049258610}
---- !u!114 &114820106390373736
+--- !u!114 &114768977838899792
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1983737840519902}
+  m_GameObject: {fileID: 1099355885353090}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e817e7282e5fa34f9d0cc26ce25baa2, type: 3}
@@ -2068,7 +2070,7 @@ MonoBehaviour:
   rigidHead: {fileID: 1074294269714384, guid: c0c11511444c289478fdd8026044f9b2, type: 2}
   headMesh: {fileID: 137387663254501232}
   enemy: {fileID: 114649730260422390}
-  rollingPower: 3
+  rollingPower: 30
 --- !u!114 &114902284250548846
 MonoBehaviour:
   m_ObjectHideFlags: 1
