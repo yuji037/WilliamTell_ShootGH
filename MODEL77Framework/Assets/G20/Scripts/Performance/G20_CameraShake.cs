@@ -91,7 +91,7 @@ public class G20_CameraShake : MonoBehaviour {
         float period = 1f / freq;
         float radRate = 2 * Mathf.PI / period;
 
-        for (float t = TimeLength; t > 0; t -= Time.deltaTime )
+        for (float t = TimeLength; t > 0; t -= Time.unscaledDeltaTime )
         {
             float str = fDefaultStrength * t / timeLen;
             vShake = dir * str * Mathf.Sin(( TimeLength - t ) * radRate);
