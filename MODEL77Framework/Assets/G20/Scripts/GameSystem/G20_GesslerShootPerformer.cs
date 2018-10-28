@@ -76,7 +76,11 @@ public class G20_GesslerShootPerformer : MonoBehaviour
     int pathIndexNumber;
     IEnumerator NextGesslerMove()
     {
-
+        if (stageBoss.HP <= 0)
+        {
+            StopCoroutine(currentMoveCoroutine);
+            yield break;
+        }
         if (currentMoveCoroutine != null)
         {
             //無敵化し、ゆっくり動く
@@ -133,7 +137,6 @@ public class G20_GesslerShootPerformer : MonoBehaviour
         {
             var rate = AutoShootCurve.Evaluate(timer / maxBossBattleTime);
             float rand=UnityEngine.Random.Range(0,1.0f);
-            Debug.Log(rate);
             if (rand<=rate)
             {
                 G20_BulletAppleCreator.GetInstance().Create(stageBoss.transform.position);

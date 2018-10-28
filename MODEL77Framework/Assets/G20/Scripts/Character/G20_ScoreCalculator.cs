@@ -14,6 +14,14 @@ public class G20_ScoreCalculator
     {
         get { return haveScore; }
     }
+    public void LowerHaveScore(int lowerValue)
+    {
+        haveScore-= lowerValue;
+        if (haveScore<=0)
+        {
+            haveScore = 0;
+        }
+    }
     int StealHaveScore(int stealScore)
     {
         //持ちスコア以上取れないように制限

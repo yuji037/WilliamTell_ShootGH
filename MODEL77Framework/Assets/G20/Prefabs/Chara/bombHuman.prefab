@@ -860,6 +860,7 @@ GameObject:
   - component: {fileID: 114180830988649236}
   - component: {fileID: 136141193708500526}
   - component: {fileID: 114933501541667136}
+  - component: {fileID: 114251894574420512}
   m_Layer: 5
   m_Name: COG_jnt
   m_TagString: Untagged
@@ -1905,6 +1906,19 @@ MonoBehaviour:
   runTimeRate: 1.5
   runTimeMin: 1.5
   bomb: {fileID: 114091790049258610}
+--- !u!114 &114251894574420512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1950576795497956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df017de51b7df2b4a9c5de659eb81d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowerTarget: {fileID: 114649730260422390}
+  oneHitLowerValue: 20
 --- !u!114 &114280314981239374
 MonoBehaviour:
   m_ObjectHideFlags: 1
