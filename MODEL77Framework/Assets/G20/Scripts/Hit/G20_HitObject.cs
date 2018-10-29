@@ -25,6 +25,7 @@ public class G20_HitObject : MonoBehaviour {
     private void Awake()
     {
         hitActions = GetComponents<G20_HitAction>();
+        Array.Sort(hitActions,(x,y)=>x.ExcutionPrioriy-y.ExcutionPrioriy);
         G20_HitObjectCabinet.GetInstance().Add(this);
     }
     private void OnDestroy()

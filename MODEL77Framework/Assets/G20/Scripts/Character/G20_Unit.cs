@@ -19,6 +19,9 @@ public class G20_Unit : MonoBehaviour
     public event Action<G20_Unit> OnDestroyAction;
     public event Action<G20_Unit,G20_DamageType> recvDamageActions;
     [SerializeField] G20_ScoreCalculator scoreCaluclator;
+    public G20_ScoreCalculator ScoreCaluclator { get { return scoreCaluclator; } }
+
+
     bool isStartDeath = false;
     protected void UpChainCount(G20_DamageType damageType)
     {

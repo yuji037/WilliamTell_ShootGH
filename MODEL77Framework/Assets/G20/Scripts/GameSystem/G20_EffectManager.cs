@@ -15,6 +15,7 @@ public enum G20_EffectType
     PLUS_ONE_SCORE,
     HIT_PROTECT,
     SUMMON_APPLE_VERT,
+    HIT_GESSLER_BODY,
 }
 public static class G20_EffectExt
 {
@@ -52,6 +53,9 @@ public static class G20_EffectExt
                 break;
             case G20_EffectType.SUMMON_APPLE_VERT:
                 retStr = "SummonApple_Vertical";
+                break;
+            case G20_EffectType.HIT_GESSLER_BODY:
+                retStr = "HitGesslerBody";
                 break;
         }
         return retStr;

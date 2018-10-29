@@ -95,7 +95,7 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
     G20_HitObject ShootHitObject(Vector2 shootPoint)
     {
         Vector3 hitPoint = Vector3.zero;
-        var hitObject = G20_RayShooter.GetHitObject(shootPoint, ref hitPoint, Camera.main, fieldMask);
+        var hitObject = G20_RayShooter.GetHitObject<G20_HitObject>(shootPoint, ref hitPoint, Camera.main, fieldMask);
         //aimAssistの値を増減
         AdjustAIMAssist(hitObject);
         if (ActionHitObject != null) ActionHitObject(hitObject);
@@ -108,7 +108,7 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
     G20_HitObject ShootPanel(Vector2 shootPoint)
     {
         Vector3 panelhitPoint = Vector3.zero;
-        var hitPanel = G20_RayShooter.GetHitObject(shootPoint, ref panelhitPoint, effectCamera, panelMask);
+        var hitPanel = G20_RayShooter.GetHitObject<G20_HitObject>(shootPoint, ref panelhitPoint, effectCamera, panelMask);
         if (hitPanel)
         {
             hitPanel.ExcuteActions(panelhitPoint);

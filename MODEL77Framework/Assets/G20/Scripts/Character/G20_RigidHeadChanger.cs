@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class G20_RigidHeadChanger : MonoBehaviour {
+public class G20_RigidHeadChanger : G20_HitAction {
     [SerializeField] GameObject rigidHead;
     [SerializeField] SkinnedMeshRenderer headMesh;
     [SerializeField] G20_Enemy enemy;
     public float rollingPower=10.0f;
 	// Use this for initialization
-	void Awake() {
-        enemy.deathActions +=(a,b)=>ChangeRigidHead();
-	}
-	void ChangeRigidHead()
+	void ChangeRigidHead(Vector3 hit_point)
     {
         //mesh非表示
         headMesh.enabled = false;
@@ -19,8 +16,15 @@ public class G20_RigidHeadChanger : MonoBehaviour {
         var rh =Instantiate(rigidHead);
         rh.transform.position = enemy.Head.position;
         rh.transform.rotation = enemy.Head.rotation;
-        var vec=rh.transform.position - Camera.main.transform.position;
+        var vec= (enemy.Head.position - hit_point).normalized;
         rh.GetComponent<Rigidbody>().AddForce(vec*rollingPower,ForceMode.Impulse);
     }
 
+    public override void Execute(Vector3 hit_point)
+    {
+        if (enemy.HP <= 0)
+        {
+            ChangeRigidHead(hit_point);
+        }
+    }
 }

@@ -29,10 +29,9 @@ public class G20_ChainCounter : G20_Singleton<G20_ChainCounter>
     {
         if (2 <= ChainCount)
         {
-            chainAnim.CrossFade("Serifu_FadeOut", 0f);
+            chainAnim.CrossFade("G20_ChainFadeOut", 0f);
         }
         ChainCount = 0;
-        chainText.text = "";
     }
     public int GetOneTimeBonusScore()
     {
@@ -45,9 +44,12 @@ public class G20_ChainCounter : G20_Singleton<G20_ChainCounter>
         //2chain目だった場合スコア表示アニメショーン実行
         if (ChainCount == 2)
         {
-            chainAnim.CrossFade("Serifu_FadeIn", 0f);
+            chainAnim.CrossFade("G20_ChainFadeIn", 0f);
         }
-        chainText.text = ChainCount + "CHAIN";
+        if (ChainCount >= 2)
+        {
+            chainText.text = ChainCount + "";
+        }
         ChainDurationTimer = ChainDurationSeconds;
     }
     void CountUpdate(G20_HitObject hitObject)

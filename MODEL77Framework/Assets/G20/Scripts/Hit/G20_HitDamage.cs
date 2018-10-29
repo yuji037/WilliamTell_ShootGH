@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class G20_HitDamage : G20_HitAction
 {
+    void Awake()
+    {
+        excutionPriority = 0;
+    }
     [SerializeField]G20_Unit target;
     public G20_Unit Target
     {
