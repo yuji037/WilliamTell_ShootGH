@@ -18,6 +18,7 @@ public enum G20_AnimType
     FrontDeath,
     SmashDeath,
     RageDeath,
+    PowerUp,
 }
 
 public class G20_EnemyAnimation : MonoBehaviour
