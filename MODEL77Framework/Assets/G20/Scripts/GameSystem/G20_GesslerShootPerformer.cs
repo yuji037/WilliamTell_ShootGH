@@ -49,6 +49,8 @@ public class G20_GesslerShootPerformer : MonoBehaviour
     [SerializeField]
     float maxBossBattleTime;
 
+    G20_HitEffect bossHitEffect;
+
     Coroutine currentMoveCoroutine;
     float shootEfectDistance;
     private void Update()
@@ -88,8 +90,12 @@ public class G20_GesslerShootPerformer : MonoBehaviour
             stageBoss.IsInvincible = true;
             gesslerMoveTimeScale = 0.3f;
             ActivateShootObject(false);
+            //1F待ってbossEffectを非アクティブに
+            yield return null;
+            bossHitEffect.IsActive = false;
             yield return new WaitForSeconds(3.0f);
             gesslerMoveTimeScale = 1.0f;
+            bossHitEffect.IsActive = true;
             ActivateShootObject(true);
             stageBoss.IsInvincible = false;
 
@@ -124,21 +130,21 @@ public class G20_GesslerShootPerformer : MonoBehaviour
 
         // ゲスラー撃てるようになる
         stageBoss.IsInvincible = false;
-        var hitEffect = stageBoss.GetComponent<G20_HitEffect>();
+        bossHitEffect = stageBoss.GetComponent<G20_HitEffect>();
 
         //gesslerにhiteefect追従するように
-        hitEffect.effctParent = stageBoss.transform;
-        hitEffect.ChangeEffectType(G20_EffectType.HIT_GESSLER_BODY);
+        bossHitEffect.effctParent = stageBoss.transform;
+        bossHitEffect.ChangeEffectType(G20_EffectType.HIT_GESSLER_BODY);
         Destroy(stageBoss.GetComponent<G20_HitSE>());
         headHitObject.ChangeHitTag(G20_HitTag.ASSIST);
 
-        float oneLoopTime =1.0f;
+        float oneLoopTime = 1.0f;
         float timer = 0f;
         while (stageBoss.HP > 0)
         {
             var rate = AutoShootCurve.Evaluate(timer / maxBossBattleTime);
-            float rand=UnityEngine.Random.Range(0,1.0f);
-            if (rand<=rate)
+            float rand = UnityEngine.Random.Range(0, 1.0f);
+            if (rand <= rate)
             {
                 G20_BulletAppleCreator.GetInstance().Create(stageBoss.transform.position);
             }

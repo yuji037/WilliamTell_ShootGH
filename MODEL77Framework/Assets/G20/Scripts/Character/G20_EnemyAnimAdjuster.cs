@@ -62,8 +62,6 @@ public class G20_EnemyAnimAdjuster : G20_Singleton<G20_EnemyAnimAdjuster>
                 var retMove = h.point - startPos;
                 var adjustZ = -height * 0.5f;
                 retMove += retMove.normalized * adjustZ;
-                Debug.Log("調整前" + move);
-                Debug.Log("調整後" + retMove);
                
                 return retMove;
             }

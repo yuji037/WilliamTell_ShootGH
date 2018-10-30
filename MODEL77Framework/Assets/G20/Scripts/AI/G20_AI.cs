@@ -38,6 +38,7 @@ public abstract class G20_AI : MonoBehaviour
     void DeathEnemy()
     {
         isPouse = true;
+        if (enemy.HP > 0) return;
         animPlayer.PlayAnimation(enemy.deathAnimTypes, 1.0f,()=>Destroy(gameObject));
         animPlayer.isEnding = true;
     }

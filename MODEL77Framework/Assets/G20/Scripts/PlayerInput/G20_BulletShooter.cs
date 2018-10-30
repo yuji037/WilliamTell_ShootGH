@@ -86,7 +86,7 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
             {
                 AssistHitCount++;
             }
-            HitRate = AssistHitCount/ShotCount;
+            HitRate = (float)AssistHitCount/(float)ShotCount;
 
             ShootPanel((Vector2)shootPoint);
 

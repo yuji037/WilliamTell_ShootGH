@@ -18,7 +18,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     public float fallTime = 20.0f;
     public float endWaitTime = 10.0f;
     [SerializeField] GameObject paramObjs;
-
+    [SerializeField] G20_ScoreCalcData scoreCalcData;
 
     [SerializeField] GameObject[] onClearDeactivateFieldObjs;
     [SerializeField] GameObject[] onClearActivateFieldObjs;
@@ -28,8 +28,8 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
 
     [SerializeField] Text yourScore;
     [SerializeField] Text yourScore_copy;
-    [SerializeField] Text creatorsHighScore;
-    [SerializeField] Text dailyHighScore;
+    //[SerializeField] Text creatorsHighScore;
+    //[SerializeField] Text dailyHighScore;
 
     [SerializeField] GameObject clearTexts;
 
@@ -38,10 +38,20 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
 
     [SerializeField] GameObject highScore;
     [SerializeField] Text highScoreText;
+    [SerializeField] Text ChainText;
+    [SerializeField] Text HitRateText;
     Animator clearFadeanimator;
 
     public int scorecount = 0;
     float balanceNum;
+    int GetHitRateBonus()
+    {
+        return scoreCalcData.HitRateMultyply * (int)(G20_BulletShooter.GetInstance().HitRate*100);
+    }
+    int GetMaxChainBonus()
+    {
+        return scoreCalcData.MaxChainMultiply * G20_ChainCounter.GetInstance().MaxChainCount;
+    }
     public void Excute(Action on_end_action)
     {
         StartCoroutine(FallAppleRoutine(on_end_action));
@@ -57,11 +67,20 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         G20_BGMManager.GetInstance().Play(G20_BGMType.CLEAR);
         G20_FadeChanger.GetInstance().StartWhiteFadeIn(2.0f);
         yield return new WaitForSeconds(2.0f);
+       
+        //スコア算出
+        var hitRateScore= GetHitRateBonus();
+        HitRateText.text = hitRateScore.ToString();
 
+        var maxChainScore = GetMaxChainBonus();
+        ChainText.text = maxChainScore.ToString();
+
+        var sumScore = G20_ScoreManager.GetInstance().GetSumScore()+maxChainScore+hitRateScore;
+        
         // リンゴ落下数の計算
         var goldFallCount = G20_ScoreManager.GetInstance().GoldPoint.Value;
         // 全リンゴ
-        var totalAppleCount = (G20_ScoreManager.GetInstance().GetSumScore()/100) - goldFallCount * 2;
+        var totalAppleCount = (sumScore / 100) - goldFallCount * 2;
         // 全リンゴ25、金4のとき
         // 5,11,17,23番目に落とす（6の倍数-1）
         // 全リンゴ25、金5のとき
@@ -85,7 +104,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
 
             var fallAppleSound = apple.GetComponent<G20_FallAppleSound>();
             fallAppleSound.firstCollisionHItAction += PlusAppleScore;
-            fallAppleSound.eventArgInteger = isGoldenApple ? 3 : 1;
+            fallAppleSound.eventArgInteger = isGoldenApple ? 300 : 100;
             apple.transform.SetParent(transform);
             if (IsRandomlyFall)
             {
@@ -97,7 +116,21 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
             }
             yield return new WaitForSeconds(fallAppleDelay);
         }
-        yield return new WaitForSeconds(endWaitTime);
+
+        float timer = 0f;
+
+        do
+        {
+            timer += Time.deltaTime;
+            yield return null;
+            //全てリンゴが落ちたら合計スコアを代入
+            if (totalAppleCount == cuurentFellCount)
+            {
+                yourScore_copy.text = sumScore.ToString();
+                yourScore.text = sumScore.ToString();
+                Debug.Log("チェンジ" + sumScore);
+            }
+        } while ((totalAppleCount != cuurentFellCount) && (timer <= endWaitTime));
         if (on_end_action != null) on_end_action();
     }
 
@@ -144,36 +177,37 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
 
     void initUI()
     {
-        yourScore.text = "0";
-        switch (G20_StageManager.GetInstance().stageType)
-        {
-            case G20_StageType.NORMAL:
-                creatorsHighScore.text = G20_NetworkManager.GetInstance().creatorScore[0].ToString();
-                break;
-            case G20_StageType.HARD:
-                creatorsHighScore.text = G20_NetworkManager.GetInstance().creatorScore[1].ToString();
-                break;
-        }
+        //yourScore.text = "0";
+        //switch (G20_StageManager.GetInstance().stageType)
+        //{
+        //    case G20_StageType.NORMAL:
+        //        creatorsHighScore.text = G20_NetworkManager.GetInstance().creatorScore[0].ToString();
+        //        break;
+        //    case G20_StageType.HARD:
+        //        creatorsHighScore.text = G20_NetworkManager.GetInstance().creatorScore[1].ToString();
+        //        break;
+        //}
 
-        if (G20_NetworkManager.GetInstance().is_network)
-        {
-            dailyHighScore.text = G20_NetworkManager.GetInstance().userData.scoreList[0].score;
-        }
-        else
-        {
+        //if (G20_NetworkManager.GetInstance().is_network)
+        //{
+        //    dailyHighScore.text = G20_NetworkManager.GetInstance().userData.scoreList[0].score;
+        //}
+        //else
+        //{
 
-            dailyHighScore.text = "80";
-        }
+        //    dailyHighScore.text = "80";
+        //}
 
         SetUIsActive();
 
     }
-
-
+    //スコアアップルが落ちた回数
+    int cuurentFellCount;
 
     //一番最後にスコアを直接いれたほうがいいかも
     void PlusAppleScore(int addValue)
     {
+        cuurentFellCount++;
         //スコアを＋1する
         scorecount += addValue;
 
@@ -183,7 +217,8 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
 
         //デイリーハイスコアと比べる
         //デイリーハイスコアより大きかったらなアニメーション開始
-        int num = int.Parse(dailyHighScore.text);
+        //int num = int.Parse(dailyHighScore.text);
+        int num = 0;
         if (num < scorecount)
         {
             clearFadeanimator = clearTexts.GetComponent<Animator>();
