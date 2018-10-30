@@ -71,6 +71,7 @@ public class G20_GesslerShootPerformer : MonoBehaviour
     private void BattleSetUP()
     {
         Destroy(stageBoss.GetComponent<G20_HitReactionVoice>());
+        Destroy(stageBoss.GetComponent<G20_HitCounterApple>());
         stageBoss.recvDamageActions += (a, b) => StartCoroutine(NextGesslerMove());
     }
     int pathIndexNumber;

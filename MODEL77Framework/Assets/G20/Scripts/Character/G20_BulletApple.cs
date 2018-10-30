@@ -39,7 +39,7 @@ public class G20_BulletApple : G20_Unit {
                 break;
             }
             transform.Translate(moveVec * moveSpeed * Time.deltaTime,Space.World);
-            transform.Rotate(-100.0f*Time.deltaTime*moveSpeed,0,0);
+            //transform.Rotate(-100.0f*Time.deltaTime*moveSpeed,0,0);
             if (radius >= Vector3.Distance(Camera.main.transform.position, transform.position))
             {
                 G20_EnemyAttack.GetInstance().Attack(1);
