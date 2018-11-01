@@ -42,6 +42,10 @@ public class G20_Unit : MonoBehaviour
             ExecuteDeathAction(damageType);
         }
     }
+    public void HealHP(int heal_value)
+    {
+        hp += heal_value;
+    }
     private void OnDestroy()
     {
         if (OnDestroyAction != null)
