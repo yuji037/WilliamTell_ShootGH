@@ -24,7 +24,6 @@ public class G20_HitBuff : G20_HitAction {
                     enemy.AddBuff(new G20_SpeedBuff(enemy, 100f, 0.5f));
                     enemyAnim.PlayAnimation(lastAnim);
                 });
-            Debug.Log(lastAnim.ToString());
         }
         isBuffed = true;
     }
