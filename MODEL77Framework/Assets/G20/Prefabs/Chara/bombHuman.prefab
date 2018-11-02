@@ -887,7 +887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1986676153882944
 GameObject:
   m_ObjectHideFlags: 1
@@ -1899,7 +1899,7 @@ MonoBehaviour:
   deathvec: {x: 0, y: -2, z: 0}
   attacktime: 0.2
   changePhase: 5
-  rotationTime: 0.5
+  rotationTime: 1
   rot: 80
   bombrot_speed: 100
   rotspeed: 0.3
@@ -1970,6 +1970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 1
   isCorrect: 1
+  IsActive: 1
   effctParent: {fileID: 0}
 --- !u!114 &114483941258364408
 MonoBehaviour:
@@ -1997,6 +1998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 0
   isCorrect: 1
+  IsActive: 1
   effctParent: {fileID: 0}
 --- !u!114 &114610099390844256
 MonoBehaviour:
@@ -2024,6 +2026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 5
   isCorrect: 1
+  IsActive: 1
   effctParent: {fileID: 0}
 --- !u!114 &114649730260422390
 MonoBehaviour:

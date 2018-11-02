@@ -13,37 +13,42 @@ public class G20_BombAI : G20_AI
     //キャラクターの回転スピード
     [SerializeField] float bombrot_speed = 100;
     //移動方向の回転スピード
-    [SerializeField] float rotspeed=0.3f;
+    [SerializeField] float rotspeed = 0.3f;
     //移動時間の長さ
     [SerializeField] float runTimeRate = 2.0f;
     //移動時間の最小
     [SerializeField] float runTimeMin = 1.5f;
 
     [SerializeField] G20_BombController bomb;
-    float runTime ;
+    float runTime;
     float angle = 0.0f;
     bool isRight = true;
     bool rotated = true;
-    
-    Vector3 moveVec = new Vector3(0, 0, -1);
+
 
     void Start()
     {
+
+
         target = GameObject.FindGameObjectWithTag("MainCamera");
         targetPos = target.transform.position;
         targetPos.y = transform.position.y;
         isRight = !(transform.position.x - target.transform.position.x < 0);
         //シューティングの時に使った　名前は知らない
-        moveVec = Quaternion.Euler(0, rot / 2 * (isRight ? 1 : -1), 0) * moveVec;
+        transform.forward = Quaternion.Euler(0, rot / 2 * (isRight ? 1 : -1), 0) * transform.forward;
     }
 
+
+  
+    
     // Update is called once per frame
     void Update()
     {
         distanceVec = target.transform.position - transform.position;
         distance = distanceVec.magnitude;
-        angle = Vector3.Angle(distanceVec, moveVec);
-        isRight = (Vector3.Angle(Quaternion.Euler(0, 90, 0) * moveVec, distanceVec) < 90.0f);
+        angle = Vector3.Angle(distanceVec, transform.forward);
+        isRight = (Vector3.Angle(transform.right, distanceVec) < 90.0f);
+
     }
 
     protected override void childAIStart()
@@ -141,10 +146,8 @@ public class G20_BombAI : G20_AI
                 //Debug.Log("インゲーム状態を抜けたのでAIを終了");
                 yield break;
             }
-            transform.position += moveVec * AITime;
+            transform.position += transform.forward * AITime;
             
-            transform.Rotate(0, bombrot_speed * AITime, 0);
-
 
             if (distance <= changePhase)
             {
@@ -180,22 +183,13 @@ public class G20_BombAI : G20_AI
             yield return null;
 
         }
-        //走る
-        //while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
-        //{
-
-        //    transform.position += targetfront * AITime;
-        //    if (distance < attackRange)
-        //    {
-        //        // 走ってる途中で近くなったので終了
-        //        yield break;
-        //    }
-        //    yield return null;
-        //}
+        
     }
 
     IEnumerator RotateCoroutine()
     {
+
+
         bool _isRight = isRight;
 
         for (float t = 0; t < rotationTime; t += AITime)
@@ -207,11 +201,9 @@ public class G20_BombAI : G20_AI
 
             }
 
-            moveVec = Quaternion.Euler(0, rot * AITime * (_isRight ? 1 : -1), 0) * moveVec;
-            transform.Rotate(0, bombrot_speed * AITime, 0);
-
-            transform.position += moveVec * (AITime / 2);
-
+            transform.Rotate(0, rot * AITime * (_isRight ? 1 : -1), 0);
+            transform.position += transform.forward * (AITime / 2);
+            
             yield return null;
         }
     }

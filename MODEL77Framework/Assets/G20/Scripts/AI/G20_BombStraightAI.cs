@@ -103,9 +103,9 @@ public class G20_BombStraightAI : G20_AI
 
         while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
         {
-            transform.Rotate(0, bombrot_speed * AITime, 0);
+            //transform.Rotate(0, bombrot_speed * AITime, 0);
 
-            transform.position += moveVec * AITime;
+            transform.position += transform.forward * AITime;
             if (distance < changePhase)
             {
                 yield break;
@@ -141,18 +141,6 @@ public class G20_BombStraightAI : G20_AI
         }
         targetfront.y = 0;
         
-        ////ターゲットに向かって走る
-        //while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME)
-        //{
-
-        //    transform.position += targetfront * AITime;
-        //    if (distance < attackRange )
-        //    {
-        //        // 走ってる途中で近くなったので終了
-        //        yield break;
-        //    }
-        //    yield return null;
-        //}
 
     }
 }
