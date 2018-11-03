@@ -177,27 +177,10 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
 
     void initUI()
     {
-        //yourScore.text = "0";
-        //switch (G20_StageManager.GetInstance().stageType)
-        //{
-        //    case G20_StageType.NORMAL:
-        //        creatorsHighScore.text = G20_NetworkManager.GetInstance().creatorScore[0].ToString();
-        //        break;
-        //    case G20_StageType.HARD:
-        //        creatorsHighScore.text = G20_NetworkManager.GetInstance().creatorScore[1].ToString();
-        //        break;
-        //}
-
-        //if (G20_NetworkManager.GetInstance().is_network)
-        //{
-        //    dailyHighScore.text = G20_NetworkManager.GetInstance().userData.scoreList[0].score;
-        //}
-        //else
-        //{
-
-        //    dailyHighScore.text = "80";
-        //}
-
+        
+        yourScore.text = G20_ScoreManager.GetInstance().GetSumScore().ToString();
+        ChainText.text = G20_ChainCounter.GetInstance().ChainCount.ToString();
+        HitRateText.text = G20_BulletShooter.GetInstance().HitRate.ToString();
         SetUIsActive();
 
     }
@@ -207,23 +190,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     //一番最後にスコアを直接いれたほうがいいかも
     void PlusAppleScore(int addValue)
     {
-        cuurentFellCount++;
-        //スコアを＋1する
-        scorecount += addValue;
-
-        //テキストを入れ替える
-        yourScore_copy.text = scorecount.ToString();
-        yourScore.text = scorecount.ToString();
-
-        //デイリーハイスコアと比べる
-        //デイリーハイスコアより大きかったらなアニメーション開始
-        //int num = int.Parse(dailyHighScore.text);
-        int num = 0;
-        if (num < scorecount)
-        {
-            clearFadeanimator = clearTexts.GetComponent<Animator>();
-            clearFadeanimator.SetBool("newHighScore", true);
-        }
+       
     }
 
 
