@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class G20_HitDamage : G20_HitAction
 {
-    void Awake()
+    G20_HitDamage()
     {
         excutionPriority = 0;
     }

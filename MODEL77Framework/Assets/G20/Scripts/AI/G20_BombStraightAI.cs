@@ -17,6 +17,7 @@ public class G20_BombStraightAI : G20_AI
         target = GameObject.FindGameObjectWithTag("MainCamera");
         targetPos = target.transform.position;
         targetPos.y = transform.position.y;
+        enemy.deathActions += (a,b)=>bomb.FallBomb();
     }
 
 

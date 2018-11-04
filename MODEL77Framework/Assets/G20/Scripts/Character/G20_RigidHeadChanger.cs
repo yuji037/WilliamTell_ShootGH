@@ -15,15 +15,15 @@ public class G20_RigidHeadChanger : G20_HitAction {
 
         var rh =Instantiate(rigidHead);
         rh.transform.position = enemy.Head.position;
-        rh.transform.rotation = enemy.Head.rotation;
-        var vec= (enemy.Head.position - hit_point).normalized;
-        rh.GetComponent<Rigidbody>().AddForce(vec*rollingPower,ForceMode.Impulse);
+        var vec2= (transform.position - Camera.main.transform.position).normalized;
+        rh.GetComponent<Rigidbody>().AddForce(vec2* rollingPower,ForceMode.Impulse);
     }
 
     public override void Execute(Vector3 hit_point)
     {
         if (enemy.HP <= 0)
         {
+
             ChangeRigidHead(hit_point);
         }
     }

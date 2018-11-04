@@ -20,8 +20,6 @@ public class G20_GesslerShootPerformer : MonoBehaviour
     [SerializeField]
     G20_Enemy stageBoss;
 
-    [SerializeField]
-    G20_HitObject headHitObject;
 
     [SerializeField]
     List<MovePath> pathList;
@@ -74,6 +72,7 @@ public class G20_GesslerShootPerformer : MonoBehaviour
         {
             damageEffect.Play(true);
         };
+        stageBoss.deathActions += (a, b) => player.GetComponent<G20_Player>().IsInvincible = true;
 
     }
     [SerializeField] List<G20_VoiceType> voices;
@@ -86,8 +85,6 @@ public class G20_GesslerShootPerformer : MonoBehaviour
             currentVoice = voices.GetEnumerator();
             currentVoice.MoveNext();
         }
-        Debug.Log(voices[0]);
-        Debug.Log(currentVoice.Current);
 
         G20_VoicePerformer.GetInstance().PlayWithNoControll(currentVoice.Current);
         currentVoice.MoveNext();
@@ -214,12 +211,7 @@ public class G20_GesslerShootPerformer : MonoBehaviour
             o.SetActive(_active);
         }
     }
-    void FollowShootEffectToGessler()
-    {
-        var gesslerPos = headHitObject.transform.position;
-        var shootVec = gesslerPos - Camera.main.transform.position;
-        shootEffect.transform.position = shootCamera.transform.position + shootVec.normalized * shootEfectDistance;
-    }
+
     private void OnDrawGizmos()
     {
         foreach (var i in pathList)

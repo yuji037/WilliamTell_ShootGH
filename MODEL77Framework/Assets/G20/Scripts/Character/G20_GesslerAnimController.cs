@@ -46,7 +46,6 @@ public class G20_GesslerAnimController : MonoBehaviour {
         {
             if ((i.haveAnim & animType)>0)
             {
-                Debug.Log(Enum.GetName(typeof(G20_GesslerAnimType), animType));
                 ChangeActiveModel(i.gesslerModel);
                 currentAnimator = i.animator;
                 currentAnimType = animType;

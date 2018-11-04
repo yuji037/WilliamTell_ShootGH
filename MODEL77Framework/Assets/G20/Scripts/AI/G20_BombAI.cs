@@ -36,11 +36,13 @@ public class G20_BombAI : G20_AI
         isRight = !(transform.position.x - target.transform.position.x < 0);
         //シューティングの時に使った　名前は知らない
         transform.forward = Quaternion.Euler(0, rot / 2 * (isRight ? 1 : -1), 0) * transform.forward;
+        enemy.deathActions += (a, b) => bomb.FallBomb();
+
     }
 
 
-  
-    
+
+
     // Update is called once per frame
     void Update()
     {
