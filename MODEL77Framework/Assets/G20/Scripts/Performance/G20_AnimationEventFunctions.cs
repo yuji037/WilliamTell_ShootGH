@@ -22,6 +22,13 @@ public class G20_AnimationEventFunctions : MonoBehaviour {
     [SerializeField]
     CameraShakeParam[] shakeParams;
 
+    [SerializeField]
+    Transform player;
+
+    [SerializeField]
+    Transform enemy;
+
+
     G20_CameraShake cameraShake;
 
     private void Awake()
@@ -46,4 +53,5 @@ public class G20_AnimationEventFunctions : MonoBehaviour {
         cameraShake.Shake(s.shakeType, s.strength, s.frequency, s.timeLength);
     }
 
+   
 }

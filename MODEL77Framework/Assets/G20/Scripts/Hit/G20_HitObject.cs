@@ -17,6 +17,7 @@ public class G20_HitObject : MonoBehaviour {
     public bool IsHitRateUp
     {
         get { return isHitRateUP; }
+        set { isHitRateUP = value; }
     }
     public G20_HitTag HitTag
     {
@@ -30,6 +31,7 @@ public class G20_HitObject : MonoBehaviour {
     }
     private void OnDestroy()
     {
+        if (!G20_ComponentUtility.CheckRoot())return;
         G20_HitObjectCabinet.GetInstance().Remove(this);
     }
     public void ChangeHitTag(G20_HitTag hit_tag)

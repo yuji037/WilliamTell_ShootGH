@@ -24,6 +24,9 @@ public enum G20_VoiceType {
     GAME_OVER3,
     GAME_OVER4,
     GAME_OVER5,
+    DAMAGE1,
+    DAMAGE2,
+    DAMAGE3,
 }
 
 

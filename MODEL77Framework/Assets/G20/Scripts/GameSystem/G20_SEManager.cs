@@ -41,6 +41,9 @@ public enum G20_SEType {
     VOICE17,
     VOICE18,
     VOICE19,
+    VOICE20,
+    VOICE21,
+    VOICE22,
 }
 
 public static class G20_SEExt {

@@ -11,9 +11,13 @@ public class G20_HitReactionVoice : G20_HitAction {
 
     int prePlayNum = 0;
 
-    [SerializeField]
-    G20_VoiceType[] voices;
-	
+    [SerializeField] List<G20_VoiceType> voices;
+    public void ChangeVoices(List<G20_VoiceType> _voices)
+    {
+        voices = _voices;
+        prePlayNum = 0;
+    }
+    public bool isRandomPlay=true;
 	// Update is called once per frame
 	void Update () {
         reactionIntervalTimer += Time.deltaTime;
@@ -25,14 +29,26 @@ public class G20_HitReactionVoice : G20_HitAction {
         {
             // 他ボイス再生中は再生しない
             if ( G20_VoicePerformer.GetInstance().IsPlaying ) return;
-
             reactionIntervalTimer = 0f;
-            int randNum = 0;
-            do{randNum = Random.Range(0, voices.Length);}
-            while ( prePlayNum == randNum );
 
-            G20_VoicePerformer.GetInstance().PlayWithNoControll(voices[randNum]);
-            prePlayNum = randNum;
+            int playNum = 0;
+            if (isRandomPlay)
+            {
+                do { playNum = Random.Range(0, voices.Count); }
+                while (prePlayNum == playNum);
+            }
+            else
+            {
+                //listの並び順に再生
+                playNum=prePlayNum+1;
+                if (playNum >= voices.Count)
+                {
+                    playNum = 0;
+                }
+            }
+            
+            G20_VoicePerformer.GetInstance().PlayWithNoControll(voices[playNum]);
+            prePlayNum = playNum;
         }
     }
 }

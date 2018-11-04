@@ -6,6 +6,10 @@ public class G20_ComponentUtility
 {
     static string rootStr = "G20_Root";
     static Transform root;
+    public static bool CheckRoot()
+    {
+        return (root);
+    }
     public static Transform Root
     {
         get

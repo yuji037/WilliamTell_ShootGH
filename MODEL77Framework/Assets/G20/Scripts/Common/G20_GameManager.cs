@@ -230,9 +230,9 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     public void GameClear()
     {
         gameState = G20_GameState.CLEAR;
-        gameRootAnim.enabled = true;
-        gameRootAnim.CrossFade("ToClear", 0.1f);
-        StartCoroutine(RootAnimOff(2f));
+        //gameRootAnim.enabled = true;
+        //gameRootAnim.CrossFade("ToClear", 0.1f);
+        //StartCoroutine(RootAnimOff(2f));
 
         // 敵（残ってれば）全滅
         G20_EnemyCabinet.GetInstance().KillAllEnemys();

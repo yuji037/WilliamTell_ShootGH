@@ -179,7 +179,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     {
         
         yourScore.text = G20_ScoreManager.GetInstance().GetSumScore().ToString();
-        ChainText.text = G20_ChainCounter.GetInstance().ChainCount.ToString();
+        ChainText.text = G20_ChainCounter.GetInstance().MaxChainCount.ToString();
         HitRateText.text = G20_BulletShooter.GetInstance().HitRate.ToString();
         SetUIsActive();
 

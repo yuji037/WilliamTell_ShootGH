@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public struct MovePath
+public class MovePath
 {
     public Transform[] Positions;
     public float OneLoopTime;
@@ -11,7 +11,6 @@ public struct MovePath
 }
 public class G20_GesslerShootPerformer : MonoBehaviour
 {
-
     [SerializeField]
     GameObject[] activateObjs;
 
@@ -26,9 +25,6 @@ public class G20_GesslerShootPerformer : MonoBehaviour
 
     [SerializeField]
     List<MovePath> pathList;
-
-    [SerializeField]
-    GameObject[] gesslerMeshs;
 
     [SerializeField]
     float moveSpeed;
@@ -49,23 +45,17 @@ public class G20_GesslerShootPerformer : MonoBehaviour
     [SerializeField]
     float maxBossBattleTime;
 
+    [SerializeField]
+    G20_GesslerAnimController gesslerAnim;
+
     G20_HitEffect bossHitEffect;
 
     Coroutine currentMoveCoroutine;
     float shootEfectDistance;
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            gesslerMeshs[0].SetActive(true);
-            gesslerMeshs[1].SetActive(false);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            gesslerMeshs[1].SetActive(true);
-            gesslerMeshs[0].SetActive(false);
-        }
-    }
+
+    [SerializeField]
+    ParticleSystem damageEffect;
+
     public void ToGesslerBattle(System.Action on_end_action)
     {
         StartCoroutine(GesslerShootCoroutine(on_end_action));
@@ -75,8 +65,42 @@ public class G20_GesslerShootPerformer : MonoBehaviour
         Destroy(stageBoss.GetComponent<G20_HitReactionVoice>());
         Destroy(stageBoss.GetComponent<G20_HitCounterApple>());
         stageBoss.recvDamageActions += (a, b) => StartCoroutine(NextGesslerMove());
+        stageBoss.recvDamageActions += (a, b) => HitGesslerHirumi();
+        stageBoss.recvDamageActions += (a, b) =>
+        {
+            PlayDamageVoice();
+        };
+        stageBoss.recvDamageActions += (a, b) =>
+        {
+            damageEffect.Play(true);
+        };
+
     }
+    [SerializeField] List<G20_VoiceType> voices;
+    IEnumerator<G20_VoiceType> currentVoice;
+    void PlayDamageVoice()
+    {
+        if (stageBoss.HP <= 0) return;
+        if (currentVoice == null)
+        {
+            currentVoice = voices.GetEnumerator();
+            currentVoice.MoveNext();
+        }
+        Debug.Log(voices[0]);
+        Debug.Log(currentVoice.Current);
+
+        G20_VoicePerformer.GetInstance().PlayWithNoControll(currentVoice.Current);
+        currentVoice.MoveNext();
+    }
+
     int pathIndexNumber;
+    void HitGesslerHirumi()
+    {
+        if (stageBoss.HP > 0)
+        {
+            gesslerAnim.PlayAnim(G20_GesslerAnimType.Hirumi);
+        }
+    }
     IEnumerator NextGesslerMove()
     {
         if (stageBoss.HP <= 0)
@@ -130,41 +154,57 @@ public class G20_GesslerShootPerformer : MonoBehaviour
 
         // ゲスラー撃てるようになる
         stageBoss.IsInvincible = false;
-        bossHitEffect = stageBoss.GetComponent<G20_HitEffect>();
+
 
         //gesslerにhiteefect追従するように
+        bossHitEffect = stageBoss.GetComponent<G20_HitEffect>();
         bossHitEffect.effctParent = stageBoss.transform;
         bossHitEffect.ChangeEffectType(G20_EffectType.HIT_GESSLER_BODY);
-        Destroy(stageBoss.GetComponent<G20_HitSE>());
-        headHitObject.ChangeHitTag(G20_HitTag.ASSIST);
 
-        float oneLoopTime = 1.0f;
+        Destroy(stageBoss.GetComponent<G20_HitSE>());
+
+        stageBoss.GetComponent<G20_HitObject>().ChangeHitTag(G20_HitTag.ASSIST);
+        stageBoss.GetComponent<G20_HitObject>().IsHitRateUp = true;
+
+        const float CheckShootTime = 1.0f;
+        float fightingTime = 0f;
         float timer = 0f;
         while (stageBoss.HP > 0)
         {
-            var rate = AutoShootCurve.Evaluate(timer / maxBossBattleTime);
-            float rand = UnityEngine.Random.Range(0, 1.0f);
-            if (rand <= rate)
+            if (timer >= CheckShootTime)
             {
-                G20_BulletAppleCreator.GetInstance().Create(stageBoss.transform.position);
+                var rate = AutoShootCurve.Evaluate(fightingTime / maxBossBattleTime);
+                float rand = UnityEngine.Random.Range(0, 1.0f);
+                if (rand <= rate)
+                {
+                    //攻撃
+                    gesslerAnim.PlayAnim(G20_GesslerAnimType.Attack);
+                    G20_BulletAppleCreator.GetInstance().Create(stageBoss.transform.position);
+                }
+                fightingTime += CheckShootTime;
+                timer = 0f;
             }
-            timer += oneLoopTime;
-            yield return new WaitForSeconds(oneLoopTime);
+            timer += Time.deltaTime;
+            yield return null;
         }
+
 
         //counterWall(ゲスラーの反撃判定壁)を非アクティブに
         counterWall.SetActive(false);
 
-
-        // ゲスラー撃破
-        G20_VoicePerformer.GetInstance().PlayWithCaption(G20_VoiceType.GAME_CLEAR1);
+        gesslerAnim.PlayAnim(G20_GesslerAnimType.Yarare);
 
         // 「SHOOT」非表示
         foreach (var o in activateObjs)
         {
             o.SetActive(false);
         }
+        StartCoroutine(GesslerDownMove());
+        StartCoroutine(ApprochToGessler());
+        G20_VoicePerformer.GetInstance().PlayWithCaption(G20_VoiceType.GAME_CLEAR1);
 
+        yield return new WaitForSeconds(1.0f);
+        // ゲスラー撃破
         if (on_end_action != null) on_end_action();
     }
     void ActivateShootObject(bool _active)
@@ -194,17 +234,80 @@ public class G20_GesslerShootPerformer : MonoBehaviour
         }
 
     }
+    [SerializeField]
+    Transform player;
+    [SerializeField]
+    Vector3 DefaultPosition;
+
+    IEnumerator ApprochToGessler()
+    {
+        var preRot = player.rotation;
+
+        //徐々に回転
+        Vector3 direction = stageBoss.transform.position - player.transform.position;
+        direction.y += 0.5f;
+        Quaternion toRotation = Quaternion.FromToRotation(player.transform.forward, direction);
+        for (float t = 0f; t <= 1.0f; t += Time.deltaTime * 2.5f)
+        {
+            player.rotation = Quaternion.Lerp(preRot, toRotation, t);
+            yield return null;
+        }
+        //徐々に近づく
+        for (float t = 0f; t <= 2.0f; t += Time.deltaTime)
+        {
+            player.transform.Translate(0, 0, Time.deltaTime * 1.5f, Space.Self);
+            yield return null;
+        }
+        yield return new WaitForSeconds(1.0f);
+        player.position = DefaultPosition;
+        player.rotation = preRot;
+
+    }
     IEnumerator GesslerFollowsPath(MovePath movePath)
     {
 
         while (true)
         {
+            Vector3 prePos = stageBoss.transform.position;
+            bool wasRight = false;
+            bool isFirstPath = true;
             foreach (var k in movePath.Positions)
             {
+                var isRight = ((k.position.x - prePos.x) > 0) ? true : false;
+                if ((wasRight != isRight) || isFirstPath)
+                {
+                    if (!gesslerAnim.IsAttacking())
+                    {
+                        if (isRight)
+                        {
+                            gesslerAnim.PlayAnim(G20_GesslerAnimType.RightMove);
+                        }
+                        else
+                        {
+                            gesslerAnim.PlayAnim(G20_GesslerAnimType.LeftMove);
+                        }
+                    }
+                    wasRight = isRight;
+                }
                 yield return MoveNextPosition(k.position, movePath.curve);
+                prePos = k.position;
+                isFirstPath = false;
             }
+
             //配列の最後まで行くと、最初に戻る
             yield return MoveNextPosition(movePath.Positions[0].position, movePath.curve);
+        }
+    }
+    IEnumerator GesslerDownMove()
+    {
+        while (true)
+        {
+            stageBoss.transform.Translate(0, -Time.deltaTime, 0);
+            if (stageBoss.transform.position.y <= 1.0f)
+            {
+                break;
+            }
+            yield return null;
         }
     }
     IEnumerator MoveNextPosition(Vector3 nextPosition, AnimationCurve curve)
