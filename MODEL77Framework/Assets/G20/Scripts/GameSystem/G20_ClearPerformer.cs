@@ -16,7 +16,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     public float fallTime = 20.0f;
     public float endWaitTime = 10.0f;
     [SerializeField] GameObject paramObjs;
-    [SerializeField] G20_ScoreCalcData scoreCalcData;
+    //[SerializeField] G20_ScoreCalcData scoreCalcData;
 
     [SerializeField] GameObject[] onClearDeactivateFieldObjs;
     [SerializeField] GameObject[] onClearActivateFieldObjs;
@@ -44,11 +44,15 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     float balanceNum;
     int GetHitRateBonus()
     {
-        return scoreCalcData.HitRateMultyply * (int)(G20_BulletShooter.GetInstance().HitRate*100);
+        return 100* (int)(G20_BulletShooter.GetInstance().HitRate * 100);
+
+        //return scoreCalcData.HitRateMultyply * (int)(G20_BulletShooter.GetInstance().HitRate*100);
     }
     int GetMaxChainBonus()
     {
-        return scoreCalcData.MaxChainMultiply * G20_ChainCounter.GetInstance().MaxChainCount;
+        return 200* G20_ChainCounter.GetInstance().MaxChainCount;
+
+        //return scoreCalcData.MaxChainMultiply * G20_ChainCounter.GetInstance().MaxChainCount;
     }
     public void Excute(Action on_end_action)
     {

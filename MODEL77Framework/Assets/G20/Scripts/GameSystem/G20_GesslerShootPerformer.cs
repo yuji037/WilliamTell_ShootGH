@@ -252,7 +252,7 @@ public class G20_GesslerShootPerformer : MonoBehaviour
         }
         yield return new WaitForSeconds(1.0f);
         player.position = DefaultPosition;
-        player.rotation = preRot;
+        player.rotation = Quaternion.identity;
 
     }
     IEnumerator GesslerFollowsPath(MovePath movePath)
