@@ -32,7 +32,7 @@ public class G20_Enemy : G20_Unit
         {
             speed = value;
             speed = Mathf.Clamp(speed, 0.5f, 100);
-            anim.AnimSpeed = speed;
+            if(anim)anim.AnimSpeed = speed;
         }
     }
     bool isLife = true;

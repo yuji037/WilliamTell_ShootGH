@@ -10,9 +10,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     [SerializeField] bool IsRandomlyFall;
     [SerializeField] GameObject appleObj;
     [SerializeField] GameObject goldenAppleObj;
-    [SerializeField] GameObject smallEneAppleObj;
-    //1/smallEneRateの確率で出現
-    [SerializeField] int smallEneRate;
+
     [SerializeField] Vector3 fallPoint;
     [SerializeField] Vector3 fallSize;
     public float fallTime = 20.0f;
@@ -70,11 +68,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
        
         //スコア算出
         var hitRateScore= GetHitRateBonus();
-        HitRateText.text = hitRateScore.ToString();
-
         var maxChainScore = GetMaxChainBonus();
-        ChainText.text = maxChainScore.ToString();
-
         var sumScore = G20_ScoreManager.GetInstance().GetSumScore()+maxChainScore+hitRateScore;
         
         // リンゴ落下数の計算
@@ -97,9 +91,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         {
             GameObject apple;
             bool isGoldenApple = (i % goldRate == goldRate - 1);
-            bool isSmalleEne = (UnityEngine.Random.Range(0, smallEneRate) == 1);
             if (isGoldenApple) apple = Instantiate(goldenAppleObj);
-            else if (isSmalleEne) apple = Instantiate(smallEneAppleObj);
             else apple = Instantiate(appleObj);
 
             var fallAppleSound = apple.GetComponent<G20_FallAppleSound>();
@@ -177,20 +169,22 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
 
     void initUI()
     {
-        
-        yourScore.text = G20_ScoreManager.GetInstance().GetSumScore().ToString();
+        var hitRateScore = GetHitRateBonus();
+        var maxChainScore = GetMaxChainBonus();
+        var sumScore = G20_ScoreManager.GetInstance().GetSumScore() + maxChainScore + hitRateScore;
+
         ChainText.text = G20_ChainCounter.GetInstance().MaxChainCount.ToString();
-        HitRateText.text = G20_BulletShooter.GetInstance().HitRate.ToString();
+        yourScore.text = sumScore.ToString();
+        HitRateText.text =  ((int)(G20_BulletShooter.GetInstance().HitRate*100)).ToString()+"%";
+
         SetUIsActive();
 
     }
     //スコアアップルが落ちた回数
     int cuurentFellCount;
 
-    //一番最後にスコアを直接いれたほうがいいかも
     void PlusAppleScore(int addValue)
     {
-       
     }
 
 

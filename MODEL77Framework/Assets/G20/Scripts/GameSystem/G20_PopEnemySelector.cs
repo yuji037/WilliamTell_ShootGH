@@ -8,6 +8,7 @@ enum G20_EnemyModelType
     Golden,
     Bomb,
     Small,
+    SmallBullet,
 }
 public class G20_PopEnemySelector : MonoBehaviour {
     [SerializeField]
@@ -32,6 +33,8 @@ public class G20_PopEnemySelector : MonoBehaviour {
                 return SelectEnemyAI<G20_BombStraightAI>(G20_EnemyModelType.Bomb);
             case G20_EnemyType.SMALL_STRAIGHT:
                 return SelectEnemyAI<G20_SmallStraightAI>(G20_EnemyModelType.Small);
+            case G20_EnemyType.SMALL_BULLET:
+                return SelectEnemyAI<G20_FlyAI>(G20_EnemyModelType.SmallBullet);
         }
         return null;
     }

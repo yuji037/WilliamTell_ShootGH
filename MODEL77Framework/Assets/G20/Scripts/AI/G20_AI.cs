@@ -27,7 +27,7 @@ public abstract class G20_AI : MonoBehaviour
     //行動パターンの変更距離
     [SerializeField] protected float changePhase = 5.0f;
 
-   
+
 
     public void Init()
     {
@@ -39,8 +39,8 @@ public abstract class G20_AI : MonoBehaviour
     {
         isPouse = true;
         if (enemy.HP > 0) return;
-        animPlayer.PlayAnimation(enemy.deathAnimTypes, 1.0f,()=>Destroy(gameObject));
-        animPlayer.isEnding = true;
+        if (animPlayer) animPlayer.PlayAnimation(enemy.deathAnimTypes, 1.0f, () => Destroy(gameObject));
+        if (animPlayer) animPlayer.isEnding = true;
     }
     protected float AITime
     {
