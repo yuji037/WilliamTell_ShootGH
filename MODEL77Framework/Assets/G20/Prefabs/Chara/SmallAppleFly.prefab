@@ -1544,9 +1544,9 @@ MonoBehaviour:
   changePhase: 5
   radius: 2
   rollingPower: 1
-  rollingDuration: 3
-  init_vy: 1
-  gravity: 1
+  rollingDuration: 0.68
+  init_vy: 0.48
+  gravity: 0.36
   appleModel: {fileID: 4771260863460660}
 --- !u!114 &114956064734046626
 MonoBehaviour:
