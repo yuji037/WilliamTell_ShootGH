@@ -19,7 +19,7 @@ public class G20_HitBomb : G20_HitAction {
     }
     void Explosion()
     {
-        var colliders=Physics.OverlapSphere(transform.position,explosionRadius);
+        var colliders=Physics.OverlapCapsule(transform.position + new Vector3(0, -5, 0),transform.position+new Vector3(0,5,0),explosionRadius);
         foreach (var col in colliders)
         {
             var hitDamage = col.GetComponent<G20_HitDamage>();
