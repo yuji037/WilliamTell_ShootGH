@@ -58,7 +58,7 @@ public class G20_StageBehaviour : MonoBehaviour
     public class PopEnemyCue
     {
         public G20_EnemyType enemyType;
-        [SerializeField, Range(-5, 22)]
+        [SerializeField, Range(-5, 24)]
         public int positionNumber;
     }
 
