@@ -300,9 +300,9 @@ public class G20_StageBehaviour : MonoBehaviour
                     positionNumber = cue.positionNumber - 1;
                 }
 
-                if (positionNumber < 0 || popPositions.Length < positionNumber)
+                if (positionNumber < 0 || popPositions.Length - 1 < positionNumber)
                 {
-                    //Debug.LogError("ポップ位置の選択が不正");
+                    Debug.LogError("ポップ位置の選択が不正");
                 }
                 Vector3 _popPos = popPositions[positionNumber].transform.position;
                 poppedNumberList.Add(positionNumber);
@@ -333,8 +333,8 @@ public class G20_StageBehaviour : MonoBehaviour
         switch (position_number)
         {
             case -5:
-                _min = 21;
-                _max = 24;
+                _min = 20;
+                _max = 23;
                 break;
             case -4:
                 _min = 15;

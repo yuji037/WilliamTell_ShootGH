@@ -56,7 +56,7 @@ public class G20_EnemyPopper : MonoBehaviour
 
         var enemy = ene.GetComponent<G20_Enemy>();
 
-        //enemyのbuffを設定、本来はstageBehaviourで処理したいので後で移行
+        //enemyのbuffを設定
         G20_EnemyBuff enemy_buff = null;
   
         if (onPopSpeedBuffValue != 0) enemy_buff = new G20_SpeedBuff(enemy, 100.0f, onPopSpeedBuffValue);

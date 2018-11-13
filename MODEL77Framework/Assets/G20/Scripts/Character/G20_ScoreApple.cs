@@ -146,6 +146,13 @@ public class G20_ScoreApple : G20_Unit
     }
     IEnumerator FadeOut()
     {
+        if ( !meshRenderer.material.HasProperty("_Color") )
+        {
+            Debug.Log("フェードアウトできないマテリアルです");
+            yield return new WaitForSeconds(1f);
+            yield break;
+        }
+
         Color c = meshRenderer.material.color;
         for (float t = 0; t < 1; t += Time.deltaTime)
         {
