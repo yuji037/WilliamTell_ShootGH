@@ -1545,7 +1545,7 @@ MonoBehaviour:
   radius: 2
   rollingPower: 1
   rollingDuration: 0.68
-  init_vy: 0.48
+  init_vy: 0.5
   gravity: 0.36
   appleModel: {fileID: 4771260863460660}
 --- !u!114 &114956064734046626
