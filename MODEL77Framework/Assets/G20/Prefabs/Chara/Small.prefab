@@ -1202,6 +1202,7 @@ GameObject:
   - component: {fileID: 114645434565230548}
   - component: {fileID: 114721877903200404}
   - component: {fileID: 114171981278495680}
+  - component: {fileID: 114204252766356520}
   m_Layer: 5
   m_Name: Small
   m_TagString: Untagged
@@ -3682,6 +3683,30 @@ MonoBehaviour:
   gravity: 0.9
   init_v: 1.2
   rotspeed: 0.3
+--- !u!114 &114204252766356520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1624674485546374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e42aa1fac2fd6743b7a3ed8b1507c73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPouse: 0
+  enemy: {fileID: 0}
+  attackRange: 3
+  deathposition_y: -2
+  deathvec: {x: 0, y: -2, z: 0}
+  attacktime: 1
+  changePhase: 5
+  radius: 2
+  rollingPower: 1
+  rollingDuration: 0.68
+  init_vy: 0.5
+  gravity: 0.36
+  appleModel: {fileID: 4972752420275906}
 --- !u!114 &114282343669644676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3695,6 +3720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 0
   isCorrect: 1
+  IsActive: 1
   effctParent: {fileID: 0}
 --- !u!114 &114562488254360678
 MonoBehaviour:

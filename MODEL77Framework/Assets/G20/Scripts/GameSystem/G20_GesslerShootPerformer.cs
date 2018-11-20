@@ -132,7 +132,6 @@ public class G20_GesslerShootPerformer : MonoBehaviour
     }
     IEnumerator GesslerShootCoroutine(System.Action on_end_action)
     {
-        G20_VoicePerformer.GetInstance().PlayWithNoControll(G20_VoiceType.INGAME6);
         BattleSetUP();
 
         var anim = GameObject.Find("G20_Root").GetComponent<Animator>();
@@ -140,6 +139,7 @@ public class G20_GesslerShootPerformer : MonoBehaviour
         anim.CrossFade("ToGesslerBattle", 0.3f);
         yield return new WaitForSeconds(2.9f);
         anim.enabled = false;
+        G20_VoicePerformer.GetInstance().PlayWithNoControll(G20_VoiceType.INGAME2);
 
         //counterWall(ゲスラーの反撃判定壁)をアクティブに
         counterWall.SetActive(true);

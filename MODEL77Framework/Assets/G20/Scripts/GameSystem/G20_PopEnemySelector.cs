@@ -8,7 +8,7 @@ enum G20_EnemyModelType
     Golden,
     Bomb,
     Small,
-    SmallBullet,
+    SmallBullet
 }
 public class G20_PopEnemySelector : MonoBehaviour {
     [SerializeField]

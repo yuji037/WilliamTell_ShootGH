@@ -218,17 +218,20 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         //ゲームオーバー演出の開始
         G20_FailedPerformer.GetInstance().Excute(GameEnd);
     }
-
+    public bool IsGesslerBattle
+    {
+        get;private set;
+    }
     public void StartGesslerBattle()
     {
-        //Debug.Log("GoldenApple : " + G20_Score.GetInstance().GoldPoint);
         gesslerAnim.enabled = false;
-        // ゲスラー撃った後、クリア
+        IsGesslerBattle = true;
         gesslerShootPerformer.ToGesslerBattle(GameClear);
     }
 
     public void GameClear()
     {
+        IsGesslerBattle = false;
         gameState = G20_GameState.CLEAR;
         //gameRootAnim.enabled = true;
         //gameRootAnim.CrossFade("ToClear", 0.1f);

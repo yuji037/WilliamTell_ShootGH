@@ -34,6 +34,10 @@ public abstract class G20_AI : MonoBehaviour
         enemy = GetComponent<G20_Enemy>();
         animPlayer = enemy.anim;
         enemy.deathActions += (x, y) => DeathEnemy();
+        ChildInit();
+    }
+    protected virtual void ChildInit()
+    {
     }
     void DeathEnemy()
     {

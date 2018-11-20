@@ -21,44 +21,54 @@ public class G20_FlyAI : G20_AI
     [SerializeField]
     float gravity = 1.0f;
 
-
     [SerializeField]
     Transform appleModel;
 
-    bool isTargetingPlayer = true;
-
+    [SerializeField]
+    float spinSpeed = 1.0f;
+    bool isTargeting = true;
+    protected override void ChildInit()
+    {
+        enemy.deathActions += (a,b)=> StartCoroutine(BoundDeath());
+    }
     protected override void childAIStart()
     {
         moveVec = Camera.main.transform.position - transform.position;
-        enemy.deathActions += (a, b) => isTargetingPlayer = false;
         moveVec.Normalize();
         moveVec.y += init_vy;
         StartCoroutine(AppleFlyRoutine());
     }
-
     IEnumerator AppleFlyRoutine()
     {
-        while (isTargetingPlayer)
+        while (G20_GameManager.GetInstance().gameState == G20_GameState.INGAME&&isTargeting)
         {
-            if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME || enemy.HP <= 0 || transform.position.y <= -2f)
-            {
-                break;
-            }
             moveVec.y -= gravity * Time.deltaTime;
-            transform.Translate(moveVec * enemy.Speed * Time.deltaTime, Space.World);
-            appleModel.up = moveVec;
+            transform.Translate(moveVec * enemy.Speed *Time.deltaTime, Space.World);
+            transform.up = moveVec;
+            appleModel.Rotate(0,360*spinSpeed*Time.deltaTime,0);
             if (radius >= Vector3.Distance(Camera.main.transform.position, transform.position))
             {
-                G20_EnemyAttack.GetInstance().Attack(1);
-                enemy.RecvDamage(enemy.HP, G20_Unit.G20_DamageType.System);
+                G20_EnemyAttack.GetInstance().Attack(enemy.Attack);
+                yield return StartCoroutine(SusideCoroutine());
+            }
+            if (deathposition_y>=transform.position.y)
+            {
+                yield return StartCoroutine(SusideCoroutine());
             }
             yield return null;
         }
+        
+    }
+
+    IEnumerator BoundDeath()
+    {
+        isTargeting = false;
         GetComponent<SphereCollider>().enabled = true;
         var rh = gameObject.AddComponent<Rigidbody>();
         rh.isKinematic = false;
         var vec = transform.position - Camera.main.transform.position;
         rh.AddForce(vec * rollingPower, ForceMode.Impulse);
+        rh.AddTorque(new Vector3(10,0,0),ForceMode.Impulse);
         yield return new WaitForSeconds(rollingDuration);
         Destroy(gameObject);
     }

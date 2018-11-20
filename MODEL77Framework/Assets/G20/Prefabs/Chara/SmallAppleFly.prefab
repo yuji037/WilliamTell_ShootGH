@@ -295,6 +295,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4771260863460660}
+  - component: {fileID: 95333866971080136}
   m_Layer: 5
   m_Name: appleheadMan3
   m_TagString: Untagged
@@ -906,7 +907,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1744997745265182}
-  m_LocalRotation: {x: -0.010956209, y: 0.20842554, z: -0.025515173, w: 0.97764397}
+  m_LocalRotation: {x: -0.01095621, y: 0.20842554, z: -0.025515174, w: 0.97764397}
   m_LocalPosition: {x: 0.19781747, y: 0.000000001595164, z: 0.000000024886962}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1471,6 +1472,23 @@ Transform:
   m_Father: {fileID: 4768080146416418}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95333866971080136
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1401669685642664}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: dfd3977812fe59e4987e98deebe4a530, type: 3}
+  m_Controller: {fileID: 9100000, guid: f6747e90a28709e42b989b4cc5f2392d, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114190756021418406
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1544,10 +1562,11 @@ MonoBehaviour:
   changePhase: 5
   radius: 2
   rollingPower: 1
-  rollingDuration: 0.68
+  rollingDuration: 1.2
   init_vy: 0.5
   gravity: 0.36
   appleModel: {fileID: 4771260863460660}
+  spinSpeed: 1
 --- !u!114 &114956064734046626
 MonoBehaviour:
   m_ObjectHideFlags: 1

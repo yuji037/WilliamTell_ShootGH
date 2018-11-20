@@ -21,6 +21,13 @@ public class G20_BombController : MonoBehaviour {
     }
     bool isThrowing=false;
 
+    private void Update()
+    {
+        if (G20_GameManager.GetInstance().IsGesslerBattle)
+        {
+            Destroy(gameObject);
+        }
+    }
     public void FallBomb()
     {
         if (isThrowing)return;
@@ -43,8 +50,7 @@ public class G20_BombController : MonoBehaviour {
             yield return null;
         }
     }
-
-
+  
     public void Bombthrow(float attackRange,int damage)
     {
         StartCoroutine(BombthrowCoroutine(attackRange,damage));
