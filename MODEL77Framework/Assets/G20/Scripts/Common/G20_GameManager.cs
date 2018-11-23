@@ -102,8 +102,10 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         // プレイヤー後ずさり等のアニメーション開始
         gameRootAnim.CrossFade("ToIngame", 0f);
 
-        yield return new WaitForSeconds(7.2f);
-        paramCanvas.SetActive(true);
+		yield return new WaitForSeconds(6.2f);
+		paramCanvas.SetActive(true);
+
+		yield return new WaitForSeconds(1.5f);
 
         gameRootAnim.enabled = false;
         // ゲスラーふわふわアニメーション開始

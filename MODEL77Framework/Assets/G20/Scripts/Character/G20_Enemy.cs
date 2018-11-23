@@ -47,6 +47,7 @@ public class G20_Enemy : G20_Unit
         deathActions += (x, y) => ChangeHitObjectNormal();
         deathActions += (x, y) => isLife = false;
         deathActions += (_, damageType) => UpChainCount(damageType);
+		deathActions += (x, y) => G20_CameraShake.GetInstance().ShakeOnEvent(G20_CamShakeEventType.ENEMY_DOWN);
         if (!head) head = transform;
     }
     public void AddBuff(G20_EnemyBuff enemy_buff)

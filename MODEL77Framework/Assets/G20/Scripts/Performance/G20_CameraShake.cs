@@ -11,9 +11,13 @@ public enum G20_CameraShakeType {
     RANDOM_DIRECTION,
 }
 
+public enum G20_CamShakeEventType {
+	ENEMY_DOWN,
+}
 
-public class G20_CameraShake : MonoBehaviour {
+public class G20_CameraShake : G20_Singleton<G20_CameraShake> {
 
+	// AnimationClipからいじれるように public にしている
     public bool beginShake = false;
     public G20_CameraShakeType ShakeType;
     [Range(0f, 1f)]
@@ -24,6 +28,22 @@ public class G20_CameraShake : MonoBehaviour {
     public float TimeLength = 1f;
 
     Vector3 defaultPos;
+
+	[System.Serializable]
+	public class CamShakeEventParam {
+		[Header("ShakeDirが(0,0)ならShakeTypeで判定して揺れる")]
+		public Vector2 shakeDir;
+		public G20_CameraShakeType shakeType;
+
+		[Range(0f, 1f)]
+		public float strength;
+		[Range(0f, 20f)]
+		public float frequency;
+		[Range(0f, 5f)]
+		public float timeLength;
+	}
+	[SerializeField]
+	CamShakeEventParam enemyDownCamShakeParam;
 
 	// Use this for initialization
 	void Start () {
@@ -99,4 +119,28 @@ public class G20_CameraShake : MonoBehaviour {
             yield return null;
         }
     }
+
+	public void ShakeOnEvent(G20_CamShakeEventType eventType)
+	{
+		CamShakeEventParam param = null;
+		switch ( eventType )
+		{
+			case G20_CamShakeEventType.ENEMY_DOWN:
+				param = enemyDownCamShakeParam;
+				break;
+		}
+
+		if ( param.shakeDir != Vector2.zero )
+
+			ShakeDirection(	param.shakeDir,
+							param.strength,
+							param.frequency,
+							param.timeLength);
+		else
+
+			Shake(			param.shakeType,
+							param.strength,
+							param.frequency,
+							param.timeLength);
+	}
 }
