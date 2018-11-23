@@ -137,8 +137,11 @@ public class G20_GesslerShootPerformer : MonoBehaviour
         var anim = GameObject.Find("G20_Root").GetComponent<Animator>();
         anim.enabled = true;
         anim.CrossFade("ToGesslerBattle", 0.3f);
-        yield return new WaitForSeconds(2.9f);
-        anim.enabled = false;
+		G20_BGMManager.GetInstance().FadeOut();
+        yield return new WaitForSeconds(1.0f);
+		G20_BGMManager.GetInstance().Play(G20_BGMType.BOSS);
+        yield return new WaitForSeconds(1.9f);
+		anim.enabled = false;
         G20_VoicePerformer.GetInstance().PlayWithNoControll(G20_VoiceType.INGAME2);
 
         //counterWall(ゲスラーの反撃判定壁)をアクティブに

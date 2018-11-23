@@ -10,6 +10,7 @@ public enum G20_BGMType {
     INGAME_2,
     CLEAR,
     GAMEOVER,
+	BOSS,
 }
 
 public static class G20_BGMExt {
@@ -36,7 +37,10 @@ public static class G20_BGMExt {
             case G20_BGMType.GAMEOVER:
                 retStr = "gameover";
                 break;
-        }
+			case G20_BGMType.BOSS:
+				retStr = "boss";
+				break;
+		}
 
         return retStr;
     }
