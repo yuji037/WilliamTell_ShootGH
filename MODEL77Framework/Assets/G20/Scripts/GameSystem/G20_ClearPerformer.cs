@@ -16,7 +16,6 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     public float fallTime = 20.0f;
     public float endWaitTime = 10.0f;
     [SerializeField] GameObject paramObjs;
-    //[SerializeField] G20_ScoreCalcData scoreCalcData;
 
     [SerializeField] GameObject[] onClearDeactivateFieldObjs;
     [SerializeField] GameObject[] onClearActivateFieldObjs;
@@ -26,13 +25,9 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
 
     [SerializeField] Text yourScore;
     [SerializeField] Text yourScore_copy;
-    //[SerializeField] Text creatorsHighScore;
-    //[SerializeField] Text dailyHighScore;
 
     [SerializeField] GameObject clearTexts;
-
     [SerializeField] GameObject playerObj;
-
 
     [SerializeField] GameObject highScore;
     [SerializeField] Text highScoreText;
@@ -42,18 +37,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
 
     public int scorecount = 0;
     float balanceNum;
-    int GetHitRateBonus()
-    {
-        return 100* (int)(G20_BulletShooter.GetInstance().HitRate * 100);
-
-        //return scoreCalcData.HitRateMultyply * (int)(G20_BulletShooter.GetInstance().HitRate*100);
-    }
-    int GetMaxChainBonus()
-    {
-        return 200* G20_ChainCounter.GetInstance().MaxChainCount;
-
-        //return scoreCalcData.MaxChainMultiply * G20_ChainCounter.GetInstance().MaxChainCount;
-    }
+ 
     public void Excute(Action on_end_action)
     {
         StartCoroutine(FallAppleRoutine(on_end_action));
@@ -71,9 +55,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         yield return new WaitForSeconds(2.0f);
        
         //スコア算出
-        var hitRateScore= GetHitRateBonus();
-        var maxChainScore = GetMaxChainBonus();
-        var sumScore = G20_ScoreManager.GetInstance().GetSumScore()+maxChainScore+hitRateScore;
+        var sumScore = G20_ScoreManager.GetInstance().GetSumScore();
         
         // リンゴ落下数の計算
         var goldFallCount = G20_ScoreManager.GetInstance().GoldPoint.Value;
@@ -173,9 +155,7 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
 
     void initUI()
     {
-        var hitRateScore = GetHitRateBonus();
-        var maxChainScore = GetMaxChainBonus();
-        var sumScore = G20_ScoreManager.GetInstance().GetSumScore() + maxChainScore + hitRateScore;
+        var sumScore = G20_ScoreManager.GetInstance().GetSumScore();
 
         ChainText.text = G20_ChainCounter.GetInstance().MaxChainCount.ToString();
         yourScore.text = sumScore.ToString();

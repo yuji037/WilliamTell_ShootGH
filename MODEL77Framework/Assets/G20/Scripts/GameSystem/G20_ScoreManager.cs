@@ -25,11 +25,23 @@ public struct G20_Score
 public class G20_ScoreManager : G20_Singleton<G20_ScoreManager>
 {
     public G20_Score Base;
-    public G20_Score Bonus;
     public G20_Score GoldPoint;
+    public G20_ScoreCalcData scoreCalcData;
+    public int GetBaseScore()
+    {
+        return Base.Value;
+    }
     //BaseとBonusの合計スコア
     public int GetSumScore()
     {
-        return Base.Value + Bonus.Value;
+        return Base.Value + GetHitRateBonus() + GetMaxChainBonus();
+    }
+    public int GetHitRateBonus()
+    {
+        return scoreCalcData.HitRateMultyply * (int)(G20_BulletShooter.GetInstance().HitRate * 100);
+    }
+    public int GetMaxChainBonus()
+    {
+        return scoreCalcData.MaxChainMultiply * G20_ChainCounter.GetInstance().MaxChainCount;
     }
 }

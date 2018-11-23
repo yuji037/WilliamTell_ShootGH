@@ -18,7 +18,7 @@ public class G20_UIScore : MonoBehaviour
     {
         while (true)
         {
-            var ScoreValue = G20_ScoreManager.GetInstance().GetSumScore();
+            var ScoreValue = G20_ScoreManager.GetInstance().GetBaseScore();
             var sub = ScoreValue - (int)virtualCurrentScore;
             var addValue = (1.0f / scoreChangeInterval) * Time.deltaTime;
             if (sub > 0)

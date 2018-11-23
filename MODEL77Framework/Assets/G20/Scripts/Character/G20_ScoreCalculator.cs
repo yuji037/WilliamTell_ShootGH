@@ -16,8 +16,8 @@ public class G20_ScoreCalculator
     }
     public void LowerHaveScore(int lowerValue)
     {
-        haveScore-= lowerValue;
-        if (haveScore<=0)
+        haveScore -= lowerValue;
+        if (haveScore <= 0)
         {
             haveScore = 0;
         }
@@ -25,7 +25,7 @@ public class G20_ScoreCalculator
     int StealHaveScore(int stealScore)
     {
         //持ちスコア以上取れないように制限
-        stealScore = Mathf.Clamp(stealScore,0,haveScore);
+        stealScore = Mathf.Clamp(stealScore, 0, haveScore);
         //持ちスコアから引く
         haveScore -= stealScore;
         return stealScore;
@@ -33,14 +33,14 @@ public class G20_ScoreCalculator
     }
     public void CalcAndAddScore(int _damage)
     {
-  
-        var score = StealHaveScore(oneDamageStealValue*_damage);
+
+        var score = StealHaveScore(oneDamageStealValue * _damage);
         if (score <= 0) return;
+        //ボーナス加算
+        score += G20_ChainCounter.GetInstance().GetOneTimeBonusScore();
         G20_ScoreManager.GetInstance().Base.AddScore(score);
-        var bonusScore = G20_ChainCounter.GetInstance().GetOneTimeBonusScore();
-        G20_ScoreManager.GetInstance().Bonus.AddScore(bonusScore);
         var obj = G20_EffectManager.GetInstance().Create(G20_EffectType.PLUS_ONE_SCORE, scoreEffectTransform.position);
-        obj.GetComponent<TextMesh>().text = "+" + (score+bonusScore);
+        obj.GetComponent<TextMesh>().text = "+" + (score);
 
     }
 }
