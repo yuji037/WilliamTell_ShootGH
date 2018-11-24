@@ -9,23 +9,23 @@ public class G20_ChainCounter : G20_Singleton<G20_ChainCounter>
     float ChainDurationTimer;
     [SerializeField] Animator chainAnim;
     [SerializeField] UnityEngine.UI.Text chainText;
-    [SerializeField]int bonusValueEveryFive;
+    [SerializeField] int bonusValueEveryFive;
     public int ChainCount { get; private set; }
     public int MaxChainCount { get; private set; }
     // Use this for initialization
     private void Awake()
     {
-        G20_BulletShooter.GetInstance().ActionHitObject += CountUpdate;
+        G20_BulletShooter.GetInstance().ActionHitObject += UpdateCount;
     }
     private void Update()
     {
         ChainDurationTimer -= Time.deltaTime;
-        if (ChainDurationTimer<=0)
+        if (ChainDurationTimer <= 0)
         {
-            CutChain();
+            ResetChainCount();
         }
     }
-    void CutChain()
+    void ResetChainCount()
     {
         if (2 <= ChainCount)
         {
@@ -33,15 +33,17 @@ public class G20_ChainCounter : G20_Singleton<G20_ChainCounter>
         }
         ChainCount = 0;
     }
+
     public int GetOneTimeBonusScore()
     {
         return (ChainCount / 5) * bonusValueEveryFive;
     }
+
     public void UpChainCount()
     {
         ChainCount++;
         if (ChainCount > MaxChainCount) MaxChainCount = ChainCount;
-        //2chain目だった場合スコア表示アニメショーン実行
+        //2chain目だった場合スコア表示アニメーション実行
         if (ChainCount == 2)
         {
             chainAnim.CrossFade("G20_ChainFadeIn", 0f);
@@ -49,15 +51,16 @@ public class G20_ChainCounter : G20_Singleton<G20_ChainCounter>
         if (ChainCount >= 2)
         {
             chainText.text = ChainCount + "";
+            chainAnim.Play("G20_ChainUp",0,0.0f);
         }
         ChainDurationTimer = ChainDurationSeconds;
     }
-    void CountUpdate(G20_HitObject hitObject)
-    {
-        if (!(hitObject &&hitObject.IsHitRateUp))
-        {
-            CutChain();
-        }
 
+    void UpdateCount(G20_HitObject hitObject)
+    {
+        if (!(hitObject && hitObject.IsHitRateUp))
+        {
+            ResetChainCount();
+        }
     }
 }
