@@ -8,6 +8,7 @@ public class MovePath
     public float OneLoopTime;
     public Color gizmoColor;
     public AnimationCurve curve;
+    public List<int> attackPosIndex;
 }
 public class G20_GesslerShootPerformer : MonoBehaviour
 {
@@ -36,17 +37,12 @@ public class G20_GesslerShootPerformer : MonoBehaviour
     [SerializeField]
     Camera shootCamera;
 
-    //ボスが自発的に弾を打つ確率のカーブ
-    [SerializeField]
-    AnimationCurve AutoShootCurve;
-    //ボスが弾を打つ頻度が最大まで高くなるまでの時間
-    [SerializeField]
-    float maxBossBattleTime;
-
     [SerializeField]
     G20_GesslerAnimController gesslerAnim;
 
     G20_HitEffect bossHitEffect;
+
+    G20_HitCounterApple hitCounterApple;
 
     Coroutine currentMoveCoroutine;
     float shootEfectDistance;
@@ -146,6 +142,8 @@ public class G20_GesslerShootPerformer : MonoBehaviour
 
         //counterWall(ゲスラーの反撃判定壁)をアクティブに
         counterWall.SetActive(true);
+        hitCounterApple = counterWall.GetComponent<G20_HitCounterApple>();
+        yield return null;
 
         // 「SHOOT」表示
         ActivateShootObject(true);
@@ -166,25 +164,8 @@ public class G20_GesslerShootPerformer : MonoBehaviour
         stageBoss.GetComponent<G20_HitObject>().ChangeHitTag(G20_HitTag.ASSIST);
         stageBoss.GetComponent<G20_HitObject>().IsHitRateUp = true;
 
-        const float CheckShootTime = 1.0f;
-        float fightingTime = 0f;
-        float timer = 0f;
         while (stageBoss.HP > 0)
         {
-            if (timer >= CheckShootTime)
-            {
-                var rate = AutoShootCurve.Evaluate(fightingTime / maxBossBattleTime);
-                float rand = UnityEngine.Random.Range(0, 1.0f);
-                if (rand <= rate)
-                {
-                    //攻撃
-                    gesslerAnim.PlayAnim(G20_GesslerAnimType.Attack);
-                    G20_BulletAppleCreator.GetInstance().Create(stageBoss.transform.position);
-                }
-                fightingTime += CheckShootTime;
-                timer = 0f;
-            }
-            timer += Time.deltaTime;
             yield return null;
         }
 
@@ -266,6 +247,7 @@ public class G20_GesslerShootPerformer : MonoBehaviour
             Vector3 prePos = stageBoss.transform.position;
             bool wasRight = false;
             bool isFirstPath = true;
+            int num = 0;
             foreach (var k in movePath.Positions)
             {
                 var isRight = ((k.position.x - prePos.x) > 0) ? true : false;
@@ -284,13 +266,16 @@ public class G20_GesslerShootPerformer : MonoBehaviour
                     }
                     wasRight = isRight;
                 }
-                yield return MoveNextPosition(k.position, movePath.curve);
+
+                if (movePath.attackPosIndex.Contains(num))
+                {
+                    hitCounterApple.CreateAppleBullet(stageBoss.transform.position);
+                }
+                yield return MoveNextPosition(k.position,movePath.curve);
                 prePos = k.position;
                 isFirstPath = false;
+                num++;
             }
-
-            //配列の最後まで行くと、最初に戻る
-            yield return MoveNextPosition(movePath.Positions[0].position, movePath.curve);
         }
     }
     IEnumerator GesslerDownMove()
@@ -305,7 +290,7 @@ public class G20_GesslerShootPerformer : MonoBehaviour
             yield return null;
         }
     }
-    IEnumerator MoveNextPosition(Vector3 nextPosition, AnimationCurve curve)
+    IEnumerator MoveNextPosition(Vector3 nextPosition,AnimationCurve curve)
     {
         var startPos = stageBoss.transform.position;
         var dis = Vector3.Distance(nextPosition, stageBoss.transform.position);

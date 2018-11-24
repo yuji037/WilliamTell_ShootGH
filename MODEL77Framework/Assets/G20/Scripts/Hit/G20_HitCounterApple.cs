@@ -26,13 +26,16 @@ public class G20_HitCounterApple : G20_HitAction {
 
     public override void Execute(Vector3 hit_point)
     {
-        var create_point = hit_point;
-        if ( isRandomPos )
+        CreateAppleBullet(hit_point);
+    }
+    public GameObject CreateAppleBullet(Vector3 create_point)
+    {
+        if (isRandomPos)
         {
             var dif = new Vector3(Random.Range(0, randRadius), 0, 0);
             dif = Quaternion.Euler(0, 0, Random.Range(0, 360)) * dif;
             create_point = popPositions[Random.Range(0, popPositions.Length)].position + dif;
         }
-        G20_BulletAppleCreator.GetInstance().Create(create_point);
+        return G20_BulletAppleCreator.GetInstance().Create(create_point);
     }
 }

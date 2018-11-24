@@ -36,7 +36,7 @@ public class G20_BulletApple : G20_Unit {
         {
             if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
             {
-                break;
+                RecvDamage(HP, G20_DamageType.System);
             }
             transform.Translate(moveVec * moveSpeed * Time.deltaTime,Space.World);
             //transform.Rotate(-100.0f*Time.deltaTime*moveSpeed,0,0);
