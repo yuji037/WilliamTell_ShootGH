@@ -71,10 +71,10 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
         // 敵が死ぬとリストの要素数が変わるためコピー配列で操作する
         var enemys = enemyList.ToArray();
 
-        StartCoroutine(DamageEffectPositions(enemys,damage)); ;
+        StartCoroutine(DamageEffectPositions(enemys,damage));
     }
 
-    IEnumerator DamageEffectPositions(G20_Enemy[] enemys, int damage)
+    IEnumerator DamageEffectPositions(G20_Enemy[] enemys, int? damage = null)
     {
         float interval = 0.07f;
 
@@ -83,12 +83,12 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
             if ( !enemy ) continue;
 
             DamageEffectSEEnemy(enemy);
-            enemy.RecvDamage(damage,G20_Unit.G20_DamageType.Player);
+            enemy.RecvDamage(damage != null ? (int)damage : enemy.HP,G20_Unit.G20_DamageType.Player);
             yield return new WaitForSeconds(interval);
         }
     }
 
-    public void DamageEffectSEEnemy(G20_Enemy enemy)
+	public void DamageEffectSEEnemy(G20_Enemy enemy)
     {
         G20_EffectManager effMn = G20_EffectManager.GetInstance();
         G20_SEManager seMn = G20_SEManager.GetInstance();
@@ -98,7 +98,12 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
         G20_SEManager.GetInstance().Play(G20_SEType.HIT_HEAD, pos);
     }
 
-    public void KillAllEnemys()
+	public void KillEnemysWithEffect(G20_Enemy[] enemys)
+	{
+		StartCoroutine(DamageEffectPositions(enemys));
+	}
+
+	public void KillAllEnemys()
     {
         var enemys = enemyList.ToArray();
 
@@ -109,4 +114,48 @@ public class G20_EnemyCabinet : G20_Singleton<G20_EnemyCabinet>
             enemy.RecvDamage(enemy.HP,G20_Unit.G20_DamageType.System);
         }
     }
+
+	public void ExplodeCapsuleRange(Vector3 point0, Vector3 point1, float radius)
+	{
+		StartCoroutine(ExplodeCoroutine(point0, point1, radius));
+	}
+
+	IEnumerator ExplodeCoroutine(Vector3 point0, Vector3 point1, float radius)
+	{
+		var colliders = Physics.OverlapCapsule(point0, point1, radius);
+		float interval = 0.09f;
+
+		foreach ( var col in colliders )
+		{
+			if ( !col ) continue;
+
+			var hitDamage = col.GetComponent<G20_HitDamage>();
+
+			if ( !hitDamage ) continue;
+
+			var enemy = hitDamage.Target as G20_Enemy;
+			var effectPos = Vector3.zero;
+
+			if ( enemy )
+			{
+				// 対象がEnemyの場合
+				effectPos = enemy.Head.position;
+			}
+			else
+			{
+				// 対象がEnemy以外の場合
+				effectPos = col.transform.position;
+			}
+
+			// 実ダメージ処理
+			hitDamage.Target.RecvDamage(hitDamage.Target.HP, G20_Unit.G20_DamageType.Player);
+
+			// エフェクト・SE発生
+			G20_EffectManager.GetInstance().Create(G20_EffectType.HIT_APPLE_HEAD, effectPos);
+			G20_SEManager.GetInstance().Play(G20_SEType.HIT_HEAD, effectPos);
+
+			// エフェクト・SE発生にわずかに間隔を空ける
+			yield return new WaitForSeconds(interval);
+		}
+	}
 }
