@@ -20,7 +20,13 @@ public enum G20_SEType {
     FOREST,
     BARRIER,
     HIGH_SCORE,
-    TEST_VOICE,
+	HIT_HEAD_B,
+	BARRIER_EXTINCTION,
+	APPLE_VOICE_SMALL,
+	APPLE_VOICE_NORMAL,
+	APPLE_VOICE_NORMAL2,
+	HIT_GOLDHEAD_2,
+	TEST_VOICE,
     VOICE0,
     VOICE1,
     VOICE2,
@@ -104,7 +110,25 @@ public static class G20_SEExt {
             case G20_SEType.HIGH_SCORE:
                 retStr = "score";
                 break;
-            case G20_SEType.TEST_VOICE:
+			case G20_SEType.HIT_HEAD_B:
+				retStr = "hit_headB";
+				break;
+			case G20_SEType.BARRIER_EXTINCTION:
+				retStr = "barrier_Extinction";
+				break;
+			case G20_SEType.APPLE_VOICE_SMALL:
+				retStr = "apple_voice_small";
+				break;
+			case G20_SEType.APPLE_VOICE_NORMAL:
+				retStr = "apple_voice_normal";
+				break;
+			case G20_SEType.APPLE_VOICE_NORMAL2:
+				retStr = "apple_voice_normal2";
+				break;
+			case G20_SEType.HIT_GOLDHEAD_2:
+				retStr = "hit_gold_2nd";
+				break;
+			case G20_SEType.TEST_VOICE:
                 retStr = "test_voice";
                 break;
             case G20_SEType.CHAIN1:
@@ -186,7 +210,7 @@ public class G20_SEManager : G20_Singleton<G20_SEManager> {
 
         // ボイスは必ず鳴って欲しい
         if ( seType >= G20_SEType.TEST_VOICE
-            && seType <= G20_SEType.VOICE19 ) audioSource.priority = 118;
+            && seType <= G20_SEType.VOICE22 ) audioSource.priority = 118;
 
         audioSource.Play();
 
