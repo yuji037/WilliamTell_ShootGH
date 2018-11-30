@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 098abaca3503a394ba6fd6060364c658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seType: 0
+  seType: 15
 --- !u!114 &114285455563140000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,6 +224,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 0
   isCorrect: 1
+  IsActive: 1
+  effctParent: {fileID: 0}
 --- !u!114 &114697312161777696
 MonoBehaviour:
   m_ObjectHideFlags: 1

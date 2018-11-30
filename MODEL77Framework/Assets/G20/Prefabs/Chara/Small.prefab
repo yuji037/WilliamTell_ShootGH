@@ -3707,6 +3707,7 @@ MonoBehaviour:
   init_vy: 0.5
   gravity: 0.36
   appleModel: {fileID: 4972752420275906}
+  spinSpeed: 1
 --- !u!114 &114282343669644676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3759,7 +3760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 098abaca3503a394ba6fd6060364c658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seType: 0
+  seType: 15
 --- !u!114 &114721877903200404
 MonoBehaviour:
   m_ObjectHideFlags: 1

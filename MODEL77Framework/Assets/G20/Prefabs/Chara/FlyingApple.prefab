@@ -364,6 +364,7 @@ MonoBehaviour:
   rollingPower: 5
   rollingDuration: 3
   particle: {fileID: 1143062537343670}
+  owner: {fileID: 0}
 --- !u!114 &114342304907240836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -392,6 +393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 0
   isCorrect: 1
+  IsActive: 1
   effctParent: {fileID: 0}
 --- !u!114 &114538655731620400
 MonoBehaviour:
@@ -429,7 +431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 098abaca3503a394ba6fd6060364c658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seType: 0
+  seType: 15
 --- !u!135 &135256163774608684
 SphereCollider:
   m_ObjectHideFlags: 1

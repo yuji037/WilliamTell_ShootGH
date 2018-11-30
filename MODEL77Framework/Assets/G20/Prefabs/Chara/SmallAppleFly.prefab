@@ -1513,7 +1513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 098abaca3503a394ba6fd6060364c658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seType: 0
+  seType: 15
 --- !u!114 &114468719919610360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1566,7 +1566,7 @@ MonoBehaviour:
   init_vy: 0.5
   gravity: 0.36
   appleModel: {fileID: 4771260863460660}
-  spinSpeed: 1
+  spinSpeed: 3
 --- !u!114 &114956064734046626
 MonoBehaviour:
   m_ObjectHideFlags: 1
