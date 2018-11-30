@@ -20,6 +20,7 @@ public class G20_BulletApple : G20_Unit {
     [SerializeField]
     GameObject particle;
 
+    public G20_Unit owner;
     bool isTargetingPlayer=true;
     
     private void Start()
@@ -34,7 +35,7 @@ public class G20_BulletApple : G20_Unit {
     {
         while (isTargetingPlayer)
         {
-            if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
+            if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME|| owner.HP<=0)
             {
                 RecvDamage(HP, G20_DamageType.System);
             }

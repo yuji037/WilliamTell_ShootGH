@@ -44,6 +44,13 @@ public enum G20_SEType {
     VOICE20,
     VOICE21,
     VOICE22,
+    CHAIN1,
+    CHAIN2,
+    CHAIN3,
+    CHAIN4,
+    CHAIN5,
+    FLIGHTBOSS,
+
 }
 
 public static class G20_SEExt {
@@ -100,6 +107,24 @@ public static class G20_SEExt {
             case G20_SEType.TEST_VOICE:
                 retStr = "test_voice";
                 break;
+            case G20_SEType.CHAIN1:
+                retStr = "Chain_1";
+                break;
+            case G20_SEType.CHAIN2:
+                retStr = "Chain_2";
+                break;
+            case G20_SEType.CHAIN3:
+                retStr = "Chain_3";
+                break;
+            case G20_SEType.CHAIN4:
+                retStr = "Chain_4";
+                break;
+            case G20_SEType.CHAIN5:
+                retStr = "Chain_5";
+                break;
+            case G20_SEType.FLIGHTBOSS:
+                retStr = "flight_boss";
+                break;
             default:
                 retStr = "voice" + ((int)( _type - G20_SEType.VOICE0 )).ToString();
                 break;
@@ -151,7 +176,7 @@ public class G20_SEManager : G20_Singleton<G20_SEManager> {
         }
         else
         {
-            Debug.Log("エラー：SE音量設定ミス");
+            Debug.Log("エラー：SE音量設定ミス"+(int)seType);
             audioSource.volume = 1f;
         }
 

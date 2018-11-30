@@ -42,6 +42,7 @@ public class G20_ChainCounter : G20_Singleton<G20_ChainCounter>
     public void UpChainCount()
     {
         ChainCount++;
+        PlayChainSE(ChainCount);
         if (ChainCount > MaxChainCount) MaxChainCount = ChainCount;
         //2chain目だった場合スコア表示アニメーション実行
         if (ChainCount == 2)
@@ -51,11 +52,38 @@ public class G20_ChainCounter : G20_Singleton<G20_ChainCounter>
         if (ChainCount >= 2)
         {
             chainText.text = ChainCount + "";
-            chainAnim.Play("G20_ChainUp",0,0.0f);
+            chainAnim.Play("G20_ChainUp", 0, 0.0f);
         }
         ChainDurationTimer = ChainDurationSeconds;
     }
-
+    void PlayChainSE(int chainCount)
+    {
+        switch (chainCount)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                G20_SEManager.GetInstance().Play(G20_SEType.CHAIN1, Vector3.zero, false);
+                break;
+            case 3:
+                G20_SEManager.GetInstance().Play(G20_SEType.CHAIN2, Vector3.zero, false);
+                break;
+            case 4:
+                G20_SEManager.GetInstance().Play(G20_SEType.CHAIN3, Vector3.zero, false);
+                break;
+            case 5:
+                G20_SEManager.GetInstance().Play(G20_SEType.CHAIN4, Vector3.zero, false);
+                break;
+            case 6:
+                G20_SEManager.GetInstance().Play(G20_SEType.CHAIN5, Vector3.zero, false);
+                break;
+            default:
+                G20_SEManager.GetInstance().Play(G20_SEType.CHAIN5, Vector3.zero, false);
+                break;
+        }
+    }
     void UpdateCount(G20_HitObject hitObject)
     {
         if (!(hitObject && hitObject.IsHitRateUp))

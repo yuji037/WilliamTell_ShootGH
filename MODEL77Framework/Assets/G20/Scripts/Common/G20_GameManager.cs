@@ -253,7 +253,8 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         yield return new WaitForSeconds(delay);
         gameRootAnim.enabled = false;
     }
-    void OnDestroy()
+
+    new void OnDestroy()
     {
         ChangedStateAction = null;
         OnGameEndAction = null;

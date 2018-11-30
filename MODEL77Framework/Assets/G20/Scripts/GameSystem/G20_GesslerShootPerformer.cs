@@ -195,7 +195,7 @@ public class G20_GesslerShootPerformer : MonoBehaviour
             o.SetActive(_active);
         }
     }
-
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         foreach (var i in pathList)
@@ -210,6 +210,7 @@ public class G20_GesslerShootPerformer : MonoBehaviour
         }
 
     }
+#endif
     [SerializeField]
     Transform player;
     [SerializeField]
@@ -239,6 +240,8 @@ public class G20_GesslerShootPerformer : MonoBehaviour
         player.rotation = Quaternion.identity;
 
     }
+    float flySETimer = 4.0f;
+    float SETime=4.0f;
     IEnumerator GesslerFollowsPath(MovePath movePath)
     {
 
@@ -250,6 +253,7 @@ public class G20_GesslerShootPerformer : MonoBehaviour
             int num = 0;
             foreach (var k in movePath.Positions)
             {
+             
                 var isRight = ((k.position.x - prePos.x) > 0) ? true : false;
                 if ((wasRight != isRight) || isFirstPath)
                 {
@@ -292,6 +296,7 @@ public class G20_GesslerShootPerformer : MonoBehaviour
     }
     IEnumerator MoveNextPosition(Vector3 nextPosition,AnimationCurve curve)
     {
+      
         var startPos = stageBoss.transform.position;
         var dis = Vector3.Distance(nextPosition, stageBoss.transform.position);
         var requiredTime = dis / moveSpeed;
@@ -299,7 +304,17 @@ public class G20_GesslerShootPerformer : MonoBehaviour
         {
             var curvePos = curve.Evaluate(t / requiredTime);
             stageBoss.transform.position = Vector3.Lerp(startPos, nextPosition, curvePos);
+            SETimerUpdate();
             yield return null;
+        }
+    }
+    void SETimerUpdate()
+    {
+        flySETimer += Time.deltaTime;
+        if (SETime <= flySETimer)
+        {
+            G20_SEManager.GetInstance().Play(G20_SEType.FLIGHTBOSS, stageBoss.transform.position);
+            flySETimer = 0f;
         }
     }
 }
