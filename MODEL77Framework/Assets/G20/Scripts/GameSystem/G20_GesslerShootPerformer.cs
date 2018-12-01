@@ -50,6 +50,9 @@ public class G20_GesslerShootPerformer : MonoBehaviour
     [SerializeField]
     ParticleSystem damageEffect;
 
+    [SerializeField]
+    ParticleSystem breakProtectEffect;
+
     public void ToGesslerBattle(System.Action on_end_action)
     {
         StartCoroutine(GesslerShootCoroutine(on_end_action));
@@ -58,6 +61,8 @@ public class G20_GesslerShootPerformer : MonoBehaviour
     {
         Destroy(stageBoss.GetComponent<G20_HitReactionVoice>());
         Destroy(stageBoss.GetComponent<G20_HitCounterApple>());
+        G20_SEManager.GetInstance().Play(G20_SEType.BARRIER_EXTINCTION,stageBoss.transform.position);
+        breakProtectEffect.Play();
         stageBoss.recvDamageActions += (a, b) => StartCoroutine(NextGesslerMove());
         stageBoss.recvDamageActions += (a, b) => HitGesslerHirumi();
         stageBoss.recvDamageActions += (a, b) =>
