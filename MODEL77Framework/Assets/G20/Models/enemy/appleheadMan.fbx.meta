@@ -907,7 +907,7 @@ ModelImporter:
       name: headAttack
       takeName: Take 001
       firstFrame: 151
-      lastFrame: 151
+      lastFrame: 152
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1032,8 +1032,8 @@ ModelImporter:
     - serializedVersion: 16
       name: clockRotateAttack
       takeName: Take 001
-      firstFrame: 152
-      lastFrame: 152
+      firstFrame: 153
+      lastFrame: 154
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
