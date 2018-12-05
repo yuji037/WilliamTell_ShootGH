@@ -17,7 +17,13 @@ public class G20_BombStraightAI : G20_AI
         target = GameObject.FindGameObjectWithTag("MainCamera");
         targetPos = target.transform.position;
         targetPos.y = transform.position.y;
-        enemy.deathActions += (a,b)=>bomb.FallBomb();
+        enemy.deathActions += (a, b) =>
+        {
+            if (bomb != null)
+            {
+                bomb.FallBomb();
+            }
+        };
     }
 
 
@@ -94,7 +100,7 @@ public class G20_BombStraightAI : G20_AI
         bomb.transform.parent = enemy.transform.parent;
 
         //yield return new WaitForSeconds(1);
-       
+
     }
 
     //とにかく前に走る
@@ -114,7 +120,7 @@ public class G20_BombStraightAI : G20_AI
             yield return null;
         }
 
-      
+
     }
 
     //ターゲットに向いてから走る
@@ -141,7 +147,7 @@ public class G20_BombStraightAI : G20_AI
 
         }
         targetfront.y = 0;
-        
+
 
     }
 }
