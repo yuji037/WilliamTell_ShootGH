@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovePath
 {
     public Transform[] Positions;
-    public float OneLoopTime;
+    public float moveSpeed;
     public Color gizmoColor;
     public AnimationCurve curve;
     public List<int> attackPosIndex;
@@ -90,7 +90,13 @@ public class G20_GesslerShootPerformer : MonoBehaviour
         G20_VoicePerformer.GetInstance().PlayWithNoControll(currentVoice.Current);
         currentVoice.MoveNext();
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            gesslerAnim.PlayAnim(G20_GesslerAnimType.Attack);
+        }
+    }
     int pathIndexNumber;
     void HitGesslerHirumi()
     {
@@ -280,7 +286,7 @@ public class G20_GesslerShootPerformer : MonoBehaviour
                 {
                     hitCounterApple.CreateAppleBullet(stageBoss.transform.position);
                 }
-                yield return MoveNextPosition(k.position,movePath.curve);
+                yield return MoveNextPosition(k.position,movePath.curve,movePath.moveSpeed);
                 prePos = k.position;
                 isFirstPath = false;
                 num++;
@@ -299,12 +305,12 @@ public class G20_GesslerShootPerformer : MonoBehaviour
             yield return null;
         }
     }
-    IEnumerator MoveNextPosition(Vector3 nextPosition,AnimationCurve curve)
+    IEnumerator MoveNextPosition(Vector3 nextPosition,AnimationCurve curve,float multiPlySpeed)
     {
       
         var startPos = stageBoss.transform.position;
         var dis = Vector3.Distance(nextPosition, stageBoss.transform.position);
-        var requiredTime = dis / moveSpeed;
+        var requiredTime = dis / (moveSpeed*multiPlySpeed);
         for (float t = 0; t < requiredTime; t += Time.deltaTime * gesslerMoveTimeScale)
         {
             var curvePos = curve.Evaluate(t / requiredTime);

@@ -23,16 +23,11 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
     [SerializeField] MeshRenderer backGroundMesh;
     [SerializeField] Material clearBackGroundMaterial;
 
-    [SerializeField] Text yourScore;
-    [SerializeField] Text yourScore_copy;
-
     [SerializeField] GameObject clearTexts;
     [SerializeField] GameObject playerObj;
 
-    [SerializeField] GameObject highScore;
-    [SerializeField] Text highScoreText;
-    [SerializeField] Text ChainText;
-    [SerializeField] Text HitRateText;
+    [SerializeField] G20_ShowRankPerformer rankPerformer;
+
     Animator clearFadeanimator;
 
     public int scorecount = 0;
@@ -53,7 +48,10 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
         G20_BGMManager.GetInstance().Play(G20_BGMType.CLEAR);
         G20_FadeChanger.GetInstance().StartWhiteFadeIn(2.0f);
         yield return new WaitForSeconds(2.0f);
-       
+
+        //ランク演出
+        rankPerformer.StartPerformance();
+
         //スコア算出
         var sumScore = G20_ScoreManager.GetInstance().GetSumScore();
         
@@ -95,20 +93,9 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
             yield return new WaitForSeconds(fallAppleDelay);
         }
 
-        float timer = 0f;
-
-        do
-        {
-            timer += Time.deltaTime;
-            yield return null;
-            //全てリンゴが落ちたら合計スコアを代入
-            if (totalAppleCount == cuurentFellCount)
-            {
-                yourScore_copy.text = sumScore.ToString();
-                yourScore.text = sumScore.ToString();
-                Debug.Log("チェンジ" + sumScore);
-            }
-        } while ((totalAppleCount != cuurentFellCount) && (timer <= endWaitTime));
+        
+        yield return new WaitForSeconds(endWaitTime);
+        
         if (on_end_action != null) on_end_action();
     }
 
@@ -155,18 +142,9 @@ public class G20_ClearPerformer : G20_Singleton<G20_ClearPerformer>
 
     void initUI()
     {
-        var sumScore = G20_ScoreManager.GetInstance().GetSumScore();
-
-        ChainText.text = G20_ChainCounter.GetInstance().MaxChainCount.ToString();
-        yourScore.text = sumScore.ToString();
-        HitRateText.text =  ((int)(G20_BulletShooter.GetInstance().HitRate*100)).ToString()+"%";
-
         SetUIsActive();
-
     }
-    //スコアアップルが落ちた回数
-    int cuurentFellCount;
-
+    
     void PlusAppleScore(int addValue)
     {
     }
