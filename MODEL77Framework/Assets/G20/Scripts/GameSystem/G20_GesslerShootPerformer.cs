@@ -191,9 +191,9 @@ public class G20_GesslerShootPerformer : MonoBehaviour
         {
             o.SetActive(false);
         }
+        G20_VoicePerformer.GetInstance().PlayWithCaption(G20_VoiceType.GAME_CLEAR1);
         StartCoroutine(GesslerDownMove());
         StartCoroutine(ApprochToGessler());
-        G20_VoicePerformer.GetInstance().PlayWithCaption(G20_VoiceType.GAME_CLEAR1);
 
         yield return new WaitForSeconds(1.0f);
         // ゲスラー撃破
@@ -232,7 +232,9 @@ public class G20_GesslerShootPerformer : MonoBehaviour
         var preRot = player.rotation;
 
         //徐々に回転
-        Vector3 direction = stageBoss.transform.position - player.transform.position;
+        var bossPos = stageBoss.transform.position;
+        bossPos.y = 1.0f;
+        Vector3 direction = bossPos - player.transform.position;
         direction.y += 0.5f;
         Quaternion toRotation = Quaternion.FromToRotation(player.transform.forward, direction);
         for (float t = 0f; t <= 1.0f; t += Time.deltaTime * 2.5f)

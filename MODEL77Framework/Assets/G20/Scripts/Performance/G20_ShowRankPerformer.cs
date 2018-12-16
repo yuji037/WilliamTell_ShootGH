@@ -18,6 +18,13 @@ public class G20_ShowRankPerformer : MonoBehaviour
     {
         StartCoroutine(PerformanceRoutine());
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            StartPerformance();
+        }
+    }
     //IEnumerator PerformanceRoutine()
     //{
 
@@ -61,13 +68,13 @@ public class G20_ShowRankPerformer : MonoBehaviour
 
         //チェイン数、チェインボーナス、トータルスコア、カウントアップ
         Debug.Log("チェイン数、チェインボーナス、トータルスコア、カウントアップ");
-        float duration = 2.0f;
+        float duration = 3.0f;
         var preScore = currentTotalScore;
         currentTotalScore += G20_ScoreManager.GetInstance().GetMaxChainBonus();
         G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(chainValue, 0, G20_ChainCounter.GetInstance().MaxChainCount, duration);
         G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(chainScore, 0, G20_ScoreManager.GetInstance().GetMaxChainBonus(), duration);
         G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(totalScore, preScore, currentTotalScore, duration);
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(duration+1.0f);
 
         //命中率、命中率ボーナス、トータルスコア、カウントアップ
         Debug.Log("命中率、命中率ボーナス、トータルスコア、カウントアップ");
