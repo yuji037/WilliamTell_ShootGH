@@ -10,6 +10,7 @@ public enum G20_GesslerAnimType{
     Hirumi=8,
     Yarare=16,
     Attack=32,
+    Kutipaku=64,
 }
 [System.Serializable]
 class G20_GesslerObject

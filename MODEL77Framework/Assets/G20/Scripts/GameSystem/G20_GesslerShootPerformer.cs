@@ -38,7 +38,7 @@ public class G20_GesslerShootPerformer : MonoBehaviour
     Camera shootCamera;
 
     [SerializeField]
-    G20_GesslerAnimController gesslerAnim;
+    public G20_GesslerAnimController gesslerAnim;
 
     G20_HitEffect bossHitEffect;
 

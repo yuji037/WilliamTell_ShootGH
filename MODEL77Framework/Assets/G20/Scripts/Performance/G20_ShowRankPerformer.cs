@@ -18,13 +18,6 @@ public class G20_ShowRankPerformer : MonoBehaviour
     {
         StartCoroutine(PerformanceRoutine());
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            StartPerformance();
-        }
-    }
     //IEnumerator PerformanceRoutine()
     //{
 

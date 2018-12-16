@@ -102,14 +102,17 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         // プレイヤー後ずさり等のアニメーション開始
         gameRootAnim.CrossFade("ToIngame", 0f);
 
-		yield return new WaitForSeconds(6.2f);
+        yield return new WaitForSeconds(6.2f);
 		paramCanvas.SetActive(true);
 
-		yield return new WaitForSeconds(1.5f);
-
-        gameRootAnim.enabled = false;
-        // ゲスラーふわふわアニメーション開始
         gesslerAnim.enabled = true;
+        gesslerShootPerformer.gesslerAnim.PlayAnim(G20_GesslerAnimType.Attack);
+        yield return new WaitForSeconds(1.5f);
+
+
+ 
+        // ゲスラーふわふわアニメーション開始
+        
         // 最初のリンゴ召喚
         G20_StageManager.GetInstance().IngameStart();
         G20_StageManager.GetInstance().nowStageBehaviour.SetEnableUpdateCall(1);
@@ -120,8 +123,9 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         //G20_VoicePerformer.GetInstance().Play(0);
 
         yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 0.5f);
+        gameRootAnim.enabled = false;
+        gesslerShootPerformer.gesslerAnim.PlayAnim(G20_GesslerAnimType.Taiki);
 
-        //yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 1.0f);
         // 戦闘開始
         G20_BulletShooter.GetInstance().CanShoot = true;
         gameState = G20_GameState.INGAME;
