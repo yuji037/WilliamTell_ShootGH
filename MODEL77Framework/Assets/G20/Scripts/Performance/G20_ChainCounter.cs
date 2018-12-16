@@ -60,27 +60,14 @@ public class G20_ChainCounter : G20_Singleton<G20_ChainCounter>
     {
         switch (chainCount)
         {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
+            case 3:
                 G20_SEManager.GetInstance().Play(G20_SEType.CHAIN1, Vector3.zero, false);
                 break;
-            case 3:
+            case 5:
                 G20_SEManager.GetInstance().Play(G20_SEType.CHAIN2, Vector3.zero, false);
                 break;
-            case 4:
+            case 7:
                 G20_SEManager.GetInstance().Play(G20_SEType.CHAIN3, Vector3.zero, false);
-                break;
-            case 5:
-                G20_SEManager.GetInstance().Play(G20_SEType.CHAIN4, Vector3.zero, false);
-                break;
-            case 6:
-                G20_SEManager.GetInstance().Play(G20_SEType.CHAIN5, Vector3.zero, false);
-                break;
-            default:
-                G20_SEManager.GetInstance().Play(G20_SEType.CHAIN5, Vector3.zero, false);
                 break;
         }
     }

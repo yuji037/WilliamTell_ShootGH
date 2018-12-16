@@ -53,8 +53,6 @@ public enum G20_SEType {
     CHAIN1,
     CHAIN2,
     CHAIN3,
-    CHAIN4,
-    CHAIN5,
     FLIGHTBOSS,
 
 }
@@ -139,12 +137,6 @@ public static class G20_SEExt {
                 break;
             case G20_SEType.CHAIN3:
                 retStr = "Chain_3";
-                break;
-            case G20_SEType.CHAIN4:
-                retStr = "Chain_4";
-                break;
-            case G20_SEType.CHAIN5:
-                retStr = "Chain_5";
                 break;
             case G20_SEType.FLIGHTBOSS:
                 retStr = "flight_boss";
