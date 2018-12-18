@@ -57,6 +57,8 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     Animator gesslerAnim;
     [SerializeField]
     bool isReloadMode;
+    [SerializeField]
+    ParticleSystem summonParticle;
     public bool isSkipPerformance = false;
 
     G20_GesslerShootPerformer gesslerShootPerformer;
@@ -102,10 +104,13 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         // プレイヤー後ずさり等のアニメーション開始
         gameRootAnim.CrossFade("ToIngame", 0f);
 
-        yield return new WaitForSeconds(6.2f);
-		paramCanvas.SetActive(true);
+        yield return new WaitForSeconds(5.5f);
+        summonParticle.Play();
+        yield return new WaitForSeconds(0.7f);
+        paramCanvas.SetActive(true);
 
         gesslerAnim.enabled = true;
+        
         gesslerShootPerformer.gesslerAnim.PlayAnim(G20_GesslerAnimType.Attack);
         yield return new WaitForSeconds(1.5f);
 
@@ -124,6 +129,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
 
         yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 0.5f);
         gameRootAnim.enabled = false;
+        summonParticle.Stop();
         gesslerShootPerformer.gesslerAnim.PlayAnim(G20_GesslerAnimType.Taiki);
 
         // 戦闘開始
