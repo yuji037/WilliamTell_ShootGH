@@ -5,6 +5,14 @@ using UnityEngine.UI;
 
 public class G20_ShowRankPerformer : MonoBehaviour
 {
+    [System.Serializable]
+    struct ResultParam
+    {
+      public Color color;
+      public string text;
+      public int scoreCondition;
+    }
+
     [SerializeField] Text baseScore;
     [SerializeField] Text chainValue;
     [SerializeField] Text chainScore;
@@ -13,6 +21,12 @@ public class G20_ShowRankPerformer : MonoBehaviour
     [SerializeField] Text totalScore;
     [SerializeField] Animator showRankAnim;
     [SerializeField] Text rankText;
+
+    [SerializeField]ResultParam[] resultParams;
+
+    [SerializeField] float chainCountUpDuration=3.0f;
+    [SerializeField] float hitRateCountUpDuration=3.0f;
+
     int currentTotalScore = 0;
     public void StartPerformance()
     {
@@ -25,68 +39,38 @@ public class G20_ShowRankPerformer : MonoBehaviour
             StartPerformance();
         }
     }
-    //IEnumerator PerformanceRoutine()
-    //{
 
-    //    //トータルスコア瞬時表示
-    //    totalScore.text = currentTotalScore.ToString();
-    //    currentTotalScore += G20_ScoreManager.GetInstance().GetBaseScore();
-    //    var baseScoreStr = G20_ScoreManager.GetInstance().GetBaseScore().ToString();
-    //    baseScore.text = baseScoreStr;
-
-    //    //チェイン数、チェインボーナス、トータルスコア、カウントアップ
-    //    Debug.Log("チェイン数、チェインボーナス、トータルスコア、カウントアップ");
-    //    float duration = 2.0f;
-    //    var preScore = currentTotalScore;
-    //    currentTotalScore += 3400;
-    //    G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(chainValue, 0, 11, duration);
-    //    G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(chainScore, 0, 3400, duration);
-    //    G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(totalScore, preScore, currentTotalScore, duration);
-    //    yield return new WaitForSeconds(duration+0.5f);
-
-    //    //命中率、命中率ボーナス、トータルスコア、カウントアップ
-    //    Debug.Log("命中率、命中率ボーナス、トータルスコア、カウントアップ");
-    //    preScore = currentTotalScore;
-    //    currentTotalScore += 5200;
-    //    G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(hitRateValue, 0, (int)(85), duration);
-    //    G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(hitRateScore, 0, 5200, duration);
-    //    G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(totalScore, preScore, currentTotalScore, duration);
-    //    yield return new WaitForSeconds(duration);
-
-    //    //RANK表示ドーン
-    //    rankText.text = CalcRank();
-    //    showRankAnim.CrossFade("ShowRank",0f);
-    //}
+    
     IEnumerator PerformanceRoutine()
     {
 
         //トータルスコア瞬時表示
-        totalScore.text = currentTotalScore.ToString();
         currentTotalScore += G20_ScoreManager.GetInstance().GetBaseScore();
+        totalScore.text = currentTotalScore.ToString();
         var baseScoreStr = G20_ScoreManager.GetInstance().GetBaseScore().ToString();
         baseScore.text = baseScoreStr;
+        yield return new WaitForSeconds(1.0f);
 
         //チェイン数、チェインボーナス、トータルスコア、カウントアップ
         Debug.Log("チェイン数、チェインボーナス、トータルスコア、カウントアップ");
-        float duration = 3.0f;
         var preScore = currentTotalScore;
         currentTotalScore += G20_ScoreManager.GetInstance().GetMaxChainBonus();
-        G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(chainValue, 0, G20_ChainCounter.GetInstance().MaxChainCount, duration);
-        G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(chainScore, 0, G20_ScoreManager.GetInstance().GetMaxChainBonus(), duration);
-        G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(totalScore, preScore, currentTotalScore, duration);
-        yield return new WaitForSeconds(duration+1.0f);
+        G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(chainValue, 0, G20_ChainCounter.GetInstance().MaxChainCount, chainCountUpDuration);
+        G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(chainScore, 0, G20_ScoreManager.GetInstance().GetMaxChainBonus(), chainCountUpDuration);
+        G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(totalScore, preScore, currentTotalScore, chainCountUpDuration);
+        yield return new WaitForSeconds(chainCountUpDuration + 1.0f);
 
         //命中率、命中率ボーナス、トータルスコア、カウントアップ
         Debug.Log("命中率、命中率ボーナス、トータルスコア、カウントアップ");
         preScore = currentTotalScore;
         currentTotalScore += G20_ScoreManager.GetInstance().GetHitRateBonus();
-        G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(hitRateValue, 0, (int)(G20_BulletShooter.GetInstance().HitRate * 100), duration);
-        G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(hitRateScore, 0, G20_ScoreManager.GetInstance().GetHitRateBonus(), duration);
-        G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(totalScore, preScore, currentTotalScore, duration);
-        yield return new WaitForSeconds(duration);
+        G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(hitRateValue, 0, (int)(G20_BulletShooter.GetInstance().HitRate * 100), hitRateCountUpDuration);
+        G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(hitRateScore, 0, G20_ScoreManager.GetInstance().GetHitRateBonus(), hitRateCountUpDuration);
+        G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(totalScore, preScore, currentTotalScore, hitRateCountUpDuration);
+        yield return new WaitForSeconds(hitRateCountUpDuration);
 
         //RANK表示ドーン
-        rankText.text = CalcRank();
+        ShowRank();
         showRankAnim.CrossFade("ShowRank", 0f);
 
     }
@@ -103,22 +87,31 @@ public class G20_ShowRankPerformer : MonoBehaviour
 
     }
 
-    string CalcRank()
+    void ShowRank()
     {
         var sumScore = G20_ScoreManager.GetInstance().GetSumScore();
-        if (sumScore>=15000)
+        foreach (var i in resultParams)
         {
-            return "S";
-        }else if(sumScore>=13000)
-        {
-            return "A";
-        }else if (sumScore >= 11000)
-        {
-            return "B";
-        }else
-        {
-            return "C";
+            if (sumScore >= i.scoreCondition)
+            {
+                rankText.text = i.text;
+                rankText.color = i.color;
+                return;
+            }
         }
+        //if (sumScore>=15000)
+        //{
+        //    return "S";
+        //}else if(sumScore>=13000)
+        //{
+        //    return "A";
+        //}else if (sumScore >= 11000)
+        //{
+        //    return "B";
+        //}else
+        //{
+        //    return "C";
+        //}
         
     }
 }

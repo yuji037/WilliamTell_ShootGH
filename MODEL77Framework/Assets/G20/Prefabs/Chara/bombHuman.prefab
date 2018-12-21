@@ -2092,7 +2092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 9
-  explosionRadius: 2.6
+  explosionRadius: 2.8
 --- !u!114 &114394393245470476
 MonoBehaviour:
   m_ObjectHideFlags: 1

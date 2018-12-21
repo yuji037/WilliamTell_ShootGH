@@ -253,7 +253,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         G20_EnemyCabinet.GetInstance().KillAllEnemys();
         G20_ScoreApplePopper.GetInstance().DeleteAllScoreApples();
         G20_BGMManager.GetInstance().FadeOut();
-
+        G20_BulletShooter.GetInstance().coutingHitRate = false;
         // クリア演出の開始
         G20_ClearPerformer.GetInstance().Excute(GameEnd);
     }

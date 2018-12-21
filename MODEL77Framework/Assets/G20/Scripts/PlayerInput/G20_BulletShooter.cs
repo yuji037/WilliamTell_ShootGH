@@ -41,6 +41,8 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
     public int ShotCount { get; private set; }
     public int AssistHitCount { get; private set;}
     public float HitRate { get; private set; }
+    public bool coutingHitRate=true;
+
     public void SaveAIMParam()
     {
         PlayerPrefs.SetFloat("G20_AIMMax", param.MaxValue);
@@ -86,8 +88,10 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
             {
                 AssistHitCount++;
             }
-            HitRate = (float)AssistHitCount/(float)ShotCount;
-
+            if (coutingHitRate)
+            {
+                HitRate = (float)AssistHitCount / (float)ShotCount;
+            }
             ShootPanel((Vector2)shootPoint);
 
         }
