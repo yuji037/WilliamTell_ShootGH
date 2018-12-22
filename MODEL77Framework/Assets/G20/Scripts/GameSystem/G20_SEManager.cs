@@ -213,4 +213,23 @@ public class G20_SEManager : G20_Singleton<G20_SEManager> {
     {
         return seClips[(int)seType].length;
     }
+
+	public void Fadeout(AudioSource se)
+	{
+		StartCoroutine( FadeoutCoroutine( se ) );
+	}
+
+	IEnumerator FadeoutCoroutine(AudioSource se)
+	{
+		float defVolume = se.volume;
+		for(float t = 0; t < 1f; t += Time.deltaTime )
+		{
+			se.volume =
+				defVolume * ( 1f - t );
+			yield return null;
+		}
+		se.volume = 0f;
+		Debug.Log( "フェードアウト完了 : " + se.clip.name );
+		se.Stop();
+	}
 }

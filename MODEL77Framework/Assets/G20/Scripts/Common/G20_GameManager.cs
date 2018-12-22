@@ -93,6 +93,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
 
         titleCanvas.SetActive(false);
         G20_BGMManager.GetInstance().FadeOut();
+		var seForest = G20_SEManager.GetInstance().Play( G20_SEType.FOREST, Vector3.zero, false );
 
         yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 1f);
         //playerObj.GetComponent<Animator>().SetBool("zoomout", true);
@@ -105,31 +106,33 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         gameRootAnim.CrossFade("ToIngame", 0f);
 
         yield return new WaitForSeconds(5.5f);
-        summonParticle.Play();
-        yield return new WaitForSeconds(0.7f);
+		summonParticle.Play();
+		yield return new WaitForSeconds(0.7f);
         paramCanvas.SetActive(true);
+		summonParticle.Stop();
 
-        gesslerAnim.enabled = true;
+		gesslerAnim.enabled = true;
         
         gesslerShootPerformer.gesslerAnim.PlayAnim(G20_GesslerAnimType.Attack);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.9f);
+		yield return new WaitForSeconds(0.6f);
 
+		gesslerShootPerformer.gesslerAnim.PlayAnim( G20_GesslerAnimType.Taiki );
 
- 
-        // ゲスラーふわふわアニメーション開始
-        
-        // 最初のリンゴ召喚
-        G20_StageManager.GetInstance().IngameStart();
+		// ゲスラーふわふわアニメーション開始
+
+		// 最初のリンゴ召喚
+		G20_StageManager.GetInstance().IngameStart();
         G20_StageManager.GetInstance().nowStageBehaviour.SetEnableUpdateCall(1);
 
-        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 1.5f);
 
-        // セリフ再生と字幕表示
-        //G20_VoicePerformer.GetInstance().Play(0);
+		yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 1.5f);
 
-        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 0.5f);
+		// セリフ再生と字幕表示
+		//G20_VoicePerformer.GetInstance().Play(0);
+
+		yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 0.5f);
         gameRootAnim.enabled = false;
-        summonParticle.Stop();
         gesslerShootPerformer.gesslerAnim.PlayAnim(G20_GesslerAnimType.Taiki);
 
         // 戦闘開始
@@ -140,8 +143,9 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         uiTextSurvive.SetActive(true);
         // BGM
         G20_BGMManager.GetInstance().Play(G20_BGMType.INGAME_0);
+		G20_SEManager.GetInstance().Fadeout( seForest );
 
-        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 5f);
+		yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 5f);
 
         uiTextSurvive.SetActive(false);
 
