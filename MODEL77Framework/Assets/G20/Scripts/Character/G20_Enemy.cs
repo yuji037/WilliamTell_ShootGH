@@ -49,6 +49,7 @@ public class G20_Enemy : G20_Unit
         deathActions += (_, damageType) => UpChainCount(damageType);
 		deathActions += (x, y) => G20_CameraShake.GetInstance().ShakeOnEvent(G20_CamShakeEventType.ENEMY_DOWN);
         if (!head) head = transform;
+		SetDeathVoice();
     }
     public void AddBuff(G20_EnemyBuff enemy_buff)
     {
@@ -106,4 +107,24 @@ public class G20_Enemy : G20_Unit
             enemyAI.isPouse = false;
         }
     }
+	void SetDeathVoice()
+	{
+		G20_SEType deathSEType;
+
+		if ( gameObject.name.Contains("Human") )
+		{
+			deathSEType = (G20_SEType)Random.Range(
+				(int)G20_SEType.APPLE_VOICE_NORMAL,
+				(int)G20_SEType.APPLE_VOICE_NORMAL2 + 1);
+			deathActions += (x, y) =>
+			G20_SEManager.GetInstance().Play(deathSEType, transform.position);
+		}
+		else if ( gameObject.name.Contains("Small") )
+		{
+			deathSEType = G20_SEType.APPLE_VOICE_SMALL;
+			deathActions += (x, y) =>
+			G20_SEManager.GetInstance().Play(deathSEType, transform.position);
+		}
+
+	}
 }
