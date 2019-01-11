@@ -317,6 +317,14 @@ public class G20_StageBehaviour : MonoBehaviour
                 // 敵出現
                 var enemy = enemyPopper.EnemyPop(cue.enemyType, _popPos, popType);
 
+				if(sequenceCounter == 0 )
+				{
+					// 最初の敵にはチュートリアル的なターゲットサークルを出す
+					var eff = G20_EffectManager.GetInstance().Create( G20_EffectType.TARGETING_LINE, enemy.Head.position );
+					eff.transform.parent = enemy.Head;
+					enemy.deathActions += (a, b) => Destroy( eff );
+				}
+
                 // 同時に試しにステージ脇リンゴ生成
                 //G20_ScoreApplePopper.GetInstance().PopSameAppleWithEnemy(cue.enemyType);
 

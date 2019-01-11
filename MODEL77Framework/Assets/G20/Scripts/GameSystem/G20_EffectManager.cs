@@ -16,6 +16,7 @@ public enum G20_EffectType
     HIT_PROTECT,
     SUMMON_APPLE_VERT,
     HIT_GESSLER_BODY,
+	TARGETING_LINE,
 }
 public static class G20_EffectExt
 {
@@ -57,7 +58,10 @@ public static class G20_EffectExt
             case G20_EffectType.HIT_GESSLER_BODY:
                 retStr = "HitGesslerBody";
                 break;
-        }
+			case G20_EffectType.TARGETING_LINE:
+				retStr = "par_targeting_line";
+				break;
+		}
         return retStr;
     }
 }
