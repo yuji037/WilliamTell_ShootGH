@@ -123,7 +123,7 @@ public class G20_BombAI : G20_AI
         
         //アニメーション終了と同時に爆弾の親変更と爆弾の動く処理実行
 
-        if (!enemy.IsLife) yield break;
+        if (!enemy.IsLife||!bomb) yield break;
 
         bomb.Bombthrow(attackRange,enemy.Attack);
         bomb.transform.parent = enemy.transform.parent;
