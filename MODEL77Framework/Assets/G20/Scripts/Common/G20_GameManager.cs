@@ -15,7 +15,9 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
 
     private bool _isGameEnd;
     public event System.Action<G20_GameState> ChangedStateAction;
-   
+
+    public int gameDifficulty;
+
     G20_GameState gState = G20_GameState.TITLE;
     public G20_GameState gameState {
         get { return gState; }

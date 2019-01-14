@@ -32,7 +32,7 @@ public class G20_PlayDebugger : MonoBehaviour
                 + "K(CreSco1)L" + "\n"
                 + "F12(CreScoSave)" + "\n"
                 + "7(ClearWait5)8" + "\n"
-                +"Tab(Save)";
+                + "Tab(Save)";
         autoShooter = G20_ComponentUtility.FindComponentOnScene<G20_DebugAutoShooter>();
         G20_NetworkManager.GetInstance().creatorScore[0] = LoadCreatorsScore(0);
         G20_NetworkManager.GetInstance().creatorScore[1] = LoadCreatorsScore(1);
@@ -78,12 +78,24 @@ public class G20_PlayDebugger : MonoBehaviour
             InputCheatShoot();
             InputClear();
             InputEnemySpeed();
-            InputAIMAssist();
+            //InputAIMAssist();
+            InputChangeDiff();
             InputPlusScore();
             InputChangeAutoShoot();
             InputCreatorScore();
             InputClearWait();
             InputSave();
+        }
+    }
+    void InputChangeDiff()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            G20_GameManager.GetInstance().gameDifficulty=0;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            G20_GameManager.GetInstance().gameDifficulty = 1;
         }
     }
     void InputCreatorScore()
@@ -134,11 +146,11 @@ public class G20_PlayDebugger : MonoBehaviour
     }
     void SaveEndWait()
     {
-        PlayerPrefs.SetFloat("G20_EndWait",G20_ClearPerformer.GetInstance().endWaitTime);
+        PlayerPrefs.SetFloat("G20_EndWait", G20_ClearPerformer.GetInstance().endWaitTime);
     }
     float LoadEndWait()
     {
-       return PlayerPrefs.GetFloat("G20_EndWait",10.0f);
+        return PlayerPrefs.GetFloat("G20_EndWait", 10.0f);
     }
     void InputSave()
     {
@@ -154,7 +166,7 @@ public class G20_PlayDebugger : MonoBehaviour
     void UpdateCreScoAndClearWait()
     {
         CreatorScore.text = "(F6)change(F12)Save\nCreatorScore:[" + editingCreScoNumber + "]" + G20_NetworkManager.GetInstance().creatorScore[editingCreScoNumber].ToString() + "\n"
-            +"ClearWaitTime:"+G20_ClearPerformer.GetInstance().endWaitTime.ToString() ;
+            + "ClearWaitTime:" + G20_ClearPerformer.GetInstance().endWaitTime.ToString();
     }
     void SaveCreatorsScore()
     {

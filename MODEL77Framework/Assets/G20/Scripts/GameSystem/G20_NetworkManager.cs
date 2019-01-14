@@ -105,7 +105,7 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
 
         WWWForm form = new WWWForm();
         form.AddField("date", date);
-        form.AddField("difficulty", (int)G20_StageManager.GetInstance().stageType);
+        form.AddField("difficulty", G20_GameManager.GetInstance().gameDifficulty);
 
         WWW www = new WWW(scoreReceiveAdress, form);
         yield return www;
@@ -170,7 +170,7 @@ public class G20_NetworkManager : G20_Singleton<G20_NetworkManager>
         form.AddField("date", date);
         form.AddField("score", G20_ScoreManager.GetInstance().GetSumScore());
         form.AddField("ID", userIDstr);
-        form.AddField("difficulty", (int)G20_StageManager.GetInstance().stageType);//どっかからとってこれるようにする？
+        form.AddField("difficulty", (int)G20_GameManager.GetInstance().gameDifficulty);//どっかからとってこれるようにする？
 
         WWW www = new WWW(scoreSendAdress, form);
         yield return www;

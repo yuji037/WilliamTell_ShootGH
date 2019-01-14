@@ -29,17 +29,7 @@ public class G20_GesslerAnimController : MonoBehaviour {
     {
         currentActiveGesslerObject=gesslerObjs[0].gesslerModel;
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            PlayAnim(G20_GesslerAnimType.LeftMove);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            PlayAnim(G20_GesslerAnimType.RightMove);
-        }
-    }
+    
     public void PlayAnim(G20_GesslerAnimType animType)
     {
         //指定animを持っているゲスラーオブジェクト探し再生
