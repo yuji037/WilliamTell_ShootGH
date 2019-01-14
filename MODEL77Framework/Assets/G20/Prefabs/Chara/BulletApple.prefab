@@ -201,6 +201,7 @@ MonoBehaviour:
   rollingPower: 5
   rollingDuration: 3
   particle: {fileID: 1008106064894984}
+  diedLayer: Ignore Raycast
   owner: {fileID: 0}
 --- !u!114 &114457219220280142
 MonoBehaviour:

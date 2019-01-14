@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class G20_BulletApple : G20_Unit {
     Vector3 moveVec;
 
@@ -19,6 +20,9 @@ public class G20_BulletApple : G20_Unit {
 
     [SerializeField]
     GameObject particle;
+
+    [SerializeField]
+    string diedLayer;
 
     public G20_Unit owner;
     bool isTargetingPlayer=true;
@@ -49,6 +53,7 @@ public class G20_BulletApple : G20_Unit {
             yield return null;
         }
         particle.SetActive(false);
+        gameObject.layer = LayerMask.NameToLayer(diedLayer);
         var rh = GetComponent<Rigidbody>();
         rh.isKinematic = false;
         var vec = transform.position - Camera.main.transform.position;
