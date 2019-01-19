@@ -1,17 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 // フレームワークとのやりとりと、
 // タイトル→インゲーム→クリアまでの流れをさせる
 
-public class G20_GameManager : G20_Singleton<G20_GameManager> {
+public class G20_GameManager : G20_Singleton<G20_GameManager>
+{
     // フレームワークの関数を使うために必要
     private GameController _gameController;
     private CoordinateManager _coordinateManager;
-
-    // GameController.cs から値をもらって保存しておく変数
-    private int playerNum;
-    private string[] playerId;
 
     private bool _isGameEnd;
     public event System.Action<G20_GameState> ChangedStateAction;
@@ -19,11 +16,13 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     public int gameDifficulty;
 
     G20_GameState gState = G20_GameState.TITLE;
-    public G20_GameState gameState {
+    public G20_GameState gameState
+    {
         get { return gState; }
-        set {
+        set
+        {
             gState = value;
-            if(ChangedStateAction!=null)ChangedStateAction(gState);
+            if (ChangedStateAction != null) ChangedStateAction(gState);
         }
     }
     public System.Action OnGameEndAction;
@@ -95,7 +94,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
 
         titleCanvas.SetActive(false);
         G20_BGMManager.GetInstance().FadeOut();
-		var seForest = G20_SEManager.GetInstance().Play( G20_SEType.FOREST, Vector3.zero, false );
+        var seForest = G20_SEManager.GetInstance().Play(G20_SEType.FOREST, Vector3.zero, false);
 
         yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 1f);
         //playerObj.GetComponent<Animator>().SetBool("zoomout", true);
@@ -108,32 +107,32 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         gameRootAnim.CrossFade("ToIngame", 0f);
 
         yield return new WaitForSeconds(5.5f);
-		summonParticle.Play();
-		yield return new WaitForSeconds(0.7f);
+        summonParticle.Play();
+        yield return new WaitForSeconds(0.7f);
         paramCanvas.SetActive(true);
-		summonParticle.Stop();
+        summonParticle.Stop();
 
-		gesslerAnim.enabled = true;
-        
+        gesslerAnim.enabled = true;
+
         gesslerShootPerformer.gesslerAnim.PlayAnim(G20_GesslerAnimType.Attack);
         yield return new WaitForSeconds(0.9f);
-		yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.6f);
 
-		gesslerShootPerformer.gesslerAnim.PlayAnim( G20_GesslerAnimType.Taiki );
+        gesslerShootPerformer.gesslerAnim.PlayAnim(G20_GesslerAnimType.Taiki);
 
-		// ゲスラーふわふわアニメーション開始
+        // ゲスラーふわふわアニメーション開始
 
-		// 最初のリンゴ召喚
-		G20_StageManager.GetInstance().IngameStart();
+        // 最初のリンゴ召喚
+        G20_StageManager.GetInstance().IngameStart();
         G20_StageManager.GetInstance().nowStageBehaviour.SetEnableUpdateCall(1);
 
 
-		yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 1.5f);
+        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 1.5f);
 
-		// セリフ再生と字幕表示
-		//G20_VoicePerformer.GetInstance().Play(0);
+        // セリフ再生と字幕表示
+        //G20_VoicePerformer.GetInstance().Play(0);
 
-		yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 0.5f);
+        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 0.5f);
         gameRootAnim.enabled = false;
         gesslerShootPerformer.gesslerAnim.PlayAnim(G20_GesslerAnimType.Taiki);
 
@@ -145,9 +144,9 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         uiTextSurvive.SetActive(true);
         // BGM
         G20_BGMManager.GetInstance().Play(G20_BGMType.INGAME_0);
-		G20_SEManager.GetInstance().Fadeout( seForest );
+        G20_SEManager.GetInstance().Fadeout(seForest);
 
-		yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 5f);
+        yield return new WaitForSeconds(isSkipPerformance ? 0.001f : 5f);
 
         uiTextSurvive.SetActive(false);
 
@@ -157,11 +156,11 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     IEnumerator LightSettingCoroutine()
     {
         //float changeLightTime = 1.0f;
-        for ( float t = 0; t < 1f; t += Time.deltaTime )
+        for (float t = 0; t < 1f; t += Time.deltaTime)
         {
-            RenderSettings.ambientLight = startAmbient * ( 1f - t ) + ingameAmbient * t;
-            RenderSettings.fogColor = startFogColor * ( 1f - t ) + ingameFogColor * t;
-            RenderSettings.fogDensity = startFogDensity * ( 1f - t ) + endFogIntensity * t;
+            RenderSettings.ambientLight = startAmbient * (1f - t) + ingameAmbient * t;
+            RenderSettings.fogColor = startFogColor * (1f - t) + ingameFogColor * t;
+            RenderSettings.fogDensity = startFogDensity * (1f - t) + endFogIntensity * t;
             yield return null;
         }
     }
@@ -170,56 +169,35 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     void Update()
     {
 
-        if ( Input.GetKey(KeyCode.Escape) )
+        if (Input.GetKey(KeyCode.Escape))
         {
             Application.Quit();
         }
 
-        //// 画面に弾がヒットした場合 isUpdate() はtrueを返す。
-        //if ( _coordinateManager.isUpdate() && !_isGameEnd )
-        //{
-        //    // CoordinateManagerから情報を取得。
-        //    Hashtable res = _coordinateManager.Get();
-        //    Vector3 pos = new Vector3((float)res["x"], (float)res["y"], 0f);
-
-        //    // 受け取った座標をRayに変換
-        //    Ray ray = Camera.main.ScreenPointToRay(pos);
-
-        //    // Raycast処理
-        //    RaycastHit hit = new RaycastHit();
-        //    if ( Physics.Raycast(ray, out hit) )
-        //    {
-        //        GameObject hitObj = hit.collider.gameObject;
-
-        //        PlayEffect(pos);
-
-        //        if ( hitObj.name == "Target" )
-        //            _targetCount--;
-
-        //        _uiView.SetTargetCount(_targetCount);
-
-        //        if ( _targetCount <= 0 )
-        //        {
-        //            _isGameEnd = true;
-        //            _uiView.DisplayGameEnd();
-
-        //            // scoreをGameControllerに送信。
-        //            SendScore();
-
-        //            // ゲームの終わりを通知し、メニュー画面へ
-        //            _gameController.GameEnd();
-        //        }
-        //    }
-        //}
     }
 
     public void SendScore()
     {
-        var score = new int[1];
-        score[0] = 10;
-        var idm = playerId;
-        var idate = new string[1];
-        idate[0] = _gameController.Now();
+        GameController GC = GameObject.Find("GameManager").GetComponent<GameController>();
+        string[] idm = new string[2];//プレイヤーID
+        int[] score = new int[2];//スコア
+        string[] idate = new string[2];//プレイ終了時間
+
+        int cnt = 0;
+        for (int i = 0; i <= GC.player_isentry.Length; i++)
+        {
+            if (GC.player_isentry[i] == true)//player_isentryがtrueの人が参加
+            {
+                idm[cnt] = GC.player_id[i];
+                cnt++;
+            }
+        }
+        //現在時刻を取得
+        idate[0] = GC.Now();
+        if (idm[1] != null) idate[1] = idate[0];
+        //スコア取得
+        score[0] = G20_ScoreManager.GetInstance().GetSumScore();
+        if (idm[1] != null) score[1] = score[0];
 
         // 順番は配列の0番目から順にプレイヤー1, プレイヤー2・・・となる。
         // id: プレイヤーの識別番号
@@ -238,7 +216,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
     }
     public bool IsGesslerBattle
     {
-        get;private set;
+        get; private set;
     }
     public void StartGesslerBattle()
     {
@@ -282,7 +260,8 @@ public class G20_GameManager : G20_Singleton<G20_GameManager> {
         if (OnGameEndAction != null) OnGameEndAction();
         //Debug.Log("ゲームエンド。フレームワークに処理を返します。");
         _gameController.GameEnd();
-        if(isReloadMode) G20_ReloadScene.GetInstance().ReloadScene();
+        if (isReloadMode) G20_ReloadScene.GetInstance().ReloadScene();
+        Resources.UnloadUnusedAssets();
         //GameObject.Find("GameManager").GetComponent<GameController>().GameEnd();
     }
 }
