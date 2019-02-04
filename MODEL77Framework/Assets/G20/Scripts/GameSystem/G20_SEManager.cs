@@ -192,7 +192,6 @@ public class G20_SEManager : G20_Singleton<G20_SEManager> {
         }
         else
         {
-            Debug.Log("エラー：SE音量設定ミス"+(int)seType);
             audioSource.volume = 1f;
         }
 
@@ -229,7 +228,6 @@ public class G20_SEManager : G20_Singleton<G20_SEManager> {
 			yield return null;
 		}
 		se.volume = 0f;
-		Debug.Log( "フェードアウト完了 : " + se.clip.name );
 		se.Stop();
 	}
 }

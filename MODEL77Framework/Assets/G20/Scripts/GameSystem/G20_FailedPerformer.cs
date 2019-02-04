@@ -28,7 +28,6 @@ public class G20_FailedPerformer : G20_Singleton<G20_FailedPerformer>
         StartCoroutine(FailedTextRoutine(on_end_action));
         StartCoroutine(FailedPanelRoutine());
         ScoreText.text = "SHOT     APPLE : " + G20_ScoreManager.GetInstance().GetSumScore();
-        Debug.Log(Time.unscaledDeltaTime);
     }
     
     IEnumerator FailedTextRoutine(Action on_end_action)

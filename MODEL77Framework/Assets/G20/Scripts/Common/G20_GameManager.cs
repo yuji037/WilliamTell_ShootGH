@@ -13,6 +13,7 @@ public class G20_GameManager : G20_Singleton<G20_GameManager>
     private bool _isGameEnd;
     public event System.Action<G20_GameState> ChangedStateAction;
 
+    //ゲーム難易度
     public int gameDifficulty;
 
     G20_GameState gState = G20_GameState.TITLE;
@@ -166,22 +167,12 @@ public class G20_GameManager : G20_Singleton<G20_GameManager>
     }
 
 
-    void Update()
-    {
-
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
-
-    }
-
     public void SendScore()
     {
         GameController GC = GameObject.Find("GameManager").GetComponent<GameController>();
-        string[] idm = new string[2];//プレイヤーID
-        int[] score = new int[2];//スコア
-        string[] idate = new string[2];//プレイ終了時間
+        string[] idm = new string[1];//プレイヤーID
+        int[] score = new int[1];//スコア
+        string[] idate = new string[1];//プレイ終了時間
 
         int cnt = 0;
         for (int i = 0; i <= GC.player_isentry.Length; i++)
@@ -190,14 +181,13 @@ public class G20_GameManager : G20_Singleton<G20_GameManager>
             {
                 idm[cnt] = GC.player_id[i];
                 cnt++;
+                break;
             }
         }
         //現在時刻を取得
         idate[0] = GC.Now();
-        if (idm[1] != null) idate[1] = idate[0];
         //スコア取得
         score[0] = G20_ScoreManager.GetInstance().GetSumScore();
-        if (idm[1] != null) score[1] = score[0];
 
         // 順番は配列の0番目から順にプレイヤー1, プレイヤー2・・・となる。
         // id: プレイヤーの識別番号
@@ -262,6 +252,5 @@ public class G20_GameManager : G20_Singleton<G20_GameManager>
         _gameController.GameEnd();
         if (isReloadMode) G20_ReloadScene.GetInstance().ReloadScene();
         Resources.UnloadUnusedAssets();
-        //GameObject.Find("GameManager").GetComponent<GameController>().GameEnd();
     }
 }

@@ -76,7 +76,6 @@ public class G20_NormalStraightAI : G20_AI {
     {
         if (G20_GameManager.GetInstance().gameState != G20_GameState.INGAME)
         {
-            Debug.Log("インゲーム状態を抜けたのでAIを終了");
             yield break;
 
         }

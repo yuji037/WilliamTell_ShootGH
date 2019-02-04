@@ -78,13 +78,11 @@ public class G20_PlayDebugger : MonoBehaviour
             InputCheatShoot();
             InputClear();
             InputEnemySpeed();
-            //InputAIMAssist();
             InputChangeDiff();
             InputPlusScore();
             InputChangeAutoShoot();
             InputCreatorScore();
             InputClearWait();
-            InputSave();
         }
     }
     void InputChangeDiff()
@@ -152,25 +150,11 @@ public class G20_PlayDebugger : MonoBehaviour
     {
         return PlayerPrefs.GetFloat("G20_EndWait", 10.0f);
     }
-    void InputSave()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            G20_BulletShooter.GetInstance().SaveAIMParam();
-            SaveEndWait();
-            SaveCreatorsScore();
-            PlayerPrefs.Save();
-            ShowLog("Saveしました", 1.0f);
-        }
-    }
+ 
     void UpdateCreScoAndClearWait()
     {
         CreatorScore.text = "(F6)change(F12)Save\nCreatorScore:[" + editingCreScoNumber + "]" + G20_NetworkManager.GetInstance().creatorScore[editingCreScoNumber].ToString() + "\n"
             + "ClearWaitTime:" + G20_ClearPerformer.GetInstance().endWaitTime.ToString();
-    }
-    void SaveCreatorsScore()
-    {
-        PlayerPrefs.SetInt("G20_CreSco" + editingCreScoNumber, G20_NetworkManager.GetInstance().creatorScore[editingCreScoNumber]);
     }
     int LoadCreatorsScore(int num)
     {
@@ -230,39 +214,5 @@ public class G20_PlayDebugger : MonoBehaviour
         {
             G20_CheatShoot.GetInstance().IsChaeting = !G20_CheatShoot.GetInstance().IsChaeting;
         }
-    }
-    void InputAIMAssist()
-    {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            G20_BulletShooter.GetInstance().param.MaxValue += 20;
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            G20_BulletShooter.GetInstance().param.MaxValue -= 20;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            G20_BulletShooter.GetInstance().param.OneChangeValue += 1.0f;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            G20_BulletShooter.GetInstance().param.OneChangeValue -= 1.0f;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            G20_BulletShooter.GetInstance().param.DefaultValue += 10.0f;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            G20_BulletShooter.GetInstance().param.DefaultValue -= 10.0f;
-        }
-        AIMText.text = "A : " + G20_BulletShooter.GetInstance().aimAssistValue + "\n"
-            + "A(AMAX)D : " + G20_BulletShooter.GetInstance().param.MaxValue + "\n"
-            + "1(AOne)2 : " + G20_BulletShooter.GetInstance().param.OneChangeValue + "\n"
-            + "3(ADefault)4 : " + G20_BulletShooter.GetInstance().param.DefaultValue + "\n"
-            + "Tab(AIMSave)" + "\n";
-        ShotCountText.text = "ShotCount : " + G20_BulletShooter.GetInstance().ShotCount;
-
     }
 }

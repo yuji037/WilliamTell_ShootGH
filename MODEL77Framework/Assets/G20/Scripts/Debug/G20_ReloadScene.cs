@@ -13,8 +13,8 @@ public class G20_ReloadScene : G20_Singleton<G20_ReloadScene>
         //MainSceneの読み直し
         if (MainSceneName.Length > 0)
         {
-            SceneManager.UnloadSceneAsync(MainSceneName);
-            SceneManager.LoadSceneAsync(MainSceneName,LoadSceneMode.Single);
+            //SceneManager.UnloadSceneAsync(MainSceneName);
+            SceneManager.LoadScene(MainSceneName,LoadSceneMode.Single);
         }
         //SubSceneの読み直し
         if (SubSceneName.Length > 0)

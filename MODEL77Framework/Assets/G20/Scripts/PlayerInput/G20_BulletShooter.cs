@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using System;
+[Serializable]
 public class G20_AIMParam
 {
     //初期値
@@ -12,6 +13,12 @@ public class G20_AIMParam
     public float MaxValue;
     //一発毎の偏移値
     public float OneChangeValue;
+    public G20_AIMParam(float defaultValue,float maxValue,float oneChangeValue)
+    {
+        DefaultValue = defaultValue;
+        MaxValue = maxValue;
+        OneChangeValue = oneChangeValue;
+    }
 }
 
 //hitObjectのactionを起動するclass
@@ -21,7 +28,8 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
     [SerializeField] LayerMask panelMask;
     [SerializeField] LayerMask fieldMask;
     //AIMのパラメーター
-   public G20_AIMParam param=new G20_AIMParam();
+    [SerializeField]
+   G20_AIMParam param=new G20_AIMParam(100,40,3);
     //trueの時弾を発射
     public bool CanShoot = true;
     //AIM補正の値
@@ -43,24 +51,9 @@ public class G20_BulletShooter : G20_Singleton<G20_BulletShooter>
     public float HitRate { get; private set; }
     public bool coutingHitRate=true;
 
-    public void SaveAIMParam()
-    {
-        PlayerPrefs.SetFloat("G20_AIMMax", param.MaxValue);
-        PlayerPrefs.SetFloat("G20_AIMDefault", param.DefaultValue);
-        PlayerPrefs.SetFloat("G20_AIMOneChange", param.OneChangeValue);
-        PlayerPrefs.Save();
-        //Debug.Log("AIMパラメーターをセーブしました。");
-    }
-    public void LoadAIMParam()
-    {
-       param.MaxValue =PlayerPrefs.GetFloat("G20_AIMMax",100);
-       param.DefaultValue= PlayerPrefs.GetFloat("G20_AIMDefault", 40);
-       param.OneChangeValue= PlayerPrefs.GetFloat("G20_AIMOneChange", 3);
-    }
     
     private void Start()
     {
-        LoadAIMParam();
         aimAssistValue = param.DefaultValue;
     }
     private void Update()

@@ -42,7 +42,6 @@ public class G20_ScoreCountUpPerformer : G20_Singleton<G20_ScoreCountUpPerformer
     //purposeScoreを目的のスコアとしてカウントアップ
     IEnumerator ScoreRoutine(Text scoreText, int startScore, int purposeScore, float scoreChangeInterval = 0.003f)
     {
-        Debug.Log("Start" + startScore + "End" + purposeScore);
         float virtualCurrentScore = startScore;
         while (true)
         {

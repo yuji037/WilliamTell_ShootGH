@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class G20_ShowRankPerformer : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class G20_ShowRankPerformer : MonoBehaviour
       public int scoreCondition;
     }
 
+    [System.Serializable]
+    struct ResultParams
+    {
+       public List<ResultParam> resultParams;
+    }
+
     [SerializeField] Text baseScore;
     [SerializeField] Text chainValue;
     [SerializeField] Text chainScore;
@@ -22,7 +29,7 @@ public class G20_ShowRankPerformer : MonoBehaviour
     [SerializeField] Animator showRankAnim;
     [SerializeField] Text rankText;
 
-    [SerializeField]ResultParam[] resultParams;
+    [SerializeField]List<ResultParams> resultParams;
 
     [SerializeField] float chainCountUpDuration=3.0f;
     [SerializeField] float hitRateCountUpDuration=3.0f;
@@ -31,13 +38,6 @@ public class G20_ShowRankPerformer : MonoBehaviour
     public void StartPerformance()
     {
         StartCoroutine(PerformanceRoutine());
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            StartPerformance();
-        }
     }
 
     
@@ -52,7 +52,6 @@ public class G20_ShowRankPerformer : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         //チェイン数、チェインボーナス、トータルスコア、カウントアップ
-        Debug.Log("チェイン数、チェインボーナス、トータルスコア、カウントアップ");
         var preScore = currentTotalScore;
         currentTotalScore += G20_ScoreManager.GetInstance().GetMaxChainBonus();
         G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(chainValue, 0, G20_ChainCounter.GetInstance().MaxChainCount, chainCountUpDuration);
@@ -61,7 +60,6 @@ public class G20_ShowRankPerformer : MonoBehaviour
         yield return new WaitForSeconds(chainCountUpDuration + 1.0f);
 
         //命中率、命中率ボーナス、トータルスコア、カウントアップ
-        Debug.Log("命中率、命中率ボーナス、トータルスコア、カウントアップ");
         preScore = currentTotalScore;
         currentTotalScore += G20_ScoreManager.GetInstance().GetHitRateBonus();
         G20_ScoreCountUpPerformer.GetInstance().StartCountUpScore(hitRateValue, 0, (int)(G20_BulletShooter.GetInstance().HitRate * 100), hitRateCountUpDuration);
@@ -90,7 +88,9 @@ public class G20_ShowRankPerformer : MonoBehaviour
     void ShowRank()
     {
         var sumScore = G20_ScoreManager.GetInstance().GetSumScore();
-        foreach (var i in resultParams)
+        var resultParam = resultParams[G20_GameManager.GetInstance().gameDifficulty];
+        resultParam.resultParams.Sort((a,b)=>b.scoreCondition-a.scoreCondition);
+        foreach (var i in resultParam.resultParams)
         {
             if (sumScore >= i.scoreCondition)
             {
@@ -99,20 +99,6 @@ public class G20_ShowRankPerformer : MonoBehaviour
                 return;
             }
         }
-        //if (sumScore>=15000)
-        //{
-        //    return "S";
-        //}else if(sumScore>=13000)
-        //{
-        //    return "A";
-        //}else if (sumScore >= 11000)
-        //{
-        //    return "B";
-        //}else
-        //{
-        //    return "C";
-        //}
-        
     }
 }
 

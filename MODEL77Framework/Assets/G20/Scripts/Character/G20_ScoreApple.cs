@@ -148,7 +148,7 @@ public class G20_ScoreApple : G20_Unit
     {
         if ( !meshRenderer.material.HasProperty("_Color") )
         {
-            Debug.Log("フェードアウトできないマテリアルです");
+
             yield return new WaitForSeconds(1f);
             yield break;
         }

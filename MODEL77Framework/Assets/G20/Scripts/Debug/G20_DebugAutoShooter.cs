@@ -132,7 +132,7 @@ public class G20_DebugAutoShooter : MonoBehaviour
     bool CanShootEnemy(GameObject _enemy)
     {
         G20_Unit unit = _enemy.GetComponent<G20_HitDamage>().Target;
-        return (unit && unit is G20_Enemy && ((G20_Enemy)unit).EnemyAI.IsAIStarted);
+        return (unit && unit is G20_Enemy && (!((G20_Enemy)unit).EnemyAI || ((G20_Enemy)unit).EnemyAI.IsAIStarted));
     }
     bool IsEnemy(GameObject _gameObject)
     {
